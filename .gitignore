@@ -1,0 +1,12 @@
+# OS X temporary files
+.DS_Store
+.Trashes
+
+# Locals
+/Design/*
+/Temp/*
+/Apps/Home - Backend/vendor/*
+GoogleService-Info.plist
+
+# Xcode
+xcuserdata
