@@ -18,7 +18,7 @@ Manages creation and information of an ethereum account. A good feature wold be 
 A representation of an ethereum [block](https://ethereum.org/en/developers/docs/blocks) that holds several transactions
 
 ## Transaction
-A representstion of an ethereum transaction that executes on [evm](https://ethereum.org/en/developers/docs/evm/#top)
+A representstion of an [ethereum transaction](https://ethereum.org/en/developers/docs/transactions/) that executes on [evm](https://ethereum.org/en/developers/docs/evm/)
 
 ## Utils
 Incapsulates commonly used code such as conversion from gwei to eth, wei to eth and etc.
