@@ -7,19 +7,19 @@
 
 import Foundation
 
-open class Wallet {
+public class Wallet {
     
-    public static var accounts: [Account] = []
-    
-    public static func importAccount(with privateKey: String) -> Account {
-        
+    public static func importAccount(privateKey: String) -> Account {
+        // create, return and store account from private key
+        return Account()
     }
     
-    public static func importAccount(with mnemonicPhrase: String) -> Account {
-        
+    public static func importAccount(mnemonicPhrase: String) -> Account {
+        // create, return and store account from mnemonic phrase
+        return Account()
     }
     
     public static func createAccount() -> Account {
-        
+        return Account()
     }
 }
