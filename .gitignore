@@ -1,12 +1,9 @@
-# OS X temporary files
+# osX files
 .DS_Store
 .Trashes
 
-# Locals
-/Design/*
-/Temp/*
-/Apps/Home - Backend/vendor/*
-GoogleService-Info.plist
+# Swift Package Manager
+.swiftpm
 
-# Xcode
-xcuserdata
+# User Interface
+*UserInterfaceState.xcuserstate
