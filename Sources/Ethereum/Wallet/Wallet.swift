@@ -8,5 +8,5 @@
 import Foundation
 
 open class Wallet {
-
+    
 }
