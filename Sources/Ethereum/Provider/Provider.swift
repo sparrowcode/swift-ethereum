@@ -9,4 +9,10 @@ import Foundation
 
 open class Provider {
     
+    public let url: URL
+    
+    public init (url: URL) {
+        self.url = url
+    }
+    
 }
