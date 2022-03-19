@@ -22,4 +22,6 @@ public class Wallet {
     public static func createAccount() -> Account {
         return Account()
     }
+    
 }
+

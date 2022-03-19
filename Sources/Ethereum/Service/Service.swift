@@ -7,13 +7,13 @@
 
 import Foundation
 
-public class Service {
+public final class EthereumService {
     
-    public static var provider: Provider?
+    public static var provider: Provider = Provider(url: URL(string: "")!)
     
-    public static var wallet: Wallet?
+    public static var wallet: Wallet = Wallet()
     
-    public static var storage: Storage?
+    public static var storage: Storage = Storage()
     
     public enum Eth {
         

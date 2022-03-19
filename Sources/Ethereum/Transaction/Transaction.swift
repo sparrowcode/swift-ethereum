@@ -7,6 +7,6 @@
 
 import Foundation
 
-open struct Transaction {
+public struct Transaction {
     
 }
