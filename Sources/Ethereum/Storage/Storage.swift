@@ -1,12 +1,15 @@
-//
-//  Storage.swift
-//  
-//
-//  Created by Ertem Biyik on 18.03.2022.
-//
-
 import Foundation
 
-open class Storage {
+public enum Storage {
+    
+    case userDefaults
+    case keychain
+    case icloud
+}
+
+/**
+ Ethereum: Protocol to do something.
+ */
+public protocol StorageProtocol {
     
 }

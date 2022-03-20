@@ -1,13 +1,7 @@
-//
-//  Provider.swift
-//  
-//
-//  Created by Ertem Biyik on 18.03.2022.
-//
-
 import Foundation
 
 protocol ProviderProtocol {
+    
     init(url: URL, sessionConfiguration: URLSessionConfiguration)
     init(url: URL)
     func sendRequest()
@@ -37,13 +31,5 @@ public final class Provider: ProviderProtocol {
      */
     func sendRequest() {
         
-    }
-    
-    enum NetworkType {
-        case main
-        case rinkeby
-        case ropsten
-        case covan
-        case custom(String)
     }
 }
