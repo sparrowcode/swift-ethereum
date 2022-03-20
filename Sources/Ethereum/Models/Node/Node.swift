@@ -5,6 +5,8 @@ public struct Node {
     
     // MARK: - Net
     
+    let url: URL
+    
     public static func version() {
         
     }

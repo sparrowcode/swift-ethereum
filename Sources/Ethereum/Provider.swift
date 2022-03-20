@@ -2,24 +2,24 @@ import Foundation
 
 protocol ProviderProtocol {
     
-    init(url: URL, sessionConfiguration: URLSessionConfiguration)
-    init(url: URL)
+    init(node: Node, sessionConfiguration: URLSessionConfiguration)
+    init(node: Node)
     func sendRequest()
 }
 
 public final class Provider: ProviderProtocol {
     
-    public let url: URL
+    public let node: Node
     
     private let session: URLSession
     
-    public init(url: URL, sessionConfiguration: URLSessionConfiguration) {
-        self.url = url
+    public init(node: Node, sessionConfiguration: URLSessionConfiguration) {
+        self.node = node
         self.session = URLSession(configuration: sessionConfiguration, delegate: nil, delegateQueue: nil)
     }
     
-    public convenience init(url: URL) {
-        self.init(url: url, sessionConfiguration: URLSession.shared.configuration)
+    public convenience init(node: Node) {
+        self.init(node: node, sessionConfiguration: URLSession.shared.configuration)
     }
     
     deinit {

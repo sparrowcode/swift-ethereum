@@ -2,7 +2,11 @@ import Foundation
 
 class AccountManager {
     
-    private let storage: Storage
+    private let storage: StorageProtocol
+    
+    public init(storage: StorageProtocol) {
+        self.storage = storage
+    }
     
     static func createAccount() -> Account {
         return Account()
@@ -18,6 +22,8 @@ class AccountManager {
         return Account()
     }
     
-    //delete method
+    static func removeAccount(_ account: Account) {
+        
+    }
 }
 
