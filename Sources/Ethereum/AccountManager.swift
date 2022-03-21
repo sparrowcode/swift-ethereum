@@ -9,17 +9,12 @@ class AccountManager {
     }
     
     static func createAccount() -> Account {
-        return Account()
+        return Account(privateKey: "")
     }
     
     static func importAccount(privateKey: String) -> Account {
         // create, return and store account from private key
-        return Account()
-    }
-    
-    static func importAccount(mnemonicPhrase: String) -> Account {
-        // create, return and store account from mnemonic phrase
-        return Account()
+        return Account(privateKey: "")
     }
     
     static func removeAccount(_ account: Account) {

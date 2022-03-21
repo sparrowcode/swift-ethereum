@@ -1,7 +1,6 @@
 import Foundation
 
 protocol ProviderProtocol {
-    
     init(node: Node, sessionConfiguration: URLSessionConfiguration)
     init(node: Node)
     func sendRequest()
