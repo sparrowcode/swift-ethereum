@@ -18,6 +18,10 @@ let package = Package(
     targets: [
         .target(
             name: "Ethereum"
+        ),
+        .testTarget(
+            name: "EthereumTests",
+            dependencies: ["Ethereum"]
         )
     ]
 )

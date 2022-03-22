@@ -1,8 +1,18 @@
 import Foundation
 
-public final class EthereumService {
+public enum EthereumService {
     
-    public static var provider = Provider(node: Node(url: URL(string: "")!))
+    enum EthereumMethods: String {
+        case getBalance = "eth_getBalance"
+    }
+    
+    public enum EthereumServiceError: Error {
+        case errorEncodingJSONRPC
+        case errorDecodingJSONRPC
+        case errorConvertingFromHex
+    }
+    
+    public static var provider = Provider(node: DefaultNodes.mainnet)
 
     // MARK: - Original Methods
     /**
@@ -12,47 +22,12 @@ public final class EthereumService {
         
     }
     
-//    /**
-//     Ethereum: Returns an object with data about the sync status or false. Object|Boolean, An object with sync status data or FALSE, when not syncing: startingBlock: QUANTITY - The block at which the import started (will only be reset, after the sync reached his head) currentBlock: QUANTITY - The current block, same as eth_blockNumber highestBlock: QUANTITY - The estimated highest block
-//     */
-//    public static func syncing() {
-//
-//    }
-    
-//    /**
-//     Ethereum: Returns the client coinbase address.
-//     */
-//    public static func coinbase() {
-//
-//    }
-//
-//    /**
-//     Ethereum: Returns true if client is actively mining new blocks.
-//     */
-//    public static func mining() {
-//
-//    }
-//
-//    /**
-//     Ethereum: Returns the number of hashes per second that the node is mining with.
-//     */
-//    public static func hashrate() {
-//
-//    }
-    
     /**
      Ethereum: Returns the current price per gas in wei.
      */
     public static func gasPrice() {
         
     }
-    
-//    /**
-//     Ethereum: Returns a list of addresses owned by client.
-//     */
-//    public static func accounts() {
-//
-//    }
     
     /**
      Ethereum: Returns the number of most recent block.
@@ -64,8 +39,32 @@ public final class EthereumService {
     /**
      Ethereum: Returns the balance of the account of given address.
      */
-    public static func getBalance() {
+    public static func getBalance(for address: String, completion: @escaping (EthereumServiceError?, Int?) -> Void) {
         
+        let jsonRPC = JSONRPCRequest(jsonrpc: "2.0", method: EthereumMethods.getBalance, params: [address, "latest"], id: 1)
+        
+        guard let jsonRPCData = try? JSONEncoder().encode(jsonRPC) else {
+            completion(EthereumServiceError.errorEncodingJSONRPC, nil)
+            return
+        }
+        
+        provider.sendRequest(jsonRPCData: jsonRPCData) { error, data in
+            
+            guard let data = data else { return }
+            
+            guard let jsonRPCResponse = try? JSONDecoder().decode(JSONRPCResponse<String>.self, from: data) else {
+                completion(EthereumServiceError.errorDecodingJSONRPC, nil)
+                return
+            }
+            
+            let hexidecimal = jsonRPCResponse.result.replacingOccurrences(of: "0x", with: "")
+            
+            guard let balance = Int(hexidecimal, radix: 16) else { completion(EthereumServiceError.errorConvertingFromHex, nil)
+                return
+            }
+            
+            completion(nil, balance)
+        }
     }
     
     /**
@@ -102,23 +101,6 @@ public final class EthereumService {
     public static func getCode() {
         
     }
-    
-    /**
-     Ethereum: The sign method calculates an Ethereum specific signature with: sign(keccak256("\x19Ethereum Signed Message:\n" + len(message) + message))).
-     By adding a prefix to the message makes the calculated signature recognisable as an Ethereum specific signature. This prevents misuse where a malicious DApp can sign arbitrary data (e.g. transaction) and use the signature to impersonate the victim.
-     ??
-     
-    public static func sign() {
-        
-    }*/
-    
-    /**
-     Ethereum: Creates new message call transaction or a contract creation, if the data field contains code.
-     sendTransaction() only supports sending unsigned transactions. In order to use it, your node must be managing your private key. Since the node must manage your key, you must not use it with a hosted node.
-     
-    public static func sendTransaction() {
-        
-    }*/
     
     /**
      Ethereum: Creates new message call transaction or a contract creation for signed transactions.
@@ -198,14 +180,6 @@ public final class EthereumService {
         
     }
     
-    /*
-    /**
-     Ethereum: Returns a list of available compilers in the client.
-     */
-    public static func getCompilers() {
-        
-    }*/
-    
     /**
      Ethereum: Returns compiled LLL code.
      */
@@ -224,6 +198,13 @@ public final class EthereumService {
      Ethereum: Returns compiled serpent code.
      */
     public static func compileSerpent() {
+        
+    }
+    
+    /**
+     Ethereum: Returns an array of all logs matching a given filter object.
+     */
+    public static func getLogs() {
         
     }
     
@@ -261,35 +242,6 @@ public final class EthereumService {
      Ethereum: Polling method for a filter, which returns an array of logs which occurred since last poll.
      */
     public static func getFilterChanges() {
-        
-    }*/
-    
-    /**
-     Ethereum: Returns an array of all logs matching a given filter object.
-     */
-    public static func getLogs() {
-        
-    }
-    
-    /*
-    /**
-     Ethereum: Returns the hash of the current block, the seedHash, and the boundary condition to be met ("target").
-     */
-    public static func getWork() {
-        
-    }
-    
-    /**
-     Ethereum: Used for submitting a proof-of-work solution.
-     */
-    public static func submitWork() {
-        
-    }
-    
-    /**
-     Ethereum: Used for submitting mining hashrate.
-     */
-    public static func submitHashrate() {
         
     }*/
 }
