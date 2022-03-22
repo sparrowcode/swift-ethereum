@@ -1,5 +1,7 @@
 import Foundation
 
+// do we need a separate structure for signed transactions?
+// 3 allowed structures: EIP-1559, EIP-2930 and Legacy Transaction
 public struct Transaction {
     
     public let from: String?
@@ -9,10 +11,11 @@ public struct Transaction {
     public var nonce: Int // the transaction index
     public let gasPrice: String
     public let gasLimit: String
-    public let gas: String
     public let blockNumber: String?
-    public var hash: String?
     public var chainId: String?
+    public var hash: String? {
+        return "" // is calculated after we sign a transaction
+    }
     private var v: String?
     private var r: String?
     private var s: String?
