@@ -1,6 +1,7 @@
 import Foundation
 
 protocol SmartContractProtocol {
+    
     var address: String { get set }
 }
 

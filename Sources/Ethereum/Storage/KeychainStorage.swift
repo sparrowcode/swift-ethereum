@@ -1,6 +1,7 @@
 import Foundation
 
 class KeychainStorage: StorageProtocol {
+    
     func storePrivateKey(_ key: String) {
         
     }

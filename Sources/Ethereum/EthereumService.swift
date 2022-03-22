@@ -107,18 +107,18 @@ public final class EthereumService {
      Ethereum: The sign method calculates an Ethereum specific signature with: sign(keccak256("\x19Ethereum Signed Message:\n" + len(message) + message))).
      By adding a prefix to the message makes the calculated signature recognisable as an Ethereum specific signature. This prevents misuse where a malicious DApp can sign arbitrary data (e.g. transaction) and use the signature to impersonate the victim.
      ??
-     */
+     
     public static func sign() {
         
-    }
+    }*/
     
     /**
      Ethereum: Creates new message call transaction or a contract creation, if the data field contains code.
      sendTransaction() only supports sending unsigned transactions. In order to use it, your node must be managing your private key. Since the node must manage your key, you must not use it with a hosted node.
-     */
+     
     public static func sendTransaction() {
         
-    }
+    }*/
     
     /**
      Ethereum: Creates new message call transaction or a contract creation for signed transactions.
@@ -198,12 +198,13 @@ public final class EthereumService {
         
     }
     
+    /*
     /**
      Ethereum: Returns a list of available compilers in the client.
      */
     public static func getCompilers() {
         
-    }
+    }*/
     
     /**
      Ethereum: Returns compiled LLL code.
@@ -226,6 +227,8 @@ public final class EthereumService {
         
     }
     
+    // TO LATER
+    /*
     /**
      Ethereum: Creates a filter object, based on filter options, to notify when the state changes (logs). To check if the state has changed, call eth_getFilterChanges.
      */
@@ -259,7 +262,7 @@ public final class EthereumService {
      */
     public static func getFilterChanges() {
         
-    }
+    }*/
     
     /**
      Ethereum: Returns an array of all logs matching a given filter object.
@@ -268,6 +271,7 @@ public final class EthereumService {
         
     }
     
+    /*
     /**
      Ethereum: Returns the hash of the current block, the seedHash, and the boundary condition to be met ("target").
      */
@@ -287,5 +291,5 @@ public final class EthereumService {
      */
     public static func submitHashrate() {
         
-    }
+    }*/
 }
