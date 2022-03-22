@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F4B18EA627E4A248005DE566 /* Ethereum in Frameworks */ = {isa = PBXBuildFile; productRef = F4B18EA527E4A248005DE566 /* Ethereum */; };
 		F4B18EAE27E4A309005DE566 /* RootController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B18EA827E4A309005DE566 /* RootController.swift */; };
 		F4B18EAF27E4A309005DE566 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4B18EAA27E4A309005DE566 /* Assets.xcassets */; };
 		F4B18EB027E4A309005DE566 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4B18EAB27E4A309005DE566 /* LaunchScreen.storyboard */; };
@@ -18,12 +17,12 @@
 /* Begin PBXFileReference section */
 		F4B18E8C27E4A207005DE566 /* iOS App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4B18E9D27E4A208005DE566 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F4B18EA327E4A236005DE566 /* Sparrow Code - swift-ethereum */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "Sparrow Code - swift-ethereum"; path = ..; sourceTree = "<group>"; };
 		F4B18EA827E4A309005DE566 /* RootController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootController.swift; sourceTree = "<group>"; };
 		F4B18EAA27E4A309005DE566 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F4B18EAC27E4A309005DE566 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F4B18EAD27E4A309005DE566 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F4B18EB227E4A358005DE566 /* AppImport */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = AppImport; sourceTree = "<group>"; };
+		F4FE3B2227E9C4F800E6E0CD /* Ethereum */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Ethereum; path = ..; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,7 +30,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F4B18EA627E4A248005DE566 /* Ethereum in Frameworks */,
 				F4B18EB427E4A3BB005DE566 /* AppImport in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -43,7 +41,7 @@
 			isa = PBXGroup;
 			children = (
 				F4B18EB227E4A358005DE566 /* AppImport */,
-				F4B18EA327E4A236005DE566 /* Sparrow Code - swift-ethereum */,
+				F4FE3B2227E9C4F800E6E0CD /* Ethereum */,
 				F4B18E8E27E4A207005DE566 /* iOS App */,
 				F4B18E8D27E4A207005DE566 /* Products */,
 				F4B18EA427E4A248005DE566 /* Frameworks */,
@@ -118,7 +116,6 @@
 			);
 			name = "iOS App";
 			packageProductDependencies = (
-				F4B18EA527E4A248005DE566 /* Ethereum */,
 				F4B18EB327E4A3BB005DE566 /* AppImport */,
 			);
 			productName = Ethereum;
@@ -388,10 +385,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		F4B18EA527E4A248005DE566 /* Ethereum */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Ethereum;
-		};
 		F4B18EB327E4A3BB005DE566 /* AppImport */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AppImport;
