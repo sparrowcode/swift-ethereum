@@ -16,7 +16,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "F4B18E8B27E4A207005DE566"
                BuildableName = "EthereumProject.app"
-               BlueprintName = "EthereumProject"
+               BlueprintName = "iOS App"
                ReferencedContainer = "container:EthereumProject.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -46,7 +46,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F4B18E8B27E4A207005DE566"
             BuildableName = "EthereumProject.app"
-            BlueprintName = "EthereumProject"
+            BlueprintName = "iOS App"
             ReferencedContainer = "container:EthereumProject.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -63,7 +63,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F4B18E8B27E4A207005DE566"
             BuildableName = "EthereumProject.app"
-            BlueprintName = "EthereumProject"
+            BlueprintName = "iOS App"
             ReferencedContainer = "container:EthereumProject.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

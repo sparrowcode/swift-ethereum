@@ -16,7 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		F4B18E8C27E4A207005DE566 /* EthereumProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EthereumProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F4B18E8C27E4A207005DE566 /* iOS App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4B18E9D27E4A208005DE566 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F4B18EA327E4A236005DE566 /* Sparrow Code - swift-ethereum */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "Sparrow Code - swift-ethereum"; path = ..; sourceTree = "<group>"; };
 		F4B18EA827E4A309005DE566 /* RootController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootController.swift; sourceTree = "<group>"; };
@@ -53,7 +53,7 @@
 		F4B18E8D27E4A207005DE566 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F4B18E8C27E4A207005DE566 /* EthereumProject.app */,
+				F4B18E8C27E4A207005DE566 /* iOS App.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -104,9 +104,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		F4B18E8B27E4A207005DE566 /* EthereumProject */ = {
+		F4B18E8B27E4A207005DE566 /* iOS App */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F4B18EA027E4A208005DE566 /* Build configuration list for PBXNativeTarget "EthereumProject" */;
+			buildConfigurationList = F4B18EA027E4A208005DE566 /* Build configuration list for PBXNativeTarget "iOS App" */;
 			buildPhases = (
 				F4B18E8827E4A207005DE566 /* Sources */,
 				F4B18E8927E4A207005DE566 /* Frameworks */,
@@ -116,13 +116,13 @@
 			);
 			dependencies = (
 			);
-			name = EthereumProject;
+			name = "iOS App";
 			packageProductDependencies = (
 				F4B18EA527E4A248005DE566 /* Ethereum */,
 				F4B18EB327E4A3BB005DE566 /* AppImport */,
 			);
 			productName = Ethereum;
-			productReference = F4B18E8C27E4A207005DE566 /* EthereumProject.app */;
+			productReference = F4B18E8C27E4A207005DE566 /* iOS App.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -153,7 +153,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				F4B18E8B27E4A207005DE566 /* EthereumProject */,
+				F4B18E8B27E4A207005DE566 /* iOS App */,
 			);
 		};
 /* End PBXProject section */
@@ -376,7 +376,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F4B18EA027E4A208005DE566 /* Build configuration list for PBXNativeTarget "EthereumProject" */ = {
+		F4B18EA027E4A208005DE566 /* Build configuration list for PBXNativeTarget "iOS App" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F4B18EA127E4A208005DE566 /* Debug */,
