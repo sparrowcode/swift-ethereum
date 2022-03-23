@@ -8,6 +8,8 @@ public enum EthereumService {
         case getBalance = "eth_getBalance"
         case getStorageAt = "eth_getStorageAt"
         case getTransactionCount = "eth_getTransactionCount"
+        case getBlockTransactionCountByHash = "eth_getBlockTransactionCountByHash"
+        case getBlockTransactionCountByNumber = "eth_getBlockTransactionCountByNumber"
     }
     
     public enum EthereumServiceError: Error {
@@ -44,11 +46,11 @@ public enum EthereumService {
             
             let hexidecimal = jsonRPCResponse.result.replacingOccurrences(of: "0x", with: "")
             
-            guard let blockNumber = Int(hexidecimal, radix: 16) else { completion(EthereumServiceError.errorConvertingFromHex, nil)
+            guard let gasPrice = Int(hexidecimal, radix: 16) else { completion(EthereumServiceError.errorConvertingFromHex, nil)
                 return
             }
             
-            completion(nil, blockNumber)
+            completion(nil, gasPrice)
         }
     }
     
@@ -156,15 +158,65 @@ public enum EthereumService {
     /**
      Ethereum: Returns the number of transactions in a block from a block matching the given block hash.
      */
-    public static func getBlockTransactionCountByHash() {
+    public static func getBlockTransactionCountByHash(blockHash: String, completion: @escaping (EthereumServiceError?, Int?) -> Void) {
         
+        let jsonRPC = JSONRPCRequest(jsonrpc: "2.0", method: EthereumMethods.getBlockTransactionCountByHash, params: [blockHash], id: 1)
+        
+        guard let jsonRPCData = try? JSONEncoder().encode(jsonRPC) else {
+            completion(EthereumServiceError.errorEncodingJSONRPC, nil)
+            return
+        }
+        
+        provider.sendRequest(jsonRPCData: jsonRPCData) { error, data in
+            
+            guard let data = data else { return }
+            
+            guard let jsonRPCResponse = try? JSONDecoder().decode(JSONRPCResponse<String>.self, from: data) else {
+                completion(EthereumServiceError.errorDecodingJSONRPC, nil)
+                return
+            }
+            
+            let hexidecimal = jsonRPCResponse.result.replacingOccurrences(of: "0x", with: "")
+            
+            guard let transactionCount = Int(hexidecimal, radix: 16) else { completion(EthereumServiceError.errorConvertingFromHex, nil)
+                return
+            }
+            
+            completion(nil, transactionCount)
+        }
     }
     
     /**
      Ethereum: Returns the number of transactions in a block matching the given block number.
      */
-    public static func getBlockTransactionCountByNumber() {
+    public static func getBlockTransactionCountByNumber(blockNumber: Int, completion: @escaping (EthereumServiceError?, Int?) -> Void) {
         
+        let hexidecimalBlockNumber = "0x" + String(blockNumber, radix: 16)
+        
+        let jsonRPC = JSONRPCRequest(jsonrpc: "2.0", method: EthereumMethods.getBlockTransactionCountByNumber, params: [hexidecimalBlockNumber], id: 1)
+        
+        guard let jsonRPCData = try? JSONEncoder().encode(jsonRPC) else {
+            completion(EthereumServiceError.errorEncodingJSONRPC, nil)
+            return
+        }
+        
+        provider.sendRequest(jsonRPCData: jsonRPCData) { error, data in
+            
+            guard let data = data else { return }
+            
+            guard let jsonRPCResponse = try? JSONDecoder().decode(JSONRPCResponse<String>.self, from: data) else {
+                completion(EthereumServiceError.errorDecodingJSONRPC, nil)
+                return
+            }
+            
+            let hexidecimal = jsonRPCResponse.result.replacingOccurrences(of: "0x", with: "")
+            
+            guard let transactionCount = Int(hexidecimal, radix: 16) else { completion(EthereumServiceError.errorConvertingFromHex, nil)
+                return
+            }
+            
+            completion(nil, transactionCount)
+        }
     }
     
     /**

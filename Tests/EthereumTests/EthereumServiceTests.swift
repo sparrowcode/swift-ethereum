@@ -53,7 +53,7 @@ class EthereumServiceTests: XCTestCase {
     }
     
     func testGasPrice() throws {
-        let expectation = XCTestExpectation(description: "block number")
+        let expectation = XCTestExpectation(description: "gas price")
         
         EthereumService.gasPrice { error, gasPrice in
             XCTAssertNil(error)
@@ -63,7 +63,32 @@ class EthereumServiceTests: XCTestCase {
         
         wait(for: [expectation], timeout: 20)
     }
+    
+    func testGetBlockTransactionCountByHash() throws {
+        let expectation = XCTestExpectation(description: "transaction count for block")
+        
+        EthereumService.getBlockTransactionCountByHash(blockHash: "0xcd6112f8e97b646a5c25e75e62a509337c77ff9e879b261d5d2d958f13a8a403") { error, transactionCount in
+            XCTAssertNil(error)
+            XCTAssertNotNil(transactionCount)
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 20)
+    }
 
+    func testGetBlockTransactionCountByNumber() throws {
+        let expectation = XCTestExpectation(description: "transaction count for block")
+        
+        EthereumService.getBlockTransactionCountByNumber(blockNumber: 2) { error, transactionCount in
+            XCTAssertNil(error)
+            XCTAssertNotNil(transactionCount)
+            print(transactionCount)
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 20)
+    }
+    
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
         self.measure {
