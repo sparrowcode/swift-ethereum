@@ -2,15 +2,26 @@
 
 ## Navigate
 
-- [Service](#service)
-  - [Storage](#storage)
-  - [Provider](#provider)
-  - [Wallet](#wallet)
-    - [Account](#account)
-- [Transaction](#transaction)
-- [Smart contract](#smart-contract)
-- [Block](#block)
-- [Extension](#extension)
+- [Installation](#installation)
+    - [Swift Package Manager](#swift-package-manager)
+    - [Manually](#manually)
+- [Quick Start](#quick-start)
+- [Usage](#usage)
+  - [How get node](#example)
+- [Best Practise](#example)
+  - [Get Balance](#example)
+  - [Send](#example)
+  - [Get Gas](#example)
+  - [Get Fee](#example)
+- [Configure](#example)
+  - [Node](#example)
+  - [Storage](#example)
+  - [Provider](#example)
+- [Models](#)
+  - [Account](#account)
+  - [Transaction](#transaction)
+  - [Smart contract](#smart-contract)
+  - [Block](#block)
 
 
 ## Service
