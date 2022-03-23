@@ -65,9 +65,11 @@ class EthereumServiceTests: XCTestCase {
     }
     
     func testGetBlockTransactionCountByHash() throws {
-        let expectation = XCTestExpectation(description: "transaction count for block")
         
-        EthereumService.getBlockTransactionCountByHash(blockHash: "0xcd6112f8e97b646a5c25e75e62a509337c77ff9e879b261d5d2d958f13a8a403") { error, transactionCount in
+        let expectation = XCTestExpectation(description: "transaction count for block by hash")
+        let blockHash = "0xcd6112f8e97b646a5c25e75e62a509337c77ff9e879b261d5d2d958f13a8a403"
+        
+        EthereumService.getBlockTransactionCountByHash(blockHash: blockHash) { error, transactionCount in
             XCTAssertNil(error)
             XCTAssertNotNil(transactionCount)
             expectation.fulfill()
@@ -77,12 +79,13 @@ class EthereumServiceTests: XCTestCase {
     }
 
     func testGetBlockTransactionCountByNumber() throws {
-        let expectation = XCTestExpectation(description: "transaction count for block")
         
-        EthereumService.getBlockTransactionCountByNumber(blockNumber: 2) { error, transactionCount in
+        let expectation = XCTestExpectation(description: "transaction count for block by number")
+        let blockNumber = 2
+        
+        EthereumService.getBlockTransactionCountByNumber(blockNumber: blockNumber) { error, transactionCount in
             XCTAssertNil(error)
             XCTAssertNotNil(transactionCount)
-            print(transactionCount)
             expectation.fulfill()
         }
         
