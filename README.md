@@ -1,5 +1,7 @@
 # swift-ethereum
 
+Going to be official Ethereum repo for Swift.
+
 ## Navigate
 
 - [Installation](#installation)
@@ -44,8 +46,4 @@ A representation of an ethereum [block](https://ethereum.org/en/developers/docs/
 
 ## Transaction
 A representation of an [ethereum transaction](https://ethereum.org/en/developers/docs/transactions/) that executes on [evm](https://ethereum.org/en/developers/docs/evm/)
-
-## Extension
-Incapsulates commonly used code such as conversion from gwei to eth, wei to eth, encryption and decryption using alhrotithms and etc.
-
 
