@@ -38,7 +38,7 @@ public final class Provider: ProviderProtocol {
         request.httpBody = jsonRPCData
         
         let task = session.dataTask(with: request) { data, response, error in
-            guard let data = data else {
+            guard let data = data, error == nil else {
                 completion(error, nil)
                 return
             }

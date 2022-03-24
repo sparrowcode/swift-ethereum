@@ -37,6 +37,25 @@ class ProviderTests: XCTestCase {
         wait(for: [expectation], timeout: 10)
     }
     
+    func testSendRequest2() throws {
+        
+        let expectation = XCTestExpectation(description: "send request")
+        
+        let jsonRPC = JSONRPCRequest(jsonrpc: "2.0", method: .version, params: Optional<String>.none, id: 10)
+        
+        let jsonRPCData = try JSONEncoder().encode(jsonRPC)
+                
+        provider?.sendRequest(jsonRPCData: jsonRPCData) { error, data in
+            
+            XCTAssertNil(error)
+            XCTAssertNotNil(data)
+            expectation.fulfill()
+            
+        }
+        
+        wait(for: [expectation], timeout: 10)
+    }
+    
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
         self.measure {
