@@ -92,6 +92,37 @@ class EthereumServiceTests: XCTestCase {
         wait(for: [expectation], timeout: 20)
     }
     
+    func testGetStorageAt() throws {
+        
+        let expectation = XCTestExpectation(description: "storage at")
+        let address = "0x295a70b2de5e3953354a6a8344e616ed314d7251"
+        let storageSlot = 3
+        let block = "latest"
+        
+        EthereumService.getStorageAt(address: address, storageSlot: storageSlot, block: block) { error, value in
+            XCTAssertNil(error)
+            XCTAssertNotNil(value)
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 20)
+    }
+    
+    func testGetCode() throws {
+        
+        let expectation = XCTestExpectation(description: "get code")
+        let address = "0x2b591e99afE9f32eAA6214f7B7629768c40Eeb39"
+        let block = "latest"
+        
+        EthereumService.getCode(address: address, block: block) { error, byteCode in
+            XCTAssertNil(error)
+            XCTAssertNotNil(byteCode)
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 20)
+    }
+    
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
         self.measure {

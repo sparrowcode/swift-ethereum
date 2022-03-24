@@ -80,7 +80,7 @@ public enum EthereumService {
      */
     public static func getBalance(for address: String, completion: @escaping (JSONRPCError?, Int?) -> Void) {
         
-        let jsonRPC = JSONRPCRequest(jsonrpc: "2.0", method: JSONRPCMethod.getBalance, params: [address, "latest"], id: 3)
+        let jsonRPC = JSONRPCRequest(jsonrpc: "2.0", method: .getBalance, params: [address, "latest"], id: 3)
         
         guard let jsonRPCData = try? JSONEncoder().encode(jsonRPC) else {
             completion(JSONRPCError.errorEncodingJSONRPC, nil)
@@ -112,8 +112,37 @@ public enum EthereumService {
     /**
      Ethereum: retrieves raw state storage for a smart contract;
      */
-    public static func getStorageAt() {
+    public static func getStorageAt(address: String, storageSlot: Int, block: String = "latest", completion: @escaping (JSONRPCError?, Int?) -> Void) {
         
+        let hexidecimalStorageSlot = "0x" + String(storageSlot, radix: 16)
+        
+        let jsonRPC = JSONRPCRequest(jsonrpc: "2.0", method: .getStorageAt, params: [address, hexidecimalStorageSlot, block], id: 4)
+        
+        guard let jsonRPCData = try? JSONEncoder().encode(jsonRPC) else {
+            completion(JSONRPCError.errorEncodingJSONRPC, nil)
+            return
+        }
+        
+        provider.sendRequest(jsonRPCData: jsonRPCData) { error, data in
+            
+            guard let data = data, error == nil else {
+                completion(JSONRPCError.nilResponse, nil)
+                return
+            }
+            
+            guard let jsonRPCResponse = try? JSONDecoder().decode(JSONRPCResponse<String>.self, from: data) else {
+                completion(JSONRPCError.errorDecodingJSONRPC, nil)
+                return
+            }
+            
+            let hexidecimal = jsonRPCResponse.result.replacingOccurrences(of: "0x", with: "")
+            
+            guard let value = Int(hexidecimal, radix: 16) else { completion(JSONRPCError.errorConvertingFromHex, nil)
+                return
+            }
+            
+            completion(nil, value)
+        }
     }
     
     /**
@@ -121,7 +150,7 @@ public enum EthereumService {
      */
     public static func getTransactionCount(for address: String, completion: @escaping (JSONRPCError?, Int?) -> Void) {
         
-        let jsonRPC = JSONRPCRequest(jsonrpc: "2.0", method: JSONRPCMethod.getTransactionCount, params: [address, "latest"], id: 4)
+        let jsonRPC = JSONRPCRequest(jsonrpc: "2.0", method: .getTransactionCount, params: [address, "latest"], id: 5)
         
         guard let jsonRPCData = try? JSONEncoder().encode(jsonRPC) else {
             completion(JSONRPCError.errorEncodingJSONRPC, nil)
@@ -155,7 +184,7 @@ public enum EthereumService {
      */
     public static func getBlockTransactionCountByHash(blockHash: String, completion: @escaping (JSONRPCError?, Int?) -> Void) {
         
-        let jsonRPC = JSONRPCRequest(jsonrpc: "2.0", method: JSONRPCMethod.getBlockTransactionCountByHash, params: [blockHash], id: 5)
+        let jsonRPC = JSONRPCRequest(jsonrpc: "2.0", method: .getBlockTransactionCountByHash, params: [blockHash], id: 6)
         
         guard let jsonRPCData = try? JSONEncoder().encode(jsonRPC) else {
             completion(JSONRPCError.errorEncodingJSONRPC, nil)
@@ -191,7 +220,7 @@ public enum EthereumService {
         
         let hexidecimalBlockNumber = "0x" + String(blockNumber, radix: 16)
         
-        let jsonRPC = JSONRPCRequest(jsonrpc: "2.0", method: JSONRPCMethod.getBlockTransactionCountByNumber, params: [hexidecimalBlockNumber], id: 6)
+        let jsonRPC = JSONRPCRequest(jsonrpc: "2.0", method: .getBlockTransactionCountByNumber, params: [hexidecimalBlockNumber], id: 7)
         
         guard let jsonRPCData = try? JSONEncoder().encode(jsonRPC) else {
             completion(JSONRPCError.errorEncodingJSONRPC, nil)
@@ -223,8 +252,31 @@ public enum EthereumService {
     /**
      Ethereum: Returns the compiled solidity code
      */
-    public static func getCode() {
+    public static func getCode(address: String, block: String = "latest", completion: @escaping (JSONRPCError?, String?) -> Void) {
         
+        let jsonRPC = JSONRPCRequest(jsonrpc: "2.0", method: .getCode, params: [address, block], id: 8)
+        
+        guard let jsonRPCData = try? JSONEncoder().encode(jsonRPC) else {
+            completion(JSONRPCError.errorEncodingJSONRPC, nil)
+            return
+        }
+        
+        provider.sendRequest(jsonRPCData: jsonRPCData) { error, data in
+            
+            guard let data = data, error == nil else {
+                completion(JSONRPCError.nilResponse, nil)
+                return
+            }
+            
+            guard let jsonRPCResponse = try? JSONDecoder().decode(JSONRPCResponse<String>.self, from: data) else {
+                completion(JSONRPCError.errorDecodingJSONRPC, nil)
+                return
+            }
+            
+            let byteCode = jsonRPCResponse.result
+            
+            completion(nil, byteCode)
+        }
     }
     
     /**

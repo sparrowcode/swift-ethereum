@@ -29,6 +29,7 @@ enum JSONRPCMethod: String {
     case getBlockTransactionCountByHash = "eth_getBlockTransactionCountByHash"
     case getBlockTransactionCountByNumber = "eth_getBlockTransactionCountByNumber"
     case getTransactionByHash = "eth_getTransactionByHash"
+    case getCode = "eth_getCode"
     case version = "net_version"
 }
 
