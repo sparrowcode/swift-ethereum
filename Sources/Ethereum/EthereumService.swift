@@ -304,8 +304,44 @@ public enum EthereumService {
     /**
      Ethereum: Returns information about a block by hash.
      */
-    public static func getBlockByHash() {
+    public static func getBlockByHash(hash: String, isHydratedTransaction: Bool = true, completion: @escaping (JSONRPCError?, Block?) -> Void) {
         
+        struct Params: Codable {
+            let hash: String
+            let isHydratedTransaction: Bool
+            
+            func encode(to encoder: Encoder) throws {
+                var container = encoder.unkeyedContainer()
+                try container.encode(hash)
+                try container.encode(isHydratedTransaction)
+            }
+        }
+        
+        let params = Params(hash: hash, isHydratedTransaction: isHydratedTransaction)
+        
+        let jsonRPC = JSONRPCRequest(jsonrpc: "2.0", method: .getBlockByHash, params: params, id: 10)
+        
+        guard let jsonRPCData = try? JSONEncoder().encode(jsonRPC) else {
+            completion(JSONRPCError.errorEncodingJSONRPC, nil)
+            return
+        }
+        
+        provider.sendRequest(jsonRPCData: jsonRPCData) { error, data in
+            
+            guard let data = data, error == nil else {
+                completion(JSONRPCError.nilResponse, nil)
+                return
+            }
+            
+            guard let jsonRPCResponse = try? JSONDecoder().decode(JSONRPCResponse<Block>.self, from: data) else {
+                completion(JSONRPCError.errorDecodingJSONRPC, nil)
+                return
+            }
+            
+            let block = jsonRPCResponse.result
+            
+            completion(nil, block)
+        }
     }
     
     /**

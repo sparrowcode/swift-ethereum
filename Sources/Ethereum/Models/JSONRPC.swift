@@ -35,6 +35,7 @@ enum JSONRPCMethod: String {
     case peerCount = "net_peerCount"
     case clientVersion = "web3_clientVersion"
     case sha3 = "web3_sha3"
+    case getBlockByHash = "eth_getBlockByHash"
 }
 
 public enum JSONRPCError: Error {

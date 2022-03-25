@@ -123,6 +123,21 @@ class EthereumServiceTests: XCTestCase {
         wait(for: [expectation], timeout: 20)
     }
     
+    func testGetBlockByHash() throws {
+        
+        let expectation = XCTestExpectation(description: "get block by hash")
+        let hash = "0xad1328d13f833b8af722117afdc406a762033321df8e48c00cd372d462f48169"
+        
+        EthereumService.getBlockByHash(hash: hash) { error, block in
+            XCTAssertNil(error)
+            XCTAssertNotNil(block)
+            print(block)
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 20)
+    }
+    
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
         self.measure {

@@ -17,7 +17,7 @@ public struct Node {
     
     public func version(completion: @escaping (JSONRPCError?, String?) -> Void) {
         
-        let jsonRPC = JSONRPCRequest(jsonrpc: "2.0", method: .version, params: Optional<String>.none, id: 20)
+        let jsonRPC = JSONRPCRequest(jsonrpc: "2.0", method: .version, params: [Optional<String>.none], id: 20)
         
         guard let jsonRPCData = try? JSONEncoder().encode(jsonRPC) else {
             completion(JSONRPCError.errorEncodingJSONRPC, nil)
