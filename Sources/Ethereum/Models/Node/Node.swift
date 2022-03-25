@@ -14,16 +14,6 @@ public struct Node {
     // MARK: - Net
     
     public let url: URL
-    private var provider: Provider?
-    
-    init(url: URL) {
-        self.url = url
-        configureProvider()
-    }
-    
-    private mutating func configureProvider() {
-        self.provider = Provider(node: self)
-    }
     
     public func version(completion: @escaping (JSONRPCError?, String?) -> Void) {
         
@@ -33,6 +23,8 @@ public struct Node {
             completion(JSONRPCError.errorEncodingJSONRPC, nil)
             return
         }
+        
+        var provider: Provider? = Provider(node: self)
         
         provider?.sendRequest(jsonRPCData: jsonRPCData) { error, data in
             
@@ -50,6 +42,7 @@ public struct Node {
             
             completion(nil, version)
             
+            provider = nil
         }
     }
     
@@ -61,6 +54,8 @@ public struct Node {
             completion(JSONRPCError.errorEncodingJSONRPC, nil)
             return
         }
+        
+        var provider: Provider? = Provider(node: self)
         
         provider?.sendRequest(jsonRPCData: jsonRPCData) { error, data in
             
@@ -78,6 +73,7 @@ public struct Node {
             
             completion(nil, version)
             
+            provider = nil
         }
     }
     
@@ -89,6 +85,8 @@ public struct Node {
             completion(JSONRPCError.errorEncodingJSONRPC, nil)
             return
         }
+        
+        var provider: Provider? = Provider(node: self)
         
         provider?.sendRequest(jsonRPCData: jsonRPCData) { error, data in
             
@@ -108,6 +106,7 @@ public struct Node {
             
             completion(nil, peerCount)
             
+            provider = nil
         }
     }
     
@@ -121,6 +120,8 @@ public struct Node {
             completion(JSONRPCError.errorEncodingJSONRPC, nil)
             return
         }
+        
+        var provider: Provider? = Provider(node: self)
         
         provider?.sendRequest(jsonRPCData: jsonRPCData) { error, data in
             
@@ -138,36 +139,40 @@ public struct Node {
             
             completion(nil, clientVersion)
             
+            provider = nil
         }
     }
     
     public func sha3(value: String, completion: @escaping (JSONRPCError?, String?) -> Void) {
-         
-         let jsonRPC = JSONRPCRequest(jsonrpc: "2.0", method: .sha3, params: [value], id: 24)
-         
-         guard let jsonRPCData = try? JSONEncoder().encode(jsonRPC) else {
-             completion(JSONRPCError.errorEncodingJSONRPC, nil)
-             return
-         }
-         
-         provider?.sendRequest(jsonRPCData: jsonRPCData) { error, data in
-             
-             guard let data = data, error == nil else {
-                 completion(JSONRPCError.nilResponse, nil)
-                 return
-             }
-             
-             guard let jsonRPCResponse = try? JSONDecoder().decode(JSONRPCResponse<String>.self, from: data) else {
-                 completion(JSONRPCError.errorDecodingJSONRPC, nil)
-                 return
-             }
-             
-             let sha3 = jsonRPCResponse.result
-             
-             completion(nil, sha3)
-             
-         }
-     }
+        
+        let jsonRPC = JSONRPCRequest(jsonrpc: "2.0", method: .sha3, params: [value], id: 24)
+        
+        guard let jsonRPCData = try? JSONEncoder().encode(jsonRPC) else {
+            completion(JSONRPCError.errorEncodingJSONRPC, nil)
+            return
+        }
+        
+        var provider: Provider? = Provider(node: self)
+        
+        provider?.sendRequest(jsonRPCData: jsonRPCData) { error, data in
+            
+            guard let data = data, error == nil else {
+                completion(JSONRPCError.nilResponse, nil)
+                return
+            }
+            
+            guard let jsonRPCResponse = try? JSONDecoder().decode(JSONRPCResponse<String>.self, from: data) else {
+                completion(JSONRPCError.errorDecodingJSONRPC, nil)
+                return
+            }
+            
+            let sha3 = jsonRPCResponse.result
+            
+            completion(nil, sha3)
+            
+            provider = nil
+        }
+    }
 }
 
 
