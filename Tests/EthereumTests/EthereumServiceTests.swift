@@ -66,7 +66,7 @@ class EthereumServiceTests: XCTestCase {
     
     func testGetBlockTransactionCountByHash() throws {
         
-        let expectation = XCTestExpectation(description: "transaction count for block by hash")
+        let expectation = XCTestExpectation(description: "get block transaction count by hash")
         let blockHash = "0xcd6112f8e97b646a5c25e75e62a509337c77ff9e879b261d5d2d958f13a8a403"
         
         EthereumService.getBlockTransactionCountByHash(blockHash: blockHash) { error, transactionCount in
@@ -80,7 +80,7 @@ class EthereumServiceTests: XCTestCase {
 
     func testGetBlockTransactionCountByNumber() throws {
         
-        let expectation = XCTestExpectation(description: "transaction count for block by number")
+        let expectation = XCTestExpectation(description: "get block transaction count by number")
         let blockNumber = 2
         
         EthereumService.getBlockTransactionCountByNumber(blockNumber: blockNumber) { error, transactionCount in
@@ -94,7 +94,7 @@ class EthereumServiceTests: XCTestCase {
     
     func testGetStorageAt() throws {
         
-        let expectation = XCTestExpectation(description: "storage at")
+        let expectation = XCTestExpectation(description: "get storage at")
         let address = "0x295a70b2de5e3953354a6a8344e616ed314d7251"
         let storageSlot = 3
         let block = "latest"

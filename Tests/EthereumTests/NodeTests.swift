@@ -20,12 +20,64 @@ class NodeTests: XCTestCase {
 
     func testVersion() throws {
         
-        let expectation = XCTestExpectation(description: "net version")
+        let expectation = XCTestExpectation(description: "version")
         
         DefaultNodes.mainnet.version { error, version in
             XCTAssertNil(error)
             XCTAssertNotNil(version)
-            print(version)
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 20)
+    }
+    
+    func testListening() throws {
+        
+        let expectation = XCTestExpectation(description: "listening")
+        
+        DefaultNodes.mainnet.listening { error, isListening in
+            XCTAssertNil(error)
+            XCTAssertNotNil(isListening)
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 20)
+    }
+    
+    func testPeerCount() throws {
+        
+        let expectation = XCTestExpectation(description: "peer count")
+        
+        DefaultNodes.mainnet.peerCount { error, peerCount in
+            XCTAssertNil(error)
+            XCTAssertNotNil(peerCount)
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 20)
+    }
+    
+    func testClientVersion() throws {
+        
+        let expectation = XCTestExpectation(description: "client version")
+        
+        DefaultNodes.mainnet.clientVersion { error, clientVersion in
+            XCTAssertNil(error)
+            XCTAssertNotNil(clientVersion)
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 20)
+    }
+    
+    func testSha3() throws {
+        
+        let expectation = XCTestExpectation(description: "sha3")
+        let value = "0x68656c6c6f20776f726c64"
+        
+        DefaultNodes.mainnet.sha3(value: value) { error, sha3 in
+            XCTAssertNil(error)
+            XCTAssertNotNil(sha3)
             expectation.fulfill()
         }
         

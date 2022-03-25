@@ -364,7 +364,7 @@ public enum EthereumService {
         
     }
     
-    // TO LATER
+    // MARK: TO LATER
     /*
     /**
      Ethereum: Creates a filter object, based on filter options, to notify when the state changes (logs). To check if the state has changed, call eth_getFilterChanges.

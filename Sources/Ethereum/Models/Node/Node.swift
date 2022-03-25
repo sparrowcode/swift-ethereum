@@ -2,11 +2,11 @@ import Foundation
 
 // TODO: Make default nodes
 public enum DefaultNodes {
-    public static let mainnet = Node(url: URL(string: "https://speedy-nodes-nyc.moralis.io/b383c412901116039315dd16/eth/mainnet")!)
-    public static let ropsten = Node(url: URL(string: "https://speedy-nodes-nyc.moralis.io/b383c412901116039315dd16/eth/ropsten")!)
-    public static let rinkeby = Node(url: URL(string: "https://speedy-nodes-nyc.moralis.io/b383c412901116039315dd16/eth/rinkeby")!)
-    public static let kovan = Node(url: URL(string: "https://speedy-nodes-nyc.moralis.io/b383c412901116039315dd16/eth/kovan")!)
-    public static let goerli = Node(url: URL(string: "https://speedy-nodes-nyc.moralis.io/b383c412901116039315dd16/eth/goerli")!)
+    public static var mainnet = Node(url: URL(string: "https://mainnet.infura.io/v3/967cf8dc4a37411c8e62698c7c603cee")!)
+    public static let ropsten = Node(url: URL(string: "https://ropsten.infura.io/v3/967cf8dc4a37411c8e62698c7c603cee")!)
+    public static let rinkeby = Node(url: URL(string: "https://rinkeby.infura.io/v3/967cf8dc4a37411c8e62698c7c603cee")!)
+    public static let kovan = Node(url: URL(string: "https://kovan.infura.io/v3/967cf8dc4a37411c8e62698c7c603cee")!)
+    public static let goerli = Node(url: URL(string: "https://goerli.infura.io/v3/967cf8dc4a37411c8e62698c7c603cee")!)
 }
 
 public struct Node {
@@ -14,24 +14,34 @@ public struct Node {
     // MARK: - Net
     
     public let url: URL
+    private var provider: Provider?
     
-    public func version(completion: @escaping (JSONRPCError?, Int?) -> Void) {
+    init(url: URL) {
+        self.url = url
+        configureProvider()
+    }
+    
+    private mutating func configureProvider() {
+        self.provider = Provider(node: self)
+    }
+    
+    public func version(completion: @escaping (JSONRPCError?, String?) -> Void) {
         
-        let jsonRPC = JSONRPCRequest(jsonrpc: "2.0", method: .version, params: Optional<String>.none, id: 10)
+        let jsonRPC = JSONRPCRequest(jsonrpc: "2.0", method: .version, params: Optional<String>.none, id: 20)
         
         guard let jsonRPCData = try? JSONEncoder().encode(jsonRPC) else {
             completion(JSONRPCError.errorEncodingJSONRPC, nil)
             return
         }
         
-        Provider(node: self).sendRequest(jsonRPCData: jsonRPCData) { error, data in
+        provider?.sendRequest(jsonRPCData: jsonRPCData) { error, data in
             
             guard let data = data, error == nil else {
                 completion(JSONRPCError.nilResponse, nil)
                 return
             }
             
-            guard let jsonRPCResponse = try? JSONDecoder().decode(JSONRPCResponse<Int>.self, from: data) else {
+            guard let jsonRPCResponse = try? JSONDecoder().decode(JSONRPCResponse<String>.self, from: data) else {
                 completion(JSONRPCError.errorDecodingJSONRPC, nil)
                 return
             }
@@ -39,27 +49,125 @@ public struct Node {
             let version = jsonRPCResponse.result
             
             completion(nil, version)
+            
+        }
+    }
+    
+    public func listening(completion: @escaping (JSONRPCError?, Bool?) -> Void) {
+        
+        let jsonRPC = JSONRPCRequest(jsonrpc: "2.0", method: .listening, params: Optional<String>.none, id: 21)
+        
+        guard let jsonRPCData = try? JSONEncoder().encode(jsonRPC) else {
+            completion(JSONRPCError.errorEncodingJSONRPC, nil)
+            return
         }
         
+        provider?.sendRequest(jsonRPCData: jsonRPCData) { error, data in
+            
+            guard let data = data, error == nil else {
+                completion(JSONRPCError.nilResponse, nil)
+                return
+            }
+            
+            guard let jsonRPCResponse = try? JSONDecoder().decode(JSONRPCResponse<Bool>.self, from: data) else {
+                completion(JSONRPCError.errorDecodingJSONRPC, nil)
+                return
+            }
+            
+            let version = jsonRPCResponse.result
+            
+            completion(nil, version)
+            
+        }
     }
     
-    public func listening() {
+    public func peerCount(completion: @escaping (JSONRPCError?, Int?) -> Void) {
         
-    }
-    
-    public func peerCount() {
+        let jsonRPC = JSONRPCRequest(jsonrpc: "2.0", method: .peerCount, params: Optional<String>.none, id: 22)
         
+        guard let jsonRPCData = try? JSONEncoder().encode(jsonRPC) else {
+            completion(JSONRPCError.errorEncodingJSONRPC, nil)
+            return
+        }
+        
+        provider?.sendRequest(jsonRPCData: jsonRPCData) { error, data in
+            
+            guard let data = data, error == nil else {
+                completion(JSONRPCError.nilResponse, nil)
+                return
+            }
+            
+            guard let jsonRPCResponse = try? JSONDecoder().decode(JSONRPCResponse<String>.self, from: data) else {
+                completion(JSONRPCError.errorDecodingJSONRPC, nil)
+                return
+            }
+            
+            let hexidecimal = jsonRPCResponse.result.replacingOccurrences(of: "0x", with: "")
+            
+            let peerCount = Int(hexidecimal, radix: 16)
+            
+            completion(nil, peerCount)
+            
+        }
     }
     
     // MARK: - Web3
     
-    public func clientVersion() {
+    public func clientVersion(completion: @escaping (JSONRPCError?, String?) -> Void) {
         
+        let jsonRPC = JSONRPCRequest(jsonrpc: "2.0", method: .clientVersion, params: Optional<String>.none, id: 23)
+        
+        guard let jsonRPCData = try? JSONEncoder().encode(jsonRPC) else {
+            completion(JSONRPCError.errorEncodingJSONRPC, nil)
+            return
+        }
+        
+        provider?.sendRequest(jsonRPCData: jsonRPCData) { error, data in
+            
+            guard let data = data, error == nil else {
+                completion(JSONRPCError.nilResponse, nil)
+                return
+            }
+            
+            guard let jsonRPCResponse = try? JSONDecoder().decode(JSONRPCResponse<String>.self, from: data) else {
+                completion(JSONRPCError.errorDecodingJSONRPC, nil)
+                return
+            }
+            
+            let clientVersion = jsonRPCResponse.result
+            
+            completion(nil, clientVersion)
+            
+        }
     }
     
-     func sha3() {
-        
-    }
+    public func sha3(value: String, completion: @escaping (JSONRPCError?, String?) -> Void) {
+         
+         let jsonRPC = JSONRPCRequest(jsonrpc: "2.0", method: .sha3, params: [value], id: 24)
+         
+         guard let jsonRPCData = try? JSONEncoder().encode(jsonRPC) else {
+             completion(JSONRPCError.errorEncodingJSONRPC, nil)
+             return
+         }
+         
+         provider?.sendRequest(jsonRPCData: jsonRPCData) { error, data in
+             
+             guard let data = data, error == nil else {
+                 completion(JSONRPCError.nilResponse, nil)
+                 return
+             }
+             
+             guard let jsonRPCResponse = try? JSONDecoder().decode(JSONRPCResponse<String>.self, from: data) else {
+                 completion(JSONRPCError.errorDecodingJSONRPC, nil)
+                 return
+             }
+             
+             let sha3 = jsonRPCResponse.result
+             
+             completion(nil, sha3)
+             
+         }
+     }
 }
 
 
