@@ -17,7 +17,7 @@ public struct Block: Codable {
     let size: String
     let stateRoot: String
     let timestamp: String
-    let totalDifficulty: String
+    let totalDifficulty: String?
     let transactions: [Transaction]?
     let transactionsRoot: String
     let uncles: [String]?

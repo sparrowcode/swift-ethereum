@@ -37,6 +37,7 @@ enum JSONRPCMethod: String {
     case sha3 = "web3_sha3"
     case getBlockByHash = "eth_getBlockByHash"
     case getBlockByNumber = "eth_getBlockByNumber"
+    case getUncleByBlockNumberAndIndex = "eth_getUncleByBlockNumberAndIndex"
 }
 
 public enum JSONRPCError: Error {
@@ -44,4 +45,5 @@ public enum JSONRPCError: Error {
     case errorDecodingJSONRPC
     case errorConvertingFromHex
     case nilResponse
+    case noResult
 }

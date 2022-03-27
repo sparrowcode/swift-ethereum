@@ -151,6 +151,51 @@ class EthereumServiceTests: XCTestCase {
         wait(for: [expectation], timeout: 20)
     }
     
+    func testGetTransactionByHash() throws {
+        
+        let expectation = XCTestExpectation(description: "get transaction by hash")
+        let transactionHash = "0xb2fea9c4b24775af6990237aa90228e5e092c56bdaee74496992a53c208da1ee"
+        
+        EthereumService.getTransactionByHash(transactionHash: transactionHash) { error, transaction in
+            XCTAssertNil(error)
+            XCTAssertNotNil(transaction)
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 20)
+    }
+    
+    func testGetUncleByBlockNumberAndIndexNullResponse() throws {
+        
+        let expectation = XCTestExpectation(description: "get uncle block by number and index null response")
+        let blockNumber = 12312
+        let index = 0
+        
+        EthereumService.getUncleByBlockNumberAndIndex(blockNumber: blockNumber, index: index) { error, block in
+            XCTAssertNotNil(error)
+            XCTAssertNil(block)
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 20)
+    }
+    
+    func testGetUncleByBlockNumberAndIndex() throws {
+        
+        let expectation = XCTestExpectation(description: "get uncle block by number and index")
+        let blockNumber = 668
+        let index = 0
+        
+        EthereumService.getUncleByBlockNumberAndIndex(blockNumber: blockNumber, index: index) { error, block in
+            XCTAssertNil(error)
+            XCTAssertNotNil(block)
+            print(block)
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 20)
+    }
+    
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
         self.measure {
