@@ -131,7 +131,20 @@ class EthereumServiceTests: XCTestCase {
         EthereumService.getBlockByHash(hash: hash) { error, block in
             XCTAssertNil(error)
             XCTAssertNotNil(block)
-            print(block)
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 20)
+    }
+    
+    func testGetBlockByNumber() throws {
+        
+        let expectation = XCTestExpectation(description: "get block by number")
+        let blockNumber = 12312
+        
+        EthereumService.getBlockByNumber(blockNumber: blockNumber) { error, block in
+            XCTAssertNil(error)
+            XCTAssertNotNil(block)
             expectation.fulfill()
         }
         

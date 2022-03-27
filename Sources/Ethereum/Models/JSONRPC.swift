@@ -36,6 +36,7 @@ enum JSONRPCMethod: String {
     case clientVersion = "web3_clientVersion"
     case sha3 = "web3_sha3"
     case getBlockByHash = "eth_getBlockByHash"
+    case getBlockByNumber = "eth_getBlockByNumber"
 }
 
 public enum JSONRPCError: Error {

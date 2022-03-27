@@ -347,8 +347,46 @@ public enum EthereumService {
     /**
      Ethereum: Returns information about a block by block number.
      */
-    public static func getBlockByNumber() {
+    public static func getBlockByNumber(blockNumber: Int, isHydratedTransaction: Bool = true, completion: @escaping (JSONRPCError?, Block?) -> Void) {
         
+        let hexidecimalBlockNumber = "0x" + String(blockNumber, radix: 16)
+        
+        struct Params: Codable {
+            let hexidecimalBlockNumber: String
+            let isHydratedTransaction: Bool
+            
+            func encode(to encoder: Encoder) throws {
+                var container = encoder.unkeyedContainer()
+                try container.encode(hexidecimalBlockNumber)
+                try container.encode(isHydratedTransaction)
+            }
+        }
+        
+        let params = Params(hexidecimalBlockNumber: hexidecimalBlockNumber, isHydratedTransaction: isHydratedTransaction)
+        
+        let jsonRPC = JSONRPCRequest(jsonrpc: "2.0", method: .getBlockByNumber, params: params, id: 10)
+        
+        guard let jsonRPCData = try? JSONEncoder().encode(jsonRPC) else {
+            completion(JSONRPCError.errorEncodingJSONRPC, nil)
+            return
+        }
+        
+        provider.sendRequest(jsonRPCData: jsonRPCData) { error, data in
+            
+            guard let data = data, error == nil else {
+                completion(JSONRPCError.nilResponse, nil)
+                return
+            }
+            
+            guard let jsonRPCResponse = try? JSONDecoder().decode(JSONRPCResponse<Block>.self, from: data) else {
+                completion(JSONRPCError.errorDecodingJSONRPC, nil)
+                return
+            }
+            
+            let block = jsonRPCResponse.result
+            
+            completion(nil, block)
+        }
     }
     
     /**
