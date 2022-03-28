@@ -195,6 +195,36 @@ class EthereumServiceTests: XCTestCase {
         wait(for: [expectation], timeout: 20)
     }
     
+    func testGetUncleByBlockHashAndIndex() throws {
+        
+        let expectation = XCTestExpectation(description: "get uncle block by hash and index")
+        let blockHash = "0x84e538e6da2340e3d4d90535f334c22974fecd037798d1cf8965c02e8ab3394b"
+        let index = 0
+        
+        EthereumService.getUncleByBlockHashAndIndex(blockHash: blockHash, index: index) { error, block in
+            XCTAssertNil(error)
+            XCTAssertNotNil(block)
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 20)
+    }
+    
+    func testGetUncleByBlockHashAndIndexNullResponse() throws {
+        
+        let expectation = XCTestExpectation(description: "get uncle block by hash and index null response")
+        let blockHash = "0x7cea0c9ae53df7073fcd4e7b19fc3f1905a2540bbdbd9a10796c9296f5af55dc"
+        let index = 0
+        
+        EthereumService.getUncleByBlockHashAndIndex(blockHash: blockHash, index: index) { error, block in
+            XCTAssertNotNil(error)
+            XCTAssertNil(block)
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 20)
+    }
+    
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
         self.measure {

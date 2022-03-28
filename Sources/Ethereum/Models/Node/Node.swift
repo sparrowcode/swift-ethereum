@@ -97,7 +97,7 @@ public struct Node {
                 return
             }
             
-            guard let jsonRPCResponse = try? JSONDecoder().decode(JSONRPCResponse<String>.self, from: data) else {
+            guard let jsonRPCResponse = try? JSONDecoder().decode(JSONRPCResponse<String>.self, from: data) else {
                 completion(.errorDecodingJSONRPC, nil)
                 return
             }
