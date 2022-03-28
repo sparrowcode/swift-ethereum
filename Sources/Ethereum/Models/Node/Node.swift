@@ -15,6 +15,16 @@ public struct Node {
     
     public let url: URL
     
+    private var provider: Provider?
+    
+    public init(url: URL) {
+        self.url = url
+        configureProvider()
+    }
+    
+    mutating func configureProvider() {
+        self.provider = Provider(node: self)
+    }
     public func version(completion: @escaping (JSONRPCError?, String?) -> Void) {
         
         let jsonRPC = JSONRPCRequest(jsonrpc: "2.0", method: .version, params: [Optional<String>.none], id: 20)
@@ -23,8 +33,6 @@ public struct Node {
             completion(.errorEncodingJSONRPC, nil)
             return
         }
-        
-        var provider: Provider? = Provider(node: self)
         
         provider?.sendRequest(jsonRPCData: jsonRPCData) { error, data in
             
@@ -42,7 +50,6 @@ public struct Node {
             
             completion(nil, version)
             
-            provider = nil
         }
     }
     
@@ -54,8 +61,6 @@ public struct Node {
             completion(.errorEncodingJSONRPC, nil)
             return
         }
-        
-        var provider: Provider? = Provider(node: self)
         
         provider?.sendRequest(jsonRPCData: jsonRPCData) { error, data in
             
@@ -73,7 +78,6 @@ public struct Node {
             
             completion(nil, version)
             
-            provider = nil
         }
     }
     
@@ -86,8 +90,6 @@ public struct Node {
             return
         }
         
-        var provider: Provider? = Provider(node: self)
-        
         provider?.sendRequest(jsonRPCData: jsonRPCData) { error, data in
             
             guard let data = data, error == nil else {
@@ -95,7 +97,7 @@ public struct Node {
                 return
             }
             
-            guard let jsonRPCResponse = try? JSONDecoder().decode(JSONRPCResponse<String>.self, from: data) else {
+            guard let jsonRPCResponse = try? JSONDecoder().decode(JSONRPCResponse<String>.self, from: data) else {
                 completion(.errorDecodingJSONRPC, nil)
                 return
             }
@@ -106,7 +108,6 @@ public struct Node {
             
             completion(nil, peerCount)
             
-            provider = nil
         }
     }
     
@@ -120,8 +121,6 @@ public struct Node {
             completion(.errorEncodingJSONRPC, nil)
             return
         }
-        
-        var provider: Provider? = Provider(node: self)
         
         provider?.sendRequest(jsonRPCData: jsonRPCData) { error, data in
             
@@ -139,7 +138,6 @@ public struct Node {
             
             completion(nil, clientVersion)
             
-            provider = nil
         }
     }
     
@@ -151,8 +149,6 @@ public struct Node {
             completion(.errorEncodingJSONRPC, nil)
             return
         }
-        
-        var provider: Provider? = Provider(node: self)
         
         provider?.sendRequest(jsonRPCData: jsonRPCData) { error, data in
             
@@ -170,7 +166,6 @@ public struct Node {
             
             completion(nil, sha3)
             
-            provider = nil
         }
     }
 }
