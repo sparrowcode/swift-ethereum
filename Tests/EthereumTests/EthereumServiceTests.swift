@@ -189,7 +189,6 @@ class EthereumServiceTests: XCTestCase {
         EthereumService.getUncleByBlockNumberAndIndex(blockNumber: blockNumber, index: index) { error, block in
             XCTAssertNil(error)
             XCTAssertNotNil(block)
-            print(block)
             expectation.fulfill()
         }
         

@@ -100,9 +100,9 @@ public struct Node {
                 return
             }
             
-            let hexidecimal = jsonRPCResponse.result.replacingOccurrences(of: "0x", with: "")
+            let hexPeerCount = jsonRPCResponse.result.replacingOccurrences(of: "0x", with: "")
             
-            let peerCount = Int(hexidecimal, radix: 16)
+            let peerCount = Int(hexPeerCount, radix: 16)
             
             completion(nil, peerCount)
             
