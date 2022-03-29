@@ -317,7 +317,7 @@ public enum EthereumService {
             }
         }
         
-        let params = Params(hash: hash, isHydratedTransaction: true)
+        let params = Params(hash: hash, isHydratedTransaction: false)
         
         let jsonRPC = JSONRPCRequest(jsonrpc: "2.0", method: .getBlockByHash, params: params, id: 10)
         
@@ -362,7 +362,7 @@ public enum EthereumService {
             }
         }
         
-        let params = Params(hexBlockNumber: hexBlockNumber, isHydratedTransaction: true)
+        let params = Params(hexBlockNumber: hexBlockNumber, isHydratedTransaction: false)
         
         let jsonRPC = JSONRPCRequest(jsonrpc: "2.0", method: .getBlockByNumber, params: params, id: 10)
         
@@ -422,15 +422,71 @@ public enum EthereumService {
     /**
      Ethereum: Returns information about a transaction by block hash and transaction index position.
      */
-    public static func getTransactionByBlockHashAndIndex() {
+    public static func getTransactionByBlockHashAndIndex(blockHash: String, index: Int, completion: @escaping (JSONRPCError?, Transaction?) -> Void) {
         
+        let hexIndex = "0x" + String(index, radix: 16)
+        
+        let jsonRPC = JSONRPCRequest(jsonrpc: "2.0", method: .getTransactionByBlockHashAndIndex, params: [blockHash, hexIndex], id: 10)
+        
+        guard let jsonRPCData = try? JSONEncoder().encode(jsonRPC) else {
+            completion(.errorEncodingJSONRPC, nil)
+            return
+        }
+        
+        provider.sendRequest(jsonRPCData: jsonRPCData) { error, data in
+            
+            guard let data = data, error == nil else {
+                completion(.nilResponse, nil)
+                return
+            }
+            
+            guard let jsonRPCResponse = try? JSONDecoder().decode(JSONRPCResponse<Transaction?>.self, from: data) else {
+                completion(.errorDecodingJSONRPC, nil)
+                return
+            }
+            
+            if let transaction = jsonRPCResponse.result {
+                completion(nil, transaction)
+            } else {
+                completion(.noResult, nil)
+            }
+        }
     }
     
     /**
      Ethereum: Returns information about a transaction by block number and transaction index position.
      */
-    public static func getTransactionByBlockNumberAndIndex() {
+    public static func getTransactionByBlockNumberAndIndex(blockNumber: Int, index: Int, completion: @escaping (JSONRPCError?, Transaction?) -> Void) {
         
+        let hexBlockNumber = "0x" + String(blockNumber, radix: 16)
+        
+        let hexIndex = "0x" + String(index, radix: 16)
+        
+        let jsonRPC = JSONRPCRequest(jsonrpc: "2.0", method: .getTransactionByBlockNumberAndIndex, params: [hexBlockNumber, hexIndex], id: 10)
+        
+        guard let jsonRPCData = try? JSONEncoder().encode(jsonRPC) else {
+            completion(.errorEncodingJSONRPC, nil)
+            return
+        }
+        
+        provider.sendRequest(jsonRPCData: jsonRPCData) { error, data in
+            
+            guard let data = data, error == nil else {
+                completion(.nilResponse, nil)
+                return
+            }
+            
+            guard let jsonRPCResponse = try? JSONDecoder().decode(JSONRPCResponse<Transaction?>.self, from: data) else {
+                completion(.errorDecodingJSONRPC, nil)
+                return
+            }
+            
+            if let transaction = jsonRPCResponse.result {
+                completion(nil, transaction)
+            } else {
+                completion(.noResult, nil)
+            }
+        }
     }
     
     /**

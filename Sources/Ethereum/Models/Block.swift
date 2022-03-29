@@ -18,7 +18,9 @@ public struct Block: Codable {
     let stateRoot: String
     let timestamp: String
     let totalDifficulty: String?
-    let transactions: [Transaction]?
     let transactionsRoot: String
+    let transactions: [String]?
     let uncles: [String]?
 }
+
+//304

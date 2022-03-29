@@ -225,6 +225,67 @@ class EthereumServiceTests: XCTestCase {
         wait(for: [expectation], timeout: 20)
     }
     
+    func testGetTransactionByBlockHashAndIndex() throws {
+        
+        let expectation = XCTestExpectation(description: "get transaction by hash and index")
+        let blockHash = "0x3c82bc62179602b67318c013c10f99011037c49cba84e31ffe6e465a21c521a7"
+        let index = 0
+        
+        EthereumService.getTransactionByBlockHashAndIndex(blockHash: blockHash, index: index) { error, transaction in
+            XCTAssertNil(error)
+            XCTAssertNotNil(transaction)
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 20)
+    }
+    
+    func testGetTransactionByBlockHashAndIndexNullResponse() throws {
+        
+        let expectation = XCTestExpectation(description: "get transaction by hash and index")
+        let blockHash = "0x8ed01db361de1e33ad89944aeca1412e536694be671df9c36e76ecc6d6ac44e5"
+        let index = 0
+        
+        EthereumService.getTransactionByBlockHashAndIndex(blockHash: blockHash, index: index) { error, transaction in
+            XCTAssertNotNil(error)
+            XCTAssertNil(transaction)
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 20)
+    }
+    
+    func testGetTransactionByBlockNumberAndIndex() throws {
+        
+        let expectation = XCTestExpectation(description: "get transaction by block number and index")
+        let blockNumber = 5417326
+        let index = 0
+        
+        EthereumService.getTransactionByBlockNumberAndIndex(blockNumber: blockNumber, index: index) { error, transaction in
+            XCTAssertNil(error)
+            XCTAssertNotNil(transaction)
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 20)
+    }
+    
+    func testGetTransactionByBlockNumberAndIndexNullResponse() throws {
+        
+        let expectation = XCTestExpectation(description: "get transaction by block number and index")
+        let blockNumber = 541
+        let index = 0
+        
+        EthereumService.getTransactionByBlockNumberAndIndex(blockNumber: blockNumber, index: index) { error, transaction in
+            XCTAssertNotNil(error)
+            XCTAssertNil(transaction)
+            print(transaction)
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 20)
+    }
+    
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
         self.measure {

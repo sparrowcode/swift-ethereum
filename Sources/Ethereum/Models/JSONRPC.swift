@@ -39,6 +39,8 @@ enum JSONRPCMethod: String {
     case getBlockByNumber = "eth_getBlockByNumber"
     case getUncleByBlockNumberAndIndex = "eth_getUncleByBlockNumberAndIndex"
     case getUncleByBlockHashAndIndex = "eth_getUncleByBlockHashAndIndex"
+    case getTransactionByBlockHashAndIndex = "eth_getTransactionByBlockHashAndIndex"
+    case getTransactionByBlockNumberAndIndex = "eth_getTransactionByBlockNumberAndIndex"
 }
 
 public enum JSONRPCError: Error {
