@@ -492,8 +492,31 @@ public enum EthereumService {
     /**
      Ethereum: Returns the receipt of a transaction by transaction hash.
      */
-    public static func getTransactionReceipt() {
+    public static func getTransactionReceipt(transactionHash: String, completion: @escaping (JSONRPCError?, Receipt?) -> Void) {
         
+        let jsonRPC = JSONRPCRequest(jsonrpc: "2.0", method: .getTransactionReceipt, params: [transactionHash], id: 10)
+        
+        guard let jsonRPCData = try? JSONEncoder().encode(jsonRPC) else {
+            completion(.errorEncodingJSONRPC, nil)
+            return
+        }
+        
+        provider.sendRequest(jsonRPCData: jsonRPCData) { error, data in
+            
+            guard let data = data, error == nil else {
+                completion(.nilResponse, nil)
+                return
+            }
+            
+            guard let jsonRPCResponse = try? JSONDecoder().decode(JSONRPCResponse<Receipt>.self, from: data) else {
+                completion(.errorDecodingJSONRPC, nil)
+                return
+            }
+            
+            let receipt = jsonRPCResponse.result
+            
+            completion(nil, receipt)
+        }
     }
     
     /**

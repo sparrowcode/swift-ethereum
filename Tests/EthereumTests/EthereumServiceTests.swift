@@ -279,7 +279,21 @@ class EthereumServiceTests: XCTestCase {
         EthereumService.getTransactionByBlockNumberAndIndex(blockNumber: blockNumber, index: index) { error, transaction in
             XCTAssertNotNil(error)
             XCTAssertNil(transaction)
-            print(transaction)
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 20)
+    }
+    
+    func testGetTransactionReceipt() throws {
+        
+        let expectation = XCTestExpectation(description: "get transaction receipt")
+        let transactionHash = "0xa3ece39ae137617669c6933b7578b94e705e765683f260fcfe30eaa41932610f"
+        
+        EthereumService.getTransactionReceipt(transactionHash: transactionHash) { error, receipt in
+            XCTAssertNil(error)
+            XCTAssertNotNil(receipt)
+            print(receipt)
             expectation.fulfill()
         }
         
