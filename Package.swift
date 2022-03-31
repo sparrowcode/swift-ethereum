@@ -14,10 +14,14 @@ let package = Package(
             targets: ["Ethereum"]
         )
     ],
-    dependencies: [],
+    dependencies: [
+        .package(url: "https://github.com/GigaBitcoin/secp256k1.swift.git", .branchItem("main")),
+        .package(url: "https://github.com/bitflying/SwiftKeccak.git", .branchItem("master"))
+    ],
     targets: [
         .target(
-            name: "Ethereum"
+            name: "Ethereum",
+            dependencies: [.product(name: "secp256k1", package: "secp256k1.swift"), "SwiftKeccak"]
         ),
         .testTarget(
             name: "EthereumTests",

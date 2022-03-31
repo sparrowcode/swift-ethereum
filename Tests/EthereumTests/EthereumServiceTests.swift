@@ -6,11 +6,11 @@ class EthereumServiceTests: XCTestCase {
     override func setUpWithError() throws {
         
     }
-
+    
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
-
+    
     func testGetBalance() throws {
         
         let address = "0xb5bfc95C7345c8B20e5290D21f88a602580a08AB"
@@ -77,7 +77,7 @@ class EthereumServiceTests: XCTestCase {
         
         wait(for: [expectation], timeout: 20)
     }
-
+    
     func testGetBlockTransactionCountByNumber() throws {
         
         let expectation = XCTestExpectation(description: "get block transaction count by number")
@@ -293,7 +293,6 @@ class EthereumServiceTests: XCTestCase {
         EthereumService.getTransactionReceipt(transactionHash: transactionHash) { error, receipt in
             XCTAssertNil(error)
             XCTAssertNotNil(receipt)
-            print(receipt)
             expectation.fulfill()
         }
         
@@ -306,5 +305,5 @@ class EthereumServiceTests: XCTestCase {
             // Put the code you want to measure the time of here.
         }
     }
-
+    
 }

@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "secp256k1",
+        "repositoryURL": "https://github.com/GigaBitcoin/secp256k1.swift.git",
+        "state": {
+          "branch": "main",
+          "revision": "31723af33c3c462ec5b75cc30d6621b23836daff",
+          "version": null
+        }
+      },
+      {
+        "package": "SwiftKeccak",
+        "repositoryURL": "https://github.com/bitflying/SwiftKeccak.git",
+        "state": {
+          "branch": "master",
+          "revision": "5fc323d4b08a8c77cbb690505445b32a3b5a8aff",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}
