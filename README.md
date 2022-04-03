@@ -1,6 +1,6 @@
 # swift-ethereum
 
-Going to be official Ethereum repo for Swift.
+Going to be official Ethereum repo for Swift. There is active progress right now. We will soon get the documentation in order and offer examples of use.
 
 ## Navigate
 
