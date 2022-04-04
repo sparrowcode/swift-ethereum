@@ -40,7 +40,7 @@ public struct Transaction: Codable, Signable {
         self.blockHash = blockHash
         self.blockNumber = blockNumber
         self.from = from
-        self.gas = (gas != nil) ? BigUInt(gas!, radix: 10)! : nil
+        self.gas = (gas != nil) ? BigUInt(gas!, radix: 10) : nil
         self.gasLimit = BigUInt(gasLimit, radix: 10)
         self.gasPrice = BigUInt(gasPrice, radix: 10)
         self.hash = hash
@@ -72,7 +72,7 @@ public struct Transaction: Codable, Signable {
         self.s = s
     }
     
-    var rawData: Data? {
+    public var rawData: Data? {
         if let v = v, let r = r, let s = s {
             let array: [Any?] = [nonce, gasPrice, gasLimit, to, value, input, v, r, s]
             return RLP.encode(array)
@@ -101,6 +101,7 @@ public struct Transaction: Codable, Signable {
     }
     
     public init(from decoder: Decoder) throws {
+        
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         let decodeHexUInt = { (key: CodingKeys) throws -> BigUInt? in
@@ -118,21 +119,22 @@ public struct Transaction: Codable, Signable {
             return try Data(decodedString.bytes)
         }
         
-        self.to = try container.decode(String.self, forKey: .to)
+        self.blockHash = try? container.decode(String.self, forKey: .blockHash)
+        self.blockNumber = try? container.decode(String.self, forKey: .blockNumber)
         self.from = try? container.decode(String.self, forKey: .from)
-        self.input = (try? decodeData(.input)) ?? Data()
-        self.value = try? decodeHexUInt(.value)
+        self.gas = try? decodeHexUInt(.gas)
         self.gasLimit = try? decodeHexUInt(.gasLimit)
         self.gasPrice = try? decodeHexUInt(.gasPrice)
-        self.gas = try? decodeHexUInt(.gas)
-        self.nonce = try? decodeHexInt(.nonce)
-        self.blockNumber = try? container.decode(String.self, forKey: .blockNumber)
         self.hash = try? container.decode(String.self, forKey: .hash)
+        self.input = (try? decodeData(.input)) ?? Data()
+        self.nonce = try? decodeHexInt(.nonce)
+        self.to = try container.decode(String.self, forKey: .to)
+        self.value = try? decodeHexUInt(.value)
         self.chainID = nil
         self.v = try? decodeHexInt(.v)
         self.r = try? decodeData(.r)
         self.s = try? decodeData(.s)
-        self.blockHash = try? container.decode(String.self, forKey: .blockHash)
+        
     }
     
     public func encode(to encoder: Encoder) throws {

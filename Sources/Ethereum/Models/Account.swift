@@ -7,7 +7,7 @@ protocol AccountProtocol {
     func sign(transaction: Transaction) throws -> Transaction
 }
 
-protocol Signable {
+public protocol Signable {
     var rawData: Data? { get }
 }
 
@@ -27,7 +27,7 @@ public struct Account: AccountProtocol {
         self.address = try AccountManager.getEthereumAddress(from: publicKey)
     }
     
-    func sign<T>(_ value: T) throws -> Data where T : Signable {
+    public func sign<T>(_ value: T) throws -> Data where T : Signable {
         
         guard let rawData = value.rawData else {
             throw SignError.invalidData
@@ -38,7 +38,7 @@ public struct Account: AccountProtocol {
         return signedData
     }
     
-    func sign(transaction: Transaction) throws -> Transaction {
+    public func sign(transaction: Transaction) throws -> Transaction {
         
         let signedData = try sign(transaction)
         

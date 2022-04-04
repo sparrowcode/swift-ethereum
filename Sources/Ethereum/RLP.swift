@@ -78,8 +78,8 @@ struct RLP {
     
     static func encodeArray(_ elements: [Any]) -> Data? {
         var encodedData = Data()
-        for el in elements {
-            guard let encoded = encode(el) else {
+        for element in elements {
+            guard let encoded = encode(element) else {
                 return nil
             }
             encodedData.append(encoded)

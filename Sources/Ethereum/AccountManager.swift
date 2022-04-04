@@ -12,7 +12,7 @@ class AccountManager {
     
     public static func createAccount() throws -> Account {
         // MARK: - store private key in storage
-        let randomBytes = Data(0..<32).map({ _ in UInt32.random(in: UInt32.min...UInt32.max) })
+        let randomBytes = Data(0..<32).map { _ in UInt32.random(in: UInt32.min...UInt32.max) }
         
         let privateKeyData = Data(bytes: randomBytes, count: 32)
         
@@ -46,51 +46,52 @@ class AccountManager {
         //
         //        let compactRepresentation = try signature.rawRepresentation
         
-        guard let ctx = secp256k1_context_create(UInt32(SECP256K1_CONTEXT_SIGN | SECP256K1_CONTEXT_VERIFY)) else {
+        guard let context = secp256k1_context_create(UInt32(SECP256K1_CONTEXT_SIGN | SECP256K1_CONTEXT_VERIFY)) else {
             print("Failed to sign message: invalid context.")
             throw JSONRPCError.errorSigningTransaction
         }
         
         defer {
-            secp256k1_context_destroy(ctx)
+            secp256k1_context_destroy(context)
         }
         
-        let msgData = data.keccak()
+        let keccakData = data.keccak()
         
-        let msg = (msgData as NSData).bytes.assumingMemoryBound(to: UInt8.self)
+        let keccakDataPointer = (keccakData as NSData).bytes.assumingMemoryBound(to: UInt8.self)
         
-        let privateKeyPtr = (secp256k1PrivateKey.rawRepresentation as NSData).bytes.assumingMemoryBound(to: UInt8.self)
+        let privateKeyPointer = (secp256k1PrivateKey.rawRepresentation as NSData).bytes.assumingMemoryBound(to: UInt8.self)
         
-        let signaturePtr = UnsafeMutablePointer<secp256k1_ecdsa_recoverable_signature>.allocate(capacity: 1)
+        let signaturePointer = UnsafeMutablePointer<secp256k1_ecdsa_recoverable_signature>.allocate(capacity: 1)
         
         defer {
-            signaturePtr.deallocate()
+            signaturePointer.deallocate()
         }
         
-        guard secp256k1_ecdsa_sign_recoverable(ctx, signaturePtr, msg, privateKeyPtr, nil, nil) == 1 else {
+        guard secp256k1_ecdsa_sign_recoverable(context, signaturePointer, keccakDataPointer, privateKeyPointer, nil, nil) == 1 else {
             print("Failed to sign message: recoverable ECDSA signature creation failed.")
             throw JSONRPCError.errorSigningTransaction
         }
         
-        let outputPtr = UnsafeMutablePointer<UInt8>.allocate(capacity: 64)
+        let outputDataPointer = UnsafeMutablePointer<UInt8>.allocate(capacity: 64)
         
         defer {
-            outputPtr.deallocate()
+            outputDataPointer.deallocate()
         }
         
-        var recid: Int32 = 0
-        secp256k1_ecdsa_recoverable_signature_serialize_compact(ctx, outputPtr, &recid, signaturePtr)
+        var recoverableID: Int32 = 0
         
-        let outputWithRecidPtr = UnsafeMutablePointer<UInt8>.allocate(capacity: 65)
+        secp256k1_ecdsa_recoverable_signature_serialize_compact(context, outputDataPointer, &recoverableID, signaturePointer)
+        
+        let outputWithRecoverableIDPointer = UnsafeMutablePointer<UInt8>.allocate(capacity: 65)
         
         defer {
-            outputWithRecidPtr.deallocate()
+            outputWithRecoverableIDPointer.deallocate()
         }
         
-        outputWithRecidPtr.assign(from: outputPtr, count: 64)
-        outputWithRecidPtr.advanced(by: 64).pointee = UInt8(recid)
+        outputWithRecoverableIDPointer.assign(from: outputDataPointer, count: 64)
+        outputWithRecoverableIDPointer.advanced(by: 64).pointee = UInt8(recoverableID)
         
-        let signature = Data(bytes: outputWithRecidPtr, count: 65)
+        let signature = Data(bytes: outputWithRecoverableIDPointer, count: 65)
         
         return signature
     }
