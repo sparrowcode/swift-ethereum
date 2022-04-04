@@ -1,4 +1,5 @@
 import Foundation
+import BigInt
 
 public enum EthereumService {
     
@@ -78,7 +79,7 @@ public enum EthereumService {
     /**
      Ethereum: Returns the balance of the account of given address.
      */
-    public static func getBalance(for address: String, completion: @escaping (JSONRPCError?, Int?) -> Void) {
+    public static func getBalance(for address: String, completion: @escaping (JSONRPCError?, String?) -> Void) {
         
         let jsonRPC = JSONRPCRequest(jsonrpc: "2.0", method: .getBalance, params: [address, "latest"], id: 3)
         
@@ -101,11 +102,13 @@ public enum EthereumService {
             
             let hexBalance = jsonRPCResponse.result.replacingOccurrences(of: "0x", with: "")
             
-            guard let balance = Int(hexBalance, radix: 16) else { completion(.errorConvertingFromHex, nil)
+            guard let balance = BigInt(hexBalance, radix: 16) else { completion(.errorConvertingFromHex, nil)
                 return
             }
             
-            completion(nil, balance)
+            let stringBalance = String(balance)
+            
+            completion(nil, stringBalance)
         }
     }
     
@@ -198,12 +201,15 @@ public enum EthereumService {
                 return
             }
             
-            guard let jsonRPCResponse = try? JSONDecoder().decode(JSONRPCResponse<String>.self, from: data) else {
+            guard let jsonRPCResponse = try? JSONDecoder().decode(JSONRPCResponse<String?>.self, from: data) else {
                 completion(.errorDecodingJSONRPC, nil)
                 return
             }
             
-            let hexTransactionCount = jsonRPCResponse.result.replacingOccurrences(of: "0x", with: "")
+            guard let hexTransactionCount = jsonRPCResponse.result?.replacingOccurrences(of: "0x", with: "") else {
+                completion(.nilResponse, nil)
+                return
+            }
             
             guard let transactionCount = Int(hexTransactionCount, radix: 16) else { completion(.errorConvertingFromHex, nil)
                 return
@@ -283,8 +289,55 @@ public enum EthereumService {
      Ethereum: Creates new message call transaction or a contract creation for signed transactions.
      sendRawTransaction() requires that the transaction be already signed and serialized. So it requires extra serialization steps to use, but enables you to broadcast transactions on hosted nodes. There are other reasons that you might want to use a local key, of course. All of them would require using sendRawTransaction().
      */
-    public static func sendRawTransaction() {
+    public static func sendRawTransaction(account: Account, transaction: Transaction, completion: @escaping (JSONRPCError?, String?) -> Void) {
         
+        self.getTransactionCount(for: account.address) { error, nonce in
+            
+            guard error == nil, let nonce = nonce else {
+                completion(error, nil)
+                return
+            }
+            
+            var unsignedTransaction = transaction
+
+            unsignedTransaction.nonce = nonce
+            
+            guard let signedTransaction = try? account.sign(transaction: unsignedTransaction) else {
+                completion(.errorSigningTransaction, nil)
+                return
+            }
+            
+            guard let bytes = signedTransaction.rawData else {
+                completion(.errorSigningTransaction, nil)
+                return
+            }
+            
+            let signedTransactionHash = "0x" + String(bytes: bytes)
+            
+            let jsonRPC = JSONRPCRequest(jsonrpc: "2.0", method: .sendRawTransaction, params: [signedTransactionHash], id: 8)
+            
+            guard let jsonRPCData = try? JSONEncoder().encode(jsonRPC) else {
+                completion(.errorEncodingJSONRPC, nil)
+                return
+            }
+            
+            provider.sendRequest(jsonRPCData: jsonRPCData) { error, data in
+                
+                guard let data = data, error == nil else {
+                    completion(.nilResponse, nil)
+                    return
+                }
+                
+                guard let jsonRPCResponse = try? JSONDecoder().decode(JSONRPCResponse<String>.self, from: data) else {
+                    completion(.errorDecodingJSONRPC, nil)
+                    return
+                }
+                
+                let transactionHash = jsonRPCResponse.result
+                
+                completion(nil, transactionHash)
+            }
+        }
     }
     
     /**

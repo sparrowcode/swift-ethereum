@@ -1,10 +1,12 @@
 import XCTest
+import BigInt
 @testable import Ethereum
 
 class EthereumServiceTests: XCTestCase {
     
     override func setUpWithError() throws {
-        
+        // MARK: - For sending transactions
+//        EthereumService.provider = Provider(node: DefaultNodes.ropsten)
     }
     
     override func tearDownWithError() throws {
@@ -13,7 +15,7 @@ class EthereumServiceTests: XCTestCase {
     
     func testGetBalance() throws {
         
-        let address = "0xb5bfc95C7345c8B20e5290D21f88a602580a08AB"
+        let address = "0xE92A146f86fEda6D14Ee1dc1BfB620D3F3d1b873"
         let expectation = XCTestExpectation(description: "get balance")
         
         EthereumService.getBalance(for: address) { error, balance in
@@ -297,6 +299,24 @@ class EthereumServiceTests: XCTestCase {
         }
         
         wait(for: [expectation], timeout: 20)
+    }
+    
+    func testSendRawTransaction() throws {
+        
+        let expectation = XCTestExpectation(description: "send raw transaction")
+        
+        let account = try Account(privateKey: "2404a482a212386ecf1ed054547cf4d28348ddf73d23325a83373f803138f105")
+        
+        
+        let transaction = try Transaction(gasLimit: "500000", gasPrice: "40000000", to: "c8DE4C1B4f6F6659944160DaC46B29a330C432B2", value: "1610000", chainID: 3)
+        
+        EthereumService.sendRawTransaction(account: account, transaction: transaction) { error, hash in
+            XCTAssertNil(error)
+            XCTAssertNotNil(hash)
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 100)
     }
     
     func testPerformanceExample() throws {

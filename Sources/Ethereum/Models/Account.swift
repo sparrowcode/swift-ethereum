@@ -1,12 +1,18 @@
 import Foundation
+import SwiftKeccak
+
 
 protocol AccountProtocol {
-    
-    func sign<T: Signable>(_ value: T) // signs a data that confirms to signable protocol (make use of generics)
+    func sign<T: Signable>(_ value: T) throws -> Data
+    func sign(transaction: Transaction) throws -> Transaction
 }
 
 protocol Signable {
-    
+    var rawData: Data? { get }
+}
+
+enum SignError: Error {
+    case invalidData
 }
 
 public struct Account: AccountProtocol {
@@ -21,7 +27,32 @@ public struct Account: AccountProtocol {
         self.address = try AccountManager.getEthereumAddress(from: publicKey)
     }
     
-    func sign<T>(_ value: T) where T : Signable {
+    func sign<T>(_ value: T) throws -> Data where T : Signable {
         
+        guard let rawData = value.rawData else {
+            throw SignError.invalidData
+        }
+        
+        let signedData = try AccountManager.sign(data: rawData, with: privateKey)
+        
+        return signedData
+    }
+    
+    func sign(transaction: Transaction) throws -> Transaction {
+        
+        let signedData = try sign(transaction)
+        
+        var v = Int(signedData[64])
+
+        if v < 37 {
+            v += (transaction.chainID ?? -1) * 2 + 35
+        }
+        
+        let r = signedData.subdata(in: 0..<32)
+        let s = signedData.subdata(in: 32..<64)
+        
+        let signedTransaction = Transaction(transaction: transaction, v: v, r: r, s: s)
+        
+        return signedTransaction
     }
 }

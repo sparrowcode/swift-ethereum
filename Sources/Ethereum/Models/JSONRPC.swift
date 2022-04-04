@@ -42,6 +42,7 @@ enum JSONRPCMethod: String {
     case getTransactionByBlockHashAndIndex = "eth_getTransactionByBlockHashAndIndex"
     case getTransactionByBlockNumberAndIndex = "eth_getTransactionByBlockNumberAndIndex"
     case getTransactionReceipt = "eth_getTransactionReceipt"
+    case sendRawTransaction = "eth_sendRawTransaction"
 }
 
 public enum JSONRPCError: Error {
@@ -50,4 +51,5 @@ public enum JSONRPCError: Error {
     case errorConvertingFromHex
     case nilResponse
     case noResult
+    case errorSigningTransaction
 }
