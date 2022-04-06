@@ -30,21 +30,20 @@ class AccountManager {
         
     }
     
-    public static func sign(data: Data, with privateKey: String) throws -> Data {
+    public static func sign(data: Data, with privateKey: String) throws -> Signature {
         
         let privateKeyBytes = try privateKey.lowercased().bytes
         
         let secp256k1PrivateKey = try secp256k1.Signing.PrivateKey(rawRepresentation: privateKeyBytes, format: .uncompressed)
         
-        // MARK: - Make use of simplified syntex
+        // MARK: - Make use of simplified syntax
         
         //        let keccakData = data.keccak()
         //
-        //        let digets = SHA256.convert(keccakData.bytes)
+        //        let digests = SHA256.convert(keccakData.bytes)
         //
-        //        let signature = try secp256k1PrivateKey.ecdsa.signature(for: digets)
+        //        let signature = try secp256k1PrivateKey.ecdsa.signature(for: digests)
         //
-        //        let compactRepresentation = try signature.rawRepresentation
         
         guard let context = secp256k1_context_create(UInt32(SECP256K1_CONTEXT_SIGN | SECP256K1_CONTEXT_VERIFY)) else {
             print("Failed to sign message: invalid context.")
@@ -91,7 +90,9 @@ class AccountManager {
         outputWithRecoverableIDPointer.assign(from: outputDataPointer, count: 64)
         outputWithRecoverableIDPointer.advanced(by: 64).pointee = UInt8(recoverableID)
         
-        let signature = Data(bytes: outputWithRecoverableIDPointer, count: 65)
+        let signedData = Data(bytes: outputWithRecoverableIDPointer, count: 65)
+        
+        let signature = Signature(signedData)
         
         return signature
     }

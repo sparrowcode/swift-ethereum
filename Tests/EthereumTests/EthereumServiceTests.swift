@@ -6,7 +6,7 @@ class EthereumServiceTests: XCTestCase {
     
     override func setUpWithError() throws {
         // MARK: - For sending transactions
-//        EthereumService.provider = Provider(node: DefaultNodes.ropsten)
+        //EthereumService.provider = Provider(node: DefaultNodes.ropsten)
     }
     
     override func tearDownWithError() throws {
@@ -306,7 +306,6 @@ class EthereumServiceTests: XCTestCase {
         let expectation = XCTestExpectation(description: "send raw transaction")
         
         let account = try Account(privateKey: "2404a482a212386ecf1ed054547cf4d28348ddf73d23325a83373f803138f105")
-        
         
         let transaction = try Transaction(gasLimit: "500000",
                                           gasPrice: "40000000",

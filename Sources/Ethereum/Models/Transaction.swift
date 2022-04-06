@@ -6,55 +6,61 @@ import BigInt
 // 3 allowed structures: EIP-1559, EIP-2930 and Legacy Transaction
 public struct Transaction: Codable, Signable {
     
-    let blockHash: String?
-    let blockNumber: String?
-    let from: String?
-    let gas: BigUInt?
-    let gasLimit: BigUInt?
-    let gasPrice: BigUInt?
-    var hash: String?
-    let input: Data
-    var nonce: Int?
-    let to: String
-    let value: BigUInt?
-    var chainID: Int?
-    let v: Int?
-    let r: Data?
-    let s: Data?
+    public let blockHash: String?
+    public let blockNumber: String?
+    public let from: String?
+    public let gas: String?
+    public let gasLimit: String?
+    public let gasPrice: String?
+    public var hash: String?
+    public let input: Data
+    public var nonce: Int?
+    public let to: String?
+    public let value: String?
+    public var chainID: Int?
+    public let v: Int?
+    public let r: Data?
+    public let s: Data?
     
-    init(blockHash: String? = nil,
-         blockNumber: String? = nil,
-         from: String? = nil,
-         gas: String? = nil,
+    // MARK: - RLP Properties
+    private var gasLimitBigUInt: BigUInt? {
+        (gasLimit != nil) ? BigUInt(gasLimit!, radix: 10) : nil
+    }
+    
+    private var gasPriceBigUInt: BigUInt? {
+        (gasPrice != nil) ? BigUInt(gasPrice!, radix: 10) : nil
+    }
+    
+    private var valueBigUInt: BigUInt? {
+        (value != nil) ? BigUInt(value!, radix: 10) : nil
+    }
+    
+    public init(
          gasLimit: String,
          gasPrice: String,
-         hash: String? = nil,
          input: Data = Data(),
          nonce: Int? = nil,
          to: String,
          value: String,
-         chainID: Int,
-         v: Int? = nil,
-         r: Data? = nil,
-         s: Data? = nil) throws {
-        self.blockHash = blockHash
-        self.blockNumber = blockNumber
-        self.from = from
-        self.gas = (gas != nil) ? BigUInt(gas!, radix: 10) : nil
-        self.gasLimit = BigUInt(gasLimit, radix: 10)
-        self.gasPrice = BigUInt(gasPrice, radix: 10)
-        self.hash = hash
+         chainID: Int) throws {
+        self.blockHash = nil
+        self.blockNumber = nil
+        self.from = nil
+        self.gas = nil
+        self.gasLimit = gasLimit
+        self.gasPrice = gasPrice
+        self.hash = nil
         self.input = input
         self.nonce = nonce
         self.to = to
-        self.value = BigUInt(value, radix: 10)
+        self.value = value
         self.chainID = chainID
-        self.v = v
-        self.r = r
-        self.s = s
+        self.v = nil
+        self.r = nil
+        self.s = nil
     }
     
-    init(transaction: Transaction, v: Int, r: Data, s: Data) {
+    public init(transaction: Transaction, v: Int, r: Data, s: Data) {
         self.blockHash = transaction.blockHash
         self.blockNumber = transaction.blockNumber
         self.from = transaction.from
@@ -74,15 +80,15 @@ public struct Transaction: Codable, Signable {
     
     public var rawData: Data? {
         if let v = v, let r = r, let s = s {
-            let array: [Any?] = [nonce, gasPrice, gasLimit, to, value, input, v, r, s]
+            let array: [Any?] = [nonce, gasPriceBigUInt, gasLimitBigUInt, to, valueBigUInt, input, v, r, s]
             return RLP.encode(array)
         } else {
-            let array: [Any?] = [nonce, gasPrice, gasLimit, to, value, input, chainID, 0, 0]
+            let array: [Any?] = [nonce, gasPriceBigUInt, gasLimitBigUInt, to, valueBigUInt, input, chainID, 0, 0]
             return RLP.encode(array)
         }
     }
     
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case blockHash
         case blockNumber
         case from
@@ -94,7 +100,7 @@ public struct Transaction: Codable, Signable {
         case nonce
         case to
         case value
-        case chainID
+        case chainId
         case v
         case r
         case s
@@ -104,9 +110,10 @@ public struct Transaction: Codable, Signable {
         
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
-        let decodeHexUInt = { (key: CodingKeys) throws -> BigUInt? in
+        let decodeHexBigUInt = { (key: CodingKeys) throws -> String? in
             let decodedString = try container.decode(String.self, forKey: key)
-            return BigUInt(decodedString, radix: 16)
+            let decodedBigUInt = BigUInt(decodedString, radix: 16)
+            return decodedBigUInt?.description
         }
         
         let decodeHexInt = { (key: CodingKeys) throws -> Int? in
@@ -122,19 +129,18 @@ public struct Transaction: Codable, Signable {
         self.blockHash = try? container.decode(String.self, forKey: .blockHash)
         self.blockNumber = try? container.decode(String.self, forKey: .blockNumber)
         self.from = try? container.decode(String.self, forKey: .from)
-        self.gas = try? decodeHexUInt(.gas)
-        self.gasLimit = try? decodeHexUInt(.gasLimit)
-        self.gasPrice = try? decodeHexUInt(.gasPrice)
+        self.gas = try? decodeHexBigUInt(.gas)
+        self.gasLimit = try? decodeHexBigUInt(.gasLimit)
+        self.gasPrice = try? decodeHexBigUInt(.gasPrice)
         self.hash = try? container.decode(String.self, forKey: .hash)
         self.input = (try? decodeData(.input)) ?? Data()
         self.nonce = try? decodeHexInt(.nonce)
-        self.to = try container.decode(String.self, forKey: .to)
-        self.value = try? decodeHexUInt(.value)
-        self.chainID = nil
+        self.to = try? container.decode(String.self, forKey: .to)
+        self.value = try? decodeHexBigUInt(.value)
+        self.chainID = try? container.decode(Int.self, forKey: .chainId)
         self.v = try? decodeHexInt(.v)
         self.r = try? decodeData(.r)
         self.s = try? decodeData(.s)
-        
     }
     
     public func encode(to encoder: Encoder) throws {

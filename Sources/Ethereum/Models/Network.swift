@@ -1,10 +1,16 @@
 import Foundation
 
-public enum Network {
-    case main
-    case rinkeby
-    case ropsten
-    case covan
-    case goerli
-    case custom(String)
-}
+//public enum Network: String, CaseIterable {
+//    case main
+//    case rinkeby
+//    case ropsten
+//    case covan
+//    case goerli
+//    case custom(String)
+//
+//    var chainID: String {
+//
+//    }
+//}
+
+
