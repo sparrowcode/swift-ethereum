@@ -311,8 +311,8 @@ class EthereumServiceTests: XCTestCase {
         
         let value = "0000000".map({ _ in String(UInt32.random(in: 0...9)) }).reduce("", +)
         
-        let transaction = try Transaction(gasLimit: "5000000",
-                                          gasPrice: "100000000",
+        let transaction = try Transaction(gasLimit: "210000",
+                                          gasPrice: "20000000000",
                                           to: "0xc8DE4C1B4f6F6659944160DaC46B29a330C432B2",
                                           value: value,
                                           chainID: 3)
@@ -323,7 +323,7 @@ class EthereumServiceTests: XCTestCase {
             expectation.fulfill()
         }
         
-        wait(for: [expectation], timeout: 30)
+        wait(for: [expectation], timeout: 50)
     }
     
     func testPerformanceExample() throws {
