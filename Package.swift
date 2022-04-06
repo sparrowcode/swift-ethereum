@@ -6,8 +6,7 @@ let package = Package(
     name: "Ethereum",
     defaultLocalization: "en",
     platforms: [
-        .iOS(.v13),
-        .macOS(.v10_15)
+        .iOS(.v13)
     ],
     products: [
         .library(

@@ -1,39 +1,30 @@
 import Foundation
-import SwiftKeccak
 import BigInt
 
-// do we need a separate structure for signed transactions?
-// 3 allowed structures: EIP-1559, EIP-2930 and Legacy Transaction
 public struct Transaction: Codable, Signable {
     
     public let blockHash: String?
     public let blockNumber: String?
     public let from: String?
     public let gas: String?
-    public let gasLimit: String?
-    public let gasPrice: String?
+    public let gasLimit: String
+    public let gasPrice: String
     public var hash: String?
     public let input: Data
     public var nonce: Int?
-    public let to: String?
-    public let value: String?
-    public var chainID: Int?
+    public let to: String
+    public let value: String
+    public var chainID: Int
     public let v: Int?
     public let r: Data?
     public let s: Data?
     
     // MARK: - RLP Properties
-    private var gasLimitBigUInt: BigUInt? {
-        (gasLimit != nil) ? BigUInt(gasLimit!, radix: 10) : nil
-    }
+    private let gasLimitBigUInt: BigUInt?
     
-    private var gasPriceBigUInt: BigUInt? {
-        (gasPrice != nil) ? BigUInt(gasPrice!, radix: 10) : nil
-    }
+    private let gasPriceBigUInt: BigUInt?
     
-    private var valueBigUInt: BigUInt? {
-        (value != nil) ? BigUInt(value!, radix: 10) : nil
-    }
+    private let valueBigUInt: BigUInt?
     
     public init(
          gasLimit: String,
@@ -52,15 +43,20 @@ public struct Transaction: Codable, Signable {
         self.hash = nil
         self.input = input
         self.nonce = nonce
-        self.to = to
+        self.to = to.removeHexPrefix()
         self.value = value
         self.chainID = chainID
         self.v = nil
         self.r = nil
         self.s = nil
+             
+        self.gasLimitBigUInt = BigUInt(gasLimit, radix: 10)
+        self.gasPriceBigUInt = BigUInt(gasPrice, radix: 10)
+        self.valueBigUInt = BigUInt(value, radix: 10)
+        
     }
     
-    public init(transaction: Transaction, v: Int, r: Data, s: Data) {
+    init(transaction: Transaction, v: Int, r: Data, s: Data) throws {
         self.blockHash = transaction.blockHash
         self.blockNumber = transaction.blockNumber
         self.from = transaction.from
@@ -76,6 +72,10 @@ public struct Transaction: Codable, Signable {
         self.v = v
         self.r = r
         self.s = s
+        
+        self.gasLimitBigUInt = BigUInt(transaction.gasLimit, radix: 10)
+        self.gasPriceBigUInt = BigUInt(transaction.gasPrice, radix: 10)
+        self.valueBigUInt = BigUInt(transaction.value, radix: 10)
     }
     
     public var rawData: Data? {
@@ -110,10 +110,10 @@ public struct Transaction: Codable, Signable {
         
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
-        let decodeHexBigUInt = { (key: CodingKeys) throws -> String? in
+        let decodeHexBigUInt = { (key: CodingKeys) throws -> BigUInt? in
             let decodedString = try container.decode(String.self, forKey: key)
             let decodedBigUInt = BigUInt(decodedString, radix: 16)
-            return decodedBigUInt?.description
+            return decodedBigUInt
         }
         
         let decodeHexInt = { (key: CodingKeys) throws -> Int? in
@@ -129,23 +129,27 @@ public struct Transaction: Codable, Signable {
         self.blockHash = try? container.decode(String.self, forKey: .blockHash)
         self.blockNumber = try? container.decode(String.self, forKey: .blockNumber)
         self.from = try? container.decode(String.self, forKey: .from)
-        self.gas = try? decodeHexBigUInt(.gas)
-        self.gasLimit = try? decodeHexBigUInt(.gasLimit)
-        self.gasPrice = try? decodeHexBigUInt(.gasPrice)
+        self.gas = try? decodeHexBigUInt(.gas)?.description
+        self.gasLimit = (try? decodeHexBigUInt(.gasLimit)?.description) ?? "0"
+        self.gasPrice = (try? decodeHexBigUInt(.gasPrice)?.description) ?? "0"
         self.hash = try? container.decode(String.self, forKey: .hash)
         self.input = (try? decodeData(.input)) ?? Data()
         self.nonce = try? decodeHexInt(.nonce)
-        self.to = try? container.decode(String.self, forKey: .to)
-        self.value = try? decodeHexBigUInt(.value)
-        self.chainID = try? container.decode(Int.self, forKey: .chainId)
+        self.to = (try? container.decode(String.self, forKey: .to)) ?? "0x"
+        self.value = (try? decodeHexBigUInt(.value)?.description) ?? "0"
+        self.chainID = (try? container.decode(Int.self, forKey: .chainId)) ?? 1
         self.v = try? decodeHexInt(.v)
         self.r = try? decodeData(.r)
         self.s = try? decodeData(.s)
+        
+        self.gasLimitBigUInt = (try? decodeHexBigUInt(.gasLimit)) ?? BigUInt(0)
+        self.gasPriceBigUInt = (try? decodeHexBigUInt(.gasPrice)) ?? BigUInt(0)
+        self.valueBigUInt = (try? decodeHexBigUInt(.value)) ?? BigUInt(0)
     }
     
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(to, forKey: .to)
+        try? container.encode(to, forKey: .to)
         try? container.encode(from, forKey: .from)
         try? container.encode(input, forKey: .input)
         try? container.encode(value, forKey: .value)

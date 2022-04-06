@@ -14,7 +14,7 @@ public struct Account: AccountProtocol {
     
     init(privateKey: String) throws {
         self.privateKey = privateKey
-        self.publicKey = try AccountManager.getPublicKey(from: privateKey)
+        self.publicKey = try AccountManager.getPublicKey(from: privateKey.removeHexPrefix())
         self.address = try AccountManager.getEthereumAddress(from: publicKey)
     }
     
@@ -24,7 +24,7 @@ public struct Account: AccountProtocol {
             throw SignError.invalidData
         }
         
-        let signedData = try AccountManager.sign(data: rawData, with: privateKey)
+        let signedData = try AccountManager.sign(data: rawData, with: privateKey.removeHexPrefix())
         
         return signedData
     }
@@ -35,7 +35,7 @@ public struct Account: AccountProtocol {
         
         signature.calculateV(with: transaction.chainID)
         
-        let signedTransaction = Transaction(transaction: transaction,
+        let signedTransaction = try Transaction(transaction: transaction,
                                             v: signature.v,
                                             r: signature.r,
                                             s: signature.s)
