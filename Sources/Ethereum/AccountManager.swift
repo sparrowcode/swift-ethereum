@@ -23,7 +23,7 @@ class AccountManager {
     
     public static func importAccount(privateKey: String) throws -> Account {
         // MARK: - store private key in storage
-        return try Account(privateKey: privateKey)
+        return try Account(privateKey: privateKey.removeHexPrefix())
     }
     
     public static func removeAccount(_ account: Account) {
@@ -32,7 +32,7 @@ class AccountManager {
     
     public static func sign(data: Data, with privateKey: String) throws -> Signature {
         
-        let privateKeyBytes = try privateKey.lowercased().bytes
+        let privateKeyBytes = try privateKey.lowercased().removeHexPrefix().bytes
         
         let secp256k1PrivateKey = try secp256k1.Signing.PrivateKey(rawRepresentation: privateKeyBytes, format: .uncompressed)
         
@@ -99,7 +99,7 @@ class AccountManager {
     
     public static func getPublicKey(from privateKey: String) throws -> String {
         
-        let privateKeyBytes = try privateKey.lowercased().bytes
+        let privateKeyBytes = try privateKey.lowercased().removeHexPrefix().bytes
         
         let secp256k1PrivateKey = try secp256k1.Signing.PrivateKey(rawRepresentation: privateKeyBytes, format: .uncompressed)
         
@@ -118,7 +118,7 @@ class AccountManager {
         
         let address = hash.subdata(in: 12..<hash.count)
         
-        let ethereumAddress = "0x" + String(bytes: address)
+        let ethereumAddress = String(bytes: address).addHexPrefix()
         
         return ethereumAddress
     }

@@ -95,7 +95,7 @@ public struct Node {
                 return
             }
             
-            let hexPeerCount = jsonRPCResponse.result.replacingOccurrences(of: "0x", with: "")
+            let hexPeerCount = jsonRPCResponse.result.removeHexPrefix()
             
             let peerCount = Int(hexPeerCount, radix: 16)
             

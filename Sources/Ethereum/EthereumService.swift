@@ -31,7 +31,7 @@ public enum EthereumService {
                 return
             }
             
-            let hexGasPrice = jsonRPCResponse.result.replacingOccurrences(of: "0x", with: "")
+            let hexGasPrice = jsonRPCResponse.result.removeHexPrefix()
             
             guard let gasPrice = Int(hexGasPrice, radix: 16) else { completion(.errorConvertingFromHex, nil)
                 return
@@ -66,7 +66,7 @@ public enum EthereumService {
                 return
             }
             
-            let hexBlockNumber = jsonRPCResponse.result.replacingOccurrences(of: "0x", with: "")
+            let hexBlockNumber = jsonRPCResponse.result.removeHexPrefix()
             
             guard let blockNumber = Int(hexBlockNumber, radix: 16) else { completion(.errorConvertingFromHex, nil)
                 return
@@ -100,7 +100,7 @@ public enum EthereumService {
                 return
             }
             
-            let hexBalance = jsonRPCResponse.result.replacingOccurrences(of: "0x", with: "")
+            let hexBalance = jsonRPCResponse.result.removeHexPrefix()
             
             guard let balance = BigInt(hexBalance, radix: 16) else { completion(.errorConvertingFromHex, nil)
                 return
@@ -117,7 +117,7 @@ public enum EthereumService {
      */
     public static func getStorageAt(address: String, storageSlot: Int, block: String = "latest", completion: @escaping (JSONRPCError?, Int?) -> Void) {
         
-        let hexStorageSlot = "0x" + String(storageSlot, radix: 16)
+        let hexStorageSlot = String(storageSlot, radix: 16).addHexPrefix()
         
         let jsonRPC = JSONRPCRequest(jsonrpc: "2.0", method: .getStorageAt, params: [address, hexStorageSlot, block], id: 4)
         
@@ -138,7 +138,7 @@ public enum EthereumService {
                 return
             }
             
-            let hexValue = jsonRPCResponse.result.replacingOccurrences(of: "0x", with: "")
+            let hexValue = jsonRPCResponse.result.removeHexPrefix()
             
             guard let value = Int(hexValue, radix: 16) else { completion(.errorConvertingFromHex, nil)
                 return
@@ -172,7 +172,7 @@ public enum EthereumService {
                 return
             }
             
-            let hexNonce = jsonRPCResponse.result.replacingOccurrences(of: "0x", with: "")
+            let hexNonce = jsonRPCResponse.result.removeHexPrefix()
             
             guard let nonce = Int(hexNonce, radix: 16) else { completion(.errorConvertingFromHex, nil)
                 return
@@ -206,7 +206,7 @@ public enum EthereumService {
                 return
             }
             
-            guard let hexTransactionCount = jsonRPCResponse.result?.replacingOccurrences(of: "0x", with: "") else {
+            guard let hexTransactionCount = jsonRPCResponse.result?.removeHexPrefix() else {
                 completion(.nilResponse, nil)
                 return
             }
@@ -224,7 +224,7 @@ public enum EthereumService {
      */
     public static func getBlockTransactionCountByNumber(blockNumber: Int, completion: @escaping (JSONRPCError?, Int?) -> Void) {
         
-        let hexBlockNumber = "0x" + String(blockNumber, radix: 16)
+        let hexBlockNumber = String(blockNumber, radix: 16).addHexPrefix()
         
         let jsonRPC = JSONRPCRequest(jsonrpc: "2.0", method: .getBlockTransactionCountByNumber, params: [hexBlockNumber], id: 7)
         
@@ -245,7 +245,7 @@ public enum EthereumService {
                 return
             }
             
-            let hexTransactionCount = jsonRPCResponse.result.replacingOccurrences(of: "0x", with: "")
+            let hexTransactionCount = jsonRPCResponse.result.removeHexPrefix()
             
             guard let transactionCount = Int(hexTransactionCount, radix: 16) else { completion(.errorConvertingFromHex, nil)
                 return
@@ -312,7 +312,7 @@ public enum EthereumService {
                 return
             }
             
-            let signedTransactionHash = "0x" + String(bytes: bytes)
+            let signedTransactionHash = String(bytes: bytes).addHexPrefix()
             
             let jsonRPC = JSONRPCRequest(jsonrpc: "2.0", method: .sendRawTransaction, params: [signedTransactionHash], id: 8)
             
@@ -402,7 +402,7 @@ public enum EthereumService {
      */
     public static func getBlockByNumber(blockNumber: Int, completion: @escaping (JSONRPCError?, Block?) -> Void) {
         
-        let hexBlockNumber = "0x" + String(blockNumber, radix: 16)
+        let hexBlockNumber = String(blockNumber, radix: 16).addHexPrefix()
         
         struct Params: Codable {
             let hexBlockNumber: String
@@ -477,7 +477,7 @@ public enum EthereumService {
      */
     public static func getTransactionByBlockHashAndIndex(blockHash: String, index: Int, completion: @escaping (JSONRPCError?, Transaction?) -> Void) {
         
-        let hexIndex = "0x" + String(index, radix: 16)
+        let hexIndex = String(index, radix: 16).addHexPrefix()
         
         let jsonRPC = JSONRPCRequest(jsonrpc: "2.0", method: .getTransactionByBlockHashAndIndex, params: [blockHash, hexIndex], id: 10)
         
@@ -511,9 +511,9 @@ public enum EthereumService {
      */
     public static func getTransactionByBlockNumberAndIndex(blockNumber: Int, index: Int, completion: @escaping (JSONRPCError?, Transaction?) -> Void) {
         
-        let hexBlockNumber = "0x" + String(blockNumber, radix: 16)
+        let hexBlockNumber = String(blockNumber, radix: 16).addHexPrefix()
         
-        let hexIndex = "0x" + String(index, radix: 16)
+        let hexIndex = String(index, radix: 16).addHexPrefix()
         
         let jsonRPC = JSONRPCRequest(jsonrpc: "2.0", method: .getTransactionByBlockNumberAndIndex, params: [hexBlockNumber, hexIndex], id: 10)
         
@@ -577,7 +577,7 @@ public enum EthereumService {
      */
     public static func getUncleByBlockHashAndIndex(blockHash: String, index: Int, completion: @escaping (JSONRPCError?, Block?) -> Void) {
         
-        let hexIndex = "0x" + String(index, radix: 16)
+        let hexIndex = String(index, radix: 16).addHexPrefix()
         
         let jsonRPC = JSONRPCRequest(jsonrpc: "2.0", method: .getUncleByBlockHashAndIndex, params: [blockHash, hexIndex], id: 10)
         
@@ -611,9 +611,9 @@ public enum EthereumService {
      */
     public static func getUncleByBlockNumberAndIndex(blockNumber: Int, index: Int, completion: @escaping (JSONRPCError?, Block?) -> Void) {
         
-        let hexBlockNumber = "0x" + String(blockNumber, radix: 16)
+        let hexBlockNumber = String(blockNumber, radix: 16).addHexPrefix()
         
-        let hexIndex = "0x" + String(index, radix: 16)
+        let hexIndex = String(index, radix: 16).addHexPrefix()
         
         let jsonRPC = JSONRPCRequest(jsonrpc: "2.0", method: .getUncleByBlockNumberAndIndex, params: [hexBlockNumber, hexIndex], id: 10)
         
