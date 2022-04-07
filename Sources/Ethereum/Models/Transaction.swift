@@ -14,7 +14,7 @@ public struct Transaction: Codable, Signable {
     public var nonce: Int?
     public let to: String
     public let value: String
-    public var chainID: Int
+    public var chainID: Int?
     public let v: Int?
     public let r: Data?
     public let s: Data?
@@ -32,8 +32,7 @@ public struct Transaction: Codable, Signable {
          input: Data = Data(),
          nonce: Int? = nil,
          to: String,
-         value: String,
-         chainID: Int) throws {
+         value: String) throws {
         self.blockHash = nil
         self.blockNumber = nil
         self.from = nil
@@ -45,7 +44,7 @@ public struct Transaction: Codable, Signable {
         self.nonce = nonce
         self.to = to.removeHexPrefix()
         self.value = value
-        self.chainID = chainID
+        self.chainID = nil
         self.v = nil
         self.r = nil
         self.s = nil

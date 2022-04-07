@@ -3,7 +3,7 @@ import BigInt
 
 public enum EthereumService {
     
-    public static var provider = Provider(node: DefaultNodes.mainnet)
+    public static var provider = Provider(node: .mainnet)
 
     // MARK: - Original Methods
     /**
@@ -299,6 +299,8 @@ public enum EthereumService {
             }
             
             var unsignedTransaction = transaction
+            
+            unsignedTransaction.chainID = provider.node.network.chainID
 
             unsignedTransaction.nonce = nonce
             

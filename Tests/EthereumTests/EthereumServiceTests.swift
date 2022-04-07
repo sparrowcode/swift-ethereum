@@ -5,7 +5,7 @@ import BigInt
 class EthereumServiceTests: XCTestCase {
     
     override func setUpWithError() throws {
-        EthereumService.provider = Provider(node: DefaultNodes.mainnet)
+        EthereumService.provider = Provider(node: .mainnet)
     }
     
     override func tearDownWithError() throws {
@@ -305,7 +305,7 @@ class EthereumServiceTests: XCTestCase {
         let expectation = XCTestExpectation(description: "send raw transaction")
         
         // MARK: - For sending transactions use test network
-        EthereumService.provider = Provider(node: DefaultNodes.ropsten)
+        EthereumService.provider = Provider(node: .ropsten)
         
         let account = try Account(privateKey: "2404a482a212386ecf1ed054547cf4d28348ddf73d23325a83373f803138f105")
         
@@ -314,8 +314,7 @@ class EthereumServiceTests: XCTestCase {
         let transaction = try Transaction(gasLimit: "210000",
                                           gasPrice: "20000000000",
                                           to: "0xc8DE4C1B4f6F6659944160DaC46B29a330C432B2",
-                                          value: value,
-                                          chainID: 3)
+                                          value: value)
 
         EthereumService.sendRawTransaction(account: account, transaction: transaction) { error, hash in
             XCTAssertNil(error)

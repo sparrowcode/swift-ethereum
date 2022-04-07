@@ -11,7 +11,7 @@ class ProviderTests: XCTestCase {
     var provider: Provider?
     
     override func setUpWithError() throws {
-        self.node = Node(url: mainnetNodeURL)
+        self.node = Node.mainnet
         self.provider = Provider(node: node!)
     }
     

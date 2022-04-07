@@ -17,12 +17,23 @@ class NodeTests: XCTestCase {
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
+    
+    func testInitialiseCustomNode() throws {
+        
+        let url = "https://mainnet.infura.io/v3/967cf8dc4a37411c8e62698c7c603cee"
+        
+        let node = try Node(url: url)
+        
+        let network = node.network
+        
+        XCTAssertEqual(network, Network.mainnet)
+    }
 
     func testVersion() throws {
         
         let expectation = XCTestExpectation(description: "version")
         
-        DefaultNodes.mainnet.version { error, version in
+        Node.mainnet.version { error, version in
             XCTAssertNil(error)
             XCTAssertNotNil(version)
             expectation.fulfill()
@@ -35,7 +46,7 @@ class NodeTests: XCTestCase {
         
         let expectation = XCTestExpectation(description: "listening")
         
-        DefaultNodes.mainnet.listening { error, isListening in
+        Node.mainnet.listening { error, isListening in
             XCTAssertNil(error)
             XCTAssertNotNil(isListening)
             expectation.fulfill()
@@ -48,7 +59,7 @@ class NodeTests: XCTestCase {
         
         let expectation = XCTestExpectation(description: "peer count")
         
-        DefaultNodes.mainnet.peerCount { error, peerCount in
+        Node.mainnet.peerCount { error, peerCount in
             XCTAssertNil(error)
             XCTAssertNotNil(peerCount)
             expectation.fulfill()
@@ -61,7 +72,7 @@ class NodeTests: XCTestCase {
         
         let expectation = XCTestExpectation(description: "client version")
         
-        DefaultNodes.mainnet.clientVersion { error, clientVersion in
+        Node.mainnet.clientVersion { error, clientVersion in
             XCTAssertNil(error)
             XCTAssertNotNil(clientVersion)
             expectation.fulfill()
@@ -75,7 +86,7 @@ class NodeTests: XCTestCase {
         let expectation = XCTestExpectation(description: "sha3")
         let value = "0x68656c6c6f20776f726c64"
         
-        DefaultNodes.mainnet.sha3(value: value) { error, sha3 in
+        Node.mainnet.sha3(value: value) { error, sha3 in
             XCTAssertNil(error)
             XCTAssertNotNil(sha3)
             expectation.fulfill()
