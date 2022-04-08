@@ -5,7 +5,7 @@ public struct Transaction: Codable, Signable {
     
     public let blockHash: String?
     public let blockNumber: String?
-    public let from: String?
+    public let from: String
     public let gas: String?
     public let gasLimit: String
     public let gasPrice: String
@@ -27,6 +27,7 @@ public struct Transaction: Codable, Signable {
     private let valueBigUInt: BigUInt?
     
     public init(
+         from: String,
          gasLimit: String,
          gasPrice: String,
          input: Data = Data(),
@@ -35,7 +36,7 @@ public struct Transaction: Codable, Signable {
          value: String) throws {
         self.blockHash = nil
         self.blockNumber = nil
-        self.from = nil
+        self.from = from
         self.gas = nil
         self.gasLimit = gasLimit
         self.gasPrice = gasPrice
@@ -127,7 +128,7 @@ public struct Transaction: Codable, Signable {
         
         self.blockHash = try? container.decode(String.self, forKey: .blockHash)
         self.blockNumber = try? container.decode(String.self, forKey: .blockNumber)
-        self.from = try? container.decode(String.self, forKey: .from)
+        self.from = (try? container.decode(String.self, forKey: .from)) ?? ""
         self.gas = try? decodeHexBigUInt(.gas)?.description
         self.gasLimit = (try? decodeHexBigUInt(.gasLimit)?.description) ?? "0"
         self.gasPrice = (try? decodeHexBigUInt(.gasPrice)?.description) ?? "0"
@@ -147,17 +148,43 @@ public struct Transaction: Codable, Signable {
     }
     
     public func encode(to encoder: Encoder) throws {
+        
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try? container.encode(to, forKey: .to)
-        try? container.encode(from, forKey: .from)
-        try? container.encode(input, forKey: .input)
-        try? container.encode(value, forKey: .value)
-        try? container.encode(gasPrice, forKey: .gasPrice)
-        try? container.encode(gasLimit, forKey: .gasLimit)
-        try? container.encode(gas, forKey: .gas)
-        try? container.encode(nonce, forKey: .nonce)
-        try? container.encode(blockNumber, forKey: .blockNumber)
-        try? container.encode(hash, forKey: .hash)
+        
+        let encodeBigUInt = { (value: BigUInt?, key: CodingKeys) throws -> Void in
+            if let value = value {
+                let encodedValue = String(value, radix: 16).addHexPrefix()
+                try container.encode(encodedValue, forKey: key)
+            } else {
+                try container.encode("", forKey: key)
+            }
+            
+        }
+        
+        let encodeOptionalString = { (value: String?, key: CodingKeys) throws -> Void in
+            if let value = value {
+                try container.encode(value, forKey: key)
+            } else {
+                try container.encode("", forKey: key)
+            }
+        }
+        
+        let encodeData = { (value: Data, key: CodingKeys) throws -> Void in
+            
+            if value == Data() {
+                try container.encode("", forKey: key)
+            } else {
+                let encodedValue = String(bytes: RLP.encodeData(value)).addHexPrefix()
+                try container.encode(encodedValue, forKey: key)
+            }
+        }
+        
+        try? encodeOptionalString(to.addHexPrefix(), .to)
+        try? encodeOptionalString(from.addHexPrefix(), .from)
+        try? encodeData(input, .input)
+        try? encodeBigUInt(valueBigUInt, .value)
+        try? encodeBigUInt(gasPriceBigUInt, .gasPrice)
+        try? encodeBigUInt(gasLimitBigUInt, .gas)
     }
     
 }

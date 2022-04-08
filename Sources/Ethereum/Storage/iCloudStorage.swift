@@ -1,8 +1,9 @@
 import Foundation
 
-enum KeychainStorage: StorageProtocol {
+enum iCloudStorage: StorageProtocol {
     
     func storePrivateKey(_ privateKey: String) throws {
+        
         
     }
     

@@ -1,12 +1,5 @@
-//
-//  NodeTests.swift
-//  
-//
-//  Created by Ertem Biyik on 23.03.2022.
-//
-
 import XCTest
-import Ethereum
+@testable import Ethereum
 
 class NodeTests: XCTestCase {
 

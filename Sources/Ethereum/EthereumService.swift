@@ -352,8 +352,50 @@ public enum EthereumService {
     /**
      Ethereum: Generates and returns an estimate of how much gas is necessary to allow the transaction to complete. The transaction will not be added to the blockchain. Note that the estimate may be significantly more than the amount of gas actually used by the transaction, for a variety of reasons including EVM mechanics and node performance.
      */
-    public static func estimateGas() {
+    public static func estimateGas(for transaction: Transaction, block: String = "latest", completion: @escaping (JSONRPCError?, Int?) -> Void) {
         
+        
+        struct Params: Codable {
+            let transaction: Transaction
+            let block: String
+            
+            func encode(to encoder: Encoder) throws {
+                var container = encoder.unkeyedContainer()
+                try container.encode(transaction)
+                try container.encode(block)
+            }
+        }
+        
+        let params = Params(transaction: transaction, block: block)
+        
+        let jsonRPC = JSONRPCRequest(jsonrpc: "2.0", method: .estimateGas, params: params, id: 10)
+        
+        guard let jsonRPCData = try? JSONEncoder().encode(jsonRPC) else {
+            completion(.errorEncodingJSONRPC, nil)
+            return
+        }
+        
+        provider.sendRequest(jsonRPCData: jsonRPCData) { error, data in
+            
+            guard let data = data, error == nil else {
+                completion(.nilResponse, nil)
+                return
+            }
+            
+            guard let jsonRPCResponse = try? JSONDecoder().decode(JSONRPCResponse<String>.self, from: data) else {
+                completion(.errorDecodingJSONRPC, nil)
+                return
+            }
+            
+            let hexValue = jsonRPCResponse.result.removeHexPrefix()
+            
+            guard let value = Int(hexValue, radix: 16) else {
+                completion(.errorDecodingJSONRPC, nil)
+                return
+            }
+            
+            completion(nil, value)
+        }
     }
     
     /**

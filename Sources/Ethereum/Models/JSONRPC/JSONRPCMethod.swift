@@ -23,4 +23,5 @@ enum JSONRPCMethod: String {
     case getTransactionByBlockNumberAndIndex = "eth_getTransactionByBlockNumberAndIndex"
     case getTransactionReceipt = "eth_getTransactionReceipt"
     case sendRawTransaction = "eth_sendRawTransaction"
+    case estimateGas = "eth_estimateGas"
 }

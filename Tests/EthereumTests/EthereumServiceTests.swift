@@ -311,7 +311,8 @@ class EthereumServiceTests: XCTestCase {
         
         let value = "0000000".map({ _ in String(UInt32.random(in: 0...9)) }).reduce("", +)
         
-        let transaction = try Transaction(gasLimit: "210000",
+        let transaction = try Transaction(from: "0xE92A146f86fEda6D14Ee1dc1BfB620D3F3d1b873",
+                                          gasLimit: "210000",
                                           gasPrice: "20000000000",
                                           to: "0xc8DE4C1B4f6F6659944160DaC46B29a330C432B2",
                                           value: value)
@@ -319,6 +320,25 @@ class EthereumServiceTests: XCTestCase {
         EthereumService.sendRawTransaction(account: account, transaction: transaction) { error, hash in
             XCTAssertNil(error)
             XCTAssertNotNil(hash)
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 50)
+    }
+    
+    func testEstimateGas() throws {
+        
+        EthereumService.provider = Provider(node: .ropsten)
+        
+        let expectation = XCTestExpectation(description: "get transaction receipt")
+        let transaction = try Transaction(from: "0xE92A146f86fEda6D14Ee1dc1BfB620D3F3d1b873",
+                                          gasLimit: "210000",
+                                          gasPrice: "20000000000",
+                                          to: "0xc8DE4C1B4f6F6659944160DaC46B29a330C432B2",
+                                          value: "1000000")
+        EthereumService.estimateGas(for: transaction) { error, value in
+            XCTAssertNil(error)
+            XCTAssertNotNil(value)
             expectation.fulfill()
         }
         
