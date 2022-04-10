@@ -26,7 +26,7 @@ class NodeTests: XCTestCase {
         
         let expectation = XCTestExpectation(description: "version")
         
-        Node.mainnet.version { error, version in
+        Node.mainnet.version { version, error in
             XCTAssertNil(error)
             XCTAssertNotNil(version)
             expectation.fulfill()
@@ -39,7 +39,7 @@ class NodeTests: XCTestCase {
         
         let expectation = XCTestExpectation(description: "listening")
         
-        Node.mainnet.listening { error, isListening in
+        Node.mainnet.listening { isListening, error in
             XCTAssertNil(error)
             XCTAssertNotNil(isListening)
             expectation.fulfill()
@@ -52,7 +52,7 @@ class NodeTests: XCTestCase {
         
         let expectation = XCTestExpectation(description: "peer count")
         
-        Node.mainnet.peerCount { error, peerCount in
+        Node.mainnet.peerCount { peerCount, error in
             XCTAssertNil(error)
             XCTAssertNotNil(peerCount)
             expectation.fulfill()
@@ -65,7 +65,7 @@ class NodeTests: XCTestCase {
         
         let expectation = XCTestExpectation(description: "client version")
         
-        Node.mainnet.clientVersion { error, clientVersion in
+        Node.mainnet.clientVersion { clientVersion, error in
             XCTAssertNil(error)
             XCTAssertNotNil(clientVersion)
             expectation.fulfill()
@@ -79,7 +79,7 @@ class NodeTests: XCTestCase {
         let expectation = XCTestExpectation(description: "sha3")
         let value = "0x68656c6c6f20776f726c64"
         
-        Node.mainnet.sha3(value: value) { error, sha3 in
+        Node.mainnet.sha3(value: value) { sha3, error in
             XCTAssertNil(error)
             XCTAssertNotNil(sha3)
             expectation.fulfill()

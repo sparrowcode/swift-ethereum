@@ -12,8 +12,8 @@ public enum Storage {
  */
 public protocol StorageProtocol {
     
-    func storePrivateKey(_ privateKey: String) throws
-    func getPrivateKey(for address: String) throws -> String
+    func storePrivateKey(_ privateKey: String, password: String) throws
+    func getPrivateKey(for address: String, password: String) throws -> String
     func removePrivateKey(for address: String) throws
 }
 

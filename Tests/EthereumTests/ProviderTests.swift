@@ -28,7 +28,7 @@ class ProviderTests: XCTestCase {
         
         let jsonRPCData = try JSONEncoder().encode(jsonRPC)
         
-        provider?.sendRequest(jsonRPCData: jsonRPCData) { error, data in
+        provider?.sendRequest(jsonRPCData: jsonRPCData) { data, error in
             XCTAssertNil(error)
             XCTAssertNotNil(data)
             expectation.fulfill()
@@ -45,7 +45,7 @@ class ProviderTests: XCTestCase {
         
         let jsonRPCData = try JSONEncoder().encode(jsonRPC)
                 
-        provider?.sendRequest(jsonRPCData: jsonRPCData) { error, data in
+        provider?.sendRequest(jsonRPCData: jsonRPCData) { data, error in
             
             XCTAssertNil(error)
             XCTAssertNotNil(data)

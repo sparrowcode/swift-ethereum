@@ -4,7 +4,7 @@ protocol ProviderProtocol {
     
     init(node: Node, sessionConfiguration: URLSessionConfiguration)
     init(node: Node)
-    func sendRequest(jsonRPCData: Data, completion: @escaping (Error?, Data?) -> Void)
+    func sendRequest(jsonRPCData: Data, completion: @escaping (Data?, Error?) -> Void)
 }
 
 public final class Provider: ProviderProtocol {
@@ -29,7 +29,7 @@ public final class Provider: ProviderProtocol {
     /*
      Method that is called from Service to send a request
      */
-    func sendRequest(jsonRPCData: Data, completion: @escaping (Error?, Data?) -> Void) {
+    func sendRequest(jsonRPCData: Data, completion: @escaping (Data?, Error?) -> Void) {
         
         var request = URLRequest(url: node.url)
         request.httpMethod = "POST"
@@ -39,10 +39,10 @@ public final class Provider: ProviderProtocol {
         
         let task = session.dataTask(with: request) { data, response, error in
             guard let data = data, error == nil else {
-                completion(error, nil)
+                completion(nil, error)
                 return
             }
-            completion(nil, data)
+            completion(data, nil)
         }
         task.resume()
     }

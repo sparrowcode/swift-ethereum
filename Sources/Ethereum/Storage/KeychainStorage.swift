@@ -2,11 +2,11 @@ import Foundation
 
 enum KeychainStorage: StorageProtocol {
     
-    func storePrivateKey(_ privateKey: String) throws {
+    func storePrivateKey(_ privateKey: String, password: String) throws {
         
     }
     
-    func getPrivateKey(for address: String) throws -> String {
+    func getPrivateKey(for address: String, password: String) throws -> String {
         return ""
     }
     
