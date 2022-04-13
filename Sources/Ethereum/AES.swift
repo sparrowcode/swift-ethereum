@@ -9,46 +9,49 @@ import Foundation
 import CommonCrypto
 
 struct AES {
-    
-    // MARK: - Make (or think about) default initial vector
 
-    private let key: Data
     private let iv: Data
 
-    init(password: String, iv: String) throws {
+    init() {
+        
+        let randomBytes = Data(0...16).map { _ in UInt32.random(in: 0...UInt32.max) }
+        
+        let ivData = Data(bytes: randomBytes, count: 16)
+
+        self.iv  = ivData
+    }
+
+    func encrypt(string: String, password: String) throws -> Data {
         
         let keyData = password.keccak()
         
         guard keyData.count == kCCKeySizeAES256 else {
             throw AESError.invalidPasswordLength
         }
-
-        guard iv.count == kCCBlockSizeAES128, let ivData = iv.data(using: .utf8) else {
-            throw AESError.invalidInitialVectorLength
-        }
-
-        self.key = keyData
-        self.iv  = ivData
+        
+        let bytes = try string.bytes
+        
+        let data = Data(bytes)
+        
+        return try crypt(data: data, option: CCOperation(kCCEncrypt), key: keyData)
     }
 
-    func encrypt(string: String) throws -> Data {
+    func decrypt(data: Data, password: String) throws -> String {
         
-        guard let data = string.data(using: .utf8) else { throw AESError.invalidString }
+        let keyData = password.keccak()
         
-        return try crypt(data: data, option: CCOperation(kCCEncrypt))
-    }
-
-    func decrypt(data: Data) throws -> String {
-        
-        let decryptedData = try crypt(data: data, option: CCOperation(kCCDecrypt))
-        
-        guard let value = String(bytes: decryptedData, encoding: .utf8) else {
-            throw AESError.unableToConvertToStringValue
+        guard keyData.count == kCCKeySizeAES256 else {
+            throw AESError.invalidPasswordLength
         }
+        
+        let decryptedData = try crypt(data: data, option: CCOperation(kCCDecrypt), key: keyData)
+        
+        let value = String(bytes: decryptedData)
+        
         return value
     }
 
-    func crypt(data: Data, option: CCOperation) throws -> Data {
+    func crypt(data: Data, option: CCOperation, key: Data) throws -> Data {
 
         let cryptLength = data.count + kCCBlockSizeAES128
         var cryptData = Data(count: cryptLength)
@@ -88,10 +91,7 @@ struct AES {
     }
     
     enum AESError: Error {
-        case invalidString
-        case unableToConvertToStringValue
         case errorCrypting
         case invalidPasswordLength
-        case invalidInitialVectorLength
     }
 }

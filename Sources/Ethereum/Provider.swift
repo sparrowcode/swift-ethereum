@@ -23,7 +23,7 @@ public final class Provider: ProviderProtocol {
     }
     
     deinit {
-        self.session.invalidateAndCancel()
+        self.session.finishTasksAndInvalidate()
     }
     
     /*

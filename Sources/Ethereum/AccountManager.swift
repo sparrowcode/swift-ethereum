@@ -10,24 +10,28 @@ class AccountManager {
         self.storage = storage
     }
     
-    public static func createAccount() throws -> Account {
-        // MARK: - store private key in storage
+    public func createAccount() throws -> Account {
+        
         let randomBytes = Data(0..<32).map { _ in UInt32.random(in: UInt32.min...UInt32.max) }
         
         let privateKeyData = Data(bytes: randomBytes, count: 32)
         
         let privateKey = String(bytes: privateKeyData)
         
+        try storage.storePrivateKey(privateKey)
+        
         return try Account(privateKey: privateKey)
     }
     
-    public static func importAccount(privateKey: String) throws -> Account {
-        // MARK: - store private key in storage
+    public func importAccount(privateKey: String) throws -> Account {
+        
+        try storage.storePrivateKey(privateKey)
+        
         return try Account(privateKey: privateKey.removeHexPrefix())
     }
     
-    public static func removeAccount(_ account: Account) {
-        
+    public func removeAccount(_ account: Account) throws {
+        try storage.removePrivateKey(for: account.address)
     }
     
     public static func sign(data: Data, with privateKey: String) throws -> Signature {
@@ -114,7 +118,7 @@ class AccountManager {
         
         let publicKeyData = Data(bytes: publicKeyBytes, count: 64)
         
-        let hash = keccak256(publicKeyData)
+        let hash = publicKeyData.keccak()
         
         let address = hash.subdata(in: 12..<hash.count)
         

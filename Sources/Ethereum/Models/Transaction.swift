@@ -15,9 +15,7 @@ public struct Transaction: Codable, Signable {
     public let to: String
     public let value: String
     public var chainID: Int?
-    public let v: Int?
-    public let r: Data?
-    public let s: Data?
+    public let signature: Signature?
     
     // MARK: - RLP Properties
     private let gasLimitBigUInt: BigUInt?
@@ -46,9 +44,7 @@ public struct Transaction: Codable, Signable {
         self.to = to.removeHexPrefix()
         self.value = value
         self.chainID = nil
-        self.v = nil
-        self.r = nil
-        self.s = nil
+        self.signature = nil
              
         self.gasLimitBigUInt = BigUInt(gasLimit, radix: 10)
         self.gasPriceBigUInt = BigUInt(gasPrice, radix: 10)
@@ -56,7 +52,7 @@ public struct Transaction: Codable, Signable {
         
     }
     
-    init(transaction: Transaction, v: Int, r: Data, s: Data) throws {
+    init(transaction: Transaction, signature: Signature) throws {
         self.blockHash = transaction.blockHash
         self.blockNumber = transaction.blockNumber
         self.from = transaction.from
@@ -69,9 +65,7 @@ public struct Transaction: Codable, Signable {
         self.to = transaction.to
         self.value = transaction.value
         self.chainID = transaction.chainID
-        self.v = v
-        self.r = r
-        self.s = s
+        self.signature = signature
         
         self.gasLimitBigUInt = BigUInt(transaction.gasLimit, radix: 10)
         self.gasPriceBigUInt = BigUInt(transaction.gasPrice, radix: 10)
@@ -79,8 +73,8 @@ public struct Transaction: Codable, Signable {
     }
     
     public var rawData: Data? {
-        if let v = v, let r = r, let s = s {
-            let array: [Any?] = [nonce, gasPriceBigUInt, gasLimitBigUInt, to, valueBigUInt, input, v, r, s]
+        if let signature = signature {
+            let array: [Any?] = [nonce, gasPriceBigUInt, gasLimitBigUInt, to, valueBigUInt, input, signature.v, signature.r, signature.s]
             return RLP.encode(array)
         } else {
             let array: [Any?] = [nonce, gasPriceBigUInt, gasLimitBigUInt, to, valueBigUInt, input, chainID, 0, 0]
@@ -138,9 +132,12 @@ public struct Transaction: Codable, Signable {
         self.to = (try? container.decode(String.self, forKey: .to)) ?? "0x"
         self.value = (try? decodeHexBigUInt(.value)?.description) ?? "0"
         self.chainID = (try? container.decode(Int.self, forKey: .chainId)) ?? 1
-        self.v = try? decodeHexInt(.v)
-        self.r = try? decodeData(.r)
-        self.s = try? decodeData(.s)
+        
+        if let v = try? decodeHexInt(.v), let r = try? decodeData(.r), let s = try? decodeData(.s) {
+            self.signature = Signature(v: v, r: r, s: s)
+        } else {
+            self.signature = nil
+        }
         
         self.gasLimitBigUInt = (try? decodeHexBigUInt(.gasLimit)) ?? BigUInt(0)
         self.gasPriceBigUInt = (try? decodeHexBigUInt(.gasPrice)) ?? BigUInt(0)

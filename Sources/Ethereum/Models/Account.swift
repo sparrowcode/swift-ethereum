@@ -35,10 +35,7 @@ public struct Account: AccountProtocol {
         
         signature.calculateV(with: transaction.chainID)
         
-        let signedTransaction = try Transaction(transaction: transaction,
-                                            v: signature.v,
-                                            r: signature.r,
-                                            s: signature.s)
+        let signedTransaction = try Transaction(transaction: transaction, signature: signature)
         
         return signedTransaction
     }

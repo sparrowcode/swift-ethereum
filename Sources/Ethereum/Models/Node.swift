@@ -15,8 +15,6 @@ public struct Node {
     
     public let url: URL
     
-    private var provider: Provider?
-    
     public var network: Network
     
     public init(url: String) throws {
@@ -27,7 +25,6 @@ public struct Node {
         
         self.url = url
         self.network = .custom(0)
-        configureProvider()
         
         var chainID: Int?
         var localError: Error?
@@ -61,12 +58,8 @@ public struct Node {
     private init(url: URL, network: Network) {
         self.url = url
         self.network = network
-        configureProvider()
     }
     
-    mutating func configureProvider() {
-        self.provider = Provider(node: self)
-    }
     
     // MARK: - Net
     public func version(completion: @escaping (Int?, JSONRPCError?) -> Void) {
@@ -78,7 +71,9 @@ public struct Node {
             return
         }
         
-        provider?.sendRequest(jsonRPCData: jsonRPCData) { data, error in
+        let provider = Provider(node: self)
+        
+        provider.sendRequest(jsonRPCData: jsonRPCData) { data, error in
             
             guard let data = data, error == nil else {
                 completion(nil, .nilResponse)
@@ -111,7 +106,9 @@ public struct Node {
             return
         }
         
-        provider?.sendRequest(jsonRPCData: jsonRPCData) { data, error in
+        let provider = Provider(node: self)
+        
+        provider.sendRequest(jsonRPCData: jsonRPCData) { data, error in
             
             guard let data = data, error == nil else {
                 completion(nil, .nilResponse)
@@ -139,7 +136,9 @@ public struct Node {
             return
         }
         
-        provider?.sendRequest(jsonRPCData: jsonRPCData) { data, error in
+        let provider = Provider(node: self)
+        
+        provider.sendRequest(jsonRPCData: jsonRPCData) { data, error in
             
             guard let data = data, error == nil else {
                 completion(nil, .nilResponse)
@@ -171,7 +170,9 @@ public struct Node {
             return
         }
         
-        provider?.sendRequest(jsonRPCData: jsonRPCData) { data, error in
+        let provider = Provider(node: self)
+        
+        provider.sendRequest(jsonRPCData: jsonRPCData) { data, error in
             
             guard let data = data, error == nil else {
                 completion(nil, .nilResponse)
@@ -199,7 +200,9 @@ public struct Node {
             return
         }
         
-        provider?.sendRequest(jsonRPCData: jsonRPCData) { data, error in
+        let provider = Provider(node: self)
+        
+        provider.sendRequest(jsonRPCData: jsonRPCData) { data, error in
             
             guard let data = data, error == nil else {
                 completion(nil, .nilResponse)
