@@ -14,8 +14,8 @@ public struct Account: AccountProtocol {
     
     init(privateKey: String) throws {
         self.privateKey = privateKey
-        self.publicKey = try AccountManager.getPublicKey(from: privateKey.removeHexPrefix())
-        self.address = try AccountManager.getEthereumAddress(from: publicKey)
+        self.publicKey = try Utils.getPublicKey(from: privateKey.removeHexPrefix())
+        self.address = try Utils.getEthereumAddress(from: publicKey)
     }
     
     public func sign<T>(_ value: T) throws -> Signature where T : Signable {
@@ -24,7 +24,7 @@ public struct Account: AccountProtocol {
             throw SignError.invalidData
         }
         
-        let signedData = try AccountManager.sign(data: rawData, with: privateKey.removeHexPrefix())
+        let signedData = try Utils.sign(data: rawData, with: privateKey.removeHexPrefix())
         
         return signedData
     }

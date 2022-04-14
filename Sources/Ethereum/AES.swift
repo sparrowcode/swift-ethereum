@@ -10,18 +10,13 @@ import CommonCrypto
 
 struct AES {
 
-    private let iv: Data
-
-    init() {
-        
+    var initialVector: Data {
         let randomBytes = Data(0...16).map { _ in UInt32.random(in: 0...UInt32.max) }
         
-        let ivData = Data(bytes: randomBytes, count: 16)
-
-        self.iv  = ivData
+        return Data(bytes: randomBytes, count: 16)
     }
 
-    func encrypt(string: String, password: String) throws -> Data {
+    func encrypt(string: String, password: String, iv: Data) throws -> Data {
         
         let keyData = password.keccak()
         
@@ -33,10 +28,10 @@ struct AES {
         
         let data = Data(bytes)
         
-        return try crypt(data: data, option: CCOperation(kCCEncrypt), key: keyData)
+        return try crypt(data: data, option: CCOperation(kCCEncrypt), key: keyData, iv: iv)
     }
 
-    func decrypt(data: Data, password: String) throws -> String {
+    func decrypt(data: Data, password: String, iv: Data) throws -> String {
         
         let keyData = password.keccak()
         
@@ -44,14 +39,14 @@ struct AES {
             throw AESError.invalidPasswordLength
         }
         
-        let decryptedData = try crypt(data: data, option: CCOperation(kCCDecrypt), key: keyData)
+        let decryptedData = try crypt(data: data, option: CCOperation(kCCDecrypt), key: keyData, iv: iv)
         
         let value = String(bytes: decryptedData)
         
         return value
     }
 
-    func crypt(data: Data, option: CCOperation, key: Data) throws -> Data {
+    func crypt(data: Data, option: CCOperation, key: Data, iv: Data) throws -> Data {
 
         let cryptLength = data.count + kCCBlockSizeAES128
         var cryptData = Data(count: cryptLength)

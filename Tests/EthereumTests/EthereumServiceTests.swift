@@ -8,10 +8,6 @@ class EthereumServiceTests: XCTestCase {
         EthereumService.provider = Provider(node: .mainnet)
     }
     
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-    
     func testGetBalance() throws {
         
         let address = "0xE92A146f86fEda6D14Ee1dc1BfB620D3F3d1b873"
@@ -330,10 +326,10 @@ class EthereumServiceTests: XCTestCase {
         
         EthereumService.provider = Provider(node: .ropsten)
         
-        let expectation = XCTestExpectation(description: "get transaction receipt")
+        let expectation = XCTestExpectation(description: "get estimate gas")
         let transaction = try Transaction(from: "0xE92A146f86fEda6D14Ee1dc1BfB620D3F3d1b873",
                                           gasLimit: "210000",
-                                          gasPrice: "20000000000",
+                                          gasPrice: "94818162544",
                                           to: "0xc8DE4C1B4f6F6659944160DaC46B29a330C432B2",
                                           value: "1000000")
         

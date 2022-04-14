@@ -10,29 +10,41 @@ struct UserDefaultsStorage: StorageProtocol {
         self.password = password
     }
     
-    public func storePrivateKey(_ privateKey: String) throws {
+    func storePrivateKey(_ privateKey: String) throws {
         
-        let publicKey = try AccountManager.getPublicKey(from: privateKey)
+        let publicKey = try Utils.getPublicKey(from: privateKey)
         
-        let address = try AccountManager.getEthereumAddress(from: publicKey)
+        let address = try Utils.getEthereumAddress(from: publicKey)
         
-        let aesEncryptedPrivateKey = try aes.encrypt(string: privateKey, password: password)
+        let iv = aes.initialVector
         
-        UserDefaults.standard.set(aesEncryptedPrivateKey, forKey: address)
+        let aesEncryptedPrivateKey = try aes.encrypt(string: privateKey, password: password, iv: iv)
+        
+        let file = StorageFile(keyData: aesEncryptedPrivateKey, iv: iv)
+        
+        let encodedFile = try JSONEncoder().encode(file)
+        
+        UserDefaults.standard.set(encodedFile, forKey: address)
     }
     
-    public func getPrivateKey(for address: String) throws -> String {
+    func getPrivateKey(for address: String) throws -> String {
         
-        guard let aesEncryptedPrivateKey = UserDefaults.standard.data(forKey: address) else {
+        guard let file = UserDefaults.standard.data(forKey: address) else {
             throw StorageError.noValueForKey(address)
         }
         
-        let decryptedPrivateKey = try aes.decrypt(data: aesEncryptedPrivateKey, password: password)
+        let decodedFile = try JSONDecoder().decode(StorageFile.self, from: file)
+        
+        let aesEncryptedPrivateKey = decodedFile.keyData
+        
+        let iv = decodedFile.iv
+        
+        let decryptedPrivateKey = try aes.decrypt(data: aesEncryptedPrivateKey, password: password, iv: iv)
         
         return decryptedPrivateKey
     }
     
-    public func removePrivateKey(for address: String) throws {
+    func removePrivateKey(for address: String) throws {
         UserDefaults.standard.set(nil, forKey: address)
     }
 }

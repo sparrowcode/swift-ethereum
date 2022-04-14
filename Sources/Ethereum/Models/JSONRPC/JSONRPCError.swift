@@ -7,4 +7,10 @@ public enum JSONRPCError: Error {
     case nilResponse
     case noResult
     case errorSigningTransaction
+    case ethereumError(JSONRPCErrorResult)
+}
+
+public struct JSONRPCErrorResult: Codable {
+    let code: Int
+    let message: String
 }

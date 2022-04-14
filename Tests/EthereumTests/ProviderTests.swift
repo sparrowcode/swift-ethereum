@@ -7,16 +7,11 @@ class ProviderTests: XCTestCase {
     
     let rinkebyNodeURL = URL(string: "https://speedy-nodes-nyc.moralis.io/b383c412901116039315dd16/eth/rinkeby")!
     
-    var node: Node?
+    var node = Node.mainnet
     var provider: Provider?
     
     override func setUpWithError() throws {
-        self.node = Node.mainnet
-        self.provider = Provider(node: node!)
-    }
-    
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        self.provider = Provider(node: node)
     }
     
     func testSendRequest() throws {
