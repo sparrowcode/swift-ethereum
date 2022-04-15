@@ -19,6 +19,8 @@ class UserDefaultsStorageTests: XCTestCase {
         
         let address = "0xf4053f6c8626f22398778267e46e0bf4179d78f6"
         
+        try storage.storePrivateKey(privateKey)
+        
         let retrievedPrivateKey = try storage.getPrivateKey(for: address)
         
         XCTAssertEqual(privateKey, retrievedPrivateKey)
