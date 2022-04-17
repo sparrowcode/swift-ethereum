@@ -1,6 +1,6 @@
 import Foundation
 
-enum JSONRPCError: Error {
+public enum JSONRPCError: Error {
     case errorEncodingJSONRPC
     case errorDecodingJSONRPC
     case errorConvertingFromHex
