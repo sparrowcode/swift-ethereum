@@ -7,13 +7,13 @@ public struct Transaction: Codable, Signable {
     public let blockNumber: String?
     public let from: String
     public let gas: String?
-    public let gasLimit: String
-    public let gasPrice: String
+    public let gasLimit: String?
+    public let gasPrice: String?
     public var hash: String?
     public let input: Data
     public var nonce: Int?
     public let to: String
-    public let value: String
+    public let value: String?
     public var chainID: Int?
     public let signature: Signature?
     
@@ -26,12 +26,12 @@ public struct Transaction: Codable, Signable {
     
     public init(
          from: String,
-         gasLimit: String,
-         gasPrice: String,
+         gasLimit: String? = nil,
+         gasPrice: String? = nil,
          input: Data = Data(),
          nonce: Int? = nil,
          to: String,
-         value: String) throws {
+         value: String? = nil) throws {
         self.blockHash = nil
         self.blockNumber = nil
         self.from = from
@@ -46,9 +46,9 @@ public struct Transaction: Codable, Signable {
         self.chainID = nil
         self.signature = nil
              
-        self.gasLimitBigUInt = BigUInt(gasLimit, radix: 10)
-        self.gasPriceBigUInt = BigUInt(gasPrice, radix: 10)
-        self.valueBigUInt = BigUInt(value, radix: 10)
+        self.gasLimitBigUInt = (gasLimit != nil) ? BigUInt(gasLimit!, radix: 10) : BigUInt(0)
+        self.gasPriceBigUInt = (gasPrice != nil) ? BigUInt(gasPrice!, radix: 10) : BigUInt(0)
+        self.valueBigUInt = (value != nil) ? BigUInt(value!, radix: 10) : BigUInt(0)
         
     }
     
@@ -67,17 +67,33 @@ public struct Transaction: Codable, Signable {
         self.chainID = transaction.chainID
         self.signature = signature
         
-        self.gasLimitBigUInt = BigUInt(transaction.gasLimit, radix: 10)
-        self.gasPriceBigUInt = BigUInt(transaction.gasPrice, radix: 10)
-        self.valueBigUInt = BigUInt(transaction.value, radix: 10)
+        self.gasLimitBigUInt = (gasLimit != nil) ? BigUInt(gasLimit!, radix: 10) : BigUInt(0)
+        self.gasPriceBigUInt = (gasPrice != nil) ? BigUInt(gasPrice!, radix: 10) : BigUInt(0)
+        self.valueBigUInt = (value != nil) ? BigUInt(value!, radix: 10) : BigUInt(0)
     }
     
     public var rawData: Data? {
         if let signature = signature {
-            let array: [Any?] = [nonce, gasPriceBigUInt, gasLimitBigUInt, to, valueBigUInt, input, signature.v, signature.r, signature.s]
+            let array: [Any?] = [nonce,
+                                 gasPriceBigUInt,
+                                 gasLimitBigUInt,
+                                 to,
+                                 valueBigUInt,
+                                 input,
+                                 signature.v,
+                                 signature.r,
+                                 signature.s]
             return RLP.encode(array)
         } else {
-            let array: [Any?] = [nonce, gasPriceBigUInt, gasLimitBigUInt, to, valueBigUInt, input, chainID, 0, 0]
+            let array: [Any?] = [nonce,
+                                 gasPriceBigUInt,
+                                 gasLimitBigUInt,
+                                 to,
+                                 valueBigUInt,
+                                 input,
+                                 chainID,
+                                 0,
+                                 0]
             return RLP.encode(array)
         }
     }

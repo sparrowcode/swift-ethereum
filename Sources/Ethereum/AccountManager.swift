@@ -1,6 +1,6 @@
 import Foundation
 
-class AccountManager {
+public class AccountManager {
     
     private let storage: StorageProtocol
     

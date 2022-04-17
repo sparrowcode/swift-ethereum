@@ -1,6 +1,6 @@
 import Foundation
 
-protocol ProviderProtocol {
+public protocol ProviderProtocol {
     
     init(node: Node, sessionConfiguration: URLSessionConfiguration)
     init(node: Node)
@@ -29,7 +29,7 @@ public final class Provider: ProviderProtocol {
     /*
      Method that is called from Service to send a request
      */
-    func sendRequest(jsonRPCData: Data, completion: @escaping (Data?, Error?) -> Void) {
+    public func sendRequest(jsonRPCData: Data, completion: @escaping (Data?, Error?) -> Void) {
         
         var request = URLRequest(url: node.url)
         request.httpMethod = "POST"

@@ -3,7 +3,7 @@ import BigInt
 import SwiftKeccak
 import secp256k1
 
-enum Utils {
+public enum Utils {
     
     public static func ethFromWei(_ wei: String) -> String {
         
@@ -147,7 +147,7 @@ enum Utils {
     
 }
 
-extension String {
+public extension String {
     
     func removeHexPrefix() -> String {
         if self.hasPrefix("0x") {
@@ -164,5 +164,15 @@ extension String {
         }
         
         return "0x" + self
+    }
+}
+
+extension Data {
+    var removeFirstZeros: Data {
+        var bytes = self.bytes
+        while bytes.first == 0 {
+            bytes.removeFirst()
+        }
+        return Data(bytes)
     }
 }

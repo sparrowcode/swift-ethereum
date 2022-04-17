@@ -17,6 +17,6 @@ public protocol StorageProtocol {
     func removePrivateKey(for address: String) throws
 }
 
-enum StorageError: Error {
+public enum StorageError: Error {
     case noValueForKey(String)
 }

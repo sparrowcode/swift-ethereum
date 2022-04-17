@@ -1,6 +1,6 @@
 import Foundation
 
-public enum JSONRPCError: Error {
+enum JSONRPCError: Error {
     case errorEncodingJSONRPC
     case errorDecodingJSONRPC
     case errorConvertingFromHex
@@ -11,6 +11,6 @@ public enum JSONRPCError: Error {
 }
 
 public struct JSONRPCErrorResult: Codable {
-    let code: Int
-    let message: String
+    public let code: Int
+    public let message: String
 }

@@ -1,12 +1,7 @@
 import Foundation
 import SwiftKeccak
 
-protocol AccountProtocol {
-    func sign<T: Signable>(_ value: T) throws -> Signature
-    func sign(transaction: Transaction) throws -> Transaction
-}
-
-public struct Account: AccountProtocol {
+public struct Account {
     
     public var address: String
     public var publicKey: String

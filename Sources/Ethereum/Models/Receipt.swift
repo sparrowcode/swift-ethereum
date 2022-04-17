@@ -1,20 +1,20 @@
 import Foundation
 
 public struct Receipt: Codable {
-    let blockHash: String
-    let blockNumber: String
-    let contractAddress: String?
-    let cumulativeGasUsed: String
-    let effectiveGasPrice: String
-    let from: String
-    let gasUsed: String
-    let logs: [Log]
-    let logsBloom: String
-    let status: String?
-    let to: String?
-    let root: String?
-    let transactionHash: String
-    let transactionIndex: String
-    let type: String
+    public let blockHash: String
+    public let blockNumber: String
+    public let contractAddress: String?
+    public let cumulativeGasUsed: String
+    public let effectiveGasPrice: String
+    public let from: String
+    public let gasUsed: String
+    public let logs: [Log]
+    public let logsBloom: String
+    public let status: String?
+    public let to: String?
+    public let root: String?
+    public let transactionHash: String
+    public let transactionIndex: String
+    public let type: String
 }
 

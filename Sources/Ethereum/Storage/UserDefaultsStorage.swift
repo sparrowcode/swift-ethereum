@@ -1,6 +1,6 @@
 import Foundation
 
-struct UserDefaultsStorage: StorageProtocol {
+public struct UserDefaultsStorage: StorageProtocol {
     
     private let aes = AES()
     
@@ -10,7 +10,7 @@ struct UserDefaultsStorage: StorageProtocol {
         self.password = password
     }
     
-    func storePrivateKey(_ privateKey: String) throws {
+    public func storePrivateKey(_ privateKey: String) throws {
         
         let publicKey = try Utils.getPublicKey(from: privateKey)
         
@@ -27,7 +27,7 @@ struct UserDefaultsStorage: StorageProtocol {
         UserDefaults.standard.set(encodedFile, forKey: address)
     }
     
-    func getPrivateKey(for address: String) throws -> String {
+    public func getPrivateKey(for address: String) throws -> String {
         
         guard let file = UserDefaults.standard.data(forKey: address) else {
             throw StorageError.noValueForKey(address)
@@ -44,7 +44,7 @@ struct UserDefaultsStorage: StorageProtocol {
         return decryptedPrivateKey
     }
     
-    func removePrivateKey(for address: String) throws {
+    public func removePrivateKey(for address: String) throws {
         UserDefaults.standard.set(nil, forKey: address)
     }
 }

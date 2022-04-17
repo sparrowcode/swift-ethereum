@@ -1,6 +1,6 @@
 import Foundation
 
-struct StorageFile: Codable {
-    let keyData: Data
-    let iv: Data
+public struct StorageFile: Codable {
+    public let keyData: Data
+    public let iv: Data
 }

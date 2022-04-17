@@ -8,13 +8,13 @@
 import Foundation
 
 public struct Log: Codable {
-    let address: String
-    let topics: [String]
-    let data: String
-    let blockNumber: String
-    let transactionHash: String
-    let transactionIndex: String
-    let blockHash: String
-    let logIndex: String
-    let removed: Bool
+    public let address: String
+    public let topics: [String]
+    public let data: String
+    public let blockNumber: String
+    public let transactionHash: String
+    public let transactionIndex: String
+    public let blockHash: String
+    public let logIndex: String
+    public let removed: Bool
 }

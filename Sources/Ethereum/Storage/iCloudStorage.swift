@@ -1,6 +1,6 @@
 import Foundation
 
-struct iCloudStorage: StorageProtocol {
+public struct iCloudStorage: StorageProtocol {
     
     private let aes = AES()
     
@@ -10,16 +10,16 @@ struct iCloudStorage: StorageProtocol {
         self.password = password
     }
     
-    func storePrivateKey(_ privateKey: String) throws {
+    public func storePrivateKey(_ privateKey: String) throws {
         
         
     }
     
-    func getPrivateKey(for address: String) throws -> String {
+    public func getPrivateKey(for address: String) throws -> String {
         return ""
     }
     
-    func removePrivateKey(for address: String) throws {
+    public func removePrivateKey(for address: String) throws {
         
     }
 }

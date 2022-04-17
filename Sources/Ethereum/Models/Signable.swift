@@ -11,6 +11,6 @@ public protocol Signable {
     var rawData: Data? { get }
 }
 
-enum SignError: Error {
+public enum SignError: Error {
     case invalidData
 }

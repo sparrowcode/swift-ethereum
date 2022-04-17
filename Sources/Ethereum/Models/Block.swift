@@ -1,26 +1,26 @@
 import Foundation
 
 public struct Block: Codable {
-    let difficulty: String
-    let extraData: String?
-    let gasLimit: String
-    let gasUsed: String
-    let hash: String
-    let logsBloom: String
-    let miner: String
-    let mixHash: String
-    let nonce: String
-    let number: String
-    let parentHash: String
-    let receiptsRoot: String
-    let sha3Uncles: String
-    let size: String
-    let stateRoot: String
-    let timestamp: String
-    let totalDifficulty: String?
-    let transactionsRoot: String
-    let transactions: [String]?
-    let uncles: [String]?
+    public let difficulty: String
+    public let extraData: String?
+    public let gasLimit: String
+    public let gasUsed: String
+    public let hash: String
+    public let logsBloom: String
+    public let miner: String
+    public let mixHash: String
+    public let nonce: String
+    public let number: String
+    public let parentHash: String
+    public let receiptsRoot: String
+    public let sha3Uncles: String
+    public let size: String
+    public let stateRoot: String
+    public let timestamp: String
+    public let totalDifficulty: String?
+    public let transactionsRoot: String
+    public let transactions: [String]?
+    public let uncles: [String]?
 }
 
 //304
