@@ -5,7 +5,7 @@ public struct Transaction: Codable, Signable {
     
     public let blockHash: String?
     public let blockNumber: String?
-    public let from: String
+    public let from: String?
     public let gas: String?
     public let gasLimit: String?
     public let gasPrice: String?
@@ -25,7 +25,7 @@ public struct Transaction: Codable, Signable {
     private let valueBigUInt: BigUInt?
     
     public init(
-         from: String,
+         from: String? = nil,
          gasLimit: String? = nil,
          gasPrice: String? = nil,
          input: Data = Data(),
@@ -46,9 +46,9 @@ public struct Transaction: Codable, Signable {
         self.chainID = nil
         self.signature = nil
              
-        self.gasLimitBigUInt = (gasLimit != nil) ? BigUInt(gasLimit!, radix: 10) : BigUInt(0)
-        self.gasPriceBigUInt = (gasPrice != nil) ? BigUInt(gasPrice!, radix: 10) : BigUInt(0)
-        self.valueBigUInt = (value != nil) ? BigUInt(value!, radix: 10) : BigUInt(0)
+        self.gasLimitBigUInt = (gasLimit != nil) ? BigUInt(gasLimit!, radix: 10) : nil
+        self.gasPriceBigUInt = (gasPrice != nil) ? BigUInt(gasPrice!, radix: 10) : nil
+        self.valueBigUInt = (value != nil) ? BigUInt(value!, radix: 10) : nil
         
     }
     
@@ -67,9 +67,9 @@ public struct Transaction: Codable, Signable {
         self.chainID = transaction.chainID
         self.signature = signature
         
-        self.gasLimitBigUInt = (gasLimit != nil) ? BigUInt(gasLimit!, radix: 10) : BigUInt(0)
-        self.gasPriceBigUInt = (gasPrice != nil) ? BigUInt(gasPrice!, radix: 10) : BigUInt(0)
-        self.valueBigUInt = (value != nil) ? BigUInt(value!, radix: 10) : BigUInt(0)
+        self.gasLimitBigUInt = (gasLimit != nil) ? BigUInt(gasLimit!, radix: 10) : nil
+        self.gasPriceBigUInt = (gasPrice != nil) ? BigUInt(gasPrice!, radix: 10) : nil
+        self.valueBigUInt = (value != nil) ? BigUInt(value!, radix: 10) : nil
     }
     
     public var rawData: Data? {
@@ -155,9 +155,9 @@ public struct Transaction: Codable, Signable {
             self.signature = nil
         }
         
-        self.gasLimitBigUInt = (try? decodeHexBigUInt(.gasLimit)) ?? BigUInt(0)
-        self.gasPriceBigUInt = (try? decodeHexBigUInt(.gasPrice)) ?? BigUInt(0)
-        self.valueBigUInt = (try? decodeHexBigUInt(.value)) ?? BigUInt(0)
+        self.gasLimitBigUInt = (try? decodeHexBigUInt(.gasLimit)) ?? nil
+        self.gasPriceBigUInt = (try? decodeHexBigUInt(.gasPrice)) ?? nil
+        self.valueBigUInt = (try? decodeHexBigUInt(.value)) ?? nil
     }
     
     public func encode(to encoder: Encoder) throws {
@@ -168,17 +168,13 @@ public struct Transaction: Codable, Signable {
             if let value = value {
                 let encodedValue = String(value, radix: 16).addHexPrefix()
                 try container.encode(encodedValue, forKey: key)
-            } else {
-                try container.encode("", forKey: key)
             }
             
         }
         
         let encodeOptionalString = { (value: String?, key: CodingKeys) throws -> Void in
             if let value = value {
-                try container.encode(value, forKey: key)
-            } else {
-                try container.encode("", forKey: key)
+                try container.encode(value.addHexPrefix(), forKey: key)
             }
         }
         
@@ -187,13 +183,13 @@ public struct Transaction: Codable, Signable {
             if value == Data() {
                 try container.encode("", forKey: key)
             } else {
-                let encodedValue = String(bytes: RLP.encodeData(value)).addHexPrefix()
+                let encodedValue = String(bytes: value).addHexPrefix()
                 try container.encode(encodedValue, forKey: key)
             }
         }
         
-        try? encodeOptionalString(to.addHexPrefix(), .to)
-        try? encodeOptionalString(from.addHexPrefix(), .from)
+        try? encodeOptionalString(to, .to)
+        try? encodeOptionalString(from, .from)
         try? encodeData(input, .input)
         try? encodeBigUInt(valueBigUInt, .value)
         try? encodeBigUInt(gasPriceBigUInt, .gasPrice)

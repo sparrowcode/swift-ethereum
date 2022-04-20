@@ -413,6 +413,8 @@ public enum EthereumService {
             return
         }
         
+//        print(try? JSONSerialization.jsonObject(with: jsonRPCData, options: []))
+        
         provider.sendRequest(jsonRPCData: jsonRPCData) { data, error in
             
             guard let data = data, error == nil else {

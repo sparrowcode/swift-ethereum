@@ -7,6 +7,6 @@
 
 import Foundation
 
-public struct ABIParams {
+public struct ABIParam {
 
 }
