@@ -309,7 +309,7 @@ class EthereumServiceTests: XCTestCase {
         
         let transaction = try Transaction(from: "0xE92A146f86fEda6D14Ee1dc1BfB620D3F3d1b873",
                                           gasLimit: "210000",
-                                          gasPrice: "200000000000",
+                                          gasPrice: "230000000000",
                                           to: "0xc8DE4C1B4f6F6659944160DaC46B29a330C432B2",
                                           value: value)
 
