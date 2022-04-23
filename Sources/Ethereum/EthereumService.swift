@@ -349,7 +349,7 @@ public enum EthereumService {
                 return
             }
             
-            guard let bytes = signedTransaction.rawData else {
+            guard let bytes = signedTransaction.rlpData else {
                 completion(nil, .errorSigningTransaction)
                 return
             }

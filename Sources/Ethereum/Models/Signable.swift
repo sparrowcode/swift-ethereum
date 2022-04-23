@@ -8,7 +8,7 @@
 import Foundation
 
 public protocol Signable {
-    var rawData: Data? { get }
+    var rlpData: Data? { get }
 }
 
 public enum SignError: Error {

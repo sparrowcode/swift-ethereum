@@ -15,11 +15,11 @@ public struct Account {
     
     public func sign<T>(_ value: T) throws -> Signature where T : Signable {
         
-        guard let rawData = value.rawData else {
+        guard let rlpData = value.rlpData else {
             throw SignError.invalidData
         }
         
-        let signedData = try Utils.sign(data: rawData, with: privateKey.removeHexPrefix())
+        let signedData = try Utils.sign(data: rlpData, with: privateKey.removeHexPrefix())
         
         return signedData
     }

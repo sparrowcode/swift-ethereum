@@ -41,7 +41,7 @@ public struct Transaction: Codable, Signable {
         self.hash = nil
         self.input = input
         self.nonce = nonce
-        self.to = to.removeHexPrefix()
+        self.to = to.removeHexPrefix().lowercased()
         self.value = value
         self.chainID = nil
         self.signature = nil
@@ -72,7 +72,7 @@ public struct Transaction: Codable, Signable {
         self.valueBigUInt = (value != nil) ? BigUInt(value!, radix: 10) : nil
     }
     
-    public var rawData: Data? {
+    public var rlpData: Data? {
         if let signature = signature {
             let array: [Any?] = [nonce,
                                  gasPriceBigUInt,

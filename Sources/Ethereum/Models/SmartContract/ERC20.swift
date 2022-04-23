@@ -12,27 +12,16 @@ public struct ERC20 {
     
     public func getBalance(for account: Account, completion: @escaping (String?, JSONRPCError?) -> ()) {
         
-        let method = "balanceOf(address)"
+        let params = [SmartContractParam(name: "_owner", value: .address(value: account.address))]
         
-        guard let methodData = method.data(using: .utf8) else {
-            completion(nil, .errorEncodingJSONRPC)
+        let method = SmartContractMethod(name: "balanceOf", params: params)
+        
+        guard let data = method.abiData else {
+            completion(nil, .errorEncodingToABI)
             return
         }
         
-        let kecckakBytes = methodData.keccak()
-        
-        let index4Bytes = kecckakBytes.subdata(in: 0..<4)
-        
-        guard let accountBytes = try? account.address.removeHexPrefix().bytes else {
-            completion(nil, .errorEncodingJSONRPC)
-            return
-        }
-        
-        let addressData = Data(accountBytes).removeFirstZeros
-        
-        let data: Data = index4Bytes + Data(repeating: 0, count: 12) + addressData
-        
-        guard let transaction = try? Transaction(input: data, to: "0xF65FF945f3a6067D0742fD6890f32A6960dD817d") else {
+        guard let transaction = try? Transaction(input: data, to: self.address) else {
             completion(nil, .errorEncodingJSONRPC)
             return
         }
@@ -53,7 +42,34 @@ public struct ERC20 {
             
             completion(bigIntValue.description, nil)
         }
+        
+    }
     
+    public func transfer(to address: String, amount: String, with account: Account, completion: @escaping (String?, JSONRPCError?) -> ()) {
+        
+        guard let bigUIntAmount = BigUInt(amount) else {
+            completion(nil, .invalidAmount)
+            return
+        }
+        
+        let params = [SmartContractParam(name: "_to", value: .address(value: address)),
+                      SmartContractParam(name: "_value", value: .uint(bits: 256, value: bigUIntAmount))]
+        
+        let method = SmartContractMethod(name: "transfer", params: params)
+        
+        guard let data = method.abiData else {
+            completion(nil, .errorEncodingToABI)
+            return
+        }
+        
+        guard let transaction = try? Transaction(gasLimit: "100000", gasPrice: "220000000000", input: data, to: self.address, value: "0") else {
+            completion(nil, .errorEncodingJSONRPC)
+            return
+        }
+        
+        EthereumService.sendRawTransaction(account: account, transaction: transaction) { hash, error in
+            completion(hash, error)
+        }
     }
     
 }

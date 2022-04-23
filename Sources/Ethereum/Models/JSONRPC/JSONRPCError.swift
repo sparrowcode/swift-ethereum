@@ -8,6 +8,8 @@ public enum JSONRPCError: Error {
     case noResult
     case errorSigningTransaction
     case ethereumError(JSONRPCErrorResult)
+    case errorEncodingToABI
+    case invalidAmount
 }
 
 public struct JSONRPCErrorResult: Codable {
