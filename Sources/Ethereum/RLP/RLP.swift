@@ -1,56 +1,54 @@
 import Foundation
 import BigInt
 
-struct RLP {
+enum RLP {
     
-    static func encode(_ item: Any) -> Data? {
+    static func encode(_ item: RLPItem) -> Data? {
         switch item {
-        case let int as Int:
-            return encodeInt(int)
-        case let string as String:
-            return encodeString(string)
-        case let bint as BigInt:
-            return encodeBigInt(bint)
-        case let array as [Any]:
-            return encodeArray(array)
-        case let buint as BigUInt:
-            return encodeBigUInt(buint)
-        case let data as Data:
-            return encodeData(data)
-        default:
-            return nil
+        case .int(let value):
+            return encode(int: value)
+        case .string(let value):
+            return encode(string: value)
+        case .bigInt(let value):
+            return encode(bigInt: value)
+        case .array(let value):
+            return encode(array: value)
+        case .bigUInt(let value):
+            return encode(bigUInt: value)
+        case .data(let value):
+            return encode(data: value)
         }
     }
     
-    static func encodeString(_ string: String) -> Data? {
+    static func encode(string: String) -> Data? {
         
         if let bytesArray = try? string.bytes {
             let hexData = Data(bytesArray)
-            return encodeData(hexData)
+            return encode(data: hexData)
         }
         
         guard let data = string.data(using: .utf8) else {
             return nil
         }
-        return encodeData(data)
+        return encode(data: data)
     }
     
-    static func encodeInt(_ int: Int) -> Data? {
+    static func encode(int: Int) -> Data? {
         guard int >= 0 else {
             return nil
         }
-        return encodeBigInt(BigInt(int))
+        return encode(bigInt: BigInt(int))
     }
     
-    static func encodeBigInt(_ bint: BigInt) -> Data? {
-        guard bint >= 0 else {
+    static func encode(bigInt: BigInt) -> Data? {
+        guard bigInt >= 0 else {
             return nil
         }
-        return encodeBigUInt(BigUInt(bint))
+        return encode(bigUInt: BigUInt(bigInt))
     }
     
-    static func encodeBigUInt(_ buint: BigUInt) -> Data? {
-        let data = buint.serialize()
+    static func encode(bigUInt: BigUInt) -> Data? {
+        let data = bigUInt.serialize()
         
         let lastIndex = data.count - 1
         let firstIndex = data.firstIndex(where: {$0 != 0x00}) ?? lastIndex
@@ -63,10 +61,10 @@ struct RLP {
             return Data( [0x80])
         }
         
-        return encodeData(data.subdata(in: firstIndex..<lastIndex+1))
+        return encode(data: data.subdata(in: firstIndex..<lastIndex+1))
     }
     
-    static func encodeData(_ data: Data) -> Data {
+    static func encode(data: Data) -> Data {
         if data.count == 1 && data[0] <= 0x7f {
             return data // single byte, no header
         }
@@ -76,9 +74,9 @@ struct RLP {
         return encoded
     }
     
-    static func encodeArray(_ elements: [Any]) -> Data? {
+    static func encode(array: [RLPItem]) -> Data? {
         var encodedData = Data()
-        for element in elements {
+        for element in array {
             guard let encoded = encode(element) else {
                 return nil
             }

@@ -52,9 +52,9 @@ public enum ABIEncoder {
         switch param.value {
         case .address(value: let value):
             return try encode(address: value)
-        case .uint(bits: _, value: let value):
+        case .uint(bits: _, _: let value):
             return encode(uint: value)
-        case .int(bits: _, value: let value):
+        case .int(bits: _, _: let value):
             return encode(int: value)
         case .bool(value: let value):
             return encode(bool: value)

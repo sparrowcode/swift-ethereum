@@ -12,7 +12,7 @@ public struct ERC20 {
     
     public func balance(of account: Account, completion: @escaping (String?, JSONRPCError?) -> ()) {
         
-        let params = [SmartContractParam(name: "_owner", value: .address(value: account.address))]
+        let params = [SmartContractParam(name: "_owner", value: .address(account.address))]
         
         let method = SmartContractMethod(name: "balanceOf", params: params)
         
@@ -52,8 +52,8 @@ public struct ERC20 {
             return
         }
         
-        let params = [SmartContractParam(name: "_to", value: .address(value: address)),
-                      SmartContractParam(name: "_value", value: .uint(bits: 256, value: bigUIntAmount))]
+        let params = [SmartContractParam(name: "_to", value: .address(address)),
+                      SmartContractParam(name: "_value", value: .uint(bits: 256, bigUIntAmount))]
         
         let method = SmartContractMethod(name: "transfer", params: params)
         

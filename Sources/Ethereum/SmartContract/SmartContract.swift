@@ -36,23 +36,23 @@ public struct SmartContractParam {
 }
 
 public enum SmartContractValue {
-    case address(value: String)
+    case address(_ value: String)
     
-    case uint(bits: UInt16 = 256, value: BigUInt)
+    case uint(bits: UInt16 = 256, _ value: BigUInt)
     
-    case int(bits: UInt16 = 256, value: BigInt)
+    case int(bits: UInt16 = 256, _ value: BigInt)
     
-    case bool(value: Bool)
-    case bytes(value: Data)
-    case string(value: String)
+    case bool(_ value: Bool)
+    case bytes(_ value: Data)
+    case string(_ value: String)
     
     var stringValue: String {
         switch self {
         case .address(_):
             return "address"
-        case .uint(bits: let bits, value: _):
+        case .uint(bits: let bits, _: _):
             return "uint\(bits)"
-        case .int(bits: let bits, value: _):
+        case .int(bits: let bits, _: _):
             return "int\(bits)"
         case .bool(_):
             return "bool"

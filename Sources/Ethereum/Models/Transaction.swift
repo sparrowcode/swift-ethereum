@@ -74,7 +74,8 @@ public struct Transaction: Codable, Signable {
     
     public var rlpData: Data? {
         if let signature = signature {
-            let array: [Any?] = [nonce,
+            
+            let array: [Any?] =  [nonce,
                                  gasPriceBigUInt,
                                  gasLimitBigUInt,
                                  to,
@@ -83,9 +84,14 @@ public struct Transaction: Codable, Signable {
                                  signature.v,
                                  signature.r,
                                  signature.s]
-            return RLP.encode(array)
+            
+            let arrayRLP: [RLPItem] = array.compactMap { RLPItem($0) }
+            
+            return RLP.encode(array: arrayRLP)
+            
         } else {
-            let array: [Any?] = [nonce,
+            
+            let array: [Any?] =  [nonce,
                                  gasPriceBigUInt,
                                  gasLimitBigUInt,
                                  to,
@@ -94,7 +100,10 @@ public struct Transaction: Codable, Signable {
                                  chainID,
                                  0,
                                  0]
-            return RLP.encode(array)
+            
+            let arrayRLP: [RLPItem] = array.compactMap { RLPItem($0) }
+            
+            return RLP.encode(array: arrayRLP)
         }
     }
     
