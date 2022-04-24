@@ -6,7 +6,12 @@ class ABITests: XCTestCase {
 
     func testEncodeMethod() throws {
         
+//        let params = [SmartContractParam(name: <#T##String#>, value: <#T##SmartContractValue#>)]
+//
+//        let method = SmartContractMethod(name: "", params: <#T##[SmartContractParam]#>)
         
+        print(Data(repeating: 0xff, count: 12))
+        print(Data())
     }
 
     func testPerformanceExample() throws {

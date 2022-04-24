@@ -29,7 +29,7 @@ struct RLP {
             return encodeData(hexData)
         }
         
-        guard let data = string.data(using: String.Encoding.utf8) else {
+        guard let data = string.data(using: .utf8) else {
             return nil
         }
         return encodeData(data)

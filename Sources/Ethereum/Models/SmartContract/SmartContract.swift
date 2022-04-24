@@ -62,5 +62,22 @@ public enum SmartContractValue {
             return "string"
         }
     }
+    
+    var isDynamic: Bool {
+        switch self {
+        case .address(_):
+            return false
+        case .uint(_, _):
+            return false
+        case .int(_, _):
+            return false
+        case .bool(_):
+            return false
+        case .bytes(_):
+            return true
+        case .string(_):
+            return true
+        }
+    }
 }
 

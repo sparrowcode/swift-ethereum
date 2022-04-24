@@ -18,7 +18,7 @@ class ERC20Tests: XCTestCase {
         let erc20 = ERC20(address: "0xF65FF945f3a6067D0742fD6890f32A6960dD817d")
         
         
-        erc20.getBalance(for: account) { value, error in
+        erc20.balance(of: account) { value, error in
             XCTAssertNil(error)
             XCTAssertNotNil(value)
             expectation.fulfill()
@@ -49,6 +49,63 @@ class ERC20Tests: XCTestCase {
         }
         
         wait(for: [expectation], timeout: 50)
+    }
+    
+    func testDecimals() throws {
+        
+        let expectation = XCTestExpectation(description: "decimals erc20")
+        
+        EthereumService.provider = Provider(node: .ropsten)
+        
+        let erc20 = ERC20(address: "0xF65FF945f3a6067D0742fD6890f32A6960dD817d")
+        
+        
+        erc20.decimals() { value, error in
+            XCTAssertNil(error)
+            XCTAssertNotNil(value)
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 50)
+        
+    }
+    
+    func testSymbol() throws {
+        
+        let expectation = XCTestExpectation(description: "decimals erc20")
+        
+        EthereumService.provider = Provider(node: .ropsten)
+        
+        let erc20 = ERC20(address: "0xF65FF945f3a6067D0742fD6890f32A6960dD817d")
+        
+        
+        erc20.symbol() { value, error in
+            XCTAssertNil(error)
+            XCTAssertNotNil(value)
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 50)
+        
+    }
+    
+    func testTotalSupply() throws {
+        
+        let expectation = XCTestExpectation(description: "decimals erc20")
+        
+        EthereumService.provider = Provider(node: .ropsten)
+        
+        let erc20 = ERC20(address: "0xF65FF945f3a6067D0742fD6890f32A6960dD817d")
+        
+        
+        erc20.totalSupply() { value, error in
+            XCTAssertNil(error)
+            XCTAssertNotNil(value)
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 50)
+        
     }
 
     func testPerformanceExample() throws {

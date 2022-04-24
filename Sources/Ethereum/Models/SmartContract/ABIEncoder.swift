@@ -6,6 +6,7 @@ public enum ABIEncoder {
     
     enum ABIEncoderError: Error {
         case invalidMethodName
+        case invalidStringParam
     }
     
     static func encode(method: SmartContractMethod) throws -> Data {
@@ -20,14 +21,31 @@ public enum ABIEncoder {
 
         let methodSignature = kecckakBytes.subdata(in: 0..<4)
 
-        var paramsSignature = Data()
+        var staticParamsSignature = Data()
+        
+        var dynamicParamsSignature = Data()
         
         for param in method.params {
-            let encodedParam = try encode(param: param)
-            paramsSignature.append(encodedParam)
+            
+            switch param.value.isDynamic {
+                
+            case true:
+                // calculate an offset for dynamic type and append it to static signature
+                let bigUIntCount = BigUInt(staticParamsSignature.count + dynamicParamsSignature.count)
+                let offset = encode(uint: bigUIntCount)
+                staticParamsSignature.append(offset)
+                
+                // calculate the encoded value of a given param and append it to dynamic signature
+                let encodedParam = try encode(param: param)
+                dynamicParamsSignature.append(encodedParam)
+            case false:
+                let encodedParam = try encode(param: param)
+                staticParamsSignature.append(encodedParam)
+            }
+            
         }
         
-        return methodSignature + paramsSignature
+        return methodSignature + staticParamsSignature + dynamicParamsSignature
     }
     
     static func encode(param: SmartContractParam) throws -> Data {
@@ -43,7 +61,7 @@ public enum ABIEncoder {
         case .bytes(value: let value):
             return Data()
         case .string(value: let value):
-            return Data()
+            return try encode(string: value)
         }
     }
     
@@ -51,31 +69,33 @@ public enum ABIEncoder {
         
         let bytes = try address.removeHexPrefix().lowercased().bytes
         
-        let data = Data(bytes).removeFirstZeros
+        let data = Data(bytes)
         
-        let paddedData = Data(repeating: 0, count: 12) + data
+        let paddedData = Data(repeating: 0x00, count: 12) + data
         
         return paddedData
     }
     
     static func encode(uint: BigUInt) -> Data {
         
-        let bytes = uint.serialize()
+        let data = uint.serialize()
         
-        let data = Data(bytes).removeFirstZeros
-        
-        let paddedData =  Data(repeating: 0, count: 32 - bytes.count) + data
+        let paddedData =  Data(repeating: 0x00, count: 32 - data.count) + data
         
         return paddedData
     }
     
     static func encode(int: BigInt) -> Data {
         
-        let bytes = int.serialize()
+        let data = int.serialize()
         
-        let data = Data(bytes).removeFirstZeros
+        var paddedData = Data()
         
-        let paddedData =  Data(repeating: 0, count: 32 - bytes.count) + data
+        if int > 0 {
+            paddedData =  Data(repeating: 0x00, count: 32 - data.count) + data
+        } else {
+            paddedData =  Data(repeating: 0xff, count: 32 - data.count) + data
+        }
         
         return paddedData
     }
@@ -84,12 +104,23 @@ public enum ABIEncoder {
         
         let uintValue = bool ? BigUInt(1) : BigUInt(0)
         
-        let bytes = uintValue.serialize()
+        let data = uintValue.serialize()
         
-        let data = Data(bytes).removeFirstZeros
-        
-        let paddedData =  Data(repeating: 0, count: 32 - bytes.count) + data
+        let paddedData =  Data(repeating: 0x00, count: 32 - data.count) + data
         
         return paddedData
+    }
+    
+    static func encode(string: String) throws -> Data {
+        
+        let bigUIntCount = BigUInt(string.count)
+        
+        let lengthData = encode(uint: bigUIntCount)
+        
+        guard let utfData = string.data(using: .utf8) else { throw ABIEncoderError.invalidStringParam }
+        
+        let paddedUtfData =  utfData + Data(repeating: 0x00, count: 32 - utfData.count)
+        
+        return lengthData + paddedUtfData
     }
 }

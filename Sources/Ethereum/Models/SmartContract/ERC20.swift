@@ -10,7 +10,7 @@ public struct ERC20 {
         self.address = address.lowercased()
     }
     
-    public func getBalance(for account: Account, completion: @escaping (String?, JSONRPCError?) -> ()) {
+    public func balance(of account: Account, completion: @escaping (String?, JSONRPCError?) -> ()) {
         
         let params = [SmartContractParam(name: "_owner", value: .address(value: account.address))]
         
@@ -69,6 +69,97 @@ public struct ERC20 {
         
         EthereumService.sendRawTransaction(account: account, transaction: transaction) { hash, error in
             completion(hash, error)
+        }
+    }
+    
+    func decimals(completion: @escaping (Int?, JSONRPCError?) -> ()) {
+        
+        let method = SmartContractMethod(name: "decimals", params: [])
+        
+        guard let data = method.abiData else {
+            completion(nil, .errorEncodingToABI)
+            return
+        }
+        
+        guard let transaction = try? Transaction(input: data, to: self.address) else {
+            completion(nil, .errorEncodingJSONRPC)
+            return
+        }
+        
+        EthereumService.call(transaction: transaction) { hexValue, error in
+            
+            guard let hexValue = hexValue, error == nil else {
+                completion(nil, .nilResponse)
+                return
+            }
+            
+            let value = hexValue.removeHexPrefix()
+            
+            guard let intValue = Int(value, radix: 16) else {
+                completion(nil, .errorConvertingFromHex)
+                return
+            }
+            
+            completion(intValue, nil)
+        }
+    }
+    
+    func symbol(completion: @escaping (String?, JSONRPCError?) -> ()) {
+        
+        let method = SmartContractMethod(name: "symbol", params: [])
+        
+        guard let data = method.abiData else {
+            completion(nil, .errorEncodingToABI)
+            return
+        }
+        
+        guard let transaction = try? Transaction(input: data, to: self.address) else {
+            completion(nil, .errorEncodingJSONRPC)
+            return
+        }
+        
+        EthereumService.call(transaction: transaction) { symbol, error in
+            
+            guard let symbol = symbol, error == nil else {
+                completion(nil, .nilResponse)
+                return
+            }
+            
+            // MARK: - ABIDecoder needed to parse the value
+            
+            completion(symbol, nil)
+        }
+    }
+    
+    func totalSupply(completion: @escaping (String?, JSONRPCError?) -> ()) {
+        
+        let method = SmartContractMethod(name: "totalSupply", params: [])
+        
+        guard let data = method.abiData else {
+            completion(nil, .errorEncodingToABI)
+            return
+        }
+        
+        guard let transaction = try? Transaction(input: data, to: self.address) else {
+            completion(nil, .errorEncodingJSONRPC)
+            return
+        }
+        
+        EthereumService.call(transaction: transaction) { hexValue, error in
+            
+            guard let hexValue = hexValue, error == nil else {
+                completion(nil, .nilResponse)
+                return
+            }
+            
+            let value = hexValue.removeHexPrefix()
+            
+            guard let bigIntValue = BigInt(value, radix: 16) else {
+                completion(nil, .errorConvertingFromHex)
+                return
+            }
+            
+            completion(bigIntValue.description, nil)
         }
     }
     
