@@ -12,7 +12,4 @@ public enum JSONRPCError: Error {
     case invalidAmount
 }
 
-public struct JSONRPCErrorResult: Codable {
-    public let code: Int
-    public let message: String
-}
+

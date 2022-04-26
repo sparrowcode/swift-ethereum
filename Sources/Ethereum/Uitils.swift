@@ -21,35 +21,20 @@ public enum Utils {
             eth = unsigned + eth
         }
         
+            
+        while eth.last == "0" {
+            eth.removeLast()
+        }
+        
         return eth
     }
     
     public static func weiFromEth(_ eth: String) -> String {
-        let valueAfterDotStartIndex = eth.index(eth.startIndex, offsetBy: 2)
-        let valueAfterDot = eth[valueAfterDotStartIndex...]
-        
-        var counterOfZeros = 0
-        var isBeforeNum = true
-        var wei = ""
-        for char in valueAfterDot {
-            if isBeforeNum {
-                if char == "0" {
-                    counterOfZeros += 1
-                    
-                } else {
-                    isBeforeNum = false
-                    wei += String(char)
-                }
-            }
-            
-            wei += String(char)
+        if eth.first != "0" {
+            return eth + String(repeating: "0", count: 18)
+        } else {
+            return String()
         }
-        
-        let zeros = String(repeating: "0", count: counterOfZeros)
-        
-        wei += zeros
-        
-        return wei
     }
     
     public static func getPublicKey(from privateKey: String) throws -> String {
@@ -150,10 +135,12 @@ public enum Utils {
 public extension String {
     
     func removeHexPrefix() -> String {
+        
         if self.hasPrefix("0x") {
             let index = self.index(self.startIndex, offsetBy: 2)
             return String(self[index...])
         }
+        
         return self
     }
     
@@ -168,6 +155,7 @@ public extension String {
 }
 
 extension Data {
+    
     var removeFirstZeros: Data {
         var bytes = self.bytes
         while bytes.first == 0 {

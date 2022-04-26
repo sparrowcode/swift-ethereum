@@ -13,6 +13,8 @@ class EthereumServiceTests: XCTestCase {
         let address = "0xE92A146f86fEda6D14Ee1dc1BfB620D3F3d1b873"
         let expectation = XCTestExpectation(description: "get balance")
         
+        EthereumService.provider = Provider(node: .ropsten)
+        
         EthereumService.getBalance(for: address) { balance, error in
             XCTAssertNil(error)
             XCTAssertNotNil(balance)
@@ -338,26 +340,6 @@ class EthereumServiceTests: XCTestCase {
         }
         
         wait(for: [expectation], timeout: 50)
-    }
-    
-    func testFromWei() throws {
-        let wei = "280000000000000000000000"
-        
-        let eth = Utils.ethFromWei(wei)
-        
-        
-        let weiRetrived = Utils.weiFromEth(eth)
-        
-        print(eth)
-        print(weiRetrived)
-        
-//        XCTAssertEqual(wei, weiRetrived)
-    }
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            
-        }
     }
     
 }

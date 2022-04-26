@@ -11,7 +11,7 @@ protocol SmartContractProtocol {
     
     var allMethods: [String] { get }
     
-    var allEvents: [String] {get}
+    var allEvents: [String] { get }
     
 }
 
@@ -24,7 +24,6 @@ public struct SmartContractMethod {
     let name: String
     let params: [SmartContractParam]
     
-    
     var abiData: Data? {
         return try? ABIEncoder.encode(method: self)
     }
@@ -36,6 +35,7 @@ public struct SmartContractParam {
 }
 
 public enum SmartContractValue {
+    
     case address(_ value: String)
     
     case uint(bits: UInt16 = 256, _ value: BigUInt)
@@ -43,8 +43,12 @@ public enum SmartContractValue {
     case int(bits: UInt16 = 256, _ value: BigInt)
     
     case bool(_ value: Bool)
+    
     case bytes(_ value: Data)
+    
     case string(_ value: String)
+    
+    case array(_ values: [SmartContractValue])
     
     var stringValue: String {
         switch self {
@@ -60,6 +64,8 @@ public enum SmartContractValue {
             return "bytes"
         case .string(_):
             return "string"
+        case .array(let values):
+            return !values.isEmpty ? values[0].stringValue + "[]" : "emptyArray"
         }
     }
     
@@ -76,6 +82,8 @@ public enum SmartContractValue {
         case .bytes(_):
             return true
         case .string(_):
+            return true
+        case .array(_):
             return true
         }
     }

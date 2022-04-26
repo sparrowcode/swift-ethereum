@@ -11,7 +11,7 @@ public enum ABIEncoder {
     
     static func encode(method: SmartContractMethod) throws -> Data {
         
-        let fullMethodName = method.name + "(" + method.params.map {$0.value.stringValue}.joined(separator: ",") + ")"
+        let fullMethodName = method.name + "(" + method.params.map { $0.value.stringValue }.joined(separator: ",") + ")"
         
         guard let methodData = fullMethodName.data(using: .utf8) else {
             throw ABIEncoderError.invalidMethodName
@@ -36,10 +36,10 @@ public enum ABIEncoder {
                 staticParamsSignature.append(offset)
                 
                 // calculate the encoded value of a given param and append it to dynamic signature
-                let encodedParam = try encode(param: param)
+                let encodedParam = try encode(value: param.value)
                 dynamicParamsSignature.append(encodedParam)
             case false:
-                let encodedParam = try encode(param: param)
+                let encodedParam = try encode(value: param.value)
                 staticParamsSignature.append(encodedParam)
             }
             
@@ -48,8 +48,10 @@ public enum ABIEncoder {
         return methodSignature + staticParamsSignature + dynamicParamsSignature
     }
     
-    static func encode(param: SmartContractParam) throws -> Data {
-        switch param.value {
+    
+    
+    static func encode(value: SmartContractValue) throws -> Data {
+        switch value {
         case .address(value: let value):
             return try encode(address: value)
         case .uint(bits: _, _: let value):
@@ -62,6 +64,8 @@ public enum ABIEncoder {
             return Data()
         case .string(value: let value):
             return try encode(string: value)
+        case .array(let values):
+            return try encode(array: values)
         }
     }
     
@@ -122,5 +126,17 @@ public enum ABIEncoder {
         let paddedUtfData =  utfData + Data(repeating: 0x00, count: 32 - utfData.count)
         
         return lengthData + paddedUtfData
+    }
+    
+    // MARK: - No proper offset calculation yet (if you put an embedded array will return wrong result)
+    static func encode(array: [SmartContractValue]) throws -> Data {
+        
+        let bigUIntCount = BigUInt(array.count)
+        
+        let lengthData = encode(uint: bigUIntCount)
+        
+        let paddedData = try array.map { try encode(value: $0) }.reduce(Data(), +)
+        
+        return lengthData + paddedData
     }
 }

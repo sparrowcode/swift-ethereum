@@ -22,12 +22,22 @@ class UtilsTests: XCTestCase {
         
         XCTAssertEqual(ethereumAddress, rightEthereumAddress)
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    func testEthFromWei() throws {
+        
+        let wei = "12345678901234567890"
+        let eth = Utils.ethFromWei(wei)
+        let rightEth = "12.34567890123456789"
+        
+        XCTAssertEqual(eth, rightEth)
     }
-
+    
+    func testWeiFromEth() {
+        let eth = "12.34567890123456789"
+        let wei = Utils.weiFromEth(eth)
+        let rightWei = "12345678901234567890"
+        
+        XCTAssertEqual(wei, rightWei)
+    }
+    
 }

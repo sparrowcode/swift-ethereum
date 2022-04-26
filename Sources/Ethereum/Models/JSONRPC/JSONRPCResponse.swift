@@ -1,13 +1,18 @@
 import Foundation
 
-struct JSONRPCResponse<T: Codable>: Codable {
+struct JSONRPCResponse<T: Decodable>: Decodable {
     let id: Int
     let jsonrpc: String
     let result: T
 }
 
-struct JSONRPCResponseError<T: Codable>: Codable {
+struct JSONRPCResponseError: Decodable {
     let id: Int
     let jsonrpc: String
-    let error: T
+    let error: JSONRPCErrorResult
+}
+
+public struct JSONRPCErrorResult: Decodable {
+    public let code: Int
+    public let message: String
 }

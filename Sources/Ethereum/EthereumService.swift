@@ -26,7 +26,7 @@ public enum EthereumService {
                 return
             }
             
-            if let ethereumError = try? JSONDecoder().decode(JSONRPCResponseError<JSONRPCErrorResult>.self, from: data) {
+            if let ethereumError = try? JSONDecoder().decode(JSONRPCResponseError.self, from: data) {
                 completion(nil, .ethereumError(ethereumError.error))
                 return
             }
@@ -66,7 +66,7 @@ public enum EthereumService {
                 return
             }
             
-            if let ethereumError = try? JSONDecoder().decode(JSONRPCResponseError<JSONRPCErrorResult>.self, from: data) {
+            if let ethereumError = try? JSONDecoder().decode(JSONRPCResponseError.self, from: data) {
                 completion(nil, .ethereumError(ethereumError.error))
                 return
             }
@@ -105,7 +105,7 @@ public enum EthereumService {
                 return
             }
             
-            if let ethereumError = try? JSONDecoder().decode(JSONRPCResponseError<JSONRPCErrorResult>.self, from: data) {
+            if let ethereumError = try? JSONDecoder().decode(JSONRPCResponseError.self, from: data) {
                 completion(nil, .ethereumError(ethereumError.error))
                 return
             }
@@ -148,7 +148,7 @@ public enum EthereumService {
                 return
             }
             
-            if let ethereumError = try? JSONDecoder().decode(JSONRPCResponseError<JSONRPCErrorResult>.self, from: data) {
+            if let ethereumError = try? JSONDecoder().decode(JSONRPCResponseError.self, from: data) {
                 completion(nil, .ethereumError(ethereumError.error))
                 return
             }
@@ -187,7 +187,7 @@ public enum EthereumService {
                 return
             }
             
-            if let ethereumError = try? JSONDecoder().decode(JSONRPCResponseError<JSONRPCErrorResult>.self, from: data) {
+            if let ethereumError = try? JSONDecoder().decode(JSONRPCResponseError.self, from: data) {
                 completion(nil, .ethereumError(ethereumError.error))
                 return
             }
@@ -226,7 +226,7 @@ public enum EthereumService {
                 return
             }
             
-            if let ethereumError = try? JSONDecoder().decode(JSONRPCResponseError<JSONRPCErrorResult>.self, from: data) {
+            if let ethereumError = try? JSONDecoder().decode(JSONRPCResponseError.self, from: data) {
                 completion(nil, .ethereumError(ethereumError.error))
                 return
             }
@@ -270,7 +270,7 @@ public enum EthereumService {
                 return
             }
             
-            if let ethereumError = try? JSONDecoder().decode(JSONRPCResponseError<JSONRPCErrorResult>.self, from: data) {
+            if let ethereumError = try? JSONDecoder().decode(JSONRPCResponseError.self, from: data) {
                 completion(nil, .ethereumError(ethereumError.error))
                 return
             }
@@ -309,7 +309,7 @@ public enum EthereumService {
                 return
             }
             
-            if let ethereumError = try? JSONDecoder().decode(JSONRPCResponseError<JSONRPCErrorResult>.self, from: data) {
+            if let ethereumError = try? JSONDecoder().decode(JSONRPCResponseError.self, from: data) {
                 completion(nil, .ethereumError(ethereumError.error))
                 return
             }
@@ -370,7 +370,7 @@ public enum EthereumService {
                     return
                 }
                 
-                if let ethereumError = try? JSONDecoder().decode(JSONRPCResponseError<JSONRPCErrorResult>.self, from: data) {
+                if let ethereumError = try? JSONDecoder().decode(JSONRPCResponseError.self, from: data) {
                     completion(nil, .ethereumError(ethereumError.error))
                     return
                 }
@@ -422,7 +422,7 @@ public enum EthereumService {
                 return
             }
             
-            if let ethereumError = try? JSONDecoder().decode(JSONRPCResponseError<JSONRPCErrorResult>.self, from: data) {
+            if let ethereumError = try? JSONDecoder().decode(JSONRPCResponseError.self, from: data) {
                 completion(nil, .ethereumError(ethereumError.error))
                 return
             }
@@ -471,7 +471,7 @@ public enum EthereumService {
                 return
             }
             
-            if let ethereumError = try? JSONDecoder().decode(JSONRPCResponseError<JSONRPCErrorResult>.self, from: data) {
+            if let ethereumError = try? JSONDecoder().decode(JSONRPCResponseError.self, from: data) {
                 completion(nil, .ethereumError(ethereumError.error))
                 return
             }
@@ -524,7 +524,7 @@ public enum EthereumService {
                 return
             }
             
-            if let ethereumError = try? JSONDecoder().decode(JSONRPCResponseError<JSONRPCErrorResult>.self, from: data) {
+            if let ethereumError = try? JSONDecoder().decode(JSONRPCResponseError.self, from: data) {
                 completion(nil, .ethereumError(ethereumError.error))
                 return
             }
@@ -574,7 +574,7 @@ public enum EthereumService {
                 return
             }
             
-            if let ethereumError = try? JSONDecoder().decode(JSONRPCResponseError<JSONRPCErrorResult>.self, from: data) {
+            if let ethereumError = try? JSONDecoder().decode(JSONRPCResponseError.self, from: data) {
                 completion(nil, .ethereumError(ethereumError.error))
                 return
             }
@@ -609,7 +609,7 @@ public enum EthereumService {
                 return
             }
             
-            if let ethereumError = try? JSONDecoder().decode(JSONRPCResponseError<JSONRPCErrorResult>.self, from: data) {
+            if let ethereumError = try? JSONDecoder().decode(JSONRPCResponseError.self, from: data) {
                 completion(nil, .ethereumError(ethereumError.error))
                 return
             }
@@ -646,7 +646,7 @@ public enum EthereumService {
                 return
             }
             
-            if let ethereumError = try? JSONDecoder().decode(JSONRPCResponseError<JSONRPCErrorResult>.self, from: data) {
+            if let ethereumError = try? JSONDecoder().decode(JSONRPCResponseError.self, from: data) {
                 completion(nil, .ethereumError(ethereumError.error))
                 return
             }
@@ -687,7 +687,7 @@ public enum EthereumService {
                 return
             }
             
-            if let ethereumError = try? JSONDecoder().decode(JSONRPCResponseError<JSONRPCErrorResult>.self, from: data) {
+            if let ethereumError = try? JSONDecoder().decode(JSONRPCResponseError.self, from: data) {
                 completion(nil, .ethereumError(ethereumError.error))
                 return
             }
@@ -724,7 +724,7 @@ public enum EthereumService {
                 return
             }
             
-            if let ethereumError = try? JSONDecoder().decode(JSONRPCResponseError<JSONRPCErrorResult>.self, from: data) {
+            if let ethereumError = try? JSONDecoder().decode(JSONRPCResponseError.self, from: data) {
                 completion(nil, .ethereumError(ethereumError.error))
                 return
             }
@@ -761,7 +761,7 @@ public enum EthereumService {
                 return
             }
             
-            if let ethereumError = try? JSONDecoder().decode(JSONRPCResponseError<JSONRPCErrorResult>.self, from: data) {
+            if let ethereumError = try? JSONDecoder().decode(JSONRPCResponseError.self, from: data) {
                 completion(nil, .ethereumError(ethereumError.error))
                 return
             }
@@ -802,7 +802,7 @@ public enum EthereumService {
                 return
             }
             
-            if let ethereumError = try? JSONDecoder().decode(JSONRPCResponseError<JSONRPCErrorResult>.self, from: data) {
+            if let ethereumError = try? JSONDecoder().decode(JSONRPCResponseError.self, from: data) {
                 completion(nil, .ethereumError(ethereumError.error))
                 return
             }

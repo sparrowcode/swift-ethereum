@@ -2,6 +2,7 @@ import Foundation
 import BigInt
 
 enum RLPItem {
+    
     case int(_ value: Int)
     
     case string(_ value: String)

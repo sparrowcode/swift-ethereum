@@ -45,7 +45,7 @@ public struct ERC20 {
         
     }
     
-    public func transfer(to address: String, amount: String, with account: Account, completion: @escaping (String?, JSONRPCError?) -> ()) {
+    public func transfer(to address: String, amount: String, gasLimit: String, gasPrice: String, with account: Account, completion: @escaping (String?, JSONRPCError?) -> ()) {
         
         guard let bigUIntAmount = BigUInt(amount) else {
             completion(nil, .invalidAmount)
@@ -62,7 +62,7 @@ public struct ERC20 {
             return
         }
         
-        guard let transaction = try? Transaction(gasLimit: "100000", gasPrice: "220000000000", input: data, to: self.address, value: "0") else {
+        guard let transaction = try? Transaction(gasLimit: gasLimit, gasPrice: gasPrice, input: data, to: self.address, value: "0") else {
             completion(nil, .errorEncodingJSONRPC)
             return
         }

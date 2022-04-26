@@ -17,7 +17,6 @@ class ERC20Tests: XCTestCase {
         
         let erc20 = ERC20(address: "0xF65FF945f3a6067D0742fD6890f32A6960dD817d")
         
-        
         erc20.balance(of: account) { value, error in
             XCTAssertNil(error)
             XCTAssertNotNil(value)
@@ -42,7 +41,7 @@ class ERC20Tests: XCTestCase {
         
         let erc20 = ERC20(address: "0xF65FF945f3a6067D0742fD6890f32A6960dD817d")
         
-        erc20.transfer(to: "0xc8DE4C1B4f6F6659944160DaC46B29a330C432B2", amount: "21000000000000000000", with: account) { hash, error in
+        erc20.transfer(to: "0xc8DE4C1B4f6F6659944160DaC46B29a330C432B2", amount: "21000000000000000000", gasLimit: "100000", gasPrice: "220000000000", with: account) { hash, error in
             XCTAssertNil(error)
             XCTAssertNotNil(hash)
             expectation.fulfill()
@@ -58,7 +57,6 @@ class ERC20Tests: XCTestCase {
         EthereumService.provider = Provider(node: .ropsten)
         
         let erc20 = ERC20(address: "0xF65FF945f3a6067D0742fD6890f32A6960dD817d")
-        
         
         erc20.decimals() { value, error in
             XCTAssertNil(error)
@@ -106,13 +104,6 @@ class ERC20Tests: XCTestCase {
         
         wait(for: [expectation], timeout: 50)
         
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
     }
 
 }
