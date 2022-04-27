@@ -1,9 +1,9 @@
 import Foundation
 
-struct JSONRPCResponse<T: Decodable>: Decodable {
+struct JSONRPCResponse<D: Decodable>: Decodable {
     let id: Int
     let jsonrpc: String
-    let result: T
+    let result: D
 }
 
 struct JSONRPCResponseError: Decodable {

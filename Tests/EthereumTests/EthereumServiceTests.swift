@@ -133,7 +133,7 @@ class EthereumServiceTests: XCTestCase {
             expectation.fulfill()
         }
         
-        wait(for: [expectation], timeout: 20)
+        wait(for: [expectation], timeout: 50)
     }
     
     func testGetBlockByNumber() throws {
@@ -251,7 +251,7 @@ class EthereumServiceTests: XCTestCase {
             expectation.fulfill()
         }
         
-        wait(for: [expectation], timeout: 20)
+        wait(for: [expectation], timeout: 50)
     }
     
     func testGetTransactionByBlockNumberAndIndex() throws {

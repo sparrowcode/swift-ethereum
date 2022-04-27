@@ -65,19 +65,5 @@ class NodeTests: XCTestCase {
         
         wait(for: [expectation], timeout: 20)
     }
-    
-    func testSha3() throws {
-        
-        let expectation = XCTestExpectation(description: "sha3")
-        let value = "0x68656c6c6f20776f726c64"
-        
-        Node.mainnet.sha3(value: value) { sha3, error in
-            XCTAssertNil(error)
-            XCTAssertNotNil(sha3)
-            expectation.fulfill()
-        }
-        
-        wait(for: [expectation], timeout: 20)
-    }
 
 }

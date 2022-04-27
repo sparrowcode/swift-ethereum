@@ -1,6 +1,6 @@
 import Foundation
 
-enum JSONRPCMethod: String {
+public enum JSONRPCMethod: String {
     case gasPrice = "eth_gasPrice"
     case blockNumber = "eth_blockNumber"
     case getBalance = "eth_getBalance"
@@ -14,7 +14,6 @@ enum JSONRPCMethod: String {
     case listening = "net_listening"
     case peerCount = "net_peerCount"
     case clientVersion = "web3_clientVersion"
-    case sha3 = "web3_sha3"
     case getBlockByHash = "eth_getBlockByHash"
     case getBlockByNumber = "eth_getBlockByNumber"
     case getUncleByBlockNumberAndIndex = "eth_getUncleByBlockNumberAndIndex"

@@ -31,61 +31,44 @@ public struct SmartContractMethod {
 
 public struct SmartContractParam {
     let name: String
-    let value: SmartContractValue
+    let value: ABIEncodable
+    let type: SmartContractType
 }
 
-public enum SmartContractValue {
+public indirect enum SmartContractType {
     
-    case address(_ value: String)
+    case address
     
-    case uint(bits: UInt16 = 256, _ value: BigUInt)
+    case uint(bits: UInt16 = 256)
     
-    case int(bits: UInt16 = 256, _ value: BigInt)
+    case int(bits: UInt16 = 256)
     
-    case bool(_ value: Bool)
+    case bool
     
-    case bytes(_ value: Data)
+    case bytes
     
-    case string(_ value: String)
+    case string
     
-    case array(_ values: [SmartContractValue])
+    case array(type: SmartContractType)
     
     var stringValue: String {
         switch self {
-        case .address(_):
+        case .address:
             return "address"
-        case .uint(bits: let bits, _: _):
+        case .uint(let bits):
             return "uint\(bits)"
-        case .int(bits: let bits, _: _):
+        case .int(let bits):
             return "int\(bits)"
-        case .bool(_):
+        case .bool:
             return "bool"
-        case .bytes(_):
+        case .bytes:
             return "bytes"
-        case .string(_):
+        case .string:
             return "string"
-        case .array(let values):
-            return !values.isEmpty ? values[0].stringValue + "[]" : "emptyArray"
+        case .array(let type):
+            return type.stringValue + "[]"
         }
     }
     
-    var isDynamic: Bool {
-        switch self {
-        case .address(_):
-            return false
-        case .uint(_, _):
-            return false
-        case .int(_, _):
-            return false
-        case .bool(_):
-            return false
-        case .bytes(_):
-            return true
-        case .string(_):
-            return true
-        case .array(_):
-            return true
-        }
-    }
 }
 

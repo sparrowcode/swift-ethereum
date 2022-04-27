@@ -64,28 +64,14 @@ public struct Node {
     // MARK: - Net
     public func version(completion: @escaping (Int?, JSONRPCError?) -> Void) {
         
-        let jsonRPC = JSONRPCRequest(jsonrpc: "2.0", method: .version, params: [Optional<String>.none], id: 20)
-        
-        guard let jsonRPCData = try? JSONEncoder().encode(jsonRPC) else {
-            completion(nil, .errorEncodingJSONRPC)
-            return
-        }
-        
         let provider = Provider(node: self)
         
-        provider.sendRequest(jsonRPCData: jsonRPCData) { data, error in
+        provider.sendRequest(method: .version, params: Optional<String>.none, decodeTo: String.self) { version, error in
             
-            guard let data = data, error == nil else {
-                completion(nil, .nilResponse)
+            guard let version = version, error == nil else {
+                completion(nil, error)
                 return
             }
-            
-            guard let jsonRPCResponse = try? JSONDecoder().decode(JSONRPCResponse<String>.self, from: data) else {
-                completion(nil, .errorDecodingJSONRPC)
-                return
-            }
-            
-            let version = jsonRPCResponse.result
             
             guard let intVersion = Int(version) else {
                 completion(nil, .errorDecodingJSONRPC)
@@ -95,130 +81,59 @@ public struct Node {
             completion(intVersion, nil)
             
         }
+        
     }
     
     public func listening(completion: @escaping (Bool?, JSONRPCError?) -> Void) {
         
-        let jsonRPC = JSONRPCRequest(jsonrpc: "2.0", method: .listening, params: Optional<String>.none, id: 21)
-        
-        guard let jsonRPCData = try? JSONEncoder().encode(jsonRPC) else {
-            completion(nil, .errorEncodingJSONRPC)
-            return
-        }
-        
         let provider = Provider(node: self)
         
-        provider.sendRequest(jsonRPCData: jsonRPCData) { data, error in
+        provider.sendRequest(method: .listening, params: Optional<String>.none, decodeTo: Bool.self) { isListening, error in
             
-            guard let data = data, error == nil else {
-                completion(nil, .nilResponse)
+            guard let isListening = isListening, error == nil else {
+                completion(nil, error)
                 return
             }
             
-            guard let jsonRPCResponse = try? JSONDecoder().decode(JSONRPCResponse<Bool>.self, from: data) else {
-                completion(nil, .errorDecodingJSONRPC)
-                return
-            }
-            
-            let version = jsonRPCResponse.result
-            
-            completion(version, nil)
-            
+            completion(isListening, nil)
         }
     }
     
     public func peerCount(completion: @escaping (Int?, JSONRPCError?) -> Void) {
         
-        let jsonRPC = JSONRPCRequest(jsonrpc: "2.0", method: .peerCount, params: Optional<String>.none, id: 22)
-        
-        guard let jsonRPCData = try? JSONEncoder().encode(jsonRPC) else {
-            completion(nil, .errorEncodingJSONRPC)
-            return
-        }
-        
         let provider = Provider(node: self)
         
-        provider.sendRequest(jsonRPCData: jsonRPCData) { data, error in
+        provider.sendRequest(method: .peerCount, params: Optional<String>.none, decodeTo: String.self) { hexPeerCount, error in
             
-            guard let data = data, error == nil else {
-                completion(nil, .nilResponse)
+            guard let hexPeerCount = hexPeerCount, error == nil else {
+                completion(nil, error)
                 return
             }
             
-            guard let jsonRPCResponse = try? JSONDecoder().decode(JSONRPCResponse<String>.self, from: data) else {
-                completion(nil, .errorDecodingJSONRPC)
-                return
-            }
-            
-            let hexPeerCount = jsonRPCResponse.result.removeHexPrefix()
-            
-            let peerCount = Int(hexPeerCount, radix: 16)
+            let peerCount = Int(hexPeerCount.removeHexPrefix(), radix: 16)
             
             completion(peerCount, nil)
             
         }
+        
     }
     
     // MARK: - Web3
     
     public func clientVersion(completion: @escaping (String?, JSONRPCError?) -> Void) {
         
-        let jsonRPC = JSONRPCRequest(jsonrpc: "2.0", method: .clientVersion, params: Optional<String>.none, id: 23)
-        
-        guard let jsonRPCData = try? JSONEncoder().encode(jsonRPC) else {
-            completion(nil, .errorEncodingJSONRPC)
-            return
-        }
-        
         let provider = Provider(node: self)
         
-        provider.sendRequest(jsonRPCData: jsonRPCData) { data, error in
+        provider.sendRequest(method: .clientVersion, params: Optional<String>.none, decodeTo: String.self) { clientVersion, error in
             
-            guard let data = data, error == nil else {
-                completion(nil, .nilResponse)
+            guard let clientVersion = clientVersion, error == nil else {
+                completion(nil, error)
                 return
             }
-            
-            guard let jsonRPCResponse = try? JSONDecoder().decode(JSONRPCResponse<String>.self, from: data) else {
-                completion(nil, .errorDecodingJSONRPC)
-                return
-            }
-            
-            let clientVersion = jsonRPCResponse.result
             
             completion(clientVersion, nil)
-            
-        }
-    }
-    
-    public func sha3(value: String, completion: @escaping (String?, JSONRPCError?) -> Void) {
-        
-        let jsonRPC = JSONRPCRequest(jsonrpc: "2.0", method: .sha3, params: [value], id: 24)
-        
-        guard let jsonRPCData = try? JSONEncoder().encode(jsonRPC) else {
-            completion(nil, .errorEncodingJSONRPC)
-            return
         }
         
-        let provider = Provider(node: self)
-        
-        provider.sendRequest(jsonRPCData: jsonRPCData) { data, error in
-            
-            guard let data = data, error == nil else {
-                completion(nil, .nilResponse)
-                return
-            }
-            
-            guard let jsonRPCResponse = try? JSONDecoder().decode(JSONRPCResponse<String>.self, from: data) else {
-                completion(nil, .errorDecodingJSONRPC)
-                return
-            }
-            
-            let sha3 = jsonRPCResponse.result
-            
-            completion(sha3, nil)
-            
-        }
     }
 }
 

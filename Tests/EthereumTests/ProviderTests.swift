@@ -19,36 +19,27 @@ class ProviderTests: XCTestCase {
         let address = "0xb5bfc95C7345c8B20e5290D21f88a602580a08AB"
         let expectation = XCTestExpectation(description: "send request")
         
-        let jsonRPC = JSONRPCRequest(jsonrpc: "2.0", method: .getBalance, params: [address, "latest"], id: 1)
-        
-        let jsonRPCData = try JSONEncoder().encode(jsonRPC)
-        
-        provider?.sendRequest(jsonRPCData: jsonRPCData) { data, error in
+        provider?.sendRequest(method: .getBalance, params: [address, "latest"], decodeTo: String.self) { value, error in
             XCTAssertNil(error)
-            XCTAssertNotNil(data)
+            XCTAssertNotNil(value)
             expectation.fulfill()
         }
         
-        wait(for: [expectation], timeout: 10)
+        wait(for: [expectation], timeout: 50)
     }
     
     func testSendRequest2() throws {
         
-        let expectation = XCTestExpectation(description: "send request")
-        
-        let jsonRPC = JSONRPCRequest(jsonrpc: "2.0", method: .version, params: Optional<String>.none, id: 10)
-        
-        let jsonRPCData = try JSONEncoder().encode(jsonRPC)
+        let expectation = XCTestExpectation(description: "send request 2")
                 
-        provider?.sendRequest(jsonRPCData: jsonRPCData) { data, error in
-            
+        provider?.sendRequest(method: .version, params: Optional<String>.none, decodeTo: String.self) { value, error in
             XCTAssertNil(error)
-            XCTAssertNotNil(data)
+            XCTAssertNotNil(value)
             expectation.fulfill()
             
         }
         
-        wait(for: [expectation], timeout: 10)
+        wait(for: [expectation], timeout: 50)
     }
     
 }
