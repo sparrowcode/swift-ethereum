@@ -17,6 +17,8 @@ public struct Node {
     
     public var network: Network
     
+    private var provider: Provider?
+    
     public init(url: String) throws {
         
         guard let url = URL(string: url) else {
@@ -25,6 +27,8 @@ public struct Node {
         
         self.url = url
         self.network = .custom(0)
+        
+        configureProvider()
         
         var chainID: Int?
         var localError: Error?
@@ -58,15 +62,20 @@ public struct Node {
     private init(url: URL, network: Network) {
         self.url = url
         self.network = network
+        configureProvider()
+    }
+    
+    private mutating func configureProvider() {
+        self.provider = Provider(node: self)
     }
     
     
     // MARK: - Net
     public func version(completion: @escaping (Int?, JSONRPCError?) -> Void) {
         
-        let provider = Provider(node: self)
+        let params = [String]()
         
-        provider.sendRequest(method: .version, params: Optional<String>.none, decodeTo: String.self) { version, error in
+        provider?.sendRequest(method: .version, params: params, decodeTo: String.self) { version, error in
             
             guard let version = version, error == nil else {
                 completion(nil, error)
@@ -86,9 +95,9 @@ public struct Node {
     
     public func listening(completion: @escaping (Bool?, JSONRPCError?) -> Void) {
         
-        let provider = Provider(node: self)
+        let params = [String]()
         
-        provider.sendRequest(method: .listening, params: Optional<String>.none, decodeTo: Bool.self) { isListening, error in
+        provider?.sendRequest(method: .listening, params: params, decodeTo: Bool.self) { isListening, error in
             
             guard let isListening = isListening, error == nil else {
                 completion(nil, error)
@@ -101,9 +110,9 @@ public struct Node {
     
     public func peerCount(completion: @escaping (Int?, JSONRPCError?) -> Void) {
         
-        let provider = Provider(node: self)
+        let params = [String]()
         
-        provider.sendRequest(method: .peerCount, params: Optional<String>.none, decodeTo: String.self) { hexPeerCount, error in
+        provider?.sendRequest(method: .peerCount, params: params, decodeTo: String.self) { hexPeerCount, error in
             
             guard let hexPeerCount = hexPeerCount, error == nil else {
                 completion(nil, error)
@@ -122,9 +131,9 @@ public struct Node {
     
     public func clientVersion(completion: @escaping (String?, JSONRPCError?) -> Void) {
         
-        let provider = Provider(node: self)
+        let params = [String]()
         
-        provider.sendRequest(method: .clientVersion, params: Optional<String>.none, decodeTo: String.self) { clientVersion, error in
+        provider?.sendRequest(method: .clientVersion, params: params, decodeTo: String.self) { clientVersion, error in
             
             guard let clientVersion = clientVersion, error == nil else {
                 completion(nil, error)

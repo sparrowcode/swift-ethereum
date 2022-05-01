@@ -85,9 +85,9 @@ public struct Transaction: Codable, Signable {
                                  signature.r,
                                  signature.s]
             
-            let arrayRLP: [RLPEncodable] = array.compactMap { $0 }
+            let arrayRLP = array.compactMap { $0 }
             
-            return RLP.encode(arrayRLP)
+            return RLPEncoder.encode(arrayRLP)
             
         } else {
             
@@ -103,7 +103,7 @@ public struct Transaction: Codable, Signable {
             
             let arrayRLP: [RLPEncodable] = array.compactMap { $0 }
             
-            return RLP.encode(arrayRLP)
+            return RLPEncoder.encode(arrayRLP)
         }
     }
     

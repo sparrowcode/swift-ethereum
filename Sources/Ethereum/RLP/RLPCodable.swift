@@ -130,14 +130,12 @@ extension Array: RLPCodable where Element: RLPCodable {
         var encodedData = Data()
         
         for element in self {
-            
             do {
                 let encoded = try element.encodeRLP()
                 encodedData.append(encoded)
             } catch {
                 throw error
             }
-            
         }
         
         var encoded = encodeHeader(size: UInt64(encodedData.count), smallTag: 0xc0, largeTag: 0xf7)

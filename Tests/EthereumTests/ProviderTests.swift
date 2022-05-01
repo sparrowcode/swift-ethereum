@@ -31,8 +31,10 @@ class ProviderTests: XCTestCase {
     func testSendRequest2() throws {
         
         let expectation = XCTestExpectation(description: "send request 2")
+        
+        let params = [String]()
                 
-        provider?.sendRequest(method: .version, params: Optional<String>.none, decodeTo: String.self) { value, error in
+        provider?.sendRequest(method: .version, params: params, decodeTo: String.self) { value, error in
             XCTAssertNil(error)
             XCTAssertNotNil(value)
             expectation.fulfill()

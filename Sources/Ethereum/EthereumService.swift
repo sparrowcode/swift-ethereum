@@ -12,7 +12,9 @@ public enum EthereumService {
     public static func gasPrice(completion: @escaping (Int?, JSONRPCError?) -> Void) {
         
         // TODO: - Create a .none for params field
-        provider.sendRequest(method: .gasPrice, params: Optional<String>.none, decodeTo: String.self) { hexGasPrice, error in
+        let params = [String]()
+        
+        provider.sendRequest(method: .gasPrice, params: params, decodeTo: String.self) { hexGasPrice, error in
             
             guard let hexGasPrice = hexGasPrice, error == nil else {
                 completion(nil, error)
@@ -33,8 +35,9 @@ public enum EthereumService {
      */
     public static func blockNumber(completion: @escaping (Int?, JSONRPCError?) -> Void) {
         
-        // TODO: - Create a .none for params field
-        provider.sendRequest(method: .blockNumber, params: Optional<String>.none, decodeTo: String.self) { hexBlockNumber, error in
+        let params = [String]()
+        
+        provider.sendRequest(method: .blockNumber, params: params, decodeTo: String.self) { hexBlockNumber, error in
             
             guard let hexBlockNumber = hexBlockNumber, error == nil else {
                 completion(nil, error)

@@ -1,14 +1,13 @@
 import Foundation
 import BigInt
 
-enum RLP {
+enum RLPEncoder {
     
     static func encode(_ array: [RLPEncodable]) -> Data? {
         
         var encodedData = Data()
         
         for element in array {
-            
             
             guard let encoded = try? element.encodeRLP() else {
                 return nil

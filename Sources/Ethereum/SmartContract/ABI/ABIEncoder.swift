@@ -22,20 +22,21 @@ public enum ABIEncoder {
         
         for param in method.params {
             
-            switch param.value.isDynamic {
+            switch param.type.isDynamic {
                 
             case true:
+                
                 // calculate an offset for dynamic type and append it to static signature
-                let bigUIntCount = BigUInt(staticParamsSignature.count + dynamicParamsSignature.count)
-                let offset = try bigUIntCount.encodeABI()
+                let bigUIntCount = BigUInt(method.params.count * 32 + dynamicParamsSignature.count)
+                let offset = try bigUIntCount.encodeABI(isDynamic: false, type: .uint())
                 staticParamsSignature.append(offset)
                 
-                // calculate the encoded value of a given param and append it to dynamic signature
-                let encodedParam = try param.value.encodeABI()
+                // calculate the encoded value of a given param and append it to dynamic signature           
+                let encodedParam = try param.value.encodeABI(isDynamic: true, type: param.type.sequenceElementType)
                 dynamicParamsSignature.append(encodedParam)
                 
             case false:
-                let encodedParam = try param.value.encodeABI()
+                let encodedParam = try param.value.encodeABI(isDynamic: false, type: param.type.sequenceElementType)
                 staticParamsSignature.append(encodedParam)
             }
             
