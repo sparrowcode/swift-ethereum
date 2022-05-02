@@ -2,7 +2,7 @@ import XCTest
 import BigInt
 @testable import Ethereum
 
-class ABITests: XCTestCase {
+class ABIEncoderTests: XCTestCase {
 
     func testEncodeMethod() throws {
         

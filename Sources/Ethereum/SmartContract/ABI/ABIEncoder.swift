@@ -28,15 +28,15 @@ public enum ABIEncoder {
                 
                 // calculate an offset for dynamic type and append it to static signature
                 let bigUIntCount = BigUInt(method.params.count * 32 + dynamicParamsSignature.count)
-                let offset = try bigUIntCount.encodeABI(isDynamic: false, type: .uint())
+                let offset = try bigUIntCount.encodeABI(isDynamic: false, sequenceElementType: .uint())
                 staticParamsSignature.append(offset)
                 
                 // calculate the encoded value of a given param and append it to dynamic signature           
-                let encodedParam = try param.value.encodeABI(isDynamic: true, type: param.type.sequenceElementType)
+                let encodedParam = try param.value.encodeABI(isDynamic: true, sequenceElementType: param.type.sequenceElementType)
                 dynamicParamsSignature.append(encodedParam)
                 
             case false:
-                let encodedParam = try param.value.encodeABI(isDynamic: false, type: param.type.sequenceElementType)
+                let encodedParam = try param.value.encodeABI(isDynamic: false, sequenceElementType: param.type.sequenceElementType)
                 staticParamsSignature.append(encodedParam)
             }
             

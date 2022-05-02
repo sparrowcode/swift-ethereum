@@ -1,4 +1,5 @@
 import Foundation
+import BigInt
 
 public indirect enum SmartContractValueType {
     
@@ -87,5 +88,4 @@ public indirect enum SmartContractValueType {
             return nil
         }
     }
-    
 }

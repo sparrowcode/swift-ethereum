@@ -156,10 +156,18 @@ public extension String {
 
 extension Data {
     
-    var removeFirstZeros: Data {
+    var removeLeadingZeros: Data {
         var bytes = self.bytes
         while bytes.first == 0 {
             bytes.removeFirst()
+        }
+        return Data(bytes)
+    }
+    
+    var removeTrailingZeros: Data {
+        var bytes = self.bytes
+        while bytes.last == 0 {
+            bytes.removeLast()
         }
         return Data(bytes)
     }

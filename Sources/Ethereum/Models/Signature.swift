@@ -8,8 +8,8 @@ public struct Signature {
     
     public init(_ signedData: Data) {
         self.v = Int(signedData[64])
-        self.r = signedData.subdata(in: 0..<32).removeFirstZeros
-        self.s = signedData.subdata(in: 32..<64).removeFirstZeros
+        self.r = signedData.subdata(in: 0..<32).removeLeadingZeros
+        self.s = signedData.subdata(in: 32..<64).removeLeadingZeros
     }
     
     public init(v: Int, r: Data, s: Data) {
