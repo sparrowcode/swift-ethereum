@@ -367,12 +367,10 @@ public enum ABIDecoder {
     
     static private func decodeBytes(from data: Data, length: UInt?) throws -> Data {
         
-        let dataPart = data.subdata(in: 0..<64)
-        
         if let _ = length {
-            return dataPart.subdata(in: 0..<32).removeTrailingZeros
+            return data.subdata(in: 0..<32).removeTrailingZeros
         } else {
-            let bytesData = dataPart.subdata(in: 32..<64)
+            let bytesData = data.subdata(in: 32..<64)
             return bytesData.removeTrailingZeros
         }
     }
