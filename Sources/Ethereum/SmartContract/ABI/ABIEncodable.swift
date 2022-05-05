@@ -1,15 +1,9 @@
 import Foundation
 import BigInt
 
-typealias ABICodable = ABIEncodable & ABIDecodable
-
 protocol ABIEncodable {
     // sequence element type is used to infer the type of element in sequence (ex. array), it is not required for static types and strings
     func encodeABI(isDynamic: Bool, sequenceElementType: SmartContractValueType?) throws -> Data
-}
-
-protocol ABIDecodable {
-    func decodeABI() throws -> Data
 }
 
 enum ABIEncoderError: Error {
@@ -17,7 +11,7 @@ enum ABIEncoderError: Error {
     case invalidStringParam
 }
 
-extension EthereumAddress: ABICodable {
+extension EthereumAddress: ABIEncodable {
     
     func encodeABI(isDynamic: Bool, sequenceElementType: SmartContractValueType?) throws -> Data {
         
@@ -29,14 +23,9 @@ extension EthereumAddress: ABICodable {
         
         return paddedData
     }
-    
-    func decodeABI() throws -> Data {
-        return Data()
-    }
-    
 }
 
-extension BigUInt: ABICodable {
+extension BigUInt: ABIEncodable {
     
     func encodeABI(isDynamic: Bool, sequenceElementType: SmartContractValueType?) throws -> Data {
         
@@ -46,14 +35,9 @@ extension BigUInt: ABICodable {
         
         return paddedData
     }
-    
-    func decodeABI() throws -> Data {
-        return Data()
-    }
-    
 }
 
-extension BigInt: ABICodable {
+extension BigInt: ABIEncodable {
     
     func encodeABI(isDynamic: Bool, sequenceElementType: SmartContractValueType?) throws -> Data {
         
@@ -69,11 +53,6 @@ extension BigInt: ABICodable {
         
         return paddedData
     }
-    
-    func decodeABI() throws -> Data {
-        return Data()
-    }
-    
 }
 
 extension FixedWidthInteger where Self: SignedInteger {
@@ -82,13 +61,8 @@ extension FixedWidthInteger where Self: SignedInteger {
         
         let bigInt = BigInt(self)
         
-        return try bigInt.encodeABI(isDynamic: isDynamic, sequenceElementType: .int())
+        return try bigInt.encodeABI(isDynamic: isDynamic, sequenceElementType: nil)
     }
-    
-    func decodeABI() throws -> Data {
-        return Data()
-    }
-    
 }
 
 extension FixedWidthInteger where Self: UnsignedInteger {
@@ -97,29 +71,24 @@ extension FixedWidthInteger where Self: UnsignedInteger {
         
         let bigUInt = BigUInt(self)
         
-        return try bigUInt.encodeABI(isDynamic: isDynamic, sequenceElementType: .int())
+        return try bigUInt.encodeABI(isDynamic: isDynamic, sequenceElementType: nil)
     }
-    
-    func decodeABI() throws -> Data {
-        return Data()
-    }
-    
 }
 
-extension Int: ABICodable { }
-extension Int8: ABICodable { }
-extension Int16: ABICodable { }
-extension Int32: ABICodable { }
-extension Int64: ABICodable { }
+extension Int: ABIEncodable { }
+extension Int8: ABIEncodable { }
+extension Int16: ABIEncodable { }
+extension Int32: ABIEncodable { }
+extension Int64: ABIEncodable { }
 
-extension UInt: ABICodable { }
-extension UInt8: ABICodable { }
-extension UInt16: ABICodable { }
-extension UInt32: ABICodable { }
-extension UInt64: ABICodable { }
+extension UInt: ABIEncodable { }
+extension UInt8: ABIEncodable { }
+extension UInt16: ABIEncodable { }
+extension UInt32: ABIEncodable { }
+extension UInt64: ABIEncodable { }
 
 
-extension Bool: ABICodable {
+extension Bool: ABIEncodable {
     
     func encodeABI(isDynamic: Bool, sequenceElementType: SmartContractValueType?) throws -> Data {
         
@@ -131,21 +100,16 @@ extension Bool: ABICodable {
         
         return paddedData
     }
-    
-    func decodeABI() throws -> Data {
-        return Data()
-    }
-    
 }
 
-extension String: ABICodable {
+extension String: ABIEncodable {
     
     func encodeABI(isDynamic: Bool, sequenceElementType: SmartContractValueType?) throws -> Data {
         
         // MARK: - Use count for characters or for bits in utf8 encoded data?
         let bigUIntCount = BigUInt(self.count)
         
-        let lengthData = try bigUIntCount.encodeABI(isDynamic: false, sequenceElementType: .uint())
+        let lengthData = try bigUIntCount.encodeABI(isDynamic: false, sequenceElementType: nil)
         
         guard let utfData = self.data(using: .utf8) else { throw ABIEncoderError.invalidStringParam }
         
@@ -153,30 +117,20 @@ extension String: ABICodable {
         
         return lengthData + paddedData
     }
-    
-    func decodeABI() throws -> Data {
-        return Data()
-    }
-    
 }
 
-extension Data: ABICodable {
+extension Data: ABIEncodable {
     
     func encodeABI(isDynamic: Bool, sequenceElementType: SmartContractValueType?) throws -> Data {
         
         let bigUIntCount = BigUInt(self.count)
         
-        let lengthData = try bigUIntCount.encodeABI(isDynamic: false, sequenceElementType: .uint())
+        let lengthData = try bigUIntCount.encodeABI(isDynamic: false, sequenceElementType: nil)
         
         let paddedData = self + Data(repeating: 0x00, count: 32 - self.count)
         
         return isDynamic ? lengthData + paddedData : paddedData
     }
-    
-    func decodeABI() throws -> Data {
-        return Data()
-    }
-    
 }
 
 extension Array: ABIEncodable where Element: ABIEncodable {
@@ -185,7 +139,7 @@ extension Array: ABIEncodable where Element: ABIEncodable {
         
         let bigUIntCount = BigUInt(self.count)
         
-        let lengthData = try bigUIntCount.encodeABI(isDynamic: false, sequenceElementType: .uint())
+        let lengthData = try bigUIntCount.encodeABI(isDynamic: false, sequenceElementType: nil)
         
         var staticSignature = Data()
         
@@ -196,7 +150,7 @@ extension Array: ABIEncodable where Element: ABIEncodable {
                 
                 //calculate an offset for dynamic type and append it to static signature
                 let bigUIntCount = BigUInt(self.count * 32 + dynamicSignature.count)
-                let offset = try bigUIntCount.encodeABI(isDynamic: false, sequenceElementType: .uint())
+                let offset = try bigUIntCount.encodeABI(isDynamic: false, sequenceElementType: nil)
                 staticSignature.append(offset)
                 
                 // calculate the encoded value of a given param and append it to dynamic signature
@@ -210,13 +164,5 @@ extension Array: ABIEncodable where Element: ABIEncodable {
         
         return isDynamic ? lengthData + staticSignature + dynamicSignature : staticSignature + dynamicSignature
     }
-    
-}
-
-extension Array: ABIDecodable where Element: ABIDecodable {
-    func decodeABI() throws -> Data {
-        return Data()
-    }
-    
     
 }

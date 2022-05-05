@@ -2,12 +2,14 @@ import XCTest
 @testable import Ethereum
 
 class ERC20Tests: XCTestCase {
+    
+    override func setUpWithError() throws {
+        EthereumService.provider = Provider(node: .ropsten)
+    }
 
     func testGetBalance() throws {
         
         let expectation = XCTestExpectation(description: "get balance erc20")
-        
-        EthereumService.provider = Provider(node: .ropsten)
         
         let storage = UserDefaultsStorage(password: "password")
         
@@ -31,8 +33,6 @@ class ERC20Tests: XCTestCase {
         
         let expectation = XCTestExpectation(description: "transfer erc20")
         
-        EthereumService.provider = Provider(node: .ropsten)
-        
         let storage = UserDefaultsStorage(password: "password")
         
         let accountManager = AccountManager(storage: storage)
@@ -54,8 +54,6 @@ class ERC20Tests: XCTestCase {
         
         let expectation = XCTestExpectation(description: "decimals erc20")
         
-        EthereumService.provider = Provider(node: .ropsten)
-        
         let erc20 = ERC20(address: "0xF65FF945f3a6067D0742fD6890f32A6960dD817d")
         
         erc20.decimals() { value, error in
@@ -70,9 +68,7 @@ class ERC20Tests: XCTestCase {
     
     func testSymbol() throws {
         
-        let expectation = XCTestExpectation(description: "decimals erc20")
-        
-        EthereumService.provider = Provider(node: .ropsten)
+        let expectation = XCTestExpectation(description: "symbol erc20")
         
         let erc20 = ERC20(address: "0xF65FF945f3a6067D0742fD6890f32A6960dD817d")
         
@@ -89,12 +85,9 @@ class ERC20Tests: XCTestCase {
     
     func testTotalSupply() throws {
         
-        let expectation = XCTestExpectation(description: "decimals erc20")
-        
-        EthereumService.provider = Provider(node: .ropsten)
+        let expectation = XCTestExpectation(description: "total supply erc20")
         
         let erc20 = ERC20(address: "0xF65FF945f3a6067D0742fD6890f32A6960dD817d")
-        
         
         erc20.totalSupply() { value, error in
             XCTAssertNil(error)
@@ -104,6 +97,21 @@ class ERC20Tests: XCTestCase {
         
         wait(for: [expectation], timeout: 50)
         
+    }
+    
+    func testName() throws {
+        
+        let expectation = XCTestExpectation(description: "name erc20")
+        
+        let erc20 = ERC20(address: "0xF65FF945f3a6067D0742fD6890f32A6960dD817d")
+        
+        erc20.name() { name, error in
+            XCTAssertNil(error)
+            XCTAssertNotNil(name)
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 50)
     }
 
 }

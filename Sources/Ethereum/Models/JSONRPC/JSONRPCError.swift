@@ -9,6 +9,7 @@ public enum JSONRPCError: Error {
     case errorSigningTransaction
     case ethereumError(JSONRPCErrorResult)
     case errorEncodingToABI
+    case errorDecodingFromABI
     case invalidAmount
     case providerIsNil
 }

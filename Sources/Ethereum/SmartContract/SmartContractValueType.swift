@@ -15,7 +15,7 @@ public indirect enum SmartContractValueType {
     
     case array(type: SmartContractValueType, length: UInt? = nil)
     
-    case bytes(_ length: UInt8? = nil)
+    case bytes(_ length: UInt? = nil)
     
     case fixed(_ bits: UInt16 = 128, _ length: UInt8 = 18)
     

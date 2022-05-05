@@ -35,8 +35,8 @@ public struct ERC20 {
             
             let value = hexValue.removeHexPrefix()
             
-            guard let bigIntValue = BigInt(value, radix: 16) else {
-                completion(nil, .errorConvertingFromHex)
+            guard let bigIntValue = try? ABIDecoder.decode(value, to: .uint()) as? BigUInt else {
+                completion(nil, .errorDecodingFromABI)
                 return
             }
             
@@ -53,7 +53,7 @@ public struct ERC20 {
         }
         
         let params = [SmartContractParam(name: "_to", type: .address,  value: EthereumAddress(address)),
-                      SmartContractParam(name: "_value", type: .uint(256), value: bigUIntAmount)]
+                      SmartContractParam(name: "_value", type: .uint(), value: bigUIntAmount)]
         
         let method = SmartContractMethod(name: "transfer", params: params)
         
@@ -72,7 +72,7 @@ public struct ERC20 {
         }
     }
     
-    func decimals(completion: @escaping (Int?, JSONRPCError?) -> ()) {
+    func decimals(completion: @escaping (String?, JSONRPCError?) -> ()) {
         
         let method = SmartContractMethod(name: "decimals", params: [])
         
@@ -95,12 +95,12 @@ public struct ERC20 {
             
             let value = hexValue.removeHexPrefix()
             
-            guard let intValue = Int(value, radix: 16) else {
-                completion(nil, .errorConvertingFromHex)
+            guard let bigIntValue = try? ABIDecoder.decode(value, to: .int()) as? BigInt else {
+                completion(nil, .errorDecodingFromABI)
                 return
             }
             
-            completion(intValue, nil)
+            completion(bigIntValue.description, nil)
         }
     }
     
@@ -118,16 +118,49 @@ public struct ERC20 {
             return
         }
         
-        EthereumService.call(transaction: transaction) { symbol, error in
+        EthereumService.call(transaction: transaction) { abiSymbol, error in
             
-            guard let symbol = symbol, error == nil else {
+            guard let abiSymbol = abiSymbol, error == nil else {
                 completion(nil, .nilResponse)
                 return
             }
             
-            // MARK: - ABIDecoder needed to parse the value
+            guard let symbol = try? ABIDecoder.decode(abiSymbol.removeHexPrefix(), to: .string) as? String else {
+                completion(nil, .errorDecodingFromABI)
+                return
+            }
             
             completion(symbol, nil)
+        }
+    }
+    
+    func name(completion: @escaping (String?, JSONRPCError?) -> ()) {
+        
+        let method = SmartContractMethod(name: "name", params: [])
+        
+        guard let data = method.abiData else {
+            completion(nil, .errorEncodingToABI)
+            return
+        }
+        
+        guard let transaction = try? Transaction(input: data, to: self.address) else {
+            completion(nil, .errorEncodingJSONRPC)
+            return
+        }
+        
+        EthereumService.call(transaction: transaction) { abiName, error in
+            
+            guard let abiName = abiName, error == nil else {
+                completion(nil, .nilResponse)
+                return
+            }
+            
+            guard let name = try? ABIDecoder.decode(abiName.removeHexPrefix(), to: .string) as? String else {
+                completion(nil, .errorDecodingFromABI)
+                return
+            }
+            
+            completion(name, nil)
         }
     }
     
@@ -154,8 +187,8 @@ public struct ERC20 {
             
             let value = hexValue.removeHexPrefix()
             
-            guard let bigIntValue = BigInt(value, radix: 16) else {
-                completion(nil, .errorConvertingFromHex)
+            guard let bigIntValue = try? ABIDecoder.decode(value, to: .uint()) as? BigUInt else {
+                completion(nil, .errorDecodingFromABI)
                 return
             }
             
