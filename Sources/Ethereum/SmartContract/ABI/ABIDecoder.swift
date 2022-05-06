@@ -3,13 +3,13 @@ import BigInt
 
 public enum ABIDecoder {
     
-    enum ABIDecoderError: Error {
+    public enum ABIDecoderError: Error {
         case errorDecodingInt
         case errorDecodingString
         case noSequenceElementTypeProvidedForArray
     }
     
-    static func decode(_ value: String, to type: SmartContractValueType) throws -> Any {
+    static public func decode(_ value: String, to type: SmartContractValueType) throws -> Any {
         
         let bytes = try value.bytes
         
@@ -18,12 +18,12 @@ public enum ABIDecoder {
         return try decode(data, to: [type])
     }
     
-    static func decode(_ data: Data, to type: SmartContractValueType) throws -> Any {
+    static public func decode(_ data: Data, to type: SmartContractValueType) throws -> Any {
         
         return try decode(data, to: [type])
     }
     
-    static func decode(_ value: String, to types: [SmartContractValueType]) throws -> Any {
+    static public func decode(_ value: String, to types: [SmartContractValueType]) throws -> Any {
         
         let bytes = try value.bytes
         
@@ -32,7 +32,7 @@ public enum ABIDecoder {
         return try decode(data, to: types)
     }
     
-    static func decode(_ data: Data, to types: [SmartContractValueType]) throws -> Any {
+    static public func decode(_ data: Data, to types: [SmartContractValueType]) throws -> Any {
         
         var values = [Any]()
         
@@ -44,20 +44,17 @@ public enum ABIDecoder {
                 
             case true:
                 let pointerStartIndex = data.index(data.startIndex, offsetBy: currentOffset)
-                let pointerEndIndex = data.index(data.startIndex, offsetBy: currentOffset + 32)
-                let pointerData = Data(data[pointerStartIndex..<pointerEndIndex])
+                let pointerData = Data(data[pointerStartIndex...])
                 let pointer = try decodeInt(from: pointerData)
                 
                 let dataPartStartIndex = data.index(data.startIndex, offsetBy: pointer)
-                let datapartEndIndex = data.endIndex
-                let dataPart = Data(data[dataPartStartIndex..<datapartEndIndex])
+                let dataPart = Data(data[dataPartStartIndex...])
                 
                 let value = try decode(dataPart, type: types[word])
                 values.append(value)
             case false:
                 let startIndex = data.index(data.startIndex, offsetBy: currentOffset)
-                let endIndex = data.endIndex
-                let dataPart = Data(data[startIndex..<endIndex])
+                let dataPart = Data(data[startIndex...])
                 let value = try decode(dataPart, type: types[word])
                 values.append(value)
             }
@@ -67,7 +64,7 @@ public enum ABIDecoder {
     }
     
     // MARK: - Only for static data parts or for pointed dynamic
-    static func decode(_ value: String, type: SmartContractValueType) throws -> Any {
+    static private func decode(_ value: String, type: SmartContractValueType) throws -> Any {
         
         let bytes = try value.bytes
         
@@ -315,50 +312,43 @@ public enum ABIDecoder {
     
     static private func decodeArray(of type: SmartContractValueType, length: UInt?, from data: Data) throws -> [Any] {
         
+        // the resulting values
         var values = [Any]()
         
+        var lengthOfArray = 0
+        var arrayData = data
+        
+        // calculate the length of an array from the first word or if the length provided use it
         if let length = length {
-            
-            for word in 0..<Int(length) {
-                let currentOffset = 32 * word
-                let startIndex = data.index(data.startIndex, offsetBy: currentOffset)
-                let endIndex = data.index(data.startIndex, offsetBy: currentOffset + 32)
-                let data = Data(data[startIndex..<endIndex])
-                let value = try decode(data, type: type)
-                values.append(value)
-            }
-            
+            lengthOfArray = Int(length)
         } else {
             let countOfArrayStartIndex = data.startIndex
-            let countOfArrayEndIndex = data.index(data.startIndex, offsetBy: 32)
-            let countOfArrayData = Data(data[countOfArrayStartIndex..<countOfArrayEndIndex])
-            let countOfArray = try decodeInt(from: countOfArrayData)
+            let countOfArrayData = Data(data[countOfArrayStartIndex...])
+            lengthOfArray = try decodeInt(from: countOfArrayData)
+            arrayData = data.subdata(in: 32..<data.count)
+        }
+        
+        for word in 0..<lengthOfArray {
             
-            for word in 0..<countOfArray {
+            let currentOffset = 32 * word
+            
+            switch type.isDynamic {
                 
-                let currentOffset = 32 * word
+            case true:
+                let pointerStartIndex = arrayData.index(arrayData.startIndex, offsetBy: currentOffset)
+                let pointerData = Data(arrayData[pointerStartIndex...])
+                let pointer = try decodeInt(from: pointerData)
                 
-                switch type.isDynamic {
-                    
-                case true:
-                    let pointerStartIndex = data.index(data.startIndex, offsetBy: currentOffset) + countOfArrayEndIndex
-                    let pointerEndIndex = data.index(data.startIndex, offsetBy: currentOffset + 32) + countOfArrayEndIndex
-                    let pointerData = Data(data[pointerStartIndex..<pointerEndIndex])
-                    let pointer = try decodeInt(from: pointerData)
-                    
-                    let dataPartStartIndex = data.index(data.startIndex, offsetBy: pointer) + countOfArrayEndIndex
-                    let datapartEndIndex = data.index(data.startIndex, offsetBy: pointer + 64) + countOfArrayEndIndex
-                    let dataPart = Data(data[dataPartStartIndex..<datapartEndIndex])
-                    
-                    let value = try decode(dataPart, type: type)
-                    values.append(value)
-                case false:
-                    let startIndex = data.index(data.startIndex, offsetBy: currentOffset) + countOfArrayEndIndex
-                    let endIndex = data.index(data.startIndex, offsetBy: currentOffset + 32) + countOfArrayEndIndex
-                    let dataPart = Data(data[startIndex..<endIndex])
-                    let value = try decode(dataPart, type: type)
-                    values.append(value)
-                }
+                let dataPartStartIndex = arrayData.index(arrayData.startIndex, offsetBy: pointer)
+                let dataPart = Data(arrayData[dataPartStartIndex...])
+                
+                let value = try decode(dataPart, type: type)
+                values.append(value)
+            case false:
+                let startIndex = arrayData.index(arrayData.startIndex, offsetBy: currentOffset)
+                let dataPart = Data(arrayData[startIndex...])
+                let value = try decode(dataPart, type: type)
+                values.append(value)
             }
         }
         

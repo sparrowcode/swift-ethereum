@@ -21,11 +21,12 @@ class ABIDecoderTests: XCTestCase {
         
         let responseAbiData = "61626300000000000000000000000000000000000000000000000000000000006465660000000000000000000000000000000000000000000000000000000000"
         
-        let encodedValues: [AnyHashable] = ["abc".data(using: .utf8)!, "def".data(using: .utf8)!]
+        let encodedValues: [Any] = ["abc".data(using: .utf8)!, "def".data(using: .utf8)!]
         
-        let decodedValues = try ABIDecoder.decode(responseAbiData, to: .array(type: .bytes(3), length: 2)) as! [AnyHashable]
+        let decodedValues = try ABIDecoder.decode(responseAbiData, to: .array(type: .bytes(3), length: 2)) as! [Any]
         
-        XCTAssertEqual(encodedValues, decodedValues)
+        XCTAssertEqual(decodedValues[0] as! Data, encodedValues[0] as! Data)
+        XCTAssertEqual(decodedValues[1] as! Data, encodedValues[1] as! Data)
     }
     
     func testDecodeResponse3() throws {
@@ -61,15 +62,14 @@ class ABIDecoderTests: XCTestCase {
         
         let responseAbiData = "000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000001400000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000000a0000000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000030000000000000000000000000000000000000000000000000000000000000003000000000000000000000000000000000000000000000000000000000000006000000000000000000000000000000000000000000000000000000000000000a000000000000000000000000000000000000000000000000000000000000000e000000000000000000000000000000000000000000000000000000000000000036f6e650000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000374776f000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000057468726565000000000000000000000000000000000000000000000000000000"
         
-        let encodedValues: [Any] = [[[BigUInt(1), BigUInt(2)], BigUInt(3)], ["one", "two", "three"]]
+        let encodedValues: [Any] = [
+            [[BigUInt(1), BigUInt(2)], [BigUInt(3)]],
+            ["one", "two", "three"]]
         
         let decodedValues = try ABIDecoder.decode(responseAbiData, to: [.array(type: .array(type: .uint())), .array(type: .string)]) as! [Any]
         
-        print(decodedValues)
-//        XCTAssertEqual(decodedValues[0] as! BigUInt, encodedValues[0] as! BigUInt)
-//        XCTAssertEqual(decodedValues[1] as! [UInt32], encodedValues[1] as! [UInt32])
-//        XCTAssertEqual(decodedValues[2] as! Data, encodedValues[2] as! Data)
-//        XCTAssertEqual(decodedValues[3] as! Data, encodedValues[3] as! Data)
+        XCTAssertEqual(decodedValues[0] as! [[BigUInt]], encodedValues[0] as! [[BigUInt]])
+        XCTAssertEqual(decodedValues[1] as! [String], encodedValues[1] as! [String])
     }
     
 }
