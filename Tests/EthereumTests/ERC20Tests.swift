@@ -41,7 +41,7 @@ class ERC20Tests: XCTestCase {
         
         let erc20 = ERC20(address: "0xF65FF945f3a6067D0742fD6890f32A6960dD817d")
         
-        erc20.transfer(to: "0xc8DE4C1B4f6F6659944160DaC46B29a330C432B2", amount: "21000000000000000000", gasLimit: "100000", gasPrice: "220000000000", with: account) { hash, error in
+        erc20.transfer(to: "0xc8DE4C1B4f6F6659944160DaC46B29a330C432B2", amount: "210000000", gasLimit: "100000", gasPrice: "220000000000", with: account) { hash, error in
             XCTAssertNil(error)
             XCTAssertNotNil(hash)
             expectation.fulfill()

@@ -10,7 +10,7 @@ public struct ERC20 {
         self.address = address.lowercased()
     }
     
-    public func balance(of account: Account, completion: @escaping (String?, JSONRPCError?) -> ()) {
+    public func balance(of account: Account, completion: @escaping (BigUInt?, JSONRPCError?) -> ()) {
         
         let params = [SmartContractParam(name: "_owner", type: .address, value: EthereumAddress(account.address))]
         
@@ -35,25 +35,20 @@ public struct ERC20 {
             
             let value = hexValue.removeHexPrefix()
             
-            guard let bigIntValue = try? ABIDecoder.decode(value, to: .uint()) as? BigUInt else {
+            guard let bigUIntValue = try? ABIDecoder.decode(value, to: .uint()) as? BigUInt else {
                 completion(nil, .errorDecodingFromABI)
                 return
             }
             
-            completion(bigIntValue.description, nil)
+            completion(bigUIntValue, nil)
         }
         
     }
     
-    public func transfer(to address: String, amount: String, gasLimit: String, gasPrice: String, with account: Account, completion: @escaping (String?, JSONRPCError?) -> ()) {
-        
-        guard let bigUIntAmount = BigUInt(amount) else {
-            completion(nil, .invalidAmount)
-            return
-        }
+    public func transfer(to address: String, amount: BigUInt, gasLimit: BigUInt, gasPrice: BigUInt, with account: Account, completion: @escaping (String?, JSONRPCError?) -> ()) {
         
         let params = [SmartContractParam(name: "_to", type: .address,  value: EthereumAddress(address)),
-                      SmartContractParam(name: "_value", type: .uint(), value: bigUIntAmount)]
+                      SmartContractParam(name: "_value", type: .uint(), value: amount)]
         
         let method = SmartContractMethod(name: "transfer", params: params)
         
@@ -62,7 +57,7 @@ public struct ERC20 {
             return
         }
         
-        guard let transaction = try? Transaction(gasLimit: gasLimit, gasPrice: gasPrice, input: data, to: self.address, value: "0") else {
+        guard let transaction = try? Transaction(gasLimit: gasLimit, gasPrice: gasPrice, input: data, to: self.address, value: amount) else {
             completion(nil, .errorEncodingJSONRPC)
             return
         }
@@ -72,7 +67,7 @@ public struct ERC20 {
         }
     }
     
-    func decimals(completion: @escaping (String?, JSONRPCError?) -> ()) {
+    func decimals(completion: @escaping (BigUInt?, JSONRPCError?) -> ()) {
         
         let method = SmartContractMethod(name: "decimals", params: [])
         
@@ -95,12 +90,12 @@ public struct ERC20 {
             
             let value = hexValue.removeHexPrefix()
             
-            guard let bigIntValue = try? ABIDecoder.decode(value, to: .int()) as? BigInt else {
+            guard let bigUIntValue = try? ABIDecoder.decode(value, to: .uint()) as? BigUInt else {
                 completion(nil, .errorDecodingFromABI)
                 return
             }
             
-            completion(bigIntValue.description, nil)
+            completion(bigUIntValue, nil)
         }
     }
     
@@ -164,7 +159,7 @@ public struct ERC20 {
         }
     }
     
-    func totalSupply(completion: @escaping (String?, JSONRPCError?) -> ()) {
+    func totalSupply(completion: @escaping (BigUInt?, JSONRPCError?) -> ()) {
         
         let method = SmartContractMethod(name: "totalSupply", params: [])
         
@@ -187,13 +182,48 @@ public struct ERC20 {
             
             let value = hexValue.removeHexPrefix()
             
-            guard let bigIntValue = try? ABIDecoder.decode(value, to: .uint()) as? BigUInt else {
+            guard let bigUIntValue = try? ABIDecoder.decode(value, to: .uint()) as? BigUInt else {
                 completion(nil, .errorDecodingFromABI)
                 return
             }
             
-            completion(bigIntValue.description, nil)
+            completion(bigUIntValue, nil)
         }
     }
+    
+//    func approve(spender: Account, value: String, completion: @escaping (String?, JSONRPCError?) -> ()) {
+//        
+//        let params = [SmartContractParam(name: "_spender", type: .address, value: spender.address),
+//                      SmartContractParam(name: "_value", type: .uint(), value: value)]
+//        
+//        let method = SmartContractMethod(name: "approve", params: [])
+//        
+//        guard let data = method.abiData else {
+//            completion(nil, .errorEncodingToABI)
+//            return
+//        }
+//        
+//        guard let transaction = try? Transaction(input: data, to: self.address) else {
+//            completion(nil, .errorEncodingJSONRPC)
+//            return
+//        }
+//        
+//        EthereumService.call(transaction: transaction) { hexValue, error in
+//            
+//            guard let hexValue = hexValue, error == nil else {
+//                completion(nil, .nilResponse)
+//                return
+//            }
+//            
+//            let value = hexValue.removeHexPrefix()
+//            
+//            guard let bigIntValue = try? ABIDecoder.decode(value, to: .uint()) as? BigUInt else {
+//                completion(nil, .errorDecodingFromABI)
+//                return
+//            }
+//            
+//            completion(bigIntValue.description, nil)
+//        }
+//    }
     
 }

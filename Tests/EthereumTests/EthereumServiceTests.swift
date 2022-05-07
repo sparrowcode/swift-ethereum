@@ -313,7 +313,7 @@ class EthereumServiceTests: XCTestCase {
                                           gasLimit: "210000",
                                           gasPrice: "250000000000",
                                           to: "0xc8DE4C1B4f6F6659944160DaC46B29a330C432B2",
-                                          value: value)
+                                          value: BigUInt(value))
 
         EthereumService.sendRawTransaction(account: account, transaction: transaction) { hash, error in
             XCTAssertNil(error)

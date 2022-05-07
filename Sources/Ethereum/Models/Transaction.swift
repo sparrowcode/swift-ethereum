@@ -7,31 +7,24 @@ public struct Transaction: Codable, Signable {
     public let blockNumber: String?
     public let from: String?
     public let gas: String?
-    public let gasLimit: String?
-    public let gasPrice: String?
+    public let gasLimit: BigUInt?
+    public let gasPrice: BigUInt?
     public var hash: String?
     public let input: Data
     public var nonce: Int?
     public let to: String
-    public let value: String?
+    public let value: BigUInt?
     public var chainID: Int?
     public let signature: Signature?
     
-    // MARK: - RLP Properties
-    private let gasLimitBigUInt: BigUInt?
-    
-    private let gasPriceBigUInt: BigUInt?
-    
-    private let valueBigUInt: BigUInt?
-    
     public init(
         from: String? = nil,
-        gasLimit: String? = nil,
-        gasPrice: String? = nil,
+        gasLimit: BigUInt? = nil,
+        gasPrice: BigUInt? = nil,
         input: Data = Data(),
         nonce: Int? = nil,
         to: String,
-        value: String? = nil) throws {
+        value: BigUInt? = nil) throws {
             self.blockHash = nil
             self.blockNumber = nil
             self.from = from
@@ -45,10 +38,6 @@ public struct Transaction: Codable, Signable {
             self.value = value
             self.chainID = nil
             self.signature = nil
-            
-            self.gasLimitBigUInt = (gasLimit != nil) ? BigUInt(gasLimit!, radix: 10) : nil
-            self.gasPriceBigUInt = (gasPrice != nil) ? BigUInt(gasPrice!, radix: 10) : nil
-            self.valueBigUInt = (value != nil) ? BigUInt(value!, radix: 10) : nil
             
         }
     
@@ -66,20 +55,16 @@ public struct Transaction: Codable, Signable {
         self.value = transaction.value
         self.chainID = transaction.chainID
         self.signature = signature
-        
-        self.gasLimitBigUInt = (gasLimit != nil) ? BigUInt(gasLimit!, radix: 10) : nil
-        self.gasPriceBigUInt = (gasPrice != nil) ? BigUInt(gasPrice!, radix: 10) : nil
-        self.valueBigUInt = (value != nil) ? BigUInt(value!, radix: 10) : nil
     }
     
     public var rlpData: Data? {
         if let signature = signature {
             
             let array: [RLPEncodable?] = [nonce,
-                                 gasPriceBigUInt,
-                                 gasLimitBigUInt,
+                                 gasPrice,
+                                 gasLimit,
                                  to,
-                                 valueBigUInt,
+                                 value,
                                  input,
                                  signature.v,
                                  signature.r,
@@ -92,10 +77,10 @@ public struct Transaction: Codable, Signable {
         } else {
             
             let array: [RLPEncodable?] = [nonce,
-                                 gasPriceBigUInt,
-                                 gasLimitBigUInt,
+                                 gasPrice,
+                                 gasLimit,
                                  to,
-                                 valueBigUInt,
+                                 value,
                                  input,
                                  chainID,
                                  0,
@@ -149,24 +134,20 @@ public struct Transaction: Codable, Signable {
         self.blockNumber = try? container.decode(String.self, forKey: .blockNumber)
         self.from = (try? container.decode(String.self, forKey: .from)) ?? ""
         self.gas = try? decodeHexBigUInt(.gas)?.description
-        self.gasLimit = (try? decodeHexBigUInt(.gasLimit)?.description) ?? "0"
-        self.gasPrice = (try? decodeHexBigUInt(.gasPrice)?.description) ?? "0"
+        self.gasLimit = try? decodeHexBigUInt(.gasLimit)
+        self.gasPrice = try? decodeHexBigUInt(.gasPrice)
         self.hash = try? container.decode(String.self, forKey: .hash)
         self.input = (try? decodeData(.input)) ?? Data()
         self.nonce = try? decodeHexInt(.nonce)
         self.to = (try? container.decode(String.self, forKey: .to)) ?? "0x"
-        self.value = (try? decodeHexBigUInt(.value)?.description) ?? "0"
-        self.chainID = (try? container.decode(Int.self, forKey: .chainId)) ?? 1
+        self.value = try? decodeHexBigUInt(.value)
+        self.chainID = (try? container.decode(Int.self, forKey: .chainId)) ?? 0
         
         if let v = try? decodeHexInt(.v), let r = try? decodeData(.r), let s = try? decodeData(.s) {
             self.signature = Signature(v: v, r: r, s: s)
         } else {
             self.signature = nil
         }
-        
-        self.gasLimitBigUInt = (try? decodeHexBigUInt(.gasLimit)) ?? nil
-        self.gasPriceBigUInt = (try? decodeHexBigUInt(.gasPrice)) ?? nil
-        self.valueBigUInt = (try? decodeHexBigUInt(.value)) ?? nil
     }
     
     public func encode(to encoder: Encoder) throws {
@@ -200,9 +181,9 @@ public struct Transaction: Codable, Signable {
         try? encodeOptionalString(to, .to)
         try? encodeOptionalString(from, .from)
         try? encodeData(input, .input)
-        try? encodeBigUInt(valueBigUInt, .value)
-        try? encodeBigUInt(gasPriceBigUInt, .gasPrice)
-        try? encodeBigUInt(gasLimitBigUInt, .gas)
+        try? encodeBigUInt(value, .value)
+        try? encodeBigUInt(gasPrice, .gasPrice)
+        try? encodeBigUInt(gasLimit, .gas)
     }
     
 }
