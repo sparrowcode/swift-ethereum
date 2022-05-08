@@ -7,4 +7,9 @@ public struct SmartContractMethod {
     var abiData: Data? {
         return try? ABIEncoder.encode(method: self)
     }
+    
+    public init(name: String, params: [SmartContractParam]) {
+        self.name = name
+        self.params = params
+    }
 }

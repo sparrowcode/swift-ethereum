@@ -43,18 +43,15 @@ public enum ABIDecoder {
             switch types[word].isDynamic {
                 
             case true:
-                let pointerStartIndex = data.index(data.startIndex, offsetBy: currentOffset)
-                let pointerData = Data(data[pointerStartIndex...])
+                let pointerData = data.subdata(in: currentOffset..<data.count)
                 let pointer = try decodeInt(from: pointerData)
                 
-                let dataPartStartIndex = data.index(data.startIndex, offsetBy: pointer)
-                let dataPart = Data(data[dataPartStartIndex...])
+                let dataPart = data.subdata(in: pointer..<data.count)
                 
                 let value = try decode(dataPart, type: types[word])
                 values.append(value)
             case false:
-                let startIndex = data.index(data.startIndex, offsetBy: currentOffset)
-                let dataPart = Data(data[startIndex...])
+                let dataPart = data.subdata(in: currentOffset..<data.count)
                 let value = try decode(dataPart, type: types[word])
                 values.append(value)
             }
@@ -124,13 +121,11 @@ public enum ABIDecoder {
         
     }
     
-    static private func decodeAddress(from data: Data) throws -> EthereumAddress {
+    static private func decodeAddress(from data: Data) throws -> String {
         
         let addressData = data.subdata(in: 12..<32)
         
-        let stringValue = "0x" + String(bytes: addressData)
-        
-        let ethereumAddress = EthereumAddress(stringValue)
+        let ethereumAddress = "0x" + String(bytes: addressData)
         
         return ethereumAddress
     }
@@ -301,7 +296,7 @@ public enum ABIDecoder {
     
     static private func decodeString(from data: Data) throws -> String {
         
-        let utf8Data = data.subdata(in: 32..<64).removeTrailingZeros
+        let utf8Data = try decodeBytes(from: data, length: nil)
         
         guard let string = String(bytes: utf8Data, encoding: .utf8) else {
             throw ABIDecoderError.errorDecodingString
@@ -322,9 +317,7 @@ public enum ABIDecoder {
         if let length = length {
             lengthOfArray = Int(length)
         } else {
-            let countOfArrayStartIndex = data.startIndex
-            let countOfArrayData = Data(data[countOfArrayStartIndex...])
-            lengthOfArray = try decodeInt(from: countOfArrayData)
+            lengthOfArray = try decodeInt(from: data)
             arrayData = data.subdata(in: 32..<data.count)
         }
         
@@ -335,18 +328,15 @@ public enum ABIDecoder {
             switch type.isDynamic {
                 
             case true:
-                let pointerStartIndex = arrayData.index(arrayData.startIndex, offsetBy: currentOffset)
-                let pointerData = Data(arrayData[pointerStartIndex...])
+                let pointerData = arrayData.subdata(in: currentOffset..<arrayData.count)
                 let pointer = try decodeInt(from: pointerData)
                 
-                let dataPartStartIndex = arrayData.index(arrayData.startIndex, offsetBy: pointer)
-                let dataPart = Data(arrayData[dataPartStartIndex...])
+                let dataPart = arrayData.subdata(in: pointer..<arrayData.count)
                 
                 let value = try decode(dataPart, type: type)
                 values.append(value)
             case false:
-                let startIndex = arrayData.index(arrayData.startIndex, offsetBy: currentOffset)
-                let dataPart = Data(arrayData[startIndex...])
+                let dataPart = arrayData.subdata(in: currentOffset..<arrayData.count)
                 let value = try decode(dataPart, type: type)
                 values.append(value)
             }
@@ -357,12 +347,29 @@ public enum ABIDecoder {
     
     static private func decodeBytes(from data: Data, length: UInt?) throws -> Data {
         
-        if let _ = length {
-            return data.subdata(in: 0..<32).removeTrailingZeros
+        var decodedData = Data()
+        var encodedData = data
+        
+        var countOfWords = Double()
+        var countOfBytes = Int()
+        
+        if let length = length {
+            countOfBytes = Int(length)
         } else {
-            let bytesData = data.subdata(in: 32..<64)
-            return bytesData.removeTrailingZeros
+            countOfBytes = try decodeInt(from: data)
+            encodedData = data.subdata(in: 32..<data.count)
         }
+        
+        countOfWords = Double(countOfBytes) / 32
+        countOfWords.round(.up)
+        
+        for word in 0..<Int(countOfWords) {
+            
+            let wordData = encodedData.subdata(in: 32*word..<32*(word+1)).removeTrailingZeros
+            decodedData.append(wordData)
+        }
+        
+        return decodedData
     }
 }
 

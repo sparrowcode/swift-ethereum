@@ -1,19 +1,19 @@
 import Foundation
 import BigInt
 
-protocol ABIEncodable {
+public protocol ABIEncodable {
     // sequence element type is used to infer the type of element in sequence (ex. array), it is not required for static types and strings
     func encodeABI(isDynamic: Bool, sequenceElementType: SmartContractValueType?) throws -> Data
 }
 
-enum ABIEncoderError: Error {
+public enum ABIEncoderError: Error {
     case invalidMethodName
     case invalidStringParam
 }
 
 extension EthereumAddress: ABIEncodable {
     
-    func encodeABI(isDynamic: Bool, sequenceElementType: SmartContractValueType?) throws -> Data {
+    public func encodeABI(isDynamic: Bool, sequenceElementType: SmartContractValueType?) throws -> Data {
         
         let bytes = try self.address.removeHexPrefix().lowercased().bytes
         
@@ -27,7 +27,7 @@ extension EthereumAddress: ABIEncodable {
 
 extension BigUInt: ABIEncodable {
     
-    func encodeABI(isDynamic: Bool, sequenceElementType: SmartContractValueType?) throws -> Data {
+    public func encodeABI(isDynamic: Bool, sequenceElementType: SmartContractValueType?) throws -> Data {
         
         let data = self.serialize()
         
@@ -39,7 +39,7 @@ extension BigUInt: ABIEncodable {
 
 extension BigInt: ABIEncodable {
     
-    func encodeABI(isDynamic: Bool, sequenceElementType: SmartContractValueType?) throws -> Data {
+    public func encodeABI(isDynamic: Bool, sequenceElementType: SmartContractValueType?) throws -> Data {
         
         let data = self.serialize()
         
@@ -57,7 +57,7 @@ extension BigInt: ABIEncodable {
 
 extension FixedWidthInteger where Self: SignedInteger {
     
-    func encodeABI(isDynamic: Bool, sequenceElementType: SmartContractValueType?) throws -> Data {
+    public func encodeABI(isDynamic: Bool, sequenceElementType: SmartContractValueType?) throws -> Data {
         
         let bigInt = BigInt(self)
         
@@ -67,7 +67,7 @@ extension FixedWidthInteger where Self: SignedInteger {
 
 extension FixedWidthInteger where Self: UnsignedInteger {
     
-    func encodeABI(isDynamic: Bool, sequenceElementType: SmartContractValueType?) throws -> Data {
+    public func encodeABI(isDynamic: Bool, sequenceElementType: SmartContractValueType?) throws -> Data {
         
         let bigUInt = BigUInt(self)
         
@@ -90,7 +90,7 @@ extension UInt64: ABIEncodable { }
 
 extension Bool: ABIEncodable {
     
-    func encodeABI(isDynamic: Bool, sequenceElementType: SmartContractValueType?) throws -> Data {
+    public func encodeABI(isDynamic: Bool, sequenceElementType: SmartContractValueType?) throws -> Data {
         
         let uintValue = self ? BigUInt(1) : BigUInt(0)
         
@@ -104,7 +104,7 @@ extension Bool: ABIEncodable {
 
 extension String: ABIEncodable {
     
-    func encodeABI(isDynamic: Bool, sequenceElementType: SmartContractValueType?) throws -> Data {
+    public func encodeABI(isDynamic: Bool, sequenceElementType: SmartContractValueType?) throws -> Data {
         
         // MARK: - Use count for characters or for bits in utf8 encoded data?
         let bigUIntCount = BigUInt(self.count)
@@ -121,7 +121,7 @@ extension String: ABIEncodable {
 
 extension Data: ABIEncodable {
     
-    func encodeABI(isDynamic: Bool, sequenceElementType: SmartContractValueType?) throws -> Data {
+    public func encodeABI(isDynamic: Bool, sequenceElementType: SmartContractValueType?) throws -> Data {
         
         let bigUIntCount = BigUInt(self.count)
         
@@ -135,7 +135,7 @@ extension Data: ABIEncodable {
 
 extension Array: ABIEncodable where Element: ABIEncodable {
     
-    func encodeABI(isDynamic: Bool, sequenceElementType: SmartContractValueType?) throws -> Data {
+    public func encodeABI(isDynamic: Bool, sequenceElementType: SmartContractValueType?) throws -> Data {
         
         let bigUIntCount = BigUInt(self.count)
         

@@ -3,17 +3,18 @@ import BigInt
 
 enum RLPEncoder {
     
-    static func encode(_ array: [RLPEncodable]) -> Data? {
+    static func encode(_ array: [RLPEncodable]) throws -> Data {
         
         var encodedData = Data()
         
         for element in array {
             
-            guard let encoded = try? element.encodeRLP() else {
-                return nil
+            do {
+                let encoded = try element.encodeRLP()
+                encodedData.append(encoded)
+            } catch {
+                throw error
             }
-            
-            encodedData.append(encoded)
             
         }
         

@@ -1,6 +1,6 @@
 import XCTest
 import BigInt
-@testable import Ethereum
+import Ethereum
 
 class EthereumServiceTests: XCTestCase {
     
@@ -305,8 +305,13 @@ class EthereumServiceTests: XCTestCase {
         // MARK: - For sending transactions use test network
         EthereumService.provider = Provider(node: .ropsten)
         
-        let account = try Account(privateKey: "2404a482a212386ecf1ed054547cf4d28348ddf73d23325a83373f803138f105")
+        let storage = UserDefaultsStorage(password: "password")
         
+        let accountManager = AccountManager(storage: storage)
+        
+        let account = try accountManager.importAccount(privateKey: "2404a482a212386ecf1ed054547cf4d28348ddf73d23325a83373f803138f105")
+        
+        // random value
         let value = "0000000".map({ _ in String(UInt32.random(in: 0...9)) }).reduce("", +)
         
         let transaction = try Transaction(from: "0xE92A146f86fEda6D14Ee1dc1BfB620D3F3d1b873",

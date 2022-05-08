@@ -1,6 +1,6 @@
 import XCTest
 import BigInt
-@testable import Ethereum
+import Ethereum
 
 class ABIDecoderTests: XCTestCase {
 

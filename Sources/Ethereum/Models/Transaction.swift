@@ -72,7 +72,7 @@ public struct Transaction: Codable, Signable {
             
             let arrayRLP = array.compactMap { $0 }
             
-            return RLPEncoder.encode(arrayRLP)
+            return try? RLPEncoder.encode(arrayRLP)
             
         } else {
             
@@ -88,7 +88,7 @@ public struct Transaction: Codable, Signable {
             
             let arrayRLP: [RLPEncodable] = array.compactMap { $0 }
             
-            return RLPEncoder.encode(arrayRLP)
+            return try? RLPEncoder.encode(arrayRLP)
         }
     }
     

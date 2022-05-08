@@ -4,7 +4,7 @@ import BigInt
 
 public enum ABIEncoder {
     
-    static func encode(method: SmartContractMethod) throws -> Data {
+    public static func encode(method: SmartContractMethod) throws -> Data {
         
         let fullMethodName = method.name + "(" + method.params.map { $0.type.stringValue }.joined(separator: ",") + ")"
         
