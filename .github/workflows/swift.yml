@@ -16,5 +16,4 @@ jobs:
     - name: Generate xcodeproj
       run: swift package generate-xcodeproj
     - name: Build and Test
-      run: xcodebuild test -destination 'name=My Mac' -scheme 
-EthereumTests
+      run: xcodebuild test -destination 'name=My Mac' -scheme EthereumTests
