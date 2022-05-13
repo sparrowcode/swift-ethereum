@@ -1,7 +1,7 @@
 import Foundation
 import BigInt
 
-public struct Transaction: Codable, Signable {
+public struct Transaction: Codable {
     
     public let blockHash: String?
     public let blockNumber: String?
@@ -55,41 +55,6 @@ public struct Transaction: Codable, Signable {
         self.value = transaction.value
         self.chainID = transaction.chainID
         self.signature = signature
-    }
-    
-    public var rlpData: Data? {
-        if let signature = signature {
-            
-            let array: [RLPEncodable?] = [nonce,
-                                 gasPrice,
-                                 gasLimit,
-                                 to,
-                                 value,
-                                 input,
-                                 signature.v,
-                                 signature.r,
-                                 signature.s]
-            
-            let arrayRLP = array.compactMap { $0 }
-            
-            return try? RLPEncoder.encode(arrayRLP)
-            
-        } else {
-            
-            let array: [RLPEncodable?] = [nonce,
-                                 gasPrice,
-                                 gasLimit,
-                                 to,
-                                 value,
-                                 input,
-                                 chainID,
-                                 0,
-                                 0]
-            
-            let arrayRLP: [RLPEncodable] = array.compactMap { $0 }
-            
-            return try? RLPEncoder.encode(arrayRLP)
-        }
     }
     
     private enum CodingKeys: String, CodingKey {
@@ -185,7 +150,42 @@ public struct Transaction: Codable, Signable {
         try? encodeBigUInt(gasPrice, .gasPrice)
         try? encodeBigUInt(gasLimit, .gas)
     }
-    
 }
 
-//240
+extension Transaction: RLPEncodable {
+    
+    public func encodeRLP() throws -> Data {
+        if let signature = signature {
+            
+            let array: [RLPEncodable?] = [nonce,
+                                 gasPrice,
+                                 gasLimit,
+                                 to,
+                                 value,
+                                 input,
+                                 signature.v,
+                                 signature.r,
+                                 signature.s]
+            
+            let arrayRLP = array.compactMap { $0 }
+            
+            return try RLPEncoder.encode(arrayRLP)
+            
+        } else {
+            
+            let array: [RLPEncodable?] = [nonce,
+                                 gasPrice,
+                                 gasLimit,
+                                 to,
+                                 value,
+                                 input,
+                                 chainID,
+                                 0,
+                                 0]
+            
+            let arrayRLP: [RLPEncodable] = array.compactMap { $0 }
+            
+            return try RLPEncoder.encode(arrayRLP)
+        }
+    }
+}

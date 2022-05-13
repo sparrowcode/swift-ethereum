@@ -1,35 +1,39 @@
 import Foundation
 import BigInt
 
-public protocol EIP721 {
+public protocol ERC721Contract {
     var address: String { get set }
-    func balance(of address: String, completion: @escaping (BigUInt?, JSONRPCError?) -> ())
-    func owner(of tokenID: BigUInt, completion: @escaping (String?, JSONRPCError?) -> ())
-    func transfer(to address: String, tokenID: BigUInt, from: Account, completion: @escaping (String?, JSONRPCError?) -> ())
-    func name(completion: @escaping (String?, JSONRPCError?) -> ())
-    func symbol(completion: @escaping (String?, JSONRPCError?) -> ())
-    func tokenURI(tokenID: BigUInt, completion: @escaping (String?, JSONRPCError?) -> ())
-    func tokenMetadata(completion: @escaping (String?, JSONRPCError?) -> ())
-    func totalSupply(completion: @escaping (BigUInt?, JSONRPCError?) -> ())
-    func tokenByIndex(completion: @escaping (String?, JSONRPCError?) -> ())
-    func tokenOfOwnerByIndex(completion: @escaping (String?, JSONRPCError?) -> ())
+    func balance(of address: String, completion: @escaping (BigUInt?, Error?) -> ())
+    func owner(of tokenID: BigUInt, completion: @escaping (String?, Error?) -> ())
+    func transfer(to address: String, tokenID: BigUInt, from: Account, completion: @escaping (String?, Error?) -> ())
+    func name(completion: @escaping (String?, Error?) -> ())
+    func symbol(completion: @escaping (String?, Error?) -> ())
+    func tokenURI(tokenID: BigUInt, completion: @escaping (String?, Error?) -> ())
+    func tokenMetadata(completion: @escaping (String?, Error?) -> ())
+    func totalSupply(completion: @escaping (BigUInt?, Error?) -> ())
+    func tokenByIndex(completion: @escaping (String?, Error?) -> ())
+    func tokenOfOwnerByIndex(completion: @escaping (String?, Error?) -> ())
 }
 
-public extension EIP721 {
+public extension ERC721Contract {
     
-    func balance(of address: String, completion: @escaping (BigUInt?, JSONRPCError?) -> ()) {
+    func balance(of address: String, completion: @escaping (BigUInt?, Error?) -> ()) {
         
         let params = [SmartContractParam(type: .address, value: EthereumAddress(address))]
         
         let method = SmartContractMethod(name: "balanceOf", params: params)
         
         guard let data = method.abiData else {
-            completion(nil, .errorEncodingToABI)
+            completion(nil, ABIError.errorEncodingToABI)
             return
         }
         
-        guard let transaction = try? Transaction(input: data, to: self.address) else {
-            completion(nil, .errorEncodingJSONRPC)
+        var transaction: Transaction
+        
+        do {
+            transaction = try Transaction(input: data, to: self.address)
+        } catch {
+            completion(nil, error)
             return
         }
         
@@ -43,7 +47,7 @@ public extension EIP721 {
             let value = hexValue.removeHexPrefix()
             
             guard let bigUIntValue = try? ABIDecoder.decode(value, to: .uint()) as? BigUInt else {
-                completion(nil, .errorDecodingFromABI)
+                completion(nil, ABIError.errorDecodingFromABI)
                 return
             }
             
@@ -52,19 +56,23 @@ public extension EIP721 {
         
     }
     
-    func owner(of tokenID: BigUInt, completion: @escaping (String?, JSONRPCError?) -> ()) {
+    func owner(of tokenID: BigUInt, completion: @escaping (String?, Error?) -> ()) {
         
         let params = [SmartContractParam(type: .uint(), value: tokenID)]
         
         let method = SmartContractMethod(name: "ownerOf", params: params)
         
         guard let data = method.abiData else {
-            completion(nil, .errorEncodingToABI)
+            completion(nil, ABIError.errorEncodingToABI)
             return
         }
         
-        guard let transaction = try? Transaction(input: data, to: self.address) else {
-            completion(nil, .errorEncodingJSONRPC)
+        var transaction: Transaction
+        
+        do {
+            transaction = try Transaction(input: data, to: self.address)
+        } catch {
+            completion(nil, error)
             return
         }
         
@@ -78,7 +86,7 @@ public extension EIP721 {
             let value = hexValue.removeHexPrefix()
             
             guard let ownerAddress = try? ABIDecoder.decode(value, to: .address) as? String else {
-                completion(nil, .errorDecodingFromABI)
+                completion(nil, ABIError.errorDecodingFromABI)
                 return
             }
             
@@ -86,21 +94,25 @@ public extension EIP721 {
         }
     }
     
-    func transfer(to address: String, tokenID: BigUInt, from: Account, completion: @escaping (String?, JSONRPCError?) -> ()) {
+    func transfer(to address: String, tokenID: BigUInt, from: Account, completion: @escaping (String?, Error?) -> ()) {
         
     }
     
-    func name(completion: @escaping (String?, JSONRPCError?) -> ()) {
+    func name(completion: @escaping (String?, Error?) -> ()) {
         
         let method = SmartContractMethod(name: "name", params: [])
         
         guard let data = method.abiData else {
-            completion(nil, .errorEncodingToABI)
+            completion(nil, ABIError.errorEncodingToABI)
             return
         }
         
-        guard let transaction = try? Transaction(input: data, to: self.address) else {
-            completion(nil, .errorEncodingJSONRPC)
+        var transaction: Transaction
+        
+        do {
+            transaction = try Transaction(input: data, to: self.address)
+        } catch {
+            completion(nil, error)
             return
         }
         
@@ -114,7 +126,7 @@ public extension EIP721 {
             let value = hexValue.removeHexPrefix()
             
             guard let name = try? ABIDecoder.decode(value, to: .string) as? String else {
-                completion(nil, .errorDecodingFromABI)
+                completion(nil, ABIError.errorDecodingFromABI)
                 return
             }
             
@@ -122,17 +134,21 @@ public extension EIP721 {
         }
     }
     
-    func symbol(completion: @escaping (String?, JSONRPCError?) -> ()) {
+    func symbol(completion: @escaping (String?, Error?) -> ()) {
         
         let method = SmartContractMethod(name: "symbol", params: [])
         
         guard let data = method.abiData else {
-            completion(nil, .errorEncodingToABI)
+            completion(nil, ABIError.errorEncodingToABI)
             return
         }
         
-        guard let transaction = try? Transaction(input: data, to: self.address) else {
-            completion(nil, .errorEncodingJSONRPC)
+        var transaction: Transaction
+        
+        do {
+            transaction = try Transaction(input: data, to: self.address)
+        } catch {
+            completion(nil, error)
             return
         }
         
@@ -146,7 +162,7 @@ public extension EIP721 {
             let value = hexValue.removeHexPrefix()
             
             guard let symbol = try? ABIDecoder.decode(value, to: .string) as? String else {
-                completion(nil, .errorDecodingFromABI)
+                completion(nil, ABIError.errorDecodingFromABI)
                 return
             }
             
@@ -155,19 +171,23 @@ public extension EIP721 {
         
     }
     
-    func tokenURI(tokenID: BigUInt, completion: @escaping (String?, JSONRPCError?) -> ()) {
+    func tokenURI(tokenID: BigUInt, completion: @escaping (String?, Error?) -> ()) {
         
         let params = [SmartContractParam(type: .uint(), value: tokenID)]
         
         let method = SmartContractMethod(name: "tokenURI", params: params)
         
         guard let data = method.abiData else {
-            completion(nil, .errorEncodingToABI)
+            completion(nil, ABIError.errorEncodingToABI)
             return
         }
         
-        guard let transaction = try? Transaction(input: data, to: self.address) else {
-            completion(nil, .errorEncodingJSONRPC)
+        var transaction: Transaction
+        
+        do {
+            transaction = try Transaction(input: data, to: self.address)
+        } catch {
+            completion(nil, error)
             return
         }
         
@@ -181,7 +201,7 @@ public extension EIP721 {
             let value = hexValue.removeHexPrefix()
             
             guard let tokenURI = try? ABIDecoder.decode(value, to: .string) as? String else {
-                completion(nil, .errorDecodingFromABI)
+                completion(nil, ABIError.errorDecodingFromABI)
                 return
             }
             
@@ -189,21 +209,25 @@ public extension EIP721 {
         }
     }
     
-    func tokenMetadata(completion: @escaping (String?, JSONRPCError?) -> ()) {
+    func tokenMetadata(completion: @escaping (String?, Error?) -> ()) {
         
     }
     
-    func totalSupply(completion: @escaping (BigUInt?, JSONRPCError?) -> ()) {
+    func totalSupply(completion: @escaping (BigUInt?, Error?) -> ()) {
         
         let method = SmartContractMethod(name: "totalSupply", params: [])
         
         guard let data = method.abiData else {
-            completion(nil, .errorEncodingToABI)
+            completion(nil, ABIError.errorEncodingToABI)
             return
         }
         
-        guard let transaction = try? Transaction(input: data, to: self.address) else {
-            completion(nil, .errorEncodingJSONRPC)
+        var transaction: Transaction
+        
+        do {
+            transaction = try Transaction(input: data, to: self.address)
+        } catch {
+            completion(nil, error)
             return
         }
         
@@ -217,7 +241,7 @@ public extension EIP721 {
             let value = hexValue.removeHexPrefix()
             
             guard let totalSupply = try? ABIDecoder.decode(value, to: .uint()) as? BigUInt else {
-                completion(nil, .errorDecodingFromABI)
+                completion(nil, ABIError.errorDecodingFromABI)
                 return
             }
             
@@ -225,11 +249,11 @@ public extension EIP721 {
         }
     }
     
-    func tokenByIndex(completion: @escaping (String?, JSONRPCError?) -> ()) {
+    func tokenByIndex(completion: @escaping (String?, Error?) -> ()) {
         
     }
     
-    func tokenOfOwnerByIndex(completion: @escaping (String?, JSONRPCError?) -> ()) {
+    func tokenOfOwnerByIndex(completion: @escaping (String?, Error?) -> ()) {
         
     }
 }

@@ -8,16 +8,15 @@ public struct Account {
     public var privateKey: String
     
     init(privateKey: String) throws {
+        
         self.privateKey = privateKey
         self.publicKey = try Utils.getPublicKey(from: privateKey.removeHexPrefix())
         self.address = try Utils.getEthereumAddress(from: publicKey)
     }
     
-    public func sign<T>(_ value: T) throws -> Signature where T : Signable {
+    public func sign<T>(_ value: T) throws -> Signature where T : RLPEncodable {
         
-        guard let rlpData = value.rlpData else {
-            throw SignError.invalidData
-        }
+        let rlpData = try value.encodeRLP()
         
         let signedData = try Utils.sign(data: rlpData, with: privateKey.removeHexPrefix())
         

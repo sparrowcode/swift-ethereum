@@ -4,7 +4,7 @@ import Ethereum
 
 class ERC20Tests: XCTestCase {
     
-    struct SPToken: EIP20 {
+    struct SPToken: ERC20Contract {
         public var address: String
     }
     

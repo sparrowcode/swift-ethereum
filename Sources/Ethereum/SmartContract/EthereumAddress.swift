@@ -8,6 +8,4 @@ struct EthereumAddress {
     }
 }
 
-extension EthereumAddress: Equatable {
-    
-}
+extension EthereumAddress: Equatable {}

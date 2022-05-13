@@ -1,6 +1,7 @@
 import Foundation
 
 public enum JSONRPCMethod: String {
+    
     case gasPrice = "eth_gasPrice"
     case blockNumber = "eth_blockNumber"
     case getBalance = "eth_getBalance"

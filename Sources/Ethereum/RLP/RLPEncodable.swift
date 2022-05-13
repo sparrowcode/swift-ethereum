@@ -1,14 +1,8 @@
 import Foundation
 import BigInt
 
-typealias RLPCodable = RLPEncodable & RLPDecodable
-
-protocol RLPEncodable {
+public protocol RLPEncodable {
     func encodeRLP() throws -> Data
-}
-
-protocol RLPDecodable {
-    func decodeRLP() throws -> Data
 }
 
 enum RLPEncoderError: Error {
@@ -16,9 +10,9 @@ enum RLPEncoderError: Error {
     case negativeInteger
 }
 
-extension String: RLPCodable {
+extension String: RLPEncodable {
     
-    func encodeRLP() throws -> Data {
+    public func encodeRLP() throws -> Data {
         
         if let bytesArray = try? self.bytes {
             let hexData = Data(bytesArray)
@@ -38,9 +32,9 @@ extension String: RLPCodable {
     
 }
 
-extension Int: RLPCodable {
+extension Int: RLPEncodable {
     
-    func encodeRLP() throws -> Data {
+    public func encodeRLP() throws -> Data {
         
         guard self >= 0 else {
             throw RLPEncoderError.negativeInteger
@@ -56,9 +50,9 @@ extension Int: RLPCodable {
     
 }
 
-extension BigInt: RLPCodable {
+extension BigInt: RLPEncodable {
     
-    func encodeRLP() throws -> Data {
+    public func encodeRLP() throws -> Data {
         
         guard self >= 0 else {
             throw RLPEncoderError.negativeInteger
@@ -74,9 +68,9 @@ extension BigInt: RLPCodable {
     
 }
 
-extension BigUInt: RLPCodable {
+extension BigUInt: RLPEncodable {
     
-    func encodeRLP() throws -> Data {
+    public func encodeRLP() throws -> Data {
         
         let data = self.serialize()
         
@@ -103,9 +97,9 @@ extension BigUInt: RLPCodable {
     }
 }
 
-extension Data: RLPCodable {
+extension Data: RLPEncodable {
     
-    func encodeRLP() throws -> Data {
+    public func encodeRLP() throws -> Data {
         
         if self.count == 1 && self[0] <= 0x7f {
             return self // single byte, no header
@@ -123,9 +117,9 @@ extension Data: RLPCodable {
     }
 }
 
-extension Array: RLPCodable where Element: RLPCodable {
+extension Array: RLPEncodable where Element: RLPEncodable {
     
-    func encodeRLP() throws -> Data {
+    public func encodeRLP() throws -> Data {
         
         var encodedData = Data()
         

@@ -1,6 +1,7 @@
 import Foundation
 
 struct JSONRPCRequest<T: Encodable>: Encodable {
+    
     let jsonrpc: String
     let method: String
     let params: T

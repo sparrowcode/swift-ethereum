@@ -15,7 +15,6 @@ enum RLPEncoder {
             } catch {
                 throw error
             }
-            
         }
         
         var encoded = encodeHeader(size: UInt64(encodedData.count), smallTag: 0xc0, largeTag: 0xf7)

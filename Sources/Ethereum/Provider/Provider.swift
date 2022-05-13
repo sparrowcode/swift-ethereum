@@ -4,7 +4,7 @@ public protocol ProviderProtocol {
     
     init(node: Node, sessionConfiguration: URLSessionConfiguration)
     init(node: Node)
-    func sendRequest<E: Encodable, D: Decodable>(method: JSONRPCMethod, params: E, decodeTo: D.Type, completion: @escaping (D?, JSONRPCError?) -> Void)
+    func sendRequest<E: Encodable, D: Decodable>(method: JSONRPCMethod, params: E, decodeTo: D.Type, completion: @escaping (D?, Error?) -> Void)
 }
 
 public final class Provider: ProviderProtocol {
@@ -35,12 +35,12 @@ public final class Provider: ProviderProtocol {
     /*
      Method that is called from Service to send a request
      */
-    public func sendRequest<E: Encodable, D: Decodable>(method: JSONRPCMethod, params: E, decodeTo: D.Type, completion: @escaping (D?, JSONRPCError?) -> Void) {
+    public func sendRequest<E: Encodable, D: Decodable>(method: JSONRPCMethod, params: E, decodeTo: D.Type, completion: @escaping (D?, Error?) -> Void) {
         
         queue.async { [weak self] in
             
             guard let self = self else {
-                completion(nil, .providerIsNil)
+                completion(nil, ProviderError.providerIsNil)
                 return
             }
             
@@ -49,11 +49,12 @@ public final class Provider: ProviderProtocol {
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
             request.addValue("application/json", forHTTPHeaderField: "Accept")
             
+            let id = Int.random(in: 1...1000)
             
-            let jsonRPC = JSONRPCRequest(jsonrpc: "2.0", method: method, params: params, id: 1)
+            let jsonRPC = JSONRPCRequest(jsonrpc: "2.0", method: method, params: params, id: id)
             
             guard let jsonRPCData = try? JSONEncoder().encode(jsonRPC) else {
-                completion(nil, .errorEncodingJSONRPC)
+                completion(nil, ResponseError.errorEncodingJSONRPC)
                 return
             }
             
@@ -62,17 +63,17 @@ public final class Provider: ProviderProtocol {
             let task = self.session.dataTask(with: request) { data, response, error in
                 
                 guard let data = data, error == nil else {
-                    completion(nil, .nilResponse)
+                    completion(nil, ResponseError.nilResponse)
                     return
                 }
                 
                 if let ethereumError = try? JSONDecoder().decode(JSONRPCResponseError.self, from: data) {
-                    completion(nil, .ethereumError(ethereumError.error))
+                    completion(nil, ResponseError.ethereumError(ethereumError.error))
                     return
                 }
                 
                 guard let jsonRPCResponse = try? JSONDecoder().decode(JSONRPCResponse<D>.self, from: data) else {
-                    completion(nil, .errorDecodingJSONRPC)
+                    completion(nil, ResponseError.errorDecodingJSONRPC)
                     return
                 }
                 

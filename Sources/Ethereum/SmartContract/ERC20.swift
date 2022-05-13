@@ -1,32 +1,36 @@
 import Foundation
 import BigInt
 
-public protocol EIP20 {
+public protocol ERC20Contract {
     var address: String { get set }
-    func balance(of address: String, completion: @escaping (BigUInt?, JSONRPCError?) -> ())
-    func transfer(to address: String, amount: BigUInt, gasLimit: BigUInt, gasPrice: BigUInt, with account: Account, completion: @escaping (String?, JSONRPCError?) -> ())
-    func decimals(completion: @escaping (BigUInt?, JSONRPCError?) -> ())
-    func symbol(completion: @escaping (String?, JSONRPCError?) -> ())
-    func name(completion: @escaping (String?, JSONRPCError?) -> ())
-    func totalSupply(completion: @escaping (BigUInt?, JSONRPCError?) -> ())
-    func approve(spender: Account, value: BigUInt, completion: @escaping (BigUInt?, JSONRPCError?) -> ())
+    func balance(of address: String, completion: @escaping (BigUInt?, Error?) -> ())
+    func transfer(to address: String, amount: BigUInt, gasLimit: BigUInt, gasPrice: BigUInt, with account: Account, completion: @escaping (String?, Error?) -> ())
+    func decimals(completion: @escaping (BigUInt?, Error?) -> ())
+    func symbol(completion: @escaping (String?, Error?) -> ())
+    func name(completion: @escaping (String?, Error?) -> ())
+    func totalSupply(completion: @escaping (BigUInt?, Error?) -> ())
+    func approve(spender: Account, value: BigUInt, completion: @escaping (BigUInt?, Error?) -> ())
 }
 
-public extension EIP20 {
+public extension ERC20Contract {
     
-    func balance(of address: String, completion: @escaping (BigUInt?, JSONRPCError?) -> ()) {
+    func balance(of address: String, completion: @escaping (BigUInt?, Error?) -> ()) {
         
         let params = [SmartContractParam(type: .address, value: EthereumAddress(address))]
         
         let method = SmartContractMethod(name: "balanceOf", params: params)
         
         guard let data = method.abiData else {
-            completion(nil, .errorEncodingToABI)
+            completion(nil, ABIError.errorEncodingToABI)
             return
         }
         
-        guard let transaction = try? Transaction(input: data, to: self.address) else {
-            completion(nil, .errorEncodingJSONRPC)
+        var transaction: Transaction
+        
+        do {
+            transaction = try Transaction(input: data, to: self.address)
+        } catch {
+            completion(nil, error)
             return
         }
         
@@ -40,7 +44,7 @@ public extension EIP20 {
             let value = hexValue.removeHexPrefix()
             
             guard let bigUIntValue = try? ABIDecoder.decode(value, to: .uint()) as? BigUInt else {
-                completion(nil, .errorDecodingFromABI)
+                completion(nil, ABIError.errorDecodingFromABI)
                 return
             }
             
@@ -49,7 +53,7 @@ public extension EIP20 {
         
     }
     
-    func transfer(to address: String, amount: BigUInt, gasLimit: BigUInt, gasPrice: BigUInt, with account: Account, completion: @escaping (String?, JSONRPCError?) -> ()) {
+    func transfer(to address: String, amount: BigUInt, gasLimit: BigUInt, gasPrice: BigUInt, with account: Account, completion: @escaping (String?, Error?) -> ()) {
         
         let params = [SmartContractParam(type: .address,  value: EthereumAddress(address)),
                       SmartContractParam(type: .uint(), value: amount)]
@@ -57,12 +61,16 @@ public extension EIP20 {
         let method = SmartContractMethod(name: "transfer", params: params)
         
         guard let data = method.abiData else {
-            completion(nil, .errorEncodingToABI)
+            completion(nil, ABIError.errorEncodingToABI)
             return
         }
         
-        guard let transaction = try? Transaction(gasLimit: gasLimit, gasPrice: gasPrice, input: data, to: self.address, value: amount) else {
-            completion(nil, .errorEncodingJSONRPC)
+        var transaction: Transaction
+            
+        do {
+            transaction = try Transaction(gasLimit: gasLimit, gasPrice: gasPrice, input: data, to: self.address, value: amount)
+        } catch {
+            completion(nil, error)
             return
         }
         
@@ -71,17 +79,21 @@ public extension EIP20 {
         }
     }
     
-    func decimals(completion: @escaping (BigUInt?, JSONRPCError?) -> ()) {
+    func decimals(completion: @escaping (BigUInt?, Error?) -> ()) {
         
         let method = SmartContractMethod(name: "decimals", params: [])
         
         guard let data = method.abiData else {
-            completion(nil, .errorEncodingToABI)
+            completion(nil, ABIError.errorEncodingToABI)
             return
         }
         
-        guard let transaction = try? Transaction(input: data, to: self.address) else {
-            completion(nil, .errorEncodingJSONRPC)
+        var transaction: Transaction
+        
+        do {
+            transaction = try Transaction(input: data, to: self.address)
+        } catch {
+            completion(nil, error)
             return
         }
         
@@ -95,7 +107,7 @@ public extension EIP20 {
             let value = hexValue.removeHexPrefix()
             
             guard let bigUIntValue = try? ABIDecoder.decode(value, to: .uint()) as? BigUInt else {
-                completion(nil, .errorDecodingFromABI)
+                completion(nil, ABIError.errorDecodingFromABI)
                 return
             }
             
@@ -103,17 +115,21 @@ public extension EIP20 {
         }
     }
     
-    func symbol(completion: @escaping (String?, JSONRPCError?) -> ()) {
+    func symbol(completion: @escaping (String?, Error?) -> ()) {
         
         let method = SmartContractMethod(name: "symbol", params: [])
         
         guard let data = method.abiData else {
-            completion(nil, .errorEncodingToABI)
+            completion(nil, ABIError.errorEncodingToABI)
             return
         }
         
-        guard let transaction = try? Transaction(input: data, to: self.address) else {
-            completion(nil, .errorEncodingJSONRPC)
+        var transaction: Transaction
+        
+        do {
+            transaction = try Transaction(input: data, to: self.address)
+        } catch {
+            completion(nil, error)
             return
         }
         
@@ -125,7 +141,7 @@ public extension EIP20 {
             }
             
             guard let symbol = try? ABIDecoder.decode(abiSymbol.removeHexPrefix(), to: .string) as? String else {
-                completion(nil, .errorDecodingFromABI)
+                completion(nil, ABIError.errorDecodingFromABI)
                 return
             }
             
@@ -133,17 +149,21 @@ public extension EIP20 {
         }
     }
     
-    func name(completion: @escaping (String?, JSONRPCError?) -> ()) {
+    func name(completion: @escaping (String?, Error?) -> ()) {
         
         let method = SmartContractMethod(name: "name", params: [])
         
         guard let data = method.abiData else {
-            completion(nil, .errorEncodingToABI)
+            completion(nil, ABIError.errorEncodingToABI)
             return
         }
         
-        guard let transaction = try? Transaction(input: data, to: self.address) else {
-            completion(nil, .errorEncodingJSONRPC)
+        var transaction: Transaction
+        
+        do {
+            transaction = try Transaction(input: data, to: self.address)
+        } catch {
+            completion(nil, error)
             return
         }
         
@@ -155,7 +175,7 @@ public extension EIP20 {
             }
             
             guard let name = try? ABIDecoder.decode(abiName.removeHexPrefix(), to: .string) as? String else {
-                completion(nil, .errorDecodingFromABI)
+                completion(nil, ABIError.errorDecodingFromABI)
                 return
             }
             
@@ -163,17 +183,21 @@ public extension EIP20 {
         }
     }
     
-    func totalSupply(completion: @escaping (BigUInt?, JSONRPCError?) -> ()) {
+    func totalSupply(completion: @escaping (BigUInt?, Error?) -> ()) {
         
         let method = SmartContractMethod(name: "totalSupply", params: [])
         
         guard let data = method.abiData else {
-            completion(nil, .errorEncodingToABI)
+            completion(nil, ABIError.errorEncodingToABI)
             return
         }
         
-        guard let transaction = try? Transaction(input: data, to: self.address) else {
-            completion(nil, .errorEncodingJSONRPC)
+        var transaction: Transaction
+        
+        do {
+            transaction = try Transaction(input: data, to: self.address)
+        } catch {
+            completion(nil, error)
             return
         }
         
@@ -187,7 +211,7 @@ public extension EIP20 {
             let value = hexValue.removeHexPrefix()
             
             guard let bigUIntValue = try? ABIDecoder.decode(value, to: .uint()) as? BigUInt else {
-                completion(nil, .errorDecodingFromABI)
+                completion(nil, ABIError.errorDecodingFromABI)
                 return
             }
             
@@ -195,7 +219,11 @@ public extension EIP20 {
         }
     }
     
-    func approve(spender: Account, value: BigUInt, completion: @escaping (BigUInt?, JSONRPCError?) -> ()) {
+    func deploy(binary: String, completion: @escaping (Bool?, Error?) -> ()) {
+        
+    }
+    
+    func approve(spender: Account, value: BigUInt, completion: @escaping (BigUInt?, Error?) -> ()) {
         
         let params = [SmartContractParam(type: .address, value: EthereumAddress(spender.address)),
                       SmartContractParam(type: .uint(), value: value)]
@@ -203,12 +231,16 @@ public extension EIP20 {
         let method = SmartContractMethod(name: "approve", params: params)
         
         guard let data = method.abiData else {
-            completion(nil, .errorEncodingToABI)
+            completion(nil, ABIError.errorEncodingToABI)
             return
         }
         
-        guard let transaction = try? Transaction(input: data, to: self.address) else {
-            completion(nil, .errorEncodingJSONRPC)
+        var transaction: Transaction
+        
+        do {
+            transaction = try Transaction(input: data, to: self.address)
+        } catch {
+            completion(nil, error)
             return
         }
         
@@ -222,7 +254,7 @@ public extension EIP20 {
             let value = hexValue.removeHexPrefix()
             
             guard let bigUIntValue = try? ABIDecoder.decode(value, to: .uint()) as? BigUInt else {
-                completion(nil, .errorDecodingFromABI)
+                completion(nil, ABIError.errorDecodingFromABI)
                 return
             }
             

@@ -9,7 +9,7 @@ public enum EthereumService {
     /**
      Ethereum: Returns the current price per gas in wei.
      */
-    public static func gasPrice(completion: @escaping (Int?, JSONRPCError?) -> ()) {
+    public static func gasPrice(completion: @escaping (Int?, Error?) -> ()) {
         
         // TODO: - Create a .none for params field
         let params = [String]()
@@ -22,7 +22,7 @@ public enum EthereumService {
             }
             
             guard let gasPrice = Int(hexGasPrice.removeHexPrefix(), radix: 16) else {
-                completion(nil, .errorConvertingFromHex)
+                completion(nil, ConvertingError.errorConvertingFromHex)
                 return
             }
             
@@ -33,7 +33,7 @@ public enum EthereumService {
     /**
      Ethereum: Returns the number of most recent block.
      */
-    public static func blockNumber(completion: @escaping (Int?, JSONRPCError?) -> ()) {
+    public static func blockNumber(completion: @escaping (Int?, Error?) -> ()) {
         
         let params = [String]()
         
@@ -45,7 +45,7 @@ public enum EthereumService {
             }
             
             guard let blockNumber = Int(hexBlockNumber.removeHexPrefix(), radix: 16) else {
-                completion(nil, .errorConvertingFromHex)
+                completion(nil, ConvertingError.errorConvertingFromHex)
                 return
             }
             
@@ -58,7 +58,7 @@ public enum EthereumService {
     /**
      Ethereum: Returns the balance of the account of given address.
      */
-    public static func getBalance(for address: String, block: String = "latest", completion: @escaping (BigUInt?, JSONRPCError?) -> ()) {
+    public static func getBalance(for address: String, block: String = "latest", completion: @escaping (BigUInt?, Error?) -> ()) {
         
         let params = [address, block]
         
@@ -70,7 +70,7 @@ public enum EthereumService {
             }
             
             guard let balance = BigUInt(hexBalance.removeHexPrefix(), radix: 16) else {
-                completion(nil, .errorConvertingFromHex)
+                completion(nil, ConvertingError.errorConvertingFromHex)
                 return
             }
             
@@ -83,7 +83,7 @@ public enum EthereumService {
     /**
      Ethereum: retrieves raw state storage for a smart contract;
      */
-    public static func getStorageAt(address: String, storageSlot: Int, block: String = "latest", completion: @escaping (String?, JSONRPCError?) -> ()) {
+    public static func getStorageAt(address: String, storageSlot: Int, block: String = "latest", completion: @escaping (String?, Error?) -> ()) {
         
         let hexStorageSlot = String(storageSlot, radix: 16).addHexPrefix()
         
@@ -97,7 +97,7 @@ public enum EthereumService {
             }
             
             guard let value = BigInt(hexValue.removeHexPrefix(), radix: 16) else {
-                completion(nil, .errorConvertingFromHex)
+                completion(nil, ConvertingError.errorConvertingFromHex)
                 return
             }
             
@@ -110,7 +110,7 @@ public enum EthereumService {
     /**
      Ethereum: Returns the number of transactions sent from an address.
      */
-    public static func getTransactionCount(for address: String, block: String = "latest", completion: @escaping (Int?, JSONRPCError?) -> ()) {
+    public static func getTransactionCount(for address: String, block: String = "latest", completion: @escaping (Int?, Error?) -> ()) {
         
         let params = [address, block]
         
@@ -122,7 +122,7 @@ public enum EthereumService {
             }
             
             guard let nonce = Int(hexNonce.removeHexPrefix(), radix: 16) else {
-                completion(nil, .errorConvertingFromHex)
+                completion(nil, ConvertingError.errorConvertingFromHex)
                 return
             }
             
@@ -135,7 +135,7 @@ public enum EthereumService {
     /**
      Ethereum: Returns the number of transactions in a block from a block matching the given block hash.
      */
-    public static func getBlockTransactionCountByHash(blockHash: String, completion: @escaping (Int?, JSONRPCError?) -> ()) {
+    public static func getBlockTransactionCountByHash(blockHash: String, completion: @escaping (Int?, Error?) -> ()) {
         
         let params = [blockHash]
         
@@ -147,12 +147,12 @@ public enum EthereumService {
             }
             
             guard let hexTransactionCount = hexTransactionCount, let hexTransactionCountNoHexPrefix = hexTransactionCount?.removeHexPrefix()  else {
-                completion(nil, .nilResponse)
+                completion(nil, ResponseError.nilResponse)
                 return
             }
             
             guard let transactionCount = Int(hexTransactionCountNoHexPrefix, radix: 16) else {
-                completion(nil, .errorConvertingFromHex)
+                completion(nil, ConvertingError.errorConvertingFromHex)
                 return
             }
             
@@ -165,7 +165,7 @@ public enum EthereumService {
     /**
      Ethereum: Returns the number of transactions in a block matching the given block number.
      */
-    public static func getBlockTransactionCountByNumber(blockNumber: Int, completion: @escaping (Int?, JSONRPCError?) -> ()) {
+    public static func getBlockTransactionCountByNumber(blockNumber: Int, completion: @escaping (Int?, Error?) -> ()) {
         
         let hexBlockNumber = String(blockNumber, radix: 16).addHexPrefix()
         
@@ -179,12 +179,12 @@ public enum EthereumService {
             }
             
             guard let hexTransactionCount = hexTransactionCount, let hexTransactionCountNoHexPrefix = hexTransactionCount?.removeHexPrefix()  else {
-                completion(nil, .nilResponse)
+                completion(nil, ResponseError.nilResponse)
                 return
             }
             
             guard let transactionCount = Int(hexTransactionCountNoHexPrefix, radix: 16) else {
-                completion(nil, .errorConvertingFromHex)
+                completion(nil, ConvertingError.errorConvertingFromHex)
                 return
             }
             
@@ -196,7 +196,7 @@ public enum EthereumService {
     /**
      Ethereum: Returns the compiled solidity code
      */
-    public static func getCode(address: String, block: String = "latest", completion: @escaping (String?, JSONRPCError?) -> ()) {
+    public static func getCode(address: String, block: String = "latest", completion: @escaping (String?, Error?) -> ()) {
         
         let params = [address, block]
         
@@ -216,7 +216,7 @@ public enum EthereumService {
      Ethereum: Creates new message call transaction or a contract creation for signed transactions.
      sendRawTransaction() requires that the transaction be already signed and serialized. So it requires extra serialization steps to use, but enables you to broadcast transactions on hosted nodes. There are other reasons that you might want to use a local key, of course. All of them would require using sendRawTransaction().
      */
-    public static func sendRawTransaction(account: Account, transaction: Transaction, completion: @escaping (String?, JSONRPCError?) -> ()) {
+    public static func sendRawTransaction(account: Account, transaction: Transaction, completion: @escaping (String?, Error?) -> ()) {
         
         self.getTransactionCount(for: account.address) { nonce, error in
             
@@ -231,15 +231,16 @@ public enum EthereumService {
 
             unsignedTransaction.nonce = nonce
             
-            guard let signedTransaction = try? account.sign(transaction: unsignedTransaction) else {
-                completion(nil, .errorSigningTransaction)
+            var rlpBytes = Data()
+            
+            do {
+                let signedTransaction = try account.sign(transaction: unsignedTransaction)
+                rlpBytes = try signedTransaction.encodeRLP()
+            } catch {
+                completion(nil, error)
                 return
             }
             
-            guard let rlpBytes = signedTransaction.rlpData else {
-                completion(nil, .errorSigningTransaction)
-                return
-            }
             
             let signedTransactionHash = String(bytes: rlpBytes).addHexPrefix()
             
@@ -260,7 +261,7 @@ public enum EthereumService {
     /**
      Ethereum: Executes a new message call immediately without creating a transaction on the block chain. Primarily is used on smart contracts
      */
-    public static func call(transaction: Transaction, block: String = "latest", completion: @escaping (String?, JSONRPCError?) -> ()) {
+    public static func call(transaction: Transaction, block: String = "latest", completion: @escaping (String?, Error?) -> ()) {
         
         
         struct Params: Codable {
@@ -291,7 +292,7 @@ public enum EthereumService {
     /**
      Ethereum: Generates and returns an estimate of how much gas is necessary to allow the transaction to complete. The transaction will not be added to the blockchain. Note that the estimate may be significantly more than the amount of gas actually used by the transaction, for a variety of reasons including EVM mechanics and node performance.
      */
-    public static func estimateGas(for transaction: Transaction, block: String = "latest", completion: @escaping (BigUInt?, JSONRPCError?) -> ()) {
+    public static func estimateGas(for transaction: Transaction, block: String = "latest", completion: @escaping (BigUInt?, Error?) -> ()) {
         
         struct Params: Codable {
             let transaction: Transaction
@@ -314,7 +315,7 @@ public enum EthereumService {
             }
             
             guard let value = BigUInt(hexValue.removeHexPrefix(), radix: 16) else {
-                completion(nil, .errorConvertingFromHex)
+                completion(nil, ConvertingError.errorConvertingFromHex)
                 return
             }
             
@@ -326,7 +327,7 @@ public enum EthereumService {
     /**
      Ethereum: Returns information about a block by hash.
      */
-    public static func getBlockByHash(hash: String, completion: @escaping (Block?, JSONRPCError?) -> ()) {
+    public static func getBlockByHash(hash: String, completion: @escaping (Block?, Error?) -> ()) {
         
         struct Params: Codable {
             let hash: String
@@ -356,7 +357,7 @@ public enum EthereumService {
     /**
      Ethereum: Returns information about a block by block number.
      */
-    public static func getBlockByNumber(blockNumber: Int, completion: @escaping (Block?, JSONRPCError?) -> ()) {
+    public static func getBlockByNumber(blockNumber: Int, completion: @escaping (Block?, Error?) -> ()) {
         
         let hexBlockNumber = String(blockNumber, radix: 16).addHexPrefix()
         
@@ -387,7 +388,7 @@ public enum EthereumService {
     /**
      Ethereum: Returns the information about a transaction requested by transaction hash.
      */
-    public static func getTransactionByHash(transactionHash: String, completion: @escaping (Transaction?, JSONRPCError?) -> ()) {
+    public static func getTransactionByHash(transactionHash: String, completion: @escaping (Transaction?, Error?) -> ()) {
         
         let params = [transactionHash]
         
@@ -406,7 +407,7 @@ public enum EthereumService {
     /**
      Ethereum: Returns information about a transaction by block hash and transaction index position.
      */
-    public static func getTransactionByBlockHashAndIndex(blockHash: String, index: Int, completion: @escaping (Transaction?, JSONRPCError?) -> ()) {
+    public static func getTransactionByBlockHashAndIndex(blockHash: String, index: Int, completion: @escaping (Transaction?, Error?) -> ()) {
         
         let hexIndex = String(index, radix: 16).addHexPrefix()
         
@@ -420,7 +421,7 @@ public enum EthereumService {
             }
             
             guard let transaction = optionalTransaction else {
-                completion(nil, .noResult)
+                completion(nil, ResponseError.noResult)
                 return
             }
             
@@ -433,7 +434,7 @@ public enum EthereumService {
     /**
      Ethereum: Returns information about a transaction by block number and transaction index position.
      */
-    public static func getTransactionByBlockNumberAndIndex(blockNumber: Int, index: Int, completion: @escaping (Transaction?, JSONRPCError?) -> ()) {
+    public static func getTransactionByBlockNumberAndIndex(blockNumber: Int, index: Int, completion: @escaping (Transaction?, Error?) -> ()) {
         
         let hexBlockNumber = String(blockNumber, radix: 16).addHexPrefix()
         
@@ -449,7 +450,7 @@ public enum EthereumService {
             }
             
             guard let transaction = optionalTransaction else {
-                completion(nil, .noResult)
+                completion(nil, ResponseError.noResult)
                 return
             }
             
@@ -461,7 +462,7 @@ public enum EthereumService {
     /**
      Ethereum: Returns the receipt of a transaction by transaction hash.
      */
-    public static func getTransactionReceipt(transactionHash: String, completion: @escaping (Receipt?, JSONRPCError?) -> ()) {
+    public static func getTransactionReceipt(transactionHash: String, completion: @escaping (Receipt?, Error?) -> ()) {
         
         let params = [transactionHash]
         
@@ -480,7 +481,7 @@ public enum EthereumService {
     /**
      Ethereum: Returns information about a uncle of a block by hash and uncle index position.
      */
-    public static func getUncleByBlockHashAndIndex(blockHash: String, index: Int, completion: @escaping (Block?, JSONRPCError?) -> ()) {
+    public static func getUncleByBlockHashAndIndex(blockHash: String, index: Int, completion: @escaping (Block?, Error?) -> ()) {
         
         let hexIndex = String(index, radix: 16).addHexPrefix()
         
@@ -494,7 +495,7 @@ public enum EthereumService {
             }
             
             guard let block = optionalBlock else {
-                completion(nil, .noResult)
+                completion(nil, ResponseError.noResult)
                 return
             }
             
@@ -506,7 +507,7 @@ public enum EthereumService {
     /**
      Ethereum: Returns information about a uncle of a block by number and uncle index position.
      */
-    public static func getUncleByBlockNumberAndIndex(blockNumber: Int, index: Int, completion: @escaping (Block?, JSONRPCError?) -> ()) {
+    public static func getUncleByBlockNumberAndIndex(blockNumber: Int, index: Int, completion: @escaping (Block?, Error?) -> ()) {
         
         let hexBlockNumber = String(blockNumber, radix: 16).addHexPrefix()
         
@@ -522,7 +523,7 @@ public enum EthereumService {
             }
             
             guard let block = optionalBlock else {
-                completion(nil, .noResult)
+                completion(nil, ResponseError.noResult)
                 return
             }
             

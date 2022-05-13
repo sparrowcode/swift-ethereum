@@ -7,7 +7,7 @@ public enum NodeErrors: Error {
 
 public struct Node {
     
-    public static var mainnet = Node(url: URL(string: "https://mainnet.infura.io/v3/967cf8dc4a37411c8e62698c7c603cee")!, network: .mainnet)
+    public static let mainnet = Node(url: URL(string: "https://mainnet.infura.io/v3/967cf8dc4a37411c8e62698c7c603cee")!, network: .mainnet)
     public static let ropsten = Node(url: URL(string: "https://ropsten.infura.io/v3/967cf8dc4a37411c8e62698c7c603cee")!, network: .ropsten)
     public static let rinkeby = Node(url: URL(string: "https://rinkeby.infura.io/v3/967cf8dc4a37411c8e62698c7c603cee")!, network: .rinkeby)
     public static let kovan = Node(url: URL(string: "https://kovan.infura.io/v3/967cf8dc4a37411c8e62698c7c603cee")!, network: .kovan)
@@ -71,7 +71,7 @@ public struct Node {
     
     
     // MARK: - Net
-    public func version(completion: @escaping (Int?, JSONRPCError?) -> Void) {
+    public func version(completion: @escaping (Int?, Error?) -> Void) {
         
         let params = [String]()
         
@@ -83,7 +83,7 @@ public struct Node {
             }
             
             guard let intVersion = Int(version) else {
-                completion(nil, .errorDecodingJSONRPC)
+                completion(nil, ResponseError.errorDecodingJSONRPC)
                 return
             }
             
@@ -93,7 +93,7 @@ public struct Node {
         
     }
     
-    public func listening(completion: @escaping (Bool?, JSONRPCError?) -> Void) {
+    public func listening(completion: @escaping (Bool?, Error?) -> Void) {
         
         let params = [String]()
         
@@ -108,7 +108,7 @@ public struct Node {
         }
     }
     
-    public func peerCount(completion: @escaping (Int?, JSONRPCError?) -> Void) {
+    public func peerCount(completion: @escaping (Int?, Error?) -> Void) {
         
         let params = [String]()
         
@@ -129,7 +129,7 @@ public struct Node {
     
     // MARK: - Web3
     
-    public func clientVersion(completion: @escaping (String?, JSONRPCError?) -> Void) {
+    public func clientVersion(completion: @escaping (String?, Error?) -> Void) {
         
         let params = [String]()
         

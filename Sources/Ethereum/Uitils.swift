@@ -80,7 +80,7 @@ public enum Utils {
         
         guard let context = secp256k1_context_create(UInt32(SECP256K1_CONTEXT_SIGN | SECP256K1_CONTEXT_VERIFY)) else {
             print("Failed to sign message: invalid context.")
-            throw JSONRPCError.errorSigningTransaction
+            throw ResponseError.errorSigningTransaction
         }
         
         defer {
@@ -101,7 +101,7 @@ public enum Utils {
         
         guard secp256k1_ecdsa_sign_recoverable(context, signaturePointer, keccakDataPointer, privateKeyPointer, nil, nil) == 1 else {
             print("Failed to sign message: recoverable ECDSA signature creation failed.")
-            throw JSONRPCError.errorSigningTransaction
+            throw ResponseError.errorSigningTransaction
         }
         
         let outputDataPointer = UnsafeMutablePointer<UInt8>.allocate(capacity: 64)

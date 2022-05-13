@@ -4,12 +4,8 @@ import Ethereum
 
 class ERC721Tests: XCTestCase {
     
-    struct ERC721: EIP721 {
+    struct ERC721: ERC721Contract {
         var address: String
-    }
-
-    override func setUpWithError() throws {
-        
     }
 
     func testBalance() throws {
