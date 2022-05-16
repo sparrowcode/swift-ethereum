@@ -1,0 +1,12 @@
+---
+path:            '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/12.1/Swift.swiftmodule/arm64e-apple-macos.swiftmodule'
+dependencies:
+  - mtime:           1637360388000000000
+    path:            '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/12.1/Swift.swiftmodule/arm64e-apple-macos.swiftmodule'
+    size:            11087008
+  - mtime:           1636797187000000000
+    path:            'usr/lib/swift/Swift.swiftmodule/arm64e-apple-macos.swiftinterface'
+    size:            1936640
+    sdk_relative:    true
+version:         1
+...

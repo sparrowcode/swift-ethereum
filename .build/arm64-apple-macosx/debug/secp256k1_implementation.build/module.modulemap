@@ -1,0 +1,4 @@
+module secp256k1_implementation {
+    header "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/secp256k1_implementation-Swift.h"
+    requires objc
+}

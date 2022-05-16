@@ -1,0 +1,4 @@
+module KeccakTiny {
+    umbrella "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/checkouts/SwiftKeccak/Sources/KeccakTiny/include"
+    export *
+}

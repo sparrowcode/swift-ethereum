@@ -10,6 +10,7 @@ public protocol ERC20Contract {
     func name(completion: @escaping (String?, Error?) -> ())
     func totalSupply(completion: @escaping (BigUInt?, Error?) -> ())
     func approve(spender: Account, value: BigUInt, completion: @escaping (BigUInt?, Error?) -> ())
+    func deploy(with account: Account, binary: Data, gasLimit: BigUInt, gasPrice: BigUInt, completion: @escaping (String?, Error?) -> ())
 }
 
 public extension ERC20Contract {
@@ -66,7 +67,7 @@ public extension ERC20Contract {
         }
         
         var transaction: Transaction
-            
+        
         do {
             transaction = try Transaction(gasLimit: gasLimit, gasPrice: gasPrice, input: data, to: self.address, value: amount)
         } catch {
@@ -219,7 +220,21 @@ public extension ERC20Contract {
         }
     }
     
-    func deploy(binary: String, completion: @escaping (Bool?, Error?) -> ()) {
+    func deploy(with account: Account, binary: Data, gasLimit: BigUInt, gasPrice: BigUInt, completion: @escaping (String?, Error?) -> ()) {
+        
+        var transaction: Transaction
+        
+        do {
+            transaction = try Transaction(gasLimit: gasLimit, gasPrice: gasPrice, input: binary, to: "0x", value: BigUInt(0))
+        } catch {
+            completion(nil, error)
+            return
+        }
+        
+        EthereumService.sendRawTransaction(account: account, transaction: transaction) { hash, error in
+            
+            completion(hash, error)
+        }
         
     }
     
@@ -262,4 +277,22 @@ public extension ERC20Contract {
         }
     }
     
+}
+
+
+extension ERC20Contract {
+    func transferTransaction(to address: String, amount: BigUInt, gasLimit: BigUInt, gasPrice: BigUInt, with account: Account) throws -> Transaction {
+        
+        let params = [SmartContractParam(type: .address,  value: EthereumAddress(address)),
+                      SmartContractParam(type: .uint(), value: amount)]
+        
+        let method = SmartContractMethod(name: "transfer", params: params)
+        
+        guard let data = method.abiData else {
+            throw ABIError.errorEncodingToABI
+        }
+        
+        return try Transaction(gasLimit: gasLimit, gasPrice: gasPrice, input: data, to: self.address, value: BigUInt(0))
+        
+    }
 }

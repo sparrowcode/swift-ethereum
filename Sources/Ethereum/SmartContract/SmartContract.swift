@@ -14,9 +14,7 @@ protocol SmartContractProtocol {
     
 }
 
-extension SmartContractProtocol {
-    // base realisation of smart contracts (call method)
-}
+extension SmartContractProtocol {}
 
 
 

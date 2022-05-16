@@ -1,6 +1,7 @@
 import Foundation
 
 public struct Receipt: Codable {
+    
     public let blockHash: String
     public let blockNumber: String
     public let contractAddress: String?
@@ -18,3 +19,4 @@ public struct Receipt: Codable {
     public let type: String
 }
 
+extension Receipt: Equatable {}

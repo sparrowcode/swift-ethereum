@@ -1,0 +1,113 @@
+{
+  "": {
+    "swift-dependencies": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/master.swiftdeps"
+  },
+  "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/checkouts/secp256k1.swift/Sources/implementation/Data.swift": {
+    "dependencies": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/Data.d",
+    "object": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/Data.swift.o",
+    "swiftmodule": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/Data~partial.swiftmodule",
+    "swift-dependencies": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/Data.swiftdeps"
+  },
+  "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/checkouts/secp256k1.swift/Sources/implementation/Digests.swift": {
+    "dependencies": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/Digests.d",
+    "object": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/Digests.swift.o",
+    "swiftmodule": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/Digests~partial.swiftmodule",
+    "swift-dependencies": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/Digests.swiftdeps"
+  },
+  "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/checkouts/secp256k1.swift/Sources/implementation/ECDSA.swift": {
+    "dependencies": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/ECDSA.d",
+    "object": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/ECDSA.swift.o",
+    "swiftmodule": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/ECDSA~partial.swiftmodule",
+    "swift-dependencies": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/ECDSA.swiftdeps"
+  },
+  "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/checkouts/secp256k1.swift/Sources/implementation/EdDSA.swift": {
+    "dependencies": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/EdDSA.d",
+    "object": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/EdDSA.swift.o",
+    "swiftmodule": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/EdDSA~partial.swiftmodule",
+    "swift-dependencies": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/EdDSA.swiftdeps"
+  },
+  "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/checkouts/secp256k1.swift/Sources/implementation/Errors.swift": {
+    "dependencies": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/Errors.d",
+    "object": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/Errors.swift.o",
+    "swiftmodule": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/Errors~partial.swiftmodule",
+    "swift-dependencies": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/Errors.swiftdeps"
+  },
+  "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/checkouts/secp256k1.swift/Sources/implementation/NISTCurvesKeys.swift": {
+    "dependencies": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/NISTCurvesKeys.d",
+    "object": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/NISTCurvesKeys.swift.o",
+    "swiftmodule": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/NISTCurvesKeys~partial.swiftmodule",
+    "swift-dependencies": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/NISTCurvesKeys.swiftdeps"
+  },
+  "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/checkouts/secp256k1.swift/Sources/implementation/PrettyBytes.swift": {
+    "dependencies": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/PrettyBytes.d",
+    "object": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/PrettyBytes.swift.o",
+    "swiftmodule": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/PrettyBytes~partial.swiftmodule",
+    "swift-dependencies": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/PrettyBytes.swiftdeps"
+  },
+  "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/checkouts/secp256k1.swift/Sources/implementation/SHA256.swift": {
+    "dependencies": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/SHA256.d",
+    "object": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/SHA256.swift.o",
+    "swiftmodule": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/SHA256~partial.swiftmodule",
+    "swift-dependencies": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/SHA256.swiftdeps"
+  },
+  "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/checkouts/secp256k1.swift/Sources/implementation/SafeCompare.swift": {
+    "dependencies": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/SafeCompare.d",
+    "object": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/SafeCompare.swift.o",
+    "swiftmodule": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/SafeCompare~partial.swiftmodule",
+    "swift-dependencies": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/SafeCompare.swiftdeps"
+  },
+  "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/checkouts/secp256k1.swift/Sources/implementation/Schnorr.swift": {
+    "dependencies": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/Schnorr.d",
+    "object": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/Schnorr.swift.o",
+    "swiftmodule": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/Schnorr~partial.swiftmodule",
+    "swift-dependencies": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/Schnorr.swiftdeps"
+  },
+  "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/checkouts/secp256k1.swift/Sources/implementation/String.swift": {
+    "dependencies": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/String.d",
+    "object": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/String.swift.o",
+    "swiftmodule": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/String~partial.swiftmodule",
+    "swift-dependencies": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/String.swiftdeps"
+  },
+  "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/checkouts/secp256k1.swift/Sources/implementation/Zeroization.swift": {
+    "dependencies": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/Zeroization.d",
+    "object": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/Zeroization.swift.o",
+    "swiftmodule": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/Zeroization~partial.swiftmodule",
+    "swift-dependencies": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/Zeroization.swiftdeps"
+  },
+  "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/checkouts/secp256k1.swift/Sources/implementation/secp256k1.swift": {
+    "dependencies": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/secp256k1.d",
+    "object": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/secp256k1.swift.o",
+    "swiftmodule": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/secp256k1~partial.swiftmodule",
+    "swift-dependencies": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/secp256k1.swiftdeps"
+  },
+  "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/checkouts/secp256k1.swift/Sources/implementation/swift-crypto/Sources/Crypto/Digests/Digest.swift": {
+    "dependencies": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/swift-crypto/Sources/Crypto/Digests/Digest.d",
+    "object": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/swift-crypto/Sources/Crypto/Digests/Digest.swift.o",
+    "swiftmodule": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/swift-crypto/Sources/Crypto/Digests/Digest~partial.swiftmodule",
+    "swift-dependencies": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/swift-crypto/Sources/Crypto/Digests/Digest.swiftdeps"
+  },
+  "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/checkouts/secp256k1.swift/Sources/implementation/swift-crypto/Sources/Crypto/Signatures/Signature.swift": {
+    "dependencies": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/swift-crypto/Sources/Crypto/Signatures/Signature.d",
+    "object": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/swift-crypto/Sources/Crypto/Signatures/Signature.swift.o",
+    "swiftmodule": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/swift-crypto/Sources/Crypto/Signatures/Signature~partial.swiftmodule",
+    "swift-dependencies": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/swift-crypto/Sources/Crypto/Signatures/Signature.swiftdeps"
+  },
+  "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/checkouts/secp256k1.swift/Sources/implementation/swift-crypto/Sources/Crypto/Util/BoringSSL/RNG_boring.swift": {
+    "dependencies": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/swift-crypto/Sources/Crypto/Util/BoringSSL/RNG_boring.d",
+    "object": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/swift-crypto/Sources/Crypto/Util/BoringSSL/RNG_boring.swift.o",
+    "swiftmodule": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/swift-crypto/Sources/Crypto/Util/BoringSSL/RNG_boring~partial.swiftmodule",
+    "swift-dependencies": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/swift-crypto/Sources/Crypto/Util/BoringSSL/RNG_boring.swiftdeps"
+  },
+  "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/checkouts/secp256k1.swift/Sources/implementation/swift-crypto/Sources/Crypto/Util/SecureBytes.swift": {
+    "dependencies": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/swift-crypto/Sources/Crypto/Util/SecureBytes.d",
+    "object": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/swift-crypto/Sources/Crypto/Util/SecureBytes.swift.o",
+    "swiftmodule": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/swift-crypto/Sources/Crypto/Util/SecureBytes~partial.swiftmodule",
+    "swift-dependencies": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/swift-crypto/Sources/Crypto/Util/SecureBytes.swiftdeps"
+  },
+  "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/checkouts/secp256k1.swift/Sources/implementation/swift-crypto/Tests/_CryptoExtrasTests/Utils/BytesUtil.swift": {
+    "dependencies": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/swift-crypto/Tests/_CryptoExtrasTests/Utils/BytesUtil.d",
+    "object": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/swift-crypto/Tests/_CryptoExtrasTests/Utils/BytesUtil.swift.o",
+    "swiftmodule": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/swift-crypto/Tests/_CryptoExtrasTests/Utils/BytesUtil~partial.swiftmodule",
+    "swift-dependencies": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/secp256k1_implementation.build/swift-crypto/Tests/_CryptoExtrasTests/Utils/BytesUtil.swiftdeps"
+  }
+}

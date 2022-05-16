@@ -1,0 +1,55 @@
+version: "Apple Swift version 5.5.2 (swiftlang-1300.0.47.5 clang-1300.0.29.30)"
+options: "4d3d1bfa4f12270513cf08931e3a1de0ff629e11e1255a1edc2970621da1a088"
+build_start_time: [1652449767, 544824123]
+build_end_time: [1652449768, 426748037]
+inputs:
+  "/Users/ertembiyik/Documents/\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B Mac /Xcode /Work/swift-ethereum/Sources/Ethereum/AccountManager.swift": [1650204379, 331166267]
+  "/Users/ertembiyik/Documents/\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B Mac /Xcode /Work/swift-ethereum/Sources/Ethereum/EthereumService.swift": [1652362396, 365571737]
+  "/Users/ertembiyik/Documents/\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B Mac /Xcode /Work/swift-ethereum/Sources/Ethereum/Models/Account.swift": [1652362732, 879751443]
+  "/Users/ertembiyik/Documents/\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B Mac /Xcode /Work/swift-ethereum/Sources/Ethereum/Models/Block.swift": [1650204554, 291184425]
+  "/Users/ertembiyik/Documents/\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B Mac /Xcode /Work/swift-ethereum/Sources/Ethereum/Models/ConvertingError.swift": [1652444499, 666917800]
+  ? "/Users/ertembiyik/Documents/\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B Mac /Xcode /Work/swift-ethereum/Sources/Ethereum/Models/JSONRPC/JSONRPCMethod.swift"
+  : [1652363512, 478060245]
+  ? "/Users/ertembiyik/Documents/\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B Mac /Xcode /Work/swift-ethereum/Sources/Ethereum/Models/JSONRPC/JSONRPCRequest.swift"
+  : [1652178037, 645550251]
+  ? "/Users/ertembiyik/Documents/\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B Mac /Xcode /Work/swift-ethereum/Sources/Ethereum/Models/JSONRPC/JSONRPCResponse.swift"
+  : [1652178037, 631833314]
+  "/Users/ertembiyik/Documents/\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B Mac /Xcode /Work/swift-ethereum/Sources/Ethereum/Models/Log.swift": [1650204554, 306468486]
+  "/Users/ertembiyik/Documents/\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B Mac /Xcode /Work/swift-ethereum/Sources/Ethereum/Models/Network.swift": [1649340103, 86472511]
+  "/Users/ertembiyik/Documents/\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B Mac /Xcode /Work/swift-ethereum/Sources/Ethereum/Models/Node.swift": [1652361395, 167677164]
+  "/Users/ertembiyik/Documents/\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B Mac /Xcode /Work/swift-ethereum/Sources/Ethereum/Models/Receipt.swift": [1650204554, 317079544]
+  "/Users/ertembiyik/Documents/\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B Mac /Xcode /Work/swift-ethereum/Sources/Ethereum/Models/ResponseError.swift": [1652444499, 689211368]
+  "/Users/ertembiyik/Documents/\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B Mac /Xcode /Work/swift-ethereum/Sources/Ethereum/Models/Signature.swift": [1651500570, 40008544]
+  "/Users/ertembiyik/Documents/\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B Mac /Xcode /Work/swift-ethereum/Sources/Ethereum/Models/Transaction.swift": [1652363293, 871517896]
+  "/Users/ertembiyik/Documents/\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B Mac /Xcode /Work/swift-ethereum/Sources/Ethereum/Provider/Provider.swift": [1652363611, 325649976]
+  "/Users/ertembiyik/Documents/\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B Mac /Xcode /Work/swift-ethereum/Sources/Ethereum/Provider/ProviderError.swift": [1652363611, 285557746]
+  "/Users/ertembiyik/Documents/\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B Mac /Xcode /Work/swift-ethereum/Sources/Ethereum/RLP/RLPEncodable.swift": [1652363018, 223251581]
+  "/Users/ertembiyik/Documents/\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B Mac /Xcode /Work/swift-ethereum/Sources/Ethereum/RLP/RLPEncoder.swift": [1652039280, 854349374]
+  "/Users/ertembiyik/Documents/\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B Mac /Xcode /Work/swift-ethereum/Sources/Ethereum/RLP/RLPError.swift": [1652363512, 467798233]
+  ? "/Users/ertembiyik/Documents/\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B Mac /Xcode /Work/swift-ethereum/Sources/Ethereum/SmartContract/ABI/ABIDecoder.swift"
+  : [1652030227, 851731777]
+  ? "/Users/ertembiyik/Documents/\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B Mac /Xcode /Work/swift-ethereum/Sources/Ethereum/SmartContract/ABI/ABIEncodable.swift"
+  : [1652029737, 762355327]
+  ? "/Users/ertembiyik/Documents/\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B Mac /Xcode /Work/swift-ethereum/Sources/Ethereum/SmartContract/ABI/ABIEncoder.swift"
+  : [1652029609, 526814937]
+  "/Users/ertembiyik/Documents/\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B Mac /Xcode /Work/swift-ethereum/Sources/Ethereum/SmartContract/ABI/ABIError.swift": [1652363512, 451722621]
+  "/Users/ertembiyik/Documents/\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B Mac /Xcode /Work/swift-ethereum/Sources/Ethereum/SmartContract/ERC20.swift": [1652363031, 360800027]
+  "/Users/ertembiyik/Documents/\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B Mac /Xcode /Work/swift-ethereum/Sources/Ethereum/SmartContract/ERC721.swift": [1652444499, 716540813]
+  ? "/Users/ertembiyik/Documents/\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B Mac /Xcode /Work/swift-ethereum/Sources/Ethereum/SmartContract/EthereumAddress.swift"
+  : [1652363799, 295219898]
+  ? "/Users/ertembiyik/Documents/\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B Mac /Xcode /Work/swift-ethereum/Sources/Ethereum/SmartContract/SmartContract.swift"
+  : [1652363799, 214579105]
+  ? "/Users/ertembiyik/Documents/\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B Mac /Xcode /Work/swift-ethereum/Sources/Ethereum/SmartContract/SmartContractMethod.swift"
+  : [1652029591, 945230484]
+  ? "/Users/ertembiyik/Documents/\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B Mac /Xcode /Work/swift-ethereum/Sources/Ethereum/SmartContract/SmartContractParam.swift"
+  : [1652029537, 496907234]
+  ? "/Users/ertembiyik/Documents/\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B Mac /Xcode /Work/swift-ethereum/Sources/Ethereum/SmartContract/SmartContractValueType.swift"
+  : [1651765235, 319748878]
+  "/Users/ertembiyik/Documents/\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B Mac /Xcode /Work/swift-ethereum/Sources/Ethereum/Storage/AES.swift": [1650106784, 534310817]
+  "/Users/ertembiyik/Documents/\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B Mac /Xcode /Work/swift-ethereum/Sources/Ethereum/Storage/KeychainStorage.swift": [1650204400, 994440555]
+  "/Users/ertembiyik/Documents/\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B Mac /Xcode /Work/swift-ethereum/Sources/Ethereum/Storage/Storage.swift": [1650204379, 277338504]
+  "/Users/ertembiyik/Documents/\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B Mac /Xcode /Work/swift-ethereum/Sources/Ethereum/Storage/StorageFile.swift": [1650204379, 300982952]
+  ? "/Users/ertembiyik/Documents/\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B Mac /Xcode /Work/swift-ethereum/Sources/Ethereum/Storage/UserDefaultsStorage.swift"
+  : [1650204379, 318944692]
+  "/Users/ertembiyik/Documents/\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B Mac /Xcode /Work/swift-ethereum/Sources/Ethereum/Storage/iCloudStorage.swift": [1650204440, 134446382]
+  "/Users/ertembiyik/Documents/\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B Mac /Xcode /Work/swift-ethereum/Sources/Ethereum/Uitils.swift": [1652361395, 134340286]

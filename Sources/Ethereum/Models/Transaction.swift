@@ -189,3 +189,6 @@ extension Transaction: RLPEncodable {
         }
     }
 }
+
+
+extension Transaction: Equatable {}

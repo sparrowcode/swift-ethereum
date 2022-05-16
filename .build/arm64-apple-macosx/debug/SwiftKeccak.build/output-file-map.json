@@ -1,0 +1,11 @@
+{
+  "": {
+    "swift-dependencies": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/SwiftKeccak.build/master.swiftdeps"
+  },
+  "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/checkouts/SwiftKeccak/Sources/SwiftKeccak/Keccak.swift": {
+    "dependencies": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/SwiftKeccak.build/Keccak.d",
+    "object": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/SwiftKeccak.build/Keccak.swift.o",
+    "swiftmodule": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/SwiftKeccak.build/Keccak~partial.swiftmodule",
+    "swift-dependencies": "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/SwiftKeccak.build/Keccak.swiftdeps"
+  }
+}

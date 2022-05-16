@@ -24,3 +24,5 @@ public struct Block: Codable {
 }
 
 //304
+
+extension Block: Equatable {}

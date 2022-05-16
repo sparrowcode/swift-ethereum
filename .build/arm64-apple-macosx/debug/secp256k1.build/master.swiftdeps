@@ -1,0 +1,7 @@
+version: "Apple Swift version 5.5.2 (swiftlang-1300.0.47.5 clang-1300.0.29.30)"
+options: "ccb944e6591660fb33f1c68c633a06911f3f25a771fb83c369e694ca8d767828"
+build_start_time: [1652449767, 392752170]
+build_end_time: [1652449767, 496744155]
+inputs:
+  ? "/Users/ertembiyik/Documents/\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B Mac /Xcode /Work/swift-ethereum/.build/checkouts/secp256k1.swift/Sources/secp256k1/EntryPoint.swift"
+  : [1652449746, 74131488]
