@@ -1,0 +1,41 @@
+version: "Apple Swift version 5.5.2 (swiftlang-1300.0.47.5 clang-1300.0.29.30)"
+options: "ccb944e6591660fb33f1c68c633a06911f3f25a771fb83c369e694ca8d767828"
+build_start_time: [1652449758, 582696914]
+build_end_time: [1652449767, 347211837]
+inputs:
+  ? "/Users/ertembiyik/Documents/\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B Mac /Xcode /Work/swift-ethereum/.build/checkouts/secp256k1.swift/Sources/implementation/Data.swift"
+  : [1652449746, 72542667]
+  ? "/Users/ertembiyik/Documents/\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B Mac /Xcode /Work/swift-ethereum/.build/checkouts/secp256k1.swift/Sources/implementation/Digests.swift"
+  : [1652449746, 72650194]
+  ? "/Users/ertembiyik/Documents/\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B Mac /Xcode /Work/swift-ethereum/.build/checkouts/secp256k1.swift/Sources/implementation/ECDSA.swift"
+  : [1652449746, 72977781]
+  ? "/Users/ertembiyik/Documents/\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B Mac /Xcode /Work/swift-ethereum/.build/checkouts/secp256k1.swift/Sources/implementation/EdDSA.swift"
+  : [1652449746, 73097467]
+  ? "/Users/ertembiyik/Documents/\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B Mac /Xcode /Work/swift-ethereum/.build/checkouts/secp256k1.swift/Sources/implementation/Errors.swift"
+  : [1652449746, 73193073]
+  ? "/Users/ertembiyik/Documents/\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B Mac /Xcode /Work/swift-ethereum/.build/checkouts/secp256k1.swift/Sources/implementation/NISTCurvesKeys.swift"
+  : [1652449746, 73285579]
+  ? "/Users/ertembiyik/Documents/\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B Mac /Xcode /Work/swift-ethereum/.build/checkouts/secp256k1.swift/Sources/implementation/PrettyBytes.swift"
+  : [1652449746, 73384284]
+  ? "/Users/ertembiyik/Documents/\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B Mac /Xcode /Work/swift-ethereum/.build/checkouts/secp256k1.swift/Sources/implementation/SHA256.swift"
+  : [1652449746, 73477029]
+  ? "/Users/ertembiyik/Documents/\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B Mac /Xcode /Work/swift-ethereum/.build/checkouts/secp256k1.swift/Sources/implementation/SafeCompare.swift"
+  : [1652449746, 73594093]
+  ? "/Users/ertembiyik/Documents/\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B Mac /Xcode /Work/swift-ethereum/.build/checkouts/secp256k1.swift/Sources/implementation/Schnorr.swift"
+  : [1652449746, 73686599]
+  ? "/Users/ertembiyik/Documents/\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B Mac /Xcode /Work/swift-ethereum/.build/checkouts/secp256k1.swift/Sources/implementation/String.swift"
+  : [1652449746, 73775768]
+  ? "/Users/ertembiyik/Documents/\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B Mac /Xcode /Work/swift-ethereum/.build/checkouts/secp256k1.swift/Sources/implementation/Zeroization.swift"
+  : [1652449746, 73857784]
+  ? "/Users/ertembiyik/Documents/\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B Mac /Xcode /Work/swift-ethereum/.build/checkouts/secp256k1.swift/Sources/implementation/secp256k1.swift"
+  : [1652449746, 73971271]
+  ? "/Users/ertembiyik/Documents/\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B Mac /Xcode /Work/swift-ethereum/.build/checkouts/secp256k1.swift/Sources/implementation/swift-crypto/Sources/Crypto/Digests/Digest.swift"
+  : [1652449753, 646735906]
+  ? "/Users/ertembiyik/Documents/\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B Mac /Xcode /Work/swift-ethereum/.build/checkouts/secp256k1.swift/Sources/implementation/swift-crypto/Sources/Crypto/Signatures/Signature.swift"
+  : [1652449753, 651460647]
+  ? "/Users/ertembiyik/Documents/\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B Mac /Xcode /Work/swift-ethereum/.build/checkouts/secp256k1.swift/Sources/implementation/swift-crypto/Sources/Crypto/Util/BoringSSL/RNG_boring.swift"
+  : [1652449753, 651949882]
+  ? "/Users/ertembiyik/Documents/\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B Mac /Xcode /Work/swift-ethereum/.build/checkouts/secp256k1.swift/Sources/implementation/swift-crypto/Sources/Crypto/Util/SecureBytes.swift"
+  : [1652449753, 652385711]
+  ? "/Users/ertembiyik/Documents/\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B Mac /Xcode /Work/swift-ethereum/.build/checkouts/secp256k1.swift/Sources/implementation/swift-crypto/Tests/_CryptoExtrasTests/Utils/BytesUtil.swift"
+  : [1652449753, 701418876]
