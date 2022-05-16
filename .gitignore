@@ -2,8 +2,12 @@
 .DS_Store
 .Trashes
 
+#Xcode data
+xcuserdata/
+
 # Swift Package Manager
 .swiftpm
+.build/
 
 # User Interface
 *UserInterfaceState.xcuserstate
