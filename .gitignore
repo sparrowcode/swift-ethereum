@@ -7,7 +7,6 @@ xcuserdata/
 
 # Swift Package Manager
 .swiftpm
-.build/
 
 # User Interface
 *UserInterfaceState.xcuserstate
