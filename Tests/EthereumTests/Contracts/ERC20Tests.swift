@@ -4,25 +4,43 @@ import Ethereum
 
 class ERC20Tests: XCTestCase {
     
-    struct SPToken: ERC20Contract {
-        public var address: String
-    }
+    let contractAddress = "0xF65FF945f3a6067D0742fD6890f32A6960dD817d"
     
     override func setUpWithError() throws {
         EthereumService.provider = Provider(node: .ropsten)
     }
-
+    
     func testBalance() throws {
         
         let expectation = XCTestExpectation(description: "get balance erc20")
         
         let address = "0xE92A146f86fEda6D14Ee1dc1BfB620D3F3d1b873"
         
-        let erc20 = SPToken(address: "0xF65FF945f3a6067D0742fD6890f32A6960dD817d")
+        let balanceRequest = ERC20Contract.balance(ofAddress: address, contractAddress: contractAddress)
         
-        erc20.balance(of: address) { value, error in
+        let ethereumTransaction = try balanceRequest.generateTransaction()
+        
+        EthereumService.call(transaction: ethereumTransaction) { response, error in
             XCTAssertNil(error)
-            XCTAssertNotNil(value)
+            XCTAssertNotNil(response)
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 50)
+        
+    }
+    
+    func testFactoryBalanceTransaction() throws {
+        
+        let expectation = XCTestExpectation(description: "get balance erc20")
+        
+        let address = "0xE92A146f86fEda6D14Ee1dc1BfB620D3F3d1b873"
+        
+        let transaction = try ERC20TransactionFactory.generateBalanceTransaction(address: address, contractAddress: contractAddress)
+        
+        EthereumService.call(transaction: transaction) { response, error in
+            XCTAssertNil(error)
+            XCTAssertNotNil(response)
             expectation.fulfill()
         }
         
@@ -40,9 +58,15 @@ class ERC20Tests: XCTestCase {
         
         let account = try accountManager.importAccount(privateKey: "2404a482a212386ecf1ed054547cf4d28348ddf73d23325a83373f803138f105")
         
-        let erc20 = SPToken(address: "0xF65FF945f3a6067D0742fD6890f32A6960dD817d")
+        let transferRequest = ERC20Contract.transfer(value: BigUInt(210000000),
+                                                     to: "0xc8DE4C1B4f6F6659944160DaC46B29a330C432B2",
+                                                     gasLimit: BigUInt(100000),
+                                                     gasPrice: BigUInt(220000000000),
+                                                     contractAddress: contractAddress)
         
-        erc20.transfer(to: "0xc8DE4C1B4f6F6659944160DaC46B29a330C432B2", amount: "210000000", gasLimit: "100000", gasPrice: "220000000000", with: account) { hash, error in
+        let ethereumTransaction = try transferRequest.generateTransaction()
+        
+        EthereumService.sendRawTransaction(account: account, transaction: ethereumTransaction) { hash, error in
             XCTAssertNil(error)
             XCTAssertNotNil(hash)
             expectation.fulfill()
@@ -53,13 +77,15 @@ class ERC20Tests: XCTestCase {
     
     func testDecimals() throws {
         
-        let expectation = XCTestExpectation(description: "decimals erc20")
+        let expectation = XCTestExpectation(description: "transfer erc20")
         
-        let erc20 = SPToken(address: "0xF65FF945f3a6067D0742fD6890f32A6960dD817d")
+        let decimalsRequest = ERC20Contract.decimals(contractAddress: contractAddress)
         
-        erc20.decimals() { value, error in
+        let ethereumTransaction = try decimalsRequest.generateTransaction()
+        
+        EthereumService.call(transaction: ethereumTransaction) { response, error in
             XCTAssertNil(error)
-            XCTAssertNotNil(value)
+            XCTAssertNotNil(response)
             expectation.fulfill()
         }
         
@@ -71,12 +97,13 @@ class ERC20Tests: XCTestCase {
         
         let expectation = XCTestExpectation(description: "symbol erc20")
         
-        let erc20 = SPToken(address: "0xF65FF945f3a6067D0742fD6890f32A6960dD817d")
+        let symbolRequest = ERC20Contract.symbol(contractAddress: contractAddress)
         
+        let ethereumTransaction = try symbolRequest.generateTransaction()
         
-        erc20.symbol() { value, error in
+        EthereumService.call(transaction: ethereumTransaction) { response, error in
             XCTAssertNil(error)
-            XCTAssertNotNil(value)
+            XCTAssertNotNil(response)
             expectation.fulfill()
         }
         
@@ -88,27 +115,31 @@ class ERC20Tests: XCTestCase {
         
         let expectation = XCTestExpectation(description: "total supply erc20")
         
-        let erc20 = SPToken(address: "0xF65FF945f3a6067D0742fD6890f32A6960dD817d")
+        let totalSupplyRequest = ERC20Contract.totalSupply(contractAddress: contractAddress)
         
-        erc20.totalSupply() { value, error in
+        let ethereumTransaction = try totalSupplyRequest.generateTransaction()
+        
+        EthereumService.call(transaction: ethereumTransaction) { response, error in
             XCTAssertNil(error)
-            XCTAssertNotNil(value)
+            XCTAssertNotNil(response)
             expectation.fulfill()
+            
+            
         }
-        
         wait(for: [expectation], timeout: 50)
-        
     }
     
     func testName() throws {
         
         let expectation = XCTestExpectation(description: "name erc20")
         
-        let erc20 = SPToken(address: "0xF65FF945f3a6067D0742fD6890f32A6960dD817d")
+        let nameRequest = ERC20Contract.name(contractAddress: contractAddress)
         
-        erc20.name() { name, error in
+        let ethereumTransaction = try nameRequest.generateTransaction()
+        
+        EthereumService.call(transaction: ethereumTransaction) { response, error in
             XCTAssertNil(error)
-            XCTAssertNotNil(name)
+            XCTAssertNotNil(response)
             expectation.fulfill()
         }
         
@@ -119,8 +150,6 @@ class ERC20Tests: XCTestCase {
         
         let expectation = XCTestExpectation(description: "approve erc20")
         
-        let erc20 = SPToken(address: "0xF65FF945f3a6067D0742fD6890f32A6960dD817d")
-        
         let storage = UserDefaultsStorage(password: "password")
         
         let accountManager = AccountManager(storage: storage)
@@ -129,15 +158,40 @@ class ERC20Tests: XCTestCase {
         
         let value = BigUInt("152587885986328125000000", radix: 10)!
         
-        erc20.approve(spender: account, value: value) { remaining, error in
-//            XCTAssertNil failed: "ethereumError(Ethereum.JSONRPCErrorResult(code: 3, message: "execution reverted: ERC20: approve from the zero address"))"
-            
-//            XCTAssertNil(error)
-//            XCTAssertNotNil(remaining)
-            expectation.fulfill()
-        }
+        //        erc20.approve(spender: account, value: value) { remaining, error in
+        //            XCTAssertNil failed: "ethereumError(Ethereum.JSONRPCErrorResult(code: 3, message: "execution reverted: ERC20: approve from the zero address"))"
+        //
+        //            XCTAssertNil(error)
+        //            XCTAssertNotNil(remaining)
+        //            expectation.fulfill()
+        //        }
         
-        wait(for: [expectation], timeout: 50)
+        //wait(for: [expectation], timeout: 50)
     }
-
+    
+    func testDeploy() throws {
+        
+        //        let expectation = XCTestExpectation(description: "approve erc20")
+        //
+        //        let binary = try  "1234567890".bytes
+        //
+        //        let binaryData = Data(binary)
+        //
+        //        let erc20 = SPToken(address: "")
+        //
+        //        let storage = UserDefaultsStorage(password: "password")
+        //
+        //        let accountManager = AccountManager(storage: storage)
+        //
+        //        let account = try accountManager.importAccount(privateKey: "2404a482a212386ecf1ed054547cf4d28348ddf73d23325a83373f803138f105")
+        //
+        //        erc20.deploy(with: account, binary: binaryData, gasLimit: BigUInt(200000), gasPrice: BigUInt(1000000)) { hash, error in
+        //            XCTAssertNil(error)
+        //            XCTAssertNotNil(hash)
+        //            expectation.fulfill()
+        //        }
+        //
+        //        wait(for: [expectation], timeout: 50)
+    }
 }
+

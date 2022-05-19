@@ -11,7 +11,7 @@ public enum ABIEncoderError: Error {
     case invalidStringParam
 }
 
-extension EthereumAddress: ABIEncodable {
+extension ABIEthereumAddress: ABIEncodable {
     
     public func encodeABI(isDynamic: Bool, sequenceElementType: SmartContractValueType?) throws -> Data {
         

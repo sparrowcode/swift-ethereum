@@ -34,3 +34,5 @@ public struct Account {
         return signedTransaction
     }
 }
+
+extension Account: Equatable {}

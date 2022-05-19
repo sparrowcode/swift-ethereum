@@ -18,3 +18,4 @@ public struct Receipt: Codable {
     public let type: String
 }
 
+extension Receipt: Equatable {}

@@ -25,3 +25,5 @@ public struct Signature {
     }
     
 }
+
+extension Signature: Equatable {}

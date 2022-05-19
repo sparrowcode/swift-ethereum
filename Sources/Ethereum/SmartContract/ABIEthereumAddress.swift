@@ -1,6 +1,6 @@
 import Foundation
 
-struct EthereumAddress {
+struct ABIEthereumAddress {
     let address: String
     
     init(_ address: String) {
@@ -8,4 +8,4 @@ struct EthereumAddress {
     }
 }
 
-extension EthereumAddress: Equatable {}
+extension ABIEthereumAddress: Equatable {}

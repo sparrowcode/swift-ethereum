@@ -18,3 +18,5 @@ public struct Log: Codable {
     public let logIndex: String
     public let removed: Bool
 }
+
+extension Log: Equatable {}
