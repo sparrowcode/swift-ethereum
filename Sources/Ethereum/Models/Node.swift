@@ -146,7 +146,6 @@ public struct Node {
     }
 }
 
-
 extension Node: Equatable {
     public static func == (lhs: Node, rhs: Node) -> Bool {
         return lhs.url == rhs.url && lhs.network == rhs.network

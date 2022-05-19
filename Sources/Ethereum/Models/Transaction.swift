@@ -1,14 +1,127 @@
 import Foundation
 import BigInt
 
+//public protocol TransactionProtocol: Encodable {
+//    var from: String? { get set }
+//    var input: Data { get set }
+//    var nonce: Int? { get }
+//    var to: String { get set }
+//    var value: BigUInt? { get set }
+//    var chainID: Int? { get }
+//
+//
+//    var blockHash: String? { get }
+//    var blockNumber: String? { get }
+//    var gas: String? { get }
+//    var hash: String? { get }
+//
+//}
+//
+//public protocol SignedTransactionProtocol: TransactionProtocol {
+//    var gasLimit: BigUInt { get }
+//    var gasPrice: BigUInt { get }
+//    var signature: Signature { get }
+//}
+
+//public struct TransferTransaction: SignedTransactionProtocol {
+//    public var gasLimit: BigUInt
+//
+//    public var gasPrice: BigUInt
+//
+//    public var signature: Signature
+//
+//    public var from: String?
+//
+//    public var input: Data
+//
+//    public var nonce: Int?
+//
+//    public var to: String
+//
+//    public var value: BigUInt?
+//
+//    public var chainID: Int?
+//
+//    public var blockHash: String?
+//
+//    public var blockNumber: String?
+//
+//    public var gas: String?
+//
+//    public var hash: String?
+//
+//    init(gasLimit: BigUInt, gasPrice: BigUInt, input: Data = Data(), to: String) {
+//        self.gasLimit = gasLimit
+//        self.gasPrice = gasPrice
+//        self.input = input
+//        self.to = to
+//        self.value = nil
+//    }
+//}
+
+//struct SignableTransaction: TransactionProtocol {
+//    var from: String?
+//
+//    var input: Data
+//
+//    var nonce: Int?
+//
+//    var to: String
+//
+//    var value: BigUInt?
+//
+//    var chainID: Int?
+//
+//    var blockHash: String?
+//
+//    var blockNumber: String?
+//
+//    var gas: String?
+//
+//    var hash: String?
+//
+//
+//}
+
+//struct SignedTransaction: SignedTransactionProtocol {
+//
+//    var blockHash: String?
+//
+//    var blockNumber: String?
+//
+//    var gas: String?
+//
+//    var hash: String?
+//
+//    var gasLimit: BigUInt
+//
+//    var gasPrice: BigUInt
+//
+//    var signature: Signature
+//
+//    var from: String?
+//
+//    var input: Data
+//
+//    var nonce: Int?
+//
+//    var to: String
+//
+//    var value: BigUInt?
+//
+//    var chainID: Int?
+//
+//}
+
+
 public struct Transaction: Codable {
     
     public let blockHash: String?
     public let blockNumber: String?
     public let from: String?
     public let gas: String?
-    public let gasLimit: BigUInt?
-    public let gasPrice: BigUInt?
+    public var gasLimit: BigUInt?
+    public var gasPrice: BigUInt?
     public var hash: String?
     public let input: Data
     public var nonce: Int?
@@ -158,14 +271,14 @@ extension Transaction: RLPEncodable {
         if let signature = signature {
             
             let array: [RLPEncodable?] = [nonce,
-                                 gasPrice,
-                                 gasLimit,
-                                 to,
-                                 value,
-                                 input,
-                                 signature.v,
-                                 signature.r,
-                                 signature.s]
+                                          gasPrice,
+                                          gasLimit,
+                                          to,
+                                          value,
+                                          input,
+                                          signature.v,
+                                          signature.r,
+                                          signature.s]
             
             let arrayRLP = array.compactMap { $0 }
             
@@ -174,14 +287,14 @@ extension Transaction: RLPEncodable {
         } else {
             
             let array: [RLPEncodable?] = [nonce,
-                                 gasPrice,
-                                 gasLimit,
-                                 to,
-                                 value,
-                                 input,
-                                 chainID,
-                                 0,
-                                 0]
+                                          gasPrice,
+                                          gasLimit,
+                                          to,
+                                          value,
+                                          input,
+                                          chainID,
+                                          0,
+                                          0]
             
             let arrayRLP: [RLPEncodable] = array.compactMap { $0 }
             
@@ -190,4 +303,20 @@ extension Transaction: RLPEncodable {
     }
 }
 
+
 extension Transaction: Equatable {}
+
+//extension Transaction {
+//    mutating func estimateGas() throws {
+//        
+//        EthereumService.estimateGas(for: self) { gasLimit, error in
+//            
+//            guard gasLimit = gasLimit, error == nil else {
+//                throw error
+//            }
+//            
+//            self.gasLimit = gasLimit
+//        }
+//        
+//    }
+//}

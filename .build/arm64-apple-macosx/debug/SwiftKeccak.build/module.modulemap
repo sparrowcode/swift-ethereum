@@ -1,0 +1,4 @@
+module SwiftKeccak {
+    header "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/SwiftKeccak.build/SwiftKeccak-Swift.h"
+    requires objc
+}

@@ -12,7 +12,6 @@ public struct iCloudStorage: StorageProtocol {
     
     public func storePrivateKey(_ privateKey: String) throws {
         
-        
     }
     
     public func getPrivateKey(for address: String) throws -> String {

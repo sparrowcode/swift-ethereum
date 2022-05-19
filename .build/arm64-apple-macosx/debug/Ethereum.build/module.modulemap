@@ -1,0 +1,4 @@
+module Ethereum {
+    header "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/arm64-apple-macosx/debug/Ethereum.build/Ethereum-Swift.h"
+    requires objc
+}

@@ -1,21 +1,10 @@
 import Foundation
 import BigInt
 
-protocol SmartContractProtocol {
+public protocol SmartContractProtocol {
     
-    init(abi: String, address: String)
+    var address: String { get set }
     
-    // MARK: - write an extension with default realisation
-    func method<T: Codable>(name: String, params: T) -> Transaction
-    
-    var allMethods: [String] { get }
-    
-    var allEvents: [String] { get }
-    
-}
-
-extension SmartContractProtocol {
-    // base realisation of smart contracts (call method)
 }
 
 

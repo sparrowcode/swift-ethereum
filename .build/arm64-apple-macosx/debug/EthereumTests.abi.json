@@ -1,0 +1,4255 @@
+{
+  "kind": "Root",
+  "name": "TopLevel",
+  "printedName": "TopLevel",
+  "children": [
+    {
+      "kind": "Import",
+      "name": "BigInt",
+      "printedName": "BigInt",
+      "declKind": "Import",
+      "moduleName": "EthereumTests"
+    },
+    {
+      "kind": "Import",
+      "name": "Ethereum",
+      "printedName": "Ethereum",
+      "declKind": "Import",
+      "moduleName": "EthereumTests"
+    },
+    {
+      "kind": "Import",
+      "name": "SwiftOnoneSupport",
+      "printedName": "SwiftOnoneSupport",
+      "declKind": "Import",
+      "moduleName": "EthereumTests"
+    },
+    {
+      "kind": "Import",
+      "name": "XCTest",
+      "printedName": "XCTest",
+      "declKind": "Import",
+      "moduleName": "EthereumTests"
+    },
+    {
+      "kind": "Import",
+      "name": "_Concurrency",
+      "printedName": "_Concurrency",
+      "declKind": "Import",
+      "moduleName": "EthereumTests"
+    },
+    {
+      "kind": "TypeDecl",
+      "name": "ABIDecoderTests",
+      "printedName": "ABIDecoderTests",
+      "children": [
+        {
+          "kind": "Function",
+          "name": "testDecodeResponse",
+          "printedName": "testDecodeResponse()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)ABIDecoderTests(im)testDecodeResponseAndReturnError:",
+          "mangledName": "$s13EthereumTests010ABIDecoderB0C18testDecodeResponseyyKF",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "testDecodeResponse2",
+          "printedName": "testDecodeResponse2()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)ABIDecoderTests(im)testDecodeResponse2AndReturnError:",
+          "mangledName": "$s13EthereumTests010ABIDecoderB0C19testDecodeResponse2yyKF",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "testDecodeResponse3",
+          "printedName": "testDecodeResponse3()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)ABIDecoderTests(im)testDecodeResponse3AndReturnError:",
+          "mangledName": "$s13EthereumTests010ABIDecoderB0C19testDecodeResponse3yyKF",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "testDecodeResponse4",
+          "printedName": "testDecodeResponse4()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)ABIDecoderTests(im)testDecodeResponse4AndReturnError:",
+          "mangledName": "$s13EthereumTests010ABIDecoderB0C19testDecodeResponse4yyKF",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "testDecodeResponse5",
+          "printedName": "testDecodeResponse5()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)ABIDecoderTests(im)testDecodeResponse5AndReturnError:",
+          "mangledName": "$s13EthereumTests010ABIDecoderB0C19testDecodeResponse5yyKF",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Constructor",
+          "name": "init",
+          "printedName": "init(invocation:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "ABIDecoderTests",
+              "printedName": "EthereumTests.ABIDecoderTests",
+              "usr": "c:@M@EthereumTests@objc(cs)ABIDecoderTests"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Optional",
+              "printedName": "Foundation.NSInvocation?",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "NSInvocation",
+                  "printedName": "Foundation.NSInvocation",
+                  "usr": "c:objc(cs)NSInvocation"
+                }
+              ],
+              "usr": "s:Sq"
+            }
+          ],
+          "declKind": "Constructor",
+          "usr": "c:@M@EthereumTests@objc(cs)ABIDecoderTests(im)initWithInvocation:",
+          "mangledName": "$s13EthereumTests010ABIDecoderB0C10invocationACSo12NSInvocationCSg_tcfc",
+          "moduleName": "EthereumTests",
+          "overriding": true,
+          "implicit": true,
+          "objc_name": "initWithInvocation:",
+          "declAttributes": [
+            "Dynamic",
+            "ObjC",
+            "Override"
+          ],
+          "init_kind": "Designated"
+        },
+        {
+          "kind": "Constructor",
+          "name": "init",
+          "printedName": "init(selector:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "ABIDecoderTests",
+              "printedName": "EthereumTests.ABIDecoderTests",
+              "usr": "c:@M@EthereumTests@objc(cs)ABIDecoderTests"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Selector",
+              "printedName": "ObjectiveC.Selector",
+              "usr": "s:10ObjectiveC8SelectorV"
+            }
+          ],
+          "declKind": "Constructor",
+          "usr": "c:@M@EthereumTests@objc(cs)ABIDecoderTests(im)initWithSelector:",
+          "mangledName": "$s13EthereumTests010ABIDecoderB0C8selectorAC10ObjectiveC8SelectorV_tcfc",
+          "moduleName": "EthereumTests",
+          "overriding": true,
+          "implicit": true,
+          "objc_name": "initWithSelector:",
+          "declAttributes": [
+            "Dynamic",
+            "ObjC",
+            "Override"
+          ],
+          "init_kind": "Designated"
+        },
+        {
+          "kind": "Constructor",
+          "name": "init",
+          "printedName": "init()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "ABIDecoderTests",
+              "printedName": "EthereumTests.ABIDecoderTests",
+              "usr": "c:@M@EthereumTests@objc(cs)ABIDecoderTests"
+            }
+          ],
+          "declKind": "Constructor",
+          "usr": "c:@M@EthereumTests@objc(cs)ABIDecoderTests(im)init",
+          "mangledName": "$s13EthereumTests010ABIDecoderB0CACycfc",
+          "moduleName": "EthereumTests",
+          "overriding": true,
+          "implicit": true,
+          "objc_name": "init",
+          "declAttributes": [
+            "Dynamic",
+            "ObjC",
+            "Override"
+          ],
+          "init_kind": "Designated"
+        }
+      ],
+      "declKind": "Class",
+      "usr": "c:@M@EthereumTests@objc(cs)ABIDecoderTests",
+      "mangledName": "$s13EthereumTests010ABIDecoderB0C",
+      "moduleName": "EthereumTests",
+      "isOpen": true,
+      "declAttributes": [
+        "ObjC"
+      ],
+      "superclassUsr": "c:objc(cs)XCTestCase",
+      "inheritsConvenienceInitializers": true,
+      "superclassNames": [
+        "XCTest.XCTestCase",
+        "XCTest.XCTest",
+        "ObjectiveC.NSObject"
+      ],
+      "conformances": [
+        {
+          "kind": "Conformance",
+          "name": "Equatable",
+          "printedName": "Equatable",
+          "usr": "s:SQ",
+          "mangledName": "$sSQ"
+        },
+        {
+          "kind": "Conformance",
+          "name": "Hashable",
+          "printedName": "Hashable",
+          "usr": "s:SH",
+          "mangledName": "$sSH"
+        },
+        {
+          "kind": "Conformance",
+          "name": "CVarArg",
+          "printedName": "CVarArg",
+          "usr": "s:s7CVarArgP",
+          "mangledName": "$ss7CVarArgP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "_KeyValueCodingAndObservingPublishing",
+          "printedName": "_KeyValueCodingAndObservingPublishing",
+          "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+          "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "_KeyValueCodingAndObserving",
+          "printedName": "_KeyValueCodingAndObserving",
+          "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+          "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "CustomStringConvertible",
+          "printedName": "CustomStringConvertible",
+          "usr": "s:s23CustomStringConvertibleP",
+          "mangledName": "$ss23CustomStringConvertibleP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "CustomDebugStringConvertible",
+          "printedName": "CustomDebugStringConvertible",
+          "usr": "s:s28CustomDebugStringConvertibleP",
+          "mangledName": "$ss28CustomDebugStringConvertibleP"
+        }
+      ]
+    },
+    {
+      "kind": "Import",
+      "name": "BigInt",
+      "printedName": "BigInt",
+      "declKind": "Import",
+      "moduleName": "EthereumTests"
+    },
+    {
+      "kind": "Import",
+      "name": "Ethereum",
+      "printedName": "Ethereum",
+      "declKind": "Import",
+      "moduleName": "EthereumTests"
+    },
+    {
+      "kind": "Import",
+      "name": "SwiftOnoneSupport",
+      "printedName": "SwiftOnoneSupport",
+      "declKind": "Import",
+      "moduleName": "EthereumTests"
+    },
+    {
+      "kind": "Import",
+      "name": "XCTest",
+      "printedName": "XCTest",
+      "declKind": "Import",
+      "moduleName": "EthereumTests"
+    },
+    {
+      "kind": "Import",
+      "name": "_Concurrency",
+      "printedName": "_Concurrency",
+      "declKind": "Import",
+      "moduleName": "EthereumTests"
+    },
+    {
+      "kind": "TypeDecl",
+      "name": "ABIEncoderTests",
+      "printedName": "ABIEncoderTests",
+      "children": [
+        {
+          "kind": "Function",
+          "name": "testEncodeMethod",
+          "printedName": "testEncodeMethod()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)ABIEncoderTests(im)testEncodeMethodAndReturnError:",
+          "mangledName": "$s13EthereumTests010ABIEncoderB0C16testEncodeMethodyyKF",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "testEncodeMethod2",
+          "printedName": "testEncodeMethod2()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)ABIEncoderTests(im)testEncodeMethod2AndReturnError:",
+          "mangledName": "$s13EthereumTests010ABIEncoderB0C17testEncodeMethod2yyKF",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "testEncodeMethod3",
+          "printedName": "testEncodeMethod3()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)ABIEncoderTests(im)testEncodeMethod3AndReturnError:",
+          "mangledName": "$s13EthereumTests010ABIEncoderB0C17testEncodeMethod3yyKF",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "testEncodeMethod4",
+          "printedName": "testEncodeMethod4()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)ABIEncoderTests(im)testEncodeMethod4AndReturnError:",
+          "mangledName": "$s13EthereumTests010ABIEncoderB0C17testEncodeMethod4yyKF",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "testEncodeMethod5",
+          "printedName": "testEncodeMethod5()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)ABIEncoderTests(im)testEncodeMethod5AndReturnError:",
+          "mangledName": "$s13EthereumTests010ABIEncoderB0C17testEncodeMethod5yyKF",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Constructor",
+          "name": "init",
+          "printedName": "init(invocation:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "ABIEncoderTests",
+              "printedName": "EthereumTests.ABIEncoderTests",
+              "usr": "c:@M@EthereumTests@objc(cs)ABIEncoderTests"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Optional",
+              "printedName": "Foundation.NSInvocation?",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "NSInvocation",
+                  "printedName": "Foundation.NSInvocation",
+                  "usr": "c:objc(cs)NSInvocation"
+                }
+              ],
+              "usr": "s:Sq"
+            }
+          ],
+          "declKind": "Constructor",
+          "usr": "c:@M@EthereumTests@objc(cs)ABIEncoderTests(im)initWithInvocation:",
+          "mangledName": "$s13EthereumTests010ABIEncoderB0C10invocationACSo12NSInvocationCSg_tcfc",
+          "moduleName": "EthereumTests",
+          "overriding": true,
+          "implicit": true,
+          "objc_name": "initWithInvocation:",
+          "declAttributes": [
+            "Dynamic",
+            "ObjC",
+            "Override"
+          ],
+          "init_kind": "Designated"
+        },
+        {
+          "kind": "Constructor",
+          "name": "init",
+          "printedName": "init(selector:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "ABIEncoderTests",
+              "printedName": "EthereumTests.ABIEncoderTests",
+              "usr": "c:@M@EthereumTests@objc(cs)ABIEncoderTests"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Selector",
+              "printedName": "ObjectiveC.Selector",
+              "usr": "s:10ObjectiveC8SelectorV"
+            }
+          ],
+          "declKind": "Constructor",
+          "usr": "c:@M@EthereumTests@objc(cs)ABIEncoderTests(im)initWithSelector:",
+          "mangledName": "$s13EthereumTests010ABIEncoderB0C8selectorAC10ObjectiveC8SelectorV_tcfc",
+          "moduleName": "EthereumTests",
+          "overriding": true,
+          "implicit": true,
+          "objc_name": "initWithSelector:",
+          "declAttributes": [
+            "Dynamic",
+            "ObjC",
+            "Override"
+          ],
+          "init_kind": "Designated"
+        },
+        {
+          "kind": "Constructor",
+          "name": "init",
+          "printedName": "init()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "ABIEncoderTests",
+              "printedName": "EthereumTests.ABIEncoderTests",
+              "usr": "c:@M@EthereumTests@objc(cs)ABIEncoderTests"
+            }
+          ],
+          "declKind": "Constructor",
+          "usr": "c:@M@EthereumTests@objc(cs)ABIEncoderTests(im)init",
+          "mangledName": "$s13EthereumTests010ABIEncoderB0CACycfc",
+          "moduleName": "EthereumTests",
+          "overriding": true,
+          "implicit": true,
+          "objc_name": "init",
+          "declAttributes": [
+            "Dynamic",
+            "ObjC",
+            "Override"
+          ],
+          "init_kind": "Designated"
+        }
+      ],
+      "declKind": "Class",
+      "usr": "c:@M@EthereumTests@objc(cs)ABIEncoderTests",
+      "mangledName": "$s13EthereumTests010ABIEncoderB0C",
+      "moduleName": "EthereumTests",
+      "isOpen": true,
+      "declAttributes": [
+        "ObjC"
+      ],
+      "superclassUsr": "c:objc(cs)XCTestCase",
+      "inheritsConvenienceInitializers": true,
+      "superclassNames": [
+        "XCTest.XCTestCase",
+        "XCTest.XCTest",
+        "ObjectiveC.NSObject"
+      ],
+      "conformances": [
+        {
+          "kind": "Conformance",
+          "name": "Equatable",
+          "printedName": "Equatable",
+          "usr": "s:SQ",
+          "mangledName": "$sSQ"
+        },
+        {
+          "kind": "Conformance",
+          "name": "Hashable",
+          "printedName": "Hashable",
+          "usr": "s:SH",
+          "mangledName": "$sSH"
+        },
+        {
+          "kind": "Conformance",
+          "name": "CVarArg",
+          "printedName": "CVarArg",
+          "usr": "s:s7CVarArgP",
+          "mangledName": "$ss7CVarArgP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "_KeyValueCodingAndObservingPublishing",
+          "printedName": "_KeyValueCodingAndObservingPublishing",
+          "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+          "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "_KeyValueCodingAndObserving",
+          "printedName": "_KeyValueCodingAndObserving",
+          "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+          "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "CustomStringConvertible",
+          "printedName": "CustomStringConvertible",
+          "usr": "s:s23CustomStringConvertibleP",
+          "mangledName": "$ss23CustomStringConvertibleP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "CustomDebugStringConvertible",
+          "printedName": "CustomDebugStringConvertible",
+          "usr": "s:s28CustomDebugStringConvertibleP",
+          "mangledName": "$ss28CustomDebugStringConvertibleP"
+        }
+      ]
+    },
+    {
+      "kind": "Import",
+      "name": "BigInt",
+      "printedName": "BigInt",
+      "declKind": "Import",
+      "moduleName": "EthereumTests"
+    },
+    {
+      "kind": "Import",
+      "name": "Ethereum",
+      "printedName": "Ethereum",
+      "declKind": "Import",
+      "moduleName": "EthereumTests"
+    },
+    {
+      "kind": "Import",
+      "name": "SwiftOnoneSupport",
+      "printedName": "SwiftOnoneSupport",
+      "declKind": "Import",
+      "moduleName": "EthereumTests"
+    },
+    {
+      "kind": "Import",
+      "name": "XCTest",
+      "printedName": "XCTest",
+      "declKind": "Import",
+      "moduleName": "EthereumTests"
+    },
+    {
+      "kind": "Import",
+      "name": "_Concurrency",
+      "printedName": "_Concurrency",
+      "declKind": "Import",
+      "moduleName": "EthereumTests"
+    },
+    {
+      "kind": "TypeDecl",
+      "name": "AccountManagerTests",
+      "printedName": "AccountManagerTests",
+      "children": [
+        {
+          "kind": "Var",
+          "name": "storage",
+          "printedName": "storage",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "UserDefaultsStorage",
+              "printedName": "Ethereum.UserDefaultsStorage",
+              "usr": "s:8Ethereum19UserDefaultsStorageV"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:13EthereumTests014AccountManagerB0C7storage0A019UserDefaultsStorageVvpZ",
+          "mangledName": "$s13EthereumTests014AccountManagerB0C7storage0A019UserDefaultsStorageVvpZ",
+          "moduleName": "EthereumTests",
+          "static": true,
+          "declAttributes": [
+            "HasInitialValue",
+            "Final",
+            "HasStorage"
+          ],
+          "isLet": true,
+          "hasStorage": true,
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "UserDefaultsStorage",
+                  "printedName": "Ethereum.UserDefaultsStorage",
+                  "usr": "s:8Ethereum19UserDefaultsStorageV"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:13EthereumTests014AccountManagerB0C7storage0A019UserDefaultsStorageVvgZ",
+              "mangledName": "$s13EthereumTests014AccountManagerB0C7storage0A019UserDefaultsStorageVvgZ",
+              "moduleName": "EthereumTests",
+              "static": true,
+              "implicit": true,
+              "declAttributes": [
+                "Final"
+              ],
+              "accessorKind": "get"
+            }
+          ]
+        },
+        {
+          "kind": "Var",
+          "name": "accountManager",
+          "printedName": "accountManager",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "AccountManager",
+              "printedName": "Ethereum.AccountManager",
+              "usr": "s:8Ethereum14AccountManagerC"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:13EthereumTests014AccountManagerB0C07accountD00A00cD0Cvp",
+          "mangledName": "$s13EthereumTests014AccountManagerB0C07accountD00A00cD0Cvp",
+          "moduleName": "EthereumTests",
+          "declAttributes": [
+            "HasInitialValue",
+            "Final",
+            "HasStorage"
+          ],
+          "fixedbinaryorder": 0,
+          "isLet": true,
+          "hasStorage": true,
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "AccountManager",
+                  "printedName": "Ethereum.AccountManager",
+                  "usr": "s:8Ethereum14AccountManagerC"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:13EthereumTests014AccountManagerB0C07accountD00A00cD0Cvg",
+              "mangledName": "$s13EthereumTests014AccountManagerB0C07accountD00A00cD0Cvg",
+              "moduleName": "EthereumTests",
+              "implicit": true,
+              "declAttributes": [
+                "Final"
+              ],
+              "accessorKind": "get"
+            }
+          ]
+        },
+        {
+          "kind": "Function",
+          "name": "testCreateAccount",
+          "printedName": "testCreateAccount()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)AccountManagerTests(im)testCreateAccountAndReturnError:",
+          "mangledName": "$s13EthereumTests014AccountManagerB0C010testCreateC0yyKF",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "testImportAccount",
+          "printedName": "testImportAccount()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)AccountManagerTests(im)testImportAccountAndReturnError:",
+          "mangledName": "$s13EthereumTests014AccountManagerB0C010testImportC0yyKF",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "testRemoveAccount",
+          "printedName": "testRemoveAccount()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)AccountManagerTests(im)testRemoveAccountAndReturnError:",
+          "mangledName": "$s13EthereumTests014AccountManagerB0C010testRemoveC0yyKF",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Constructor",
+          "name": "init",
+          "printedName": "init(invocation:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "AccountManagerTests",
+              "printedName": "EthereumTests.AccountManagerTests",
+              "usr": "c:@M@EthereumTests@objc(cs)AccountManagerTests"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Optional",
+              "printedName": "Foundation.NSInvocation?",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "NSInvocation",
+                  "printedName": "Foundation.NSInvocation",
+                  "usr": "c:objc(cs)NSInvocation"
+                }
+              ],
+              "usr": "s:Sq"
+            }
+          ],
+          "declKind": "Constructor",
+          "usr": "c:@M@EthereumTests@objc(cs)AccountManagerTests(im)initWithInvocation:",
+          "mangledName": "$s13EthereumTests014AccountManagerB0C10invocationACSo12NSInvocationCSg_tcfc",
+          "moduleName": "EthereumTests",
+          "overriding": true,
+          "implicit": true,
+          "objc_name": "initWithInvocation:",
+          "declAttributes": [
+            "Dynamic",
+            "ObjC",
+            "Override"
+          ],
+          "init_kind": "Designated"
+        },
+        {
+          "kind": "Constructor",
+          "name": "init",
+          "printedName": "init(selector:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "AccountManagerTests",
+              "printedName": "EthereumTests.AccountManagerTests",
+              "usr": "c:@M@EthereumTests@objc(cs)AccountManagerTests"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Selector",
+              "printedName": "ObjectiveC.Selector",
+              "usr": "s:10ObjectiveC8SelectorV"
+            }
+          ],
+          "declKind": "Constructor",
+          "usr": "c:@M@EthereumTests@objc(cs)AccountManagerTests(im)initWithSelector:",
+          "mangledName": "$s13EthereumTests014AccountManagerB0C8selectorAC10ObjectiveC8SelectorV_tcfc",
+          "moduleName": "EthereumTests",
+          "overriding": true,
+          "implicit": true,
+          "objc_name": "initWithSelector:",
+          "declAttributes": [
+            "Dynamic",
+            "ObjC",
+            "Override"
+          ],
+          "init_kind": "Designated"
+        },
+        {
+          "kind": "Constructor",
+          "name": "init",
+          "printedName": "init()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "AccountManagerTests",
+              "printedName": "EthereumTests.AccountManagerTests",
+              "usr": "c:@M@EthereumTests@objc(cs)AccountManagerTests"
+            }
+          ],
+          "declKind": "Constructor",
+          "usr": "c:@M@EthereumTests@objc(cs)AccountManagerTests(im)init",
+          "mangledName": "$s13EthereumTests014AccountManagerB0CACycfc",
+          "moduleName": "EthereumTests",
+          "overriding": true,
+          "implicit": true,
+          "objc_name": "init",
+          "declAttributes": [
+            "Dynamic",
+            "ObjC",
+            "Override"
+          ],
+          "init_kind": "Designated"
+        }
+      ],
+      "declKind": "Class",
+      "usr": "c:@M@EthereumTests@objc(cs)AccountManagerTests",
+      "mangledName": "$s13EthereumTests014AccountManagerB0C",
+      "moduleName": "EthereumTests",
+      "isOpen": true,
+      "declAttributes": [
+        "ObjC"
+      ],
+      "superclassUsr": "c:objc(cs)XCTestCase",
+      "inheritsConvenienceInitializers": true,
+      "superclassNames": [
+        "XCTest.XCTestCase",
+        "XCTest.XCTest",
+        "ObjectiveC.NSObject"
+      ],
+      "conformances": [
+        {
+          "kind": "Conformance",
+          "name": "Equatable",
+          "printedName": "Equatable",
+          "usr": "s:SQ",
+          "mangledName": "$sSQ"
+        },
+        {
+          "kind": "Conformance",
+          "name": "Hashable",
+          "printedName": "Hashable",
+          "usr": "s:SH",
+          "mangledName": "$sSH"
+        },
+        {
+          "kind": "Conformance",
+          "name": "CVarArg",
+          "printedName": "CVarArg",
+          "usr": "s:s7CVarArgP",
+          "mangledName": "$ss7CVarArgP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "_KeyValueCodingAndObservingPublishing",
+          "printedName": "_KeyValueCodingAndObservingPublishing",
+          "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+          "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "_KeyValueCodingAndObserving",
+          "printedName": "_KeyValueCodingAndObserving",
+          "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+          "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "CustomStringConvertible",
+          "printedName": "CustomStringConvertible",
+          "usr": "s:s23CustomStringConvertibleP",
+          "mangledName": "$ss23CustomStringConvertibleP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "CustomDebugStringConvertible",
+          "printedName": "CustomDebugStringConvertible",
+          "usr": "s:s28CustomDebugStringConvertibleP",
+          "mangledName": "$ss28CustomDebugStringConvertibleP"
+        }
+      ]
+    },
+    {
+      "kind": "Import",
+      "name": "BigInt",
+      "printedName": "BigInt",
+      "declKind": "Import",
+      "moduleName": "EthereumTests"
+    },
+    {
+      "kind": "Import",
+      "name": "Ethereum",
+      "printedName": "Ethereum",
+      "declKind": "Import",
+      "moduleName": "EthereumTests"
+    },
+    {
+      "kind": "Import",
+      "name": "SwiftOnoneSupport",
+      "printedName": "SwiftOnoneSupport",
+      "declKind": "Import",
+      "moduleName": "EthereumTests"
+    },
+    {
+      "kind": "Import",
+      "name": "XCTest",
+      "printedName": "XCTest",
+      "declKind": "Import",
+      "moduleName": "EthereumTests"
+    },
+    {
+      "kind": "Import",
+      "name": "_Concurrency",
+      "printedName": "_Concurrency",
+      "declKind": "Import",
+      "moduleName": "EthereumTests"
+    },
+    {
+      "kind": "TypeDecl",
+      "name": "ERC20Tests",
+      "printedName": "ERC20Tests",
+      "children": [
+        {
+          "kind": "TypeDecl",
+          "name": "SPToken",
+          "printedName": "SPToken",
+          "children": [
+            {
+              "kind": "Var",
+              "name": "address",
+              "printedName": "address",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "String",
+                  "printedName": "Swift.String",
+                  "usr": "s:SS"
+                }
+              ],
+              "declKind": "Var",
+              "usr": "s:13EthereumTests05ERC20B0C7SPTokenV7addressSSvp",
+              "mangledName": "$s13EthereumTests05ERC20B0C7SPTokenV7addressSSvp",
+              "moduleName": "EthereumTests",
+              "declAttributes": [
+                "HasStorage"
+              ],
+              "fixedbinaryorder": 0,
+              "hasStorage": true,
+              "accessors": [
+                {
+                  "kind": "Accessor",
+                  "name": "Get",
+                  "printedName": "Get()",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "String",
+                      "printedName": "Swift.String",
+                      "usr": "s:SS"
+                    }
+                  ],
+                  "declKind": "Accessor",
+                  "usr": "s:13EthereumTests05ERC20B0C7SPTokenV7addressSSvg",
+                  "mangledName": "$s13EthereumTests05ERC20B0C7SPTokenV7addressSSvg",
+                  "moduleName": "EthereumTests",
+                  "implicit": true,
+                  "declAttributes": [
+                    "Transparent"
+                  ],
+                  "accessorKind": "get"
+                },
+                {
+                  "kind": "Accessor",
+                  "name": "Set",
+                  "printedName": "Set()",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "Void",
+                      "printedName": "()"
+                    },
+                    {
+                      "kind": "TypeNominal",
+                      "name": "String",
+                      "printedName": "Swift.String",
+                      "usr": "s:SS"
+                    }
+                  ],
+                  "declKind": "Accessor",
+                  "usr": "s:13EthereumTests05ERC20B0C7SPTokenV7addressSSvs",
+                  "mangledName": "$s13EthereumTests05ERC20B0C7SPTokenV7addressSSvs",
+                  "moduleName": "EthereumTests",
+                  "implicit": true,
+                  "declAttributes": [
+                    "Transparent"
+                  ],
+                  "accessorKind": "set"
+                },
+                {
+                  "kind": "Accessor",
+                  "name": "Modify",
+                  "printedName": "Modify()",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "Void",
+                      "printedName": "()"
+                    }
+                  ],
+                  "declKind": "Accessor",
+                  "usr": "s:13EthereumTests05ERC20B0C7SPTokenV7addressSSvM",
+                  "mangledName": "$s13EthereumTests05ERC20B0C7SPTokenV7addressSSvM",
+                  "moduleName": "EthereumTests",
+                  "implicit": true,
+                  "declAttributes": [
+                    "Transparent"
+                  ],
+                  "accessorKind": "_modify"
+                }
+              ]
+            },
+            {
+              "kind": "Constructor",
+              "name": "init",
+              "printedName": "init(address:)",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "SPToken",
+                  "printedName": "EthereumTests.ERC20Tests.SPToken",
+                  "usr": "s:13EthereumTests05ERC20B0C7SPTokenV"
+                },
+                {
+                  "kind": "TypeNominal",
+                  "name": "String",
+                  "printedName": "Swift.String",
+                  "usr": "s:SS"
+                }
+              ],
+              "declKind": "Constructor",
+              "usr": "s:13EthereumTests05ERC20B0C7SPTokenV7addressAESS_tcfc",
+              "mangledName": "$s13EthereumTests05ERC20B0C7SPTokenV7addressAESS_tcfc",
+              "moduleName": "EthereumTests",
+              "implicit": true,
+              "init_kind": "Designated"
+            }
+          ],
+          "declKind": "Struct",
+          "usr": "s:13EthereumTests05ERC20B0C7SPTokenV",
+          "mangledName": "$s13EthereumTests05ERC20B0C7SPTokenV",
+          "moduleName": "EthereumTests",
+          "conformances": [
+            {
+              "kind": "Conformance",
+              "name": "ERC20Contract",
+              "printedName": "ERC20Contract",
+              "usr": "s:8Ethereum13ERC20ContractP",
+              "mangledName": "$s8Ethereum13ERC20ContractP"
+            },
+            {
+              "kind": "Conformance",
+              "name": "Sendable",
+              "printedName": "Sendable",
+              "usr": "s:s8SendableP",
+              "mangledName": "$ss8SendableP"
+            }
+          ]
+        },
+        {
+          "kind": "Function",
+          "name": "setUpWithError",
+          "printedName": "setUpWithError()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)ERC20Tests(im)setUpWithError:",
+          "mangledName": "$s13EthereumTests05ERC20B0C14setUpWithErroryyKF",
+          "moduleName": "EthereumTests",
+          "overriding": true,
+          "isOpen": true,
+          "objc_name": "setUpWithError:",
+          "declAttributes": [
+            "Dynamic",
+            "ObjC",
+            "Override"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "testBalance",
+          "printedName": "testBalance()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)ERC20Tests(im)testBalanceAndReturnError:",
+          "mangledName": "$s13EthereumTests05ERC20B0C11testBalanceyyKF",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "testTransfer",
+          "printedName": "testTransfer()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)ERC20Tests(im)testTransferAndReturnError:",
+          "mangledName": "$s13EthereumTests05ERC20B0C12testTransferyyKF",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "testDecimals",
+          "printedName": "testDecimals()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)ERC20Tests(im)testDecimalsAndReturnError:",
+          "mangledName": "$s13EthereumTests05ERC20B0C12testDecimalsyyKF",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "testSymbol",
+          "printedName": "testSymbol()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)ERC20Tests(im)testSymbolAndReturnError:",
+          "mangledName": "$s13EthereumTests05ERC20B0C10testSymbolyyKF",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "testTotalSupply",
+          "printedName": "testTotalSupply()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)ERC20Tests(im)testTotalSupplyAndReturnError:",
+          "mangledName": "$s13EthereumTests05ERC20B0C15testTotalSupplyyyKF",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "testName",
+          "printedName": "testName()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)ERC20Tests(im)testNameAndReturnError:",
+          "mangledName": "$s13EthereumTests05ERC20B0C8testNameyyKF",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "testApprove",
+          "printedName": "testApprove()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)ERC20Tests(im)testApproveAndReturnError:",
+          "mangledName": "$s13EthereumTests05ERC20B0C11testApproveyyKF",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Constructor",
+          "name": "init",
+          "printedName": "init(invocation:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "ERC20Tests",
+              "printedName": "EthereumTests.ERC20Tests",
+              "usr": "c:@M@EthereumTests@objc(cs)ERC20Tests"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Optional",
+              "printedName": "Foundation.NSInvocation?",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "NSInvocation",
+                  "printedName": "Foundation.NSInvocation",
+                  "usr": "c:objc(cs)NSInvocation"
+                }
+              ],
+              "usr": "s:Sq"
+            }
+          ],
+          "declKind": "Constructor",
+          "usr": "c:@M@EthereumTests@objc(cs)ERC20Tests(im)initWithInvocation:",
+          "mangledName": "$s13EthereumTests05ERC20B0C10invocationACSo12NSInvocationCSg_tcfc",
+          "moduleName": "EthereumTests",
+          "overriding": true,
+          "implicit": true,
+          "objc_name": "initWithInvocation:",
+          "declAttributes": [
+            "Dynamic",
+            "ObjC",
+            "Override"
+          ],
+          "init_kind": "Designated"
+        },
+        {
+          "kind": "Constructor",
+          "name": "init",
+          "printedName": "init(selector:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "ERC20Tests",
+              "printedName": "EthereumTests.ERC20Tests",
+              "usr": "c:@M@EthereumTests@objc(cs)ERC20Tests"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Selector",
+              "printedName": "ObjectiveC.Selector",
+              "usr": "s:10ObjectiveC8SelectorV"
+            }
+          ],
+          "declKind": "Constructor",
+          "usr": "c:@M@EthereumTests@objc(cs)ERC20Tests(im)initWithSelector:",
+          "mangledName": "$s13EthereumTests05ERC20B0C8selectorAC10ObjectiveC8SelectorV_tcfc",
+          "moduleName": "EthereumTests",
+          "overriding": true,
+          "implicit": true,
+          "objc_name": "initWithSelector:",
+          "declAttributes": [
+            "Dynamic",
+            "ObjC",
+            "Override"
+          ],
+          "init_kind": "Designated"
+        },
+        {
+          "kind": "Constructor",
+          "name": "init",
+          "printedName": "init()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "ERC20Tests",
+              "printedName": "EthereumTests.ERC20Tests",
+              "usr": "c:@M@EthereumTests@objc(cs)ERC20Tests"
+            }
+          ],
+          "declKind": "Constructor",
+          "usr": "c:@M@EthereumTests@objc(cs)ERC20Tests(im)init",
+          "mangledName": "$s13EthereumTests05ERC20B0CACycfc",
+          "moduleName": "EthereumTests",
+          "overriding": true,
+          "implicit": true,
+          "objc_name": "init",
+          "declAttributes": [
+            "Dynamic",
+            "ObjC",
+            "Override"
+          ],
+          "init_kind": "Designated"
+        }
+      ],
+      "declKind": "Class",
+      "usr": "c:@M@EthereumTests@objc(cs)ERC20Tests",
+      "mangledName": "$s13EthereumTests05ERC20B0C",
+      "moduleName": "EthereumTests",
+      "isOpen": true,
+      "declAttributes": [
+        "ObjC"
+      ],
+      "superclassUsr": "c:objc(cs)XCTestCase",
+      "inheritsConvenienceInitializers": true,
+      "superclassNames": [
+        "XCTest.XCTestCase",
+        "XCTest.XCTest",
+        "ObjectiveC.NSObject"
+      ],
+      "conformances": [
+        {
+          "kind": "Conformance",
+          "name": "Equatable",
+          "printedName": "Equatable",
+          "usr": "s:SQ",
+          "mangledName": "$sSQ"
+        },
+        {
+          "kind": "Conformance",
+          "name": "Hashable",
+          "printedName": "Hashable",
+          "usr": "s:SH",
+          "mangledName": "$sSH"
+        },
+        {
+          "kind": "Conformance",
+          "name": "CVarArg",
+          "printedName": "CVarArg",
+          "usr": "s:s7CVarArgP",
+          "mangledName": "$ss7CVarArgP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "_KeyValueCodingAndObservingPublishing",
+          "printedName": "_KeyValueCodingAndObservingPublishing",
+          "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+          "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "_KeyValueCodingAndObserving",
+          "printedName": "_KeyValueCodingAndObserving",
+          "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+          "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "CustomStringConvertible",
+          "printedName": "CustomStringConvertible",
+          "usr": "s:s23CustomStringConvertibleP",
+          "mangledName": "$ss23CustomStringConvertibleP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "CustomDebugStringConvertible",
+          "printedName": "CustomDebugStringConvertible",
+          "usr": "s:s28CustomDebugStringConvertibleP",
+          "mangledName": "$ss28CustomDebugStringConvertibleP"
+        }
+      ]
+    },
+    {
+      "kind": "Import",
+      "name": "BigInt",
+      "printedName": "BigInt",
+      "declKind": "Import",
+      "moduleName": "EthereumTests"
+    },
+    {
+      "kind": "Import",
+      "name": "Ethereum",
+      "printedName": "Ethereum",
+      "declKind": "Import",
+      "moduleName": "EthereumTests"
+    },
+    {
+      "kind": "Import",
+      "name": "SwiftOnoneSupport",
+      "printedName": "SwiftOnoneSupport",
+      "declKind": "Import",
+      "moduleName": "EthereumTests"
+    },
+    {
+      "kind": "Import",
+      "name": "XCTest",
+      "printedName": "XCTest",
+      "declKind": "Import",
+      "moduleName": "EthereumTests"
+    },
+    {
+      "kind": "Import",
+      "name": "_Concurrency",
+      "printedName": "_Concurrency",
+      "declKind": "Import",
+      "moduleName": "EthereumTests"
+    },
+    {
+      "kind": "TypeDecl",
+      "name": "ERC721Tests",
+      "printedName": "ERC721Tests",
+      "children": [
+        {
+          "kind": "TypeDecl",
+          "name": "ERC721",
+          "printedName": "ERC721",
+          "children": [
+            {
+              "kind": "Var",
+              "name": "address",
+              "printedName": "address",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "String",
+                  "printedName": "Swift.String",
+                  "usr": "s:SS"
+                }
+              ],
+              "declKind": "Var",
+              "usr": "s:13EthereumTests06ERC721B0C0C0V7addressSSvp",
+              "mangledName": "$s13EthereumTests06ERC721B0C0C0V7addressSSvp",
+              "moduleName": "EthereumTests",
+              "declAttributes": [
+                "HasStorage"
+              ],
+              "fixedbinaryorder": 0,
+              "hasStorage": true,
+              "accessors": [
+                {
+                  "kind": "Accessor",
+                  "name": "Get",
+                  "printedName": "Get()",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "String",
+                      "printedName": "Swift.String",
+                      "usr": "s:SS"
+                    }
+                  ],
+                  "declKind": "Accessor",
+                  "usr": "s:13EthereumTests06ERC721B0C0C0V7addressSSvg",
+                  "mangledName": "$s13EthereumTests06ERC721B0C0C0V7addressSSvg",
+                  "moduleName": "EthereumTests",
+                  "implicit": true,
+                  "declAttributes": [
+                    "Transparent"
+                  ],
+                  "accessorKind": "get"
+                },
+                {
+                  "kind": "Accessor",
+                  "name": "Set",
+                  "printedName": "Set()",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "Void",
+                      "printedName": "()"
+                    },
+                    {
+                      "kind": "TypeNominal",
+                      "name": "String",
+                      "printedName": "Swift.String",
+                      "usr": "s:SS"
+                    }
+                  ],
+                  "declKind": "Accessor",
+                  "usr": "s:13EthereumTests06ERC721B0C0C0V7addressSSvs",
+                  "mangledName": "$s13EthereumTests06ERC721B0C0C0V7addressSSvs",
+                  "moduleName": "EthereumTests",
+                  "implicit": true,
+                  "declAttributes": [
+                    "Transparent"
+                  ],
+                  "accessorKind": "set"
+                },
+                {
+                  "kind": "Accessor",
+                  "name": "Modify",
+                  "printedName": "Modify()",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "Void",
+                      "printedName": "()"
+                    }
+                  ],
+                  "declKind": "Accessor",
+                  "usr": "s:13EthereumTests06ERC721B0C0C0V7addressSSvM",
+                  "mangledName": "$s13EthereumTests06ERC721B0C0C0V7addressSSvM",
+                  "moduleName": "EthereumTests",
+                  "implicit": true,
+                  "declAttributes": [
+                    "Transparent"
+                  ],
+                  "accessorKind": "_modify"
+                }
+              ]
+            },
+            {
+              "kind": "Constructor",
+              "name": "init",
+              "printedName": "init(address:)",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "ERC721",
+                  "printedName": "EthereumTests.ERC721Tests.ERC721",
+                  "usr": "s:13EthereumTests06ERC721B0C0C0V"
+                },
+                {
+                  "kind": "TypeNominal",
+                  "name": "String",
+                  "printedName": "Swift.String",
+                  "usr": "s:SS"
+                }
+              ],
+              "declKind": "Constructor",
+              "usr": "s:13EthereumTests06ERC721B0C0C0V7addressAESS_tcfc",
+              "mangledName": "$s13EthereumTests06ERC721B0C0C0V7addressAESS_tcfc",
+              "moduleName": "EthereumTests",
+              "implicit": true,
+              "init_kind": "Designated"
+            }
+          ],
+          "declKind": "Struct",
+          "usr": "s:13EthereumTests06ERC721B0C0C0V",
+          "mangledName": "$s13EthereumTests06ERC721B0C0C0V",
+          "moduleName": "EthereumTests",
+          "conformances": [
+            {
+              "kind": "Conformance",
+              "name": "ERC721Contract",
+              "printedName": "ERC721Contract",
+              "usr": "s:8Ethereum14ERC721ContractP",
+              "mangledName": "$s8Ethereum14ERC721ContractP"
+            },
+            {
+              "kind": "Conformance",
+              "name": "Sendable",
+              "printedName": "Sendable",
+              "usr": "s:s8SendableP",
+              "mangledName": "$ss8SendableP"
+            }
+          ]
+        },
+        {
+          "kind": "Function",
+          "name": "testBalance",
+          "printedName": "testBalance()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)ERC721Tests(im)testBalanceAndReturnError:",
+          "mangledName": "$s13EthereumTests06ERC721B0C11testBalanceyyKF",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "testOwnerOf",
+          "printedName": "testOwnerOf()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)ERC721Tests(im)testOwnerOfAndReturnError:",
+          "mangledName": "$s13EthereumTests06ERC721B0C11testOwnerOfyyKF",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "testName",
+          "printedName": "testName()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)ERC721Tests(im)testNameAndReturnError:",
+          "mangledName": "$s13EthereumTests06ERC721B0C8testNameyyKF",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "testSymbol",
+          "printedName": "testSymbol()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)ERC721Tests(im)testSymbolAndReturnError:",
+          "mangledName": "$s13EthereumTests06ERC721B0C10testSymbolyyKF",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "testTokenURI",
+          "printedName": "testTokenURI()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)ERC721Tests(im)testTokenURIAndReturnError:",
+          "mangledName": "$s13EthereumTests06ERC721B0C12testTokenURIyyKF",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "testTotalSupply",
+          "printedName": "testTotalSupply()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)ERC721Tests(im)testTotalSupplyAndReturnError:",
+          "mangledName": "$s13EthereumTests06ERC721B0C15testTotalSupplyyyKF",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Constructor",
+          "name": "init",
+          "printedName": "init(invocation:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "ERC721Tests",
+              "printedName": "EthereumTests.ERC721Tests",
+              "usr": "c:@M@EthereumTests@objc(cs)ERC721Tests"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Optional",
+              "printedName": "Foundation.NSInvocation?",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "NSInvocation",
+                  "printedName": "Foundation.NSInvocation",
+                  "usr": "c:objc(cs)NSInvocation"
+                }
+              ],
+              "usr": "s:Sq"
+            }
+          ],
+          "declKind": "Constructor",
+          "usr": "c:@M@EthereumTests@objc(cs)ERC721Tests(im)initWithInvocation:",
+          "mangledName": "$s13EthereumTests06ERC721B0C10invocationACSo12NSInvocationCSg_tcfc",
+          "moduleName": "EthereumTests",
+          "overriding": true,
+          "implicit": true,
+          "objc_name": "initWithInvocation:",
+          "declAttributes": [
+            "Dynamic",
+            "ObjC",
+            "Override"
+          ],
+          "init_kind": "Designated"
+        },
+        {
+          "kind": "Constructor",
+          "name": "init",
+          "printedName": "init(selector:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "ERC721Tests",
+              "printedName": "EthereumTests.ERC721Tests",
+              "usr": "c:@M@EthereumTests@objc(cs)ERC721Tests"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Selector",
+              "printedName": "ObjectiveC.Selector",
+              "usr": "s:10ObjectiveC8SelectorV"
+            }
+          ],
+          "declKind": "Constructor",
+          "usr": "c:@M@EthereumTests@objc(cs)ERC721Tests(im)initWithSelector:",
+          "mangledName": "$s13EthereumTests06ERC721B0C8selectorAC10ObjectiveC8SelectorV_tcfc",
+          "moduleName": "EthereumTests",
+          "overriding": true,
+          "implicit": true,
+          "objc_name": "initWithSelector:",
+          "declAttributes": [
+            "Dynamic",
+            "ObjC",
+            "Override"
+          ],
+          "init_kind": "Designated"
+        },
+        {
+          "kind": "Constructor",
+          "name": "init",
+          "printedName": "init()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "ERC721Tests",
+              "printedName": "EthereumTests.ERC721Tests",
+              "usr": "c:@M@EthereumTests@objc(cs)ERC721Tests"
+            }
+          ],
+          "declKind": "Constructor",
+          "usr": "c:@M@EthereumTests@objc(cs)ERC721Tests(im)init",
+          "mangledName": "$s13EthereumTests06ERC721B0CACycfc",
+          "moduleName": "EthereumTests",
+          "overriding": true,
+          "implicit": true,
+          "objc_name": "init",
+          "declAttributes": [
+            "Dynamic",
+            "ObjC",
+            "Override"
+          ],
+          "init_kind": "Designated"
+        }
+      ],
+      "declKind": "Class",
+      "usr": "c:@M@EthereumTests@objc(cs)ERC721Tests",
+      "mangledName": "$s13EthereumTests06ERC721B0C",
+      "moduleName": "EthereumTests",
+      "isOpen": true,
+      "declAttributes": [
+        "ObjC"
+      ],
+      "superclassUsr": "c:objc(cs)XCTestCase",
+      "inheritsConvenienceInitializers": true,
+      "superclassNames": [
+        "XCTest.XCTestCase",
+        "XCTest.XCTest",
+        "ObjectiveC.NSObject"
+      ],
+      "conformances": [
+        {
+          "kind": "Conformance",
+          "name": "Equatable",
+          "printedName": "Equatable",
+          "usr": "s:SQ",
+          "mangledName": "$sSQ"
+        },
+        {
+          "kind": "Conformance",
+          "name": "Hashable",
+          "printedName": "Hashable",
+          "usr": "s:SH",
+          "mangledName": "$sSH"
+        },
+        {
+          "kind": "Conformance",
+          "name": "CVarArg",
+          "printedName": "CVarArg",
+          "usr": "s:s7CVarArgP",
+          "mangledName": "$ss7CVarArgP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "_KeyValueCodingAndObservingPublishing",
+          "printedName": "_KeyValueCodingAndObservingPublishing",
+          "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+          "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "_KeyValueCodingAndObserving",
+          "printedName": "_KeyValueCodingAndObserving",
+          "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+          "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "CustomStringConvertible",
+          "printedName": "CustomStringConvertible",
+          "usr": "s:s23CustomStringConvertibleP",
+          "mangledName": "$ss23CustomStringConvertibleP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "CustomDebugStringConvertible",
+          "printedName": "CustomDebugStringConvertible",
+          "usr": "s:s28CustomDebugStringConvertibleP",
+          "mangledName": "$ss28CustomDebugStringConvertibleP"
+        }
+      ]
+    },
+    {
+      "kind": "Import",
+      "name": "BigInt",
+      "printedName": "BigInt",
+      "declKind": "Import",
+      "moduleName": "EthereumTests"
+    },
+    {
+      "kind": "Import",
+      "name": "Ethereum",
+      "printedName": "Ethereum",
+      "declKind": "Import",
+      "moduleName": "EthereumTests"
+    },
+    {
+      "kind": "Import",
+      "name": "SwiftOnoneSupport",
+      "printedName": "SwiftOnoneSupport",
+      "declKind": "Import",
+      "moduleName": "EthereumTests"
+    },
+    {
+      "kind": "Import",
+      "name": "XCTest",
+      "printedName": "XCTest",
+      "declKind": "Import",
+      "moduleName": "EthereumTests"
+    },
+    {
+      "kind": "Import",
+      "name": "_Concurrency",
+      "printedName": "_Concurrency",
+      "declKind": "Import",
+      "moduleName": "EthereumTests"
+    },
+    {
+      "kind": "TypeDecl",
+      "name": "EthereumServiceTests",
+      "printedName": "EthereumServiceTests",
+      "children": [
+        {
+          "kind": "Function",
+          "name": "setUpWithError",
+          "printedName": "setUpWithError()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)EthereumServiceTests(im)setUpWithError:",
+          "mangledName": "$s13EthereumTests0a7ServiceB0C14setUpWithErroryyKF",
+          "moduleName": "EthereumTests",
+          "overriding": true,
+          "isOpen": true,
+          "objc_name": "setUpWithError:",
+          "declAttributes": [
+            "Dynamic",
+            "ObjC",
+            "Override"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "testGetBalance",
+          "printedName": "testGetBalance()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)EthereumServiceTests(im)testGetBalanceAndReturnError:",
+          "mangledName": "$s13EthereumTests0a7ServiceB0C14testGetBalanceyyKF",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "testGetTransactionCount",
+          "printedName": "testGetTransactionCount()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)EthereumServiceTests(im)testGetTransactionCountAndReturnError:",
+          "mangledName": "$s13EthereumTests0a7ServiceB0C23testGetTransactionCountyyKF",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "testBlockNumber",
+          "printedName": "testBlockNumber()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)EthereumServiceTests(im)testBlockNumberAndReturnError:",
+          "mangledName": "$s13EthereumTests0a7ServiceB0C15testBlockNumberyyKF",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "testGasPrice",
+          "printedName": "testGasPrice()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)EthereumServiceTests(im)testGasPriceAndReturnError:",
+          "mangledName": "$s13EthereumTests0a7ServiceB0C12testGasPriceyyKF",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "testGetBlockTransactionCountByHash",
+          "printedName": "testGetBlockTransactionCountByHash()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)EthereumServiceTests(im)testGetBlockTransactionCountByHashAndReturnError:",
+          "mangledName": "$s13EthereumTests0a7ServiceB0C34testGetBlockTransactionCountByHashyyKF",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "testGetBlockTransactionCountByNumber",
+          "printedName": "testGetBlockTransactionCountByNumber()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)EthereumServiceTests(im)testGetBlockTransactionCountByNumberAndReturnError:",
+          "mangledName": "$s13EthereumTests0a7ServiceB0C36testGetBlockTransactionCountByNumberyyKF",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "testGetStorageAt",
+          "printedName": "testGetStorageAt()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)EthereumServiceTests(im)testGetStorageAtAndReturnError:",
+          "mangledName": "$s13EthereumTests0a7ServiceB0C16testGetStorageAtyyKF",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "testGetCode",
+          "printedName": "testGetCode()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)EthereumServiceTests(im)testGetCodeAndReturnError:",
+          "mangledName": "$s13EthereumTests0a7ServiceB0C11testGetCodeyyKF",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "testGetBlockByHash",
+          "printedName": "testGetBlockByHash()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)EthereumServiceTests(im)testGetBlockByHashAndReturnError:",
+          "mangledName": "$s13EthereumTests0a7ServiceB0C18testGetBlockByHashyyKF",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "testGetBlockByNumber",
+          "printedName": "testGetBlockByNumber()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)EthereumServiceTests(im)testGetBlockByNumberAndReturnError:",
+          "mangledName": "$s13EthereumTests0a7ServiceB0C20testGetBlockByNumberyyKF",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "testGetTransactionByHash",
+          "printedName": "testGetTransactionByHash()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)EthereumServiceTests(im)testGetTransactionByHashAndReturnError:",
+          "mangledName": "$s13EthereumTests0a7ServiceB0C24testGetTransactionByHashyyKF",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "testGetUncleByBlockNumberAndIndexNullResponse",
+          "printedName": "testGetUncleByBlockNumberAndIndexNullResponse()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)EthereumServiceTests(im)testGetUncleByBlockNumberAndIndexNullResponseAndReturnError:",
+          "mangledName": "$s13EthereumTests0a7ServiceB0C45testGetUncleByBlockNumberAndIndexNullResponseyyKF",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "testGetUncleByBlockNumberAndIndex",
+          "printedName": "testGetUncleByBlockNumberAndIndex()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)EthereumServiceTests(im)testGetUncleByBlockNumberAndIndexAndReturnError:",
+          "mangledName": "$s13EthereumTests0a7ServiceB0C33testGetUncleByBlockNumberAndIndexyyKF",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "testGetUncleByBlockHashAndIndex",
+          "printedName": "testGetUncleByBlockHashAndIndex()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)EthereumServiceTests(im)testGetUncleByBlockHashAndIndexAndReturnError:",
+          "mangledName": "$s13EthereumTests0a7ServiceB0C31testGetUncleByBlockHashAndIndexyyKF",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "testGetUncleByBlockHashAndIndexNullResponse",
+          "printedName": "testGetUncleByBlockHashAndIndexNullResponse()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)EthereumServiceTests(im)testGetUncleByBlockHashAndIndexNullResponseAndReturnError:",
+          "mangledName": "$s13EthereumTests0a7ServiceB0C43testGetUncleByBlockHashAndIndexNullResponseyyKF",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "testGetTransactionByBlockHashAndIndex",
+          "printedName": "testGetTransactionByBlockHashAndIndex()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)EthereumServiceTests(im)testGetTransactionByBlockHashAndIndexAndReturnError:",
+          "mangledName": "$s13EthereumTests0a7ServiceB0C37testGetTransactionByBlockHashAndIndexyyKF",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "testGetTransactionByBlockHashAndIndexNullResponse",
+          "printedName": "testGetTransactionByBlockHashAndIndexNullResponse()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)EthereumServiceTests(im)testGetTransactionByBlockHashAndIndexNullResponseAndReturnError:",
+          "mangledName": "$s13EthereumTests0a7ServiceB0C49testGetTransactionByBlockHashAndIndexNullResponseyyKF",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "testGetTransactionByBlockNumberAndIndex",
+          "printedName": "testGetTransactionByBlockNumberAndIndex()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)EthereumServiceTests(im)testGetTransactionByBlockNumberAndIndexAndReturnError:",
+          "mangledName": "$s13EthereumTests0a7ServiceB0C39testGetTransactionByBlockNumberAndIndexyyKF",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "testGetTransactionByBlockNumberAndIndexNullResponse",
+          "printedName": "testGetTransactionByBlockNumberAndIndexNullResponse()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)EthereumServiceTests(im)testGetTransactionByBlockNumberAndIndexNullResponseAndReturnError:",
+          "mangledName": "$s13EthereumTests0a7ServiceB0C51testGetTransactionByBlockNumberAndIndexNullResponseyyKF",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "testGetTransactionReceipt",
+          "printedName": "testGetTransactionReceipt()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)EthereumServiceTests(im)testGetTransactionReceiptAndReturnError:",
+          "mangledName": "$s13EthereumTests0a7ServiceB0C25testGetTransactionReceiptyyKF",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "testSendRawTransaction",
+          "printedName": "testSendRawTransaction()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)EthereumServiceTests(im)testSendRawTransactionAndReturnError:",
+          "mangledName": "$s13EthereumTests0a7ServiceB0C22testSendRawTransactionyyKF",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "testEstimateGas",
+          "printedName": "testEstimateGas()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)EthereumServiceTests(im)testEstimateGasAndReturnError:",
+          "mangledName": "$s13EthereumTests0a7ServiceB0C15testEstimateGasyyKF",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Constructor",
+          "name": "init",
+          "printedName": "init(invocation:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "EthereumServiceTests",
+              "printedName": "EthereumTests.EthereumServiceTests",
+              "usr": "c:@M@EthereumTests@objc(cs)EthereumServiceTests"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Optional",
+              "printedName": "Foundation.NSInvocation?",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "NSInvocation",
+                  "printedName": "Foundation.NSInvocation",
+                  "usr": "c:objc(cs)NSInvocation"
+                }
+              ],
+              "usr": "s:Sq"
+            }
+          ],
+          "declKind": "Constructor",
+          "usr": "c:@M@EthereumTests@objc(cs)EthereumServiceTests(im)initWithInvocation:",
+          "mangledName": "$s13EthereumTests0a7ServiceB0C10invocationACSo12NSInvocationCSg_tcfc",
+          "moduleName": "EthereumTests",
+          "overriding": true,
+          "implicit": true,
+          "objc_name": "initWithInvocation:",
+          "declAttributes": [
+            "Dynamic",
+            "ObjC",
+            "Override"
+          ],
+          "init_kind": "Designated"
+        },
+        {
+          "kind": "Constructor",
+          "name": "init",
+          "printedName": "init(selector:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "EthereumServiceTests",
+              "printedName": "EthereumTests.EthereumServiceTests",
+              "usr": "c:@M@EthereumTests@objc(cs)EthereumServiceTests"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Selector",
+              "printedName": "ObjectiveC.Selector",
+              "usr": "s:10ObjectiveC8SelectorV"
+            }
+          ],
+          "declKind": "Constructor",
+          "usr": "c:@M@EthereumTests@objc(cs)EthereumServiceTests(im)initWithSelector:",
+          "mangledName": "$s13EthereumTests0a7ServiceB0C8selectorAC10ObjectiveC8SelectorV_tcfc",
+          "moduleName": "EthereumTests",
+          "overriding": true,
+          "implicit": true,
+          "objc_name": "initWithSelector:",
+          "declAttributes": [
+            "Dynamic",
+            "ObjC",
+            "Override"
+          ],
+          "init_kind": "Designated"
+        },
+        {
+          "kind": "Constructor",
+          "name": "init",
+          "printedName": "init()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "EthereumServiceTests",
+              "printedName": "EthereumTests.EthereumServiceTests",
+              "usr": "c:@M@EthereumTests@objc(cs)EthereumServiceTests"
+            }
+          ],
+          "declKind": "Constructor",
+          "usr": "c:@M@EthereumTests@objc(cs)EthereumServiceTests(im)init",
+          "mangledName": "$s13EthereumTests0a7ServiceB0CACycfc",
+          "moduleName": "EthereumTests",
+          "overriding": true,
+          "implicit": true,
+          "objc_name": "init",
+          "declAttributes": [
+            "Dynamic",
+            "ObjC",
+            "Override"
+          ],
+          "init_kind": "Designated"
+        }
+      ],
+      "declKind": "Class",
+      "usr": "c:@M@EthereumTests@objc(cs)EthereumServiceTests",
+      "mangledName": "$s13EthereumTests0a7ServiceB0C",
+      "moduleName": "EthereumTests",
+      "isOpen": true,
+      "declAttributes": [
+        "ObjC"
+      ],
+      "superclassUsr": "c:objc(cs)XCTestCase",
+      "inheritsConvenienceInitializers": true,
+      "superclassNames": [
+        "XCTest.XCTestCase",
+        "XCTest.XCTest",
+        "ObjectiveC.NSObject"
+      ],
+      "conformances": [
+        {
+          "kind": "Conformance",
+          "name": "Equatable",
+          "printedName": "Equatable",
+          "usr": "s:SQ",
+          "mangledName": "$sSQ"
+        },
+        {
+          "kind": "Conformance",
+          "name": "Hashable",
+          "printedName": "Hashable",
+          "usr": "s:SH",
+          "mangledName": "$sSH"
+        },
+        {
+          "kind": "Conformance",
+          "name": "CVarArg",
+          "printedName": "CVarArg",
+          "usr": "s:s7CVarArgP",
+          "mangledName": "$ss7CVarArgP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "_KeyValueCodingAndObservingPublishing",
+          "printedName": "_KeyValueCodingAndObservingPublishing",
+          "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+          "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "_KeyValueCodingAndObserving",
+          "printedName": "_KeyValueCodingAndObserving",
+          "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+          "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "CustomStringConvertible",
+          "printedName": "CustomStringConvertible",
+          "usr": "s:s23CustomStringConvertibleP",
+          "mangledName": "$ss23CustomStringConvertibleP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "CustomDebugStringConvertible",
+          "printedName": "CustomDebugStringConvertible",
+          "usr": "s:s28CustomDebugStringConvertibleP",
+          "mangledName": "$ss28CustomDebugStringConvertibleP"
+        }
+      ]
+    },
+    {
+      "kind": "Import",
+      "name": "BigInt",
+      "printedName": "BigInt",
+      "declKind": "Import",
+      "moduleName": "EthereumTests"
+    },
+    {
+      "kind": "Import",
+      "name": "Ethereum",
+      "printedName": "Ethereum",
+      "declKind": "Import",
+      "moduleName": "EthereumTests"
+    },
+    {
+      "kind": "Import",
+      "name": "SwiftOnoneSupport",
+      "printedName": "SwiftOnoneSupport",
+      "declKind": "Import",
+      "moduleName": "EthereumTests"
+    },
+    {
+      "kind": "Import",
+      "name": "XCTest",
+      "printedName": "XCTest",
+      "declKind": "Import",
+      "moduleName": "EthereumTests"
+    },
+    {
+      "kind": "Import",
+      "name": "_Concurrency",
+      "printedName": "_Concurrency",
+      "declKind": "Import",
+      "moduleName": "EthereumTests"
+    },
+    {
+      "kind": "TypeDecl",
+      "name": "NodeTests",
+      "printedName": "NodeTests",
+      "children": [
+        {
+          "kind": "Function",
+          "name": "testInitialiseCustomNode",
+          "printedName": "testInitialiseCustomNode()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)NodeTests(im)testInitialiseCustomNodeAndReturnError:",
+          "mangledName": "$s13EthereumTests04NodeB0C020testInitialiseCustomC0yyKF",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "testVersion",
+          "printedName": "testVersion()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)NodeTests(im)testVersionAndReturnError:",
+          "mangledName": "$s13EthereumTests04NodeB0C11testVersionyyKF",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "testListening",
+          "printedName": "testListening()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)NodeTests(im)testListeningAndReturnError:",
+          "mangledName": "$s13EthereumTests04NodeB0C13testListeningyyKF",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "testPeerCount",
+          "printedName": "testPeerCount()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)NodeTests(im)testPeerCountAndReturnError:",
+          "mangledName": "$s13EthereumTests04NodeB0C13testPeerCountyyKF",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "testClientVersion",
+          "printedName": "testClientVersion()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)NodeTests(im)testClientVersionAndReturnError:",
+          "mangledName": "$s13EthereumTests04NodeB0C17testClientVersionyyKF",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Constructor",
+          "name": "init",
+          "printedName": "init(invocation:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "NodeTests",
+              "printedName": "EthereumTests.NodeTests",
+              "usr": "c:@M@EthereumTests@objc(cs)NodeTests"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Optional",
+              "printedName": "Foundation.NSInvocation?",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "NSInvocation",
+                  "printedName": "Foundation.NSInvocation",
+                  "usr": "c:objc(cs)NSInvocation"
+                }
+              ],
+              "usr": "s:Sq"
+            }
+          ],
+          "declKind": "Constructor",
+          "usr": "c:@M@EthereumTests@objc(cs)NodeTests(im)initWithInvocation:",
+          "mangledName": "$s13EthereumTests04NodeB0C10invocationACSo12NSInvocationCSg_tcfc",
+          "moduleName": "EthereumTests",
+          "overriding": true,
+          "implicit": true,
+          "objc_name": "initWithInvocation:",
+          "declAttributes": [
+            "Dynamic",
+            "ObjC",
+            "Override"
+          ],
+          "init_kind": "Designated"
+        },
+        {
+          "kind": "Constructor",
+          "name": "init",
+          "printedName": "init(selector:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "NodeTests",
+              "printedName": "EthereumTests.NodeTests",
+              "usr": "c:@M@EthereumTests@objc(cs)NodeTests"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Selector",
+              "printedName": "ObjectiveC.Selector",
+              "usr": "s:10ObjectiveC8SelectorV"
+            }
+          ],
+          "declKind": "Constructor",
+          "usr": "c:@M@EthereumTests@objc(cs)NodeTests(im)initWithSelector:",
+          "mangledName": "$s13EthereumTests04NodeB0C8selectorAC10ObjectiveC8SelectorV_tcfc",
+          "moduleName": "EthereumTests",
+          "overriding": true,
+          "implicit": true,
+          "objc_name": "initWithSelector:",
+          "declAttributes": [
+            "Dynamic",
+            "ObjC",
+            "Override"
+          ],
+          "init_kind": "Designated"
+        },
+        {
+          "kind": "Constructor",
+          "name": "init",
+          "printedName": "init()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "NodeTests",
+              "printedName": "EthereumTests.NodeTests",
+              "usr": "c:@M@EthereumTests@objc(cs)NodeTests"
+            }
+          ],
+          "declKind": "Constructor",
+          "usr": "c:@M@EthereumTests@objc(cs)NodeTests(im)init",
+          "mangledName": "$s13EthereumTests04NodeB0CACycfc",
+          "moduleName": "EthereumTests",
+          "overriding": true,
+          "implicit": true,
+          "objc_name": "init",
+          "declAttributes": [
+            "Dynamic",
+            "ObjC",
+            "Override"
+          ],
+          "init_kind": "Designated"
+        }
+      ],
+      "declKind": "Class",
+      "usr": "c:@M@EthereumTests@objc(cs)NodeTests",
+      "mangledName": "$s13EthereumTests04NodeB0C",
+      "moduleName": "EthereumTests",
+      "isOpen": true,
+      "declAttributes": [
+        "ObjC"
+      ],
+      "superclassUsr": "c:objc(cs)XCTestCase",
+      "inheritsConvenienceInitializers": true,
+      "superclassNames": [
+        "XCTest.XCTestCase",
+        "XCTest.XCTest",
+        "ObjectiveC.NSObject"
+      ],
+      "conformances": [
+        {
+          "kind": "Conformance",
+          "name": "Equatable",
+          "printedName": "Equatable",
+          "usr": "s:SQ",
+          "mangledName": "$sSQ"
+        },
+        {
+          "kind": "Conformance",
+          "name": "Hashable",
+          "printedName": "Hashable",
+          "usr": "s:SH",
+          "mangledName": "$sSH"
+        },
+        {
+          "kind": "Conformance",
+          "name": "CVarArg",
+          "printedName": "CVarArg",
+          "usr": "s:s7CVarArgP",
+          "mangledName": "$ss7CVarArgP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "_KeyValueCodingAndObservingPublishing",
+          "printedName": "_KeyValueCodingAndObservingPublishing",
+          "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+          "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "_KeyValueCodingAndObserving",
+          "printedName": "_KeyValueCodingAndObserving",
+          "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+          "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "CustomStringConvertible",
+          "printedName": "CustomStringConvertible",
+          "usr": "s:s23CustomStringConvertibleP",
+          "mangledName": "$ss23CustomStringConvertibleP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "CustomDebugStringConvertible",
+          "printedName": "CustomDebugStringConvertible",
+          "usr": "s:s28CustomDebugStringConvertibleP",
+          "mangledName": "$ss28CustomDebugStringConvertibleP"
+        }
+      ]
+    },
+    {
+      "kind": "Import",
+      "name": "BigInt",
+      "printedName": "BigInt",
+      "declKind": "Import",
+      "moduleName": "EthereumTests"
+    },
+    {
+      "kind": "Import",
+      "name": "Ethereum",
+      "printedName": "Ethereum",
+      "declKind": "Import",
+      "moduleName": "EthereumTests"
+    },
+    {
+      "kind": "Import",
+      "name": "SwiftOnoneSupport",
+      "printedName": "SwiftOnoneSupport",
+      "declKind": "Import",
+      "moduleName": "EthereumTests"
+    },
+    {
+      "kind": "Import",
+      "name": "XCTest",
+      "printedName": "XCTest",
+      "declKind": "Import",
+      "moduleName": "EthereumTests"
+    },
+    {
+      "kind": "Import",
+      "name": "_Concurrency",
+      "printedName": "_Concurrency",
+      "declKind": "Import",
+      "moduleName": "EthereumTests"
+    },
+    {
+      "kind": "TypeDecl",
+      "name": "ProviderTests",
+      "printedName": "ProviderTests",
+      "children": [
+        {
+          "kind": "Var",
+          "name": "mainnetNodeURL",
+          "printedName": "mainnetNodeURL",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "URL",
+              "printedName": "Foundation.URL",
+              "usr": "s:10Foundation3URLV"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "c:@M@EthereumTests@objc(cs)ProviderTests(py)mainnetNodeURL",
+          "mangledName": "$s13EthereumTests08ProviderB0C14mainnetNodeURL10Foundation0F0Vvp",
+          "moduleName": "EthereumTests",
+          "declAttributes": [
+            "HasInitialValue",
+            "Final",
+            "HasStorage",
+            "ObjC"
+          ],
+          "fixedbinaryorder": 0,
+          "isLet": true,
+          "hasStorage": true,
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "URL",
+                  "printedName": "Foundation.URL",
+                  "usr": "s:10Foundation3URLV"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "c:@M@EthereumTests@objc(cs)ProviderTests(im)mainnetNodeURL",
+              "mangledName": "$s13EthereumTests08ProviderB0C14mainnetNodeURL10Foundation0F0Vvg",
+              "moduleName": "EthereumTests",
+              "implicit": true,
+              "declAttributes": [
+                "Final",
+                "ObjC"
+              ],
+              "accessorKind": "get"
+            }
+          ]
+        },
+        {
+          "kind": "Var",
+          "name": "rinkebyNodeURL",
+          "printedName": "rinkebyNodeURL",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "URL",
+              "printedName": "Foundation.URL",
+              "usr": "s:10Foundation3URLV"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "c:@M@EthereumTests@objc(cs)ProviderTests(py)rinkebyNodeURL",
+          "mangledName": "$s13EthereumTests08ProviderB0C14rinkebyNodeURL10Foundation0F0Vvp",
+          "moduleName": "EthereumTests",
+          "declAttributes": [
+            "HasInitialValue",
+            "Final",
+            "HasStorage",
+            "ObjC"
+          ],
+          "fixedbinaryorder": 1,
+          "isLet": true,
+          "hasStorage": true,
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "URL",
+                  "printedName": "Foundation.URL",
+                  "usr": "s:10Foundation3URLV"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "c:@M@EthereumTests@objc(cs)ProviderTests(im)rinkebyNodeURL",
+              "mangledName": "$s13EthereumTests08ProviderB0C14rinkebyNodeURL10Foundation0F0Vvg",
+              "moduleName": "EthereumTests",
+              "implicit": true,
+              "declAttributes": [
+                "Final",
+                "ObjC"
+              ],
+              "accessorKind": "get"
+            }
+          ]
+        },
+        {
+          "kind": "Var",
+          "name": "node",
+          "printedName": "node",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Node",
+              "printedName": "Ethereum.Node",
+              "usr": "s:8Ethereum4NodeV"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:13EthereumTests08ProviderB0C4node0A04NodeVvp",
+          "mangledName": "$s13EthereumTests08ProviderB0C4node0A04NodeVvp",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "HasInitialValue",
+            "HasStorage"
+          ],
+          "fixedbinaryorder": 2,
+          "hasStorage": true,
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Node",
+                  "printedName": "Ethereum.Node",
+                  "usr": "s:8Ethereum4NodeV"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:13EthereumTests08ProviderB0C4node0A04NodeVvg",
+              "mangledName": "$s13EthereumTests08ProviderB0C4node0A04NodeVvg",
+              "moduleName": "EthereumTests",
+              "implicit": true,
+              "isOpen": true,
+              "accessorKind": "get"
+            },
+            {
+              "kind": "Accessor",
+              "name": "Set",
+              "printedName": "Set()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Void",
+                  "printedName": "()"
+                },
+                {
+                  "kind": "TypeNominal",
+                  "name": "Node",
+                  "printedName": "Ethereum.Node",
+                  "usr": "s:8Ethereum4NodeV"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:13EthereumTests08ProviderB0C4node0A04NodeVvs",
+              "mangledName": "$s13EthereumTests08ProviderB0C4node0A04NodeVvs",
+              "moduleName": "EthereumTests",
+              "implicit": true,
+              "isOpen": true,
+              "accessorKind": "set"
+            },
+            {
+              "kind": "Accessor",
+              "name": "Modify",
+              "printedName": "Modify()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Void",
+                  "printedName": "()"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:13EthereumTests08ProviderB0C4node0A04NodeVvM",
+              "mangledName": "$s13EthereumTests08ProviderB0C4node0A04NodeVvM",
+              "moduleName": "EthereumTests",
+              "implicit": true,
+              "isOpen": true,
+              "accessorKind": "_modify"
+            }
+          ]
+        },
+        {
+          "kind": "Var",
+          "name": "provider",
+          "printedName": "provider",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Optional",
+              "printedName": "Ethereum.Provider?",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Provider",
+                  "printedName": "Ethereum.Provider",
+                  "usr": "s:8Ethereum8ProviderC"
+                }
+              ],
+              "usr": "s:Sq"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:13EthereumTests08ProviderB0C8provider0A00C0CSgvp",
+          "mangledName": "$s13EthereumTests08ProviderB0C8provider0A00C0CSgvp",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "HasInitialValue",
+            "HasStorage"
+          ],
+          "fixedbinaryorder": 3,
+          "hasStorage": true,
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Optional",
+                  "printedName": "Ethereum.Provider?",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "Provider",
+                      "printedName": "Ethereum.Provider",
+                      "usr": "s:8Ethereum8ProviderC"
+                    }
+                  ],
+                  "usr": "s:Sq"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:13EthereumTests08ProviderB0C8provider0A00C0CSgvg",
+              "mangledName": "$s13EthereumTests08ProviderB0C8provider0A00C0CSgvg",
+              "moduleName": "EthereumTests",
+              "implicit": true,
+              "isOpen": true,
+              "accessorKind": "get"
+            },
+            {
+              "kind": "Accessor",
+              "name": "Set",
+              "printedName": "Set()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Void",
+                  "printedName": "()"
+                },
+                {
+                  "kind": "TypeNominal",
+                  "name": "Optional",
+                  "printedName": "Ethereum.Provider?",
+                  "children": [
+                    {
+                      "kind": "TypeNominal",
+                      "name": "Provider",
+                      "printedName": "Ethereum.Provider",
+                      "usr": "s:8Ethereum8ProviderC"
+                    }
+                  ],
+                  "usr": "s:Sq"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:13EthereumTests08ProviderB0C8provider0A00C0CSgvs",
+              "mangledName": "$s13EthereumTests08ProviderB0C8provider0A00C0CSgvs",
+              "moduleName": "EthereumTests",
+              "implicit": true,
+              "isOpen": true,
+              "accessorKind": "set"
+            },
+            {
+              "kind": "Accessor",
+              "name": "Modify",
+              "printedName": "Modify()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "Void",
+                  "printedName": "()"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:13EthereumTests08ProviderB0C8provider0A00C0CSgvM",
+              "mangledName": "$s13EthereumTests08ProviderB0C8provider0A00C0CSgvM",
+              "moduleName": "EthereumTests",
+              "implicit": true,
+              "isOpen": true,
+              "accessorKind": "_modify"
+            }
+          ]
+        },
+        {
+          "kind": "Function",
+          "name": "setUpWithError",
+          "printedName": "setUpWithError()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)ProviderTests(im)setUpWithError:",
+          "mangledName": "$s13EthereumTests08ProviderB0C14setUpWithErroryyKF",
+          "moduleName": "EthereumTests",
+          "overriding": true,
+          "isOpen": true,
+          "objc_name": "setUpWithError:",
+          "declAttributes": [
+            "Dynamic",
+            "ObjC",
+            "Override"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "testSendRequest",
+          "printedName": "testSendRequest()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)ProviderTests(im)testSendRequestAndReturnError:",
+          "mangledName": "$s13EthereumTests08ProviderB0C15testSendRequestyyKF",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "testSendRequest2",
+          "printedName": "testSendRequest2()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)ProviderTests(im)testSendRequest2AndReturnError:",
+          "mangledName": "$s13EthereumTests08ProviderB0C16testSendRequest2yyKF",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Constructor",
+          "name": "init",
+          "printedName": "init(invocation:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "ProviderTests",
+              "printedName": "EthereumTests.ProviderTests",
+              "usr": "c:@M@EthereumTests@objc(cs)ProviderTests"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Optional",
+              "printedName": "Foundation.NSInvocation?",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "NSInvocation",
+                  "printedName": "Foundation.NSInvocation",
+                  "usr": "c:objc(cs)NSInvocation"
+                }
+              ],
+              "usr": "s:Sq"
+            }
+          ],
+          "declKind": "Constructor",
+          "usr": "c:@M@EthereumTests@objc(cs)ProviderTests(im)initWithInvocation:",
+          "mangledName": "$s13EthereumTests08ProviderB0C10invocationACSo12NSInvocationCSg_tcfc",
+          "moduleName": "EthereumTests",
+          "overriding": true,
+          "implicit": true,
+          "objc_name": "initWithInvocation:",
+          "declAttributes": [
+            "Dynamic",
+            "ObjC",
+            "Override"
+          ],
+          "init_kind": "Designated"
+        },
+        {
+          "kind": "Constructor",
+          "name": "init",
+          "printedName": "init(selector:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "ProviderTests",
+              "printedName": "EthereumTests.ProviderTests",
+              "usr": "c:@M@EthereumTests@objc(cs)ProviderTests"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Selector",
+              "printedName": "ObjectiveC.Selector",
+              "usr": "s:10ObjectiveC8SelectorV"
+            }
+          ],
+          "declKind": "Constructor",
+          "usr": "c:@M@EthereumTests@objc(cs)ProviderTests(im)initWithSelector:",
+          "mangledName": "$s13EthereumTests08ProviderB0C8selectorAC10ObjectiveC8SelectorV_tcfc",
+          "moduleName": "EthereumTests",
+          "overriding": true,
+          "implicit": true,
+          "objc_name": "initWithSelector:",
+          "declAttributes": [
+            "Dynamic",
+            "ObjC",
+            "Override"
+          ],
+          "init_kind": "Designated"
+        },
+        {
+          "kind": "Constructor",
+          "name": "init",
+          "printedName": "init()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "ProviderTests",
+              "printedName": "EthereumTests.ProviderTests",
+              "usr": "c:@M@EthereumTests@objc(cs)ProviderTests"
+            }
+          ],
+          "declKind": "Constructor",
+          "usr": "c:@M@EthereumTests@objc(cs)ProviderTests(im)init",
+          "mangledName": "$s13EthereumTests08ProviderB0CACycfc",
+          "moduleName": "EthereumTests",
+          "overriding": true,
+          "implicit": true,
+          "objc_name": "init",
+          "declAttributes": [
+            "Dynamic",
+            "ObjC",
+            "Override"
+          ],
+          "init_kind": "Designated"
+        }
+      ],
+      "declKind": "Class",
+      "usr": "c:@M@EthereumTests@objc(cs)ProviderTests",
+      "mangledName": "$s13EthereumTests08ProviderB0C",
+      "moduleName": "EthereumTests",
+      "isOpen": true,
+      "declAttributes": [
+        "ObjC"
+      ],
+      "superclassUsr": "c:objc(cs)XCTestCase",
+      "inheritsConvenienceInitializers": true,
+      "superclassNames": [
+        "XCTest.XCTestCase",
+        "XCTest.XCTest",
+        "ObjectiveC.NSObject"
+      ],
+      "conformances": [
+        {
+          "kind": "Conformance",
+          "name": "Equatable",
+          "printedName": "Equatable",
+          "usr": "s:SQ",
+          "mangledName": "$sSQ"
+        },
+        {
+          "kind": "Conformance",
+          "name": "Hashable",
+          "printedName": "Hashable",
+          "usr": "s:SH",
+          "mangledName": "$sSH"
+        },
+        {
+          "kind": "Conformance",
+          "name": "CVarArg",
+          "printedName": "CVarArg",
+          "usr": "s:s7CVarArgP",
+          "mangledName": "$ss7CVarArgP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "_KeyValueCodingAndObservingPublishing",
+          "printedName": "_KeyValueCodingAndObservingPublishing",
+          "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+          "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "_KeyValueCodingAndObserving",
+          "printedName": "_KeyValueCodingAndObserving",
+          "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+          "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "CustomStringConvertible",
+          "printedName": "CustomStringConvertible",
+          "usr": "s:s23CustomStringConvertibleP",
+          "mangledName": "$ss23CustomStringConvertibleP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "CustomDebugStringConvertible",
+          "printedName": "CustomDebugStringConvertible",
+          "usr": "s:s28CustomDebugStringConvertibleP",
+          "mangledName": "$ss28CustomDebugStringConvertibleP"
+        }
+      ]
+    },
+    {
+      "kind": "Import",
+      "name": "BigInt",
+      "printedName": "BigInt",
+      "declKind": "Import",
+      "moduleName": "EthereumTests"
+    },
+    {
+      "kind": "Import",
+      "name": "Ethereum",
+      "printedName": "Ethereum",
+      "declKind": "Import",
+      "moduleName": "EthereumTests"
+    },
+    {
+      "kind": "Import",
+      "name": "SwiftOnoneSupport",
+      "printedName": "SwiftOnoneSupport",
+      "declKind": "Import",
+      "moduleName": "EthereumTests"
+    },
+    {
+      "kind": "Import",
+      "name": "XCTest",
+      "printedName": "XCTest",
+      "declKind": "Import",
+      "moduleName": "EthereumTests"
+    },
+    {
+      "kind": "Import",
+      "name": "_Concurrency",
+      "printedName": "_Concurrency",
+      "declKind": "Import",
+      "moduleName": "EthereumTests"
+    },
+    {
+      "kind": "TypeDecl",
+      "name": "UserDefaultsStorageTests",
+      "printedName": "UserDefaultsStorageTests",
+      "children": [
+        {
+          "kind": "Var",
+          "name": "storage",
+          "printedName": "storage",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "UserDefaultsStorage",
+              "printedName": "Ethereum.UserDefaultsStorage",
+              "usr": "s:8Ethereum19UserDefaultsStorageV"
+            }
+          ],
+          "declKind": "Var",
+          "usr": "s:13EthereumTests019UserDefaultsStorageB0C7storage0A00cdE0Vvp",
+          "mangledName": "$s13EthereumTests019UserDefaultsStorageB0C7storage0A00cdE0Vvp",
+          "moduleName": "EthereumTests",
+          "declAttributes": [
+            "HasInitialValue",
+            "Final",
+            "HasStorage"
+          ],
+          "fixedbinaryorder": 0,
+          "isLet": true,
+          "hasStorage": true,
+          "accessors": [
+            {
+              "kind": "Accessor",
+              "name": "Get",
+              "printedName": "Get()",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "UserDefaultsStorage",
+                  "printedName": "Ethereum.UserDefaultsStorage",
+                  "usr": "s:8Ethereum19UserDefaultsStorageV"
+                }
+              ],
+              "declKind": "Accessor",
+              "usr": "s:13EthereumTests019UserDefaultsStorageB0C7storage0A00cdE0Vvg",
+              "mangledName": "$s13EthereumTests019UserDefaultsStorageB0C7storage0A00cdE0Vvg",
+              "moduleName": "EthereumTests",
+              "implicit": true,
+              "declAttributes": [
+                "Final"
+              ],
+              "accessorKind": "get"
+            }
+          ]
+        },
+        {
+          "kind": "Function",
+          "name": "testStorePrivateKey",
+          "printedName": "testStorePrivateKey()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)UserDefaultsStorageTests(im)testStorePrivateKeyAndReturnError:",
+          "mangledName": "$s13EthereumTests019UserDefaultsStorageB0C19testStorePrivateKeyyyKF",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "testGetPrivateKeyTest",
+          "printedName": "testGetPrivateKeyTest()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)UserDefaultsStorageTests(im)testGetPrivateKeyTestAndReturnError:",
+          "mangledName": "$s13EthereumTests019UserDefaultsStorageB0C21testGetPrivateKeyTestyyKF",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "testRemovePrivateKey",
+          "printedName": "testRemovePrivateKey()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)UserDefaultsStorageTests(im)testRemovePrivateKeyAndReturnError:",
+          "mangledName": "$s13EthereumTests019UserDefaultsStorageB0C20testRemovePrivateKeyyyKF",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Constructor",
+          "name": "init",
+          "printedName": "init(invocation:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "UserDefaultsStorageTests",
+              "printedName": "EthereumTests.UserDefaultsStorageTests",
+              "usr": "c:@M@EthereumTests@objc(cs)UserDefaultsStorageTests"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Optional",
+              "printedName": "Foundation.NSInvocation?",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "NSInvocation",
+                  "printedName": "Foundation.NSInvocation",
+                  "usr": "c:objc(cs)NSInvocation"
+                }
+              ],
+              "usr": "s:Sq"
+            }
+          ],
+          "declKind": "Constructor",
+          "usr": "c:@M@EthereumTests@objc(cs)UserDefaultsStorageTests(im)initWithInvocation:",
+          "mangledName": "$s13EthereumTests019UserDefaultsStorageB0C10invocationACSo12NSInvocationCSg_tcfc",
+          "moduleName": "EthereumTests",
+          "overriding": true,
+          "implicit": true,
+          "objc_name": "initWithInvocation:",
+          "declAttributes": [
+            "Dynamic",
+            "ObjC",
+            "Override"
+          ],
+          "init_kind": "Designated"
+        },
+        {
+          "kind": "Constructor",
+          "name": "init",
+          "printedName": "init(selector:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "UserDefaultsStorageTests",
+              "printedName": "EthereumTests.UserDefaultsStorageTests",
+              "usr": "c:@M@EthereumTests@objc(cs)UserDefaultsStorageTests"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Selector",
+              "printedName": "ObjectiveC.Selector",
+              "usr": "s:10ObjectiveC8SelectorV"
+            }
+          ],
+          "declKind": "Constructor",
+          "usr": "c:@M@EthereumTests@objc(cs)UserDefaultsStorageTests(im)initWithSelector:",
+          "mangledName": "$s13EthereumTests019UserDefaultsStorageB0C8selectorAC10ObjectiveC8SelectorV_tcfc",
+          "moduleName": "EthereumTests",
+          "overriding": true,
+          "implicit": true,
+          "objc_name": "initWithSelector:",
+          "declAttributes": [
+            "Dynamic",
+            "ObjC",
+            "Override"
+          ],
+          "init_kind": "Designated"
+        },
+        {
+          "kind": "Constructor",
+          "name": "init",
+          "printedName": "init()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "UserDefaultsStorageTests",
+              "printedName": "EthereumTests.UserDefaultsStorageTests",
+              "usr": "c:@M@EthereumTests@objc(cs)UserDefaultsStorageTests"
+            }
+          ],
+          "declKind": "Constructor",
+          "usr": "c:@M@EthereumTests@objc(cs)UserDefaultsStorageTests(im)init",
+          "mangledName": "$s13EthereumTests019UserDefaultsStorageB0CACycfc",
+          "moduleName": "EthereumTests",
+          "overriding": true,
+          "implicit": true,
+          "objc_name": "init",
+          "declAttributes": [
+            "Dynamic",
+            "ObjC",
+            "Override"
+          ],
+          "init_kind": "Designated"
+        }
+      ],
+      "declKind": "Class",
+      "usr": "c:@M@EthereumTests@objc(cs)UserDefaultsStorageTests",
+      "mangledName": "$s13EthereumTests019UserDefaultsStorageB0C",
+      "moduleName": "EthereumTests",
+      "isOpen": true,
+      "declAttributes": [
+        "ObjC"
+      ],
+      "superclassUsr": "c:objc(cs)XCTestCase",
+      "inheritsConvenienceInitializers": true,
+      "superclassNames": [
+        "XCTest.XCTestCase",
+        "XCTest.XCTest",
+        "ObjectiveC.NSObject"
+      ],
+      "conformances": [
+        {
+          "kind": "Conformance",
+          "name": "Equatable",
+          "printedName": "Equatable",
+          "usr": "s:SQ",
+          "mangledName": "$sSQ"
+        },
+        {
+          "kind": "Conformance",
+          "name": "Hashable",
+          "printedName": "Hashable",
+          "usr": "s:SH",
+          "mangledName": "$sSH"
+        },
+        {
+          "kind": "Conformance",
+          "name": "CVarArg",
+          "printedName": "CVarArg",
+          "usr": "s:s7CVarArgP",
+          "mangledName": "$ss7CVarArgP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "_KeyValueCodingAndObservingPublishing",
+          "printedName": "_KeyValueCodingAndObservingPublishing",
+          "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+          "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "_KeyValueCodingAndObserving",
+          "printedName": "_KeyValueCodingAndObserving",
+          "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+          "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "CustomStringConvertible",
+          "printedName": "CustomStringConvertible",
+          "usr": "s:s23CustomStringConvertibleP",
+          "mangledName": "$ss23CustomStringConvertibleP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "CustomDebugStringConvertible",
+          "printedName": "CustomDebugStringConvertible",
+          "usr": "s:s28CustomDebugStringConvertibleP",
+          "mangledName": "$ss28CustomDebugStringConvertibleP"
+        }
+      ]
+    },
+    {
+      "kind": "Import",
+      "name": "BigInt",
+      "printedName": "BigInt",
+      "declKind": "Import",
+      "moduleName": "EthereumTests"
+    },
+    {
+      "kind": "Import",
+      "name": "Ethereum",
+      "printedName": "Ethereum",
+      "declKind": "Import",
+      "moduleName": "EthereumTests"
+    },
+    {
+      "kind": "Import",
+      "name": "SwiftOnoneSupport",
+      "printedName": "SwiftOnoneSupport",
+      "declKind": "Import",
+      "moduleName": "EthereumTests"
+    },
+    {
+      "kind": "Import",
+      "name": "XCTest",
+      "printedName": "XCTest",
+      "declKind": "Import",
+      "moduleName": "EthereumTests"
+    },
+    {
+      "kind": "Import",
+      "name": "_Concurrency",
+      "printedName": "_Concurrency",
+      "declKind": "Import",
+      "moduleName": "EthereumTests"
+    },
+    {
+      "kind": "TypeDecl",
+      "name": "UtilsTests",
+      "printedName": "UtilsTests",
+      "children": [
+        {
+          "kind": "Function",
+          "name": "testGetPublicKey",
+          "printedName": "testGetPublicKey()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)UtilsTests(im)testGetPublicKeyAndReturnError:",
+          "mangledName": "$s13EthereumTests05UtilsB0C16testGetPublicKeyyyKF",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "testGetEthereumAddress",
+          "printedName": "testGetEthereumAddress()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)UtilsTests(im)testGetEthereumAddressAndReturnError:",
+          "mangledName": "$s13EthereumTests05UtilsB0C07testGetA7AddressyyKF",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "testEthFromWei",
+          "printedName": "testEthFromWei()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)UtilsTests(im)testEthFromWeiAndReturnError:",
+          "mangledName": "$s13EthereumTests05UtilsB0C14testEthFromWeiyyKF",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "throwing": true,
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Function",
+          "name": "testWeiFromEth",
+          "printedName": "testWeiFromEth()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "Void",
+              "printedName": "()"
+            }
+          ],
+          "declKind": "Func",
+          "usr": "c:@M@EthereumTests@objc(cs)UtilsTests(im)testWeiFromEth",
+          "mangledName": "$s13EthereumTests05UtilsB0C14testWeiFromEthyyF",
+          "moduleName": "EthereumTests",
+          "isOpen": true,
+          "declAttributes": [
+            "ObjC"
+          ],
+          "funcSelfKind": "NonMutating"
+        },
+        {
+          "kind": "Constructor",
+          "name": "init",
+          "printedName": "init(invocation:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "UtilsTests",
+              "printedName": "EthereumTests.UtilsTests",
+              "usr": "c:@M@EthereumTests@objc(cs)UtilsTests"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Optional",
+              "printedName": "Foundation.NSInvocation?",
+              "children": [
+                {
+                  "kind": "TypeNominal",
+                  "name": "NSInvocation",
+                  "printedName": "Foundation.NSInvocation",
+                  "usr": "c:objc(cs)NSInvocation"
+                }
+              ],
+              "usr": "s:Sq"
+            }
+          ],
+          "declKind": "Constructor",
+          "usr": "c:@M@EthereumTests@objc(cs)UtilsTests(im)initWithInvocation:",
+          "mangledName": "$s13EthereumTests05UtilsB0C10invocationACSo12NSInvocationCSg_tcfc",
+          "moduleName": "EthereumTests",
+          "overriding": true,
+          "implicit": true,
+          "objc_name": "initWithInvocation:",
+          "declAttributes": [
+            "Dynamic",
+            "ObjC",
+            "Override"
+          ],
+          "init_kind": "Designated"
+        },
+        {
+          "kind": "Constructor",
+          "name": "init",
+          "printedName": "init(selector:)",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "UtilsTests",
+              "printedName": "EthereumTests.UtilsTests",
+              "usr": "c:@M@EthereumTests@objc(cs)UtilsTests"
+            },
+            {
+              "kind": "TypeNominal",
+              "name": "Selector",
+              "printedName": "ObjectiveC.Selector",
+              "usr": "s:10ObjectiveC8SelectorV"
+            }
+          ],
+          "declKind": "Constructor",
+          "usr": "c:@M@EthereumTests@objc(cs)UtilsTests(im)initWithSelector:",
+          "mangledName": "$s13EthereumTests05UtilsB0C8selectorAC10ObjectiveC8SelectorV_tcfc",
+          "moduleName": "EthereumTests",
+          "overriding": true,
+          "implicit": true,
+          "objc_name": "initWithSelector:",
+          "declAttributes": [
+            "Dynamic",
+            "ObjC",
+            "Override"
+          ],
+          "init_kind": "Designated"
+        },
+        {
+          "kind": "Constructor",
+          "name": "init",
+          "printedName": "init()",
+          "children": [
+            {
+              "kind": "TypeNominal",
+              "name": "UtilsTests",
+              "printedName": "EthereumTests.UtilsTests",
+              "usr": "c:@M@EthereumTests@objc(cs)UtilsTests"
+            }
+          ],
+          "declKind": "Constructor",
+          "usr": "c:@M@EthereumTests@objc(cs)UtilsTests(im)init",
+          "mangledName": "$s13EthereumTests05UtilsB0CACycfc",
+          "moduleName": "EthereumTests",
+          "overriding": true,
+          "implicit": true,
+          "objc_name": "init",
+          "declAttributes": [
+            "Dynamic",
+            "ObjC",
+            "Override"
+          ],
+          "init_kind": "Designated"
+        }
+      ],
+      "declKind": "Class",
+      "usr": "c:@M@EthereumTests@objc(cs)UtilsTests",
+      "mangledName": "$s13EthereumTests05UtilsB0C",
+      "moduleName": "EthereumTests",
+      "isOpen": true,
+      "declAttributes": [
+        "ObjC"
+      ],
+      "superclassUsr": "c:objc(cs)XCTestCase",
+      "inheritsConvenienceInitializers": true,
+      "superclassNames": [
+        "XCTest.XCTestCase",
+        "XCTest.XCTest",
+        "ObjectiveC.NSObject"
+      ],
+      "conformances": [
+        {
+          "kind": "Conformance",
+          "name": "Equatable",
+          "printedName": "Equatable",
+          "usr": "s:SQ",
+          "mangledName": "$sSQ"
+        },
+        {
+          "kind": "Conformance",
+          "name": "Hashable",
+          "printedName": "Hashable",
+          "usr": "s:SH",
+          "mangledName": "$sSH"
+        },
+        {
+          "kind": "Conformance",
+          "name": "CVarArg",
+          "printedName": "CVarArg",
+          "usr": "s:s7CVarArgP",
+          "mangledName": "$ss7CVarArgP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "_KeyValueCodingAndObservingPublishing",
+          "printedName": "_KeyValueCodingAndObservingPublishing",
+          "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+          "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "_KeyValueCodingAndObserving",
+          "printedName": "_KeyValueCodingAndObserving",
+          "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+          "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "CustomStringConvertible",
+          "printedName": "CustomStringConvertible",
+          "usr": "s:s23CustomStringConvertibleP",
+          "mangledName": "$ss23CustomStringConvertibleP"
+        },
+        {
+          "kind": "Conformance",
+          "name": "CustomDebugStringConvertible",
+          "printedName": "CustomDebugStringConvertible",
+          "usr": "s:s28CustomDebugStringConvertibleP",
+          "mangledName": "$ss28CustomDebugStringConvertibleP"
+        }
+      ]
+    }
+  ],
+  "json_format_version": 6
+}
