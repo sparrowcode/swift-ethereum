@@ -102,34 +102,4 @@ class ERC721Tests: XCTestCase {
         
         wait(for: [expectation], timeout: 50)
     }
-    
-    func testTokenByIndex() throws {
-        
-        let expectation = XCTestExpectation(description: "token by index erc721")
-        
-        let erc721 = ERC721(address: "0xf8aD42AB76862A934AD2e4578C6a108B172Cd287")
-        
-        erc721.tokenByIndex(index: BigUInt(14)) { tokenId, error in
-            XCTAssertNil(error)
-            XCTAssertNotNil(tokenId)
-            expectation.fulfill()
-        }
-        
-        wait(for: [expectation], timeout: 50)
-    }
-    
-    func testTokenOfOwnerByIndex() throws {
-        
-        let expectation = XCTestExpectation(description: "token by index erc721")
-        
-        let erc721 = ERC721(address: "0xf8aD42AB76862A934AD2e4578C6a108B172Cd287")
-        
-        erc721.tokenOfOwnerByIndex(owner: "0x12e8dc1e05f5d90b78ca0a0336ce911f20f9c075", index: BigUInt(12)) { tokenId, error in
-            XCTAssertNil(error)
-            XCTAssertNotNil(tokenId)
-            expectation.fulfill()
-        }
-        
-        wait(for: [expectation], timeout: 50)
-    }
 }

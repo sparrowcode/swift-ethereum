@@ -1,7 +1,0 @@
-version: "Apple Swift version 5.5.2 (swiftlang-1300.0.47.5 clang-1300.0.29.30)"
-options: "16d7dad600fcb7ff2320606f53265fe3d595aa2a55b147bfb23cc3bb0113d567"
-build_start_time: [1652449757, 623841047]
-build_end_time: [1652449767, 190167903]
-inputs:
-  ? "/Users/ertembiyik/Documents/\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B Mac /Xcode /Work/swift-ethereum/.build/checkouts/SwiftKeccak/Sources/SwiftKeccak/Keccak.swift"
-  : [1652449753, 854484796]

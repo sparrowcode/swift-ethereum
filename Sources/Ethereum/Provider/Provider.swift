@@ -13,6 +13,10 @@ public final class Provider: ProviderProtocol {
     
     private let session: URLSession
     
+    private let encoder = JSONEncoder()
+    
+    private let decoder = JSONDecoder()
+    
     private let queue = DispatchQueue(label: "com.swift-ethereum.provider", attributes: .concurrent)
     
     public init(node: Node, sessionConfiguration: URLSessionConfiguration) {

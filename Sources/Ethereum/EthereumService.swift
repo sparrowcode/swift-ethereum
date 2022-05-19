@@ -264,7 +264,7 @@ public enum EthereumService {
     public static func call(transaction: Transaction, block: String = "latest", completion: @escaping (String?, Error?) -> ()) {
         
         
-        struct Params: Encodable {
+        struct Params: Codable {
             let transaction: Transaction
             let block: String
             

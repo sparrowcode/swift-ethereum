@@ -287,9 +287,7 @@ class EthereumServiceTests: XCTestCase {
     func testGetTransactionReceipt() throws {
         
         let expectation = XCTestExpectation(description: "get transaction receipt")
-        let transactionHash = "0x3f3f5a12c058f25630332daa6875125424aafb9c2dcc71294b1ed69b90e3b54f"
-        
-        EthereumService.provider = Provider(node: .ropsten)
+        let transactionHash = "0xa3ece39ae137617669c6933b7578b94e705e765683f260fcfe30eaa41932610f"
         
         EthereumService.getTransactionReceipt(transactionHash: transactionHash) { receipt, error in
             XCTAssertNil(error)
