@@ -31,7 +31,7 @@ public enum ABIEncoder {
                 let offset = try bigUIntCount.encodeABI(isDynamic: false, sequenceElementType: nil)
                 staticParamsSignature.append(offset)
                 
-                // calculate the encoded value of a given param and append it to dynamic signature           
+                // calculate the encoded value of a given param and append it to dynamic signature
                 let encodedParam = try param.value.encodeABI(isDynamic: true, sequenceElementType: param.type.sequenceElementType)
                 dynamicParamsSignature.append(encodedParam)
                 

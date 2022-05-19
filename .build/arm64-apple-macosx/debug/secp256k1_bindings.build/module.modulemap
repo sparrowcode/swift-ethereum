@@ -1,4 +1,0 @@
-module secp256k1_bindings {
-    umbrella "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/checkouts/secp256k1.swift/Sources/bindings/include"
-    export *
-}

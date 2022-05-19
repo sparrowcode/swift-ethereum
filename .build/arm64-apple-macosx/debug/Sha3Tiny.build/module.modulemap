@@ -1,4 +1,0 @@
-module Sha3Tiny {
-    umbrella "/Users/ertembiyik/Documents/Документы Mac /Xcode /Work/swift-ethereum/.build/checkouts/SwiftKeccak/Sources/Sha3Tiny/include"
-    export *
-}

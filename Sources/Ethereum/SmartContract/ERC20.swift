@@ -20,7 +20,7 @@ public enum ERC20Contract {
         switch self {
             
         case .balance(let ofAddress, let contractAddress):
-            let params = [SmartContractParam(type: .address, value: EthereumAddress(ofAddress))]
+            let params = [SmartContractParam(type: .address, value: ABIEthereumAddress(ofAddress))]
             
             let method = SmartContractMethod(name: "balanceOf", params: params)
             
@@ -31,7 +31,7 @@ public enum ERC20Contract {
             return try Transaction(input: data, to: contractAddress)
             
         case .transfer(let value, let to, let gasLimit, let gasPrice, let contractAddress):
-            let params = [SmartContractParam(type: .address,  value: EthereumAddress(to)),
+            let params = [SmartContractParam(type: .address,  value: ABIEthereumAddress(to)),
                           SmartContractParam(type: .uint(), value: value)]
             
             let method = SmartContractMethod(name: "transfer", params: params)
@@ -120,7 +120,7 @@ public enum ERC20TransactionFactory {
     
     public static func generateBalanceTransaction(address: String, contractAddress: String) throws -> Transaction {
         
-        let params = [SmartContractParam(type: .address, value: EthereumAddress(address))]
+        let params = [SmartContractParam(type: .address, value: ABIEthereumAddress(address))]
         
         let method = SmartContractMethod(name: "balanceOf", params: params)
         

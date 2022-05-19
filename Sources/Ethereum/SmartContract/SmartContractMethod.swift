@@ -1,6 +1,7 @@
 import Foundation
 
 public struct SmartContractMethod {
+    
     let name: String
     let params: [SmartContractParam]
     

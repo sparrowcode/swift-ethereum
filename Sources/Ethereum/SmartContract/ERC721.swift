@@ -19,7 +19,7 @@ public extension ERC721Contract {
     
     func balance(of address: String, completion: @escaping (BigUInt?, Error?) -> ()) {
         
-        let params = [SmartContractParam(type: .address, value: EthereumAddress(address))]
+        let params = [SmartContractParam(type: .address, value: ABIEthereumAddress(address))]
         
         let method = SmartContractMethod(name: "balanceOf", params: params)
         
@@ -96,7 +96,7 @@ public extension ERC721Contract {
     
     func transfer(to address: String, tokenID: BigUInt, from account: Account, gasPrice: BigUInt, gasLimit: BigUInt, completion: @escaping (String?, Error?) -> ()) {
         
-        let params = [SmartContractParam(type: .address,  value: EthereumAddress(address)),
+        let params = [SmartContractParam(type: .address,  value: ABIEthereumAddress(address)),
                       SmartContractParam(type: .uint(), value: tokenID)]
         
         let method = SmartContractMethod(name: "transfer", params: params)
@@ -308,7 +308,7 @@ public extension ERC721Contract {
     
     func tokenOfOwnerByIndex(owner: String, index: BigUInt, completion: @escaping (BigUInt?, Error?) -> ()) {
         
-        let params = [SmartContractParam(type: .address, value: EthereumAddress(owner)),
+        let params = [SmartContractParam(type: .address, value: ABIEthereumAddress(owner)),
                       SmartContractParam(type: .uint(), value: index)]
         
         let method = SmartContractMethod(name: "tokenOfOwnerByIndex", params: params)
@@ -377,7 +377,7 @@ extension ERC721Contract {
     
     func transferTransaction(to address: String, tokenId: BigUInt, from account: Account, gasPrice: BigUInt, gasLimit: BigUInt) throws -> Transaction {
         
-        let params = [SmartContractParam(type: .address,  value: EthereumAddress(address)),
+        let params = [SmartContractParam(type: .address,  value: ABIEthereumAddress(address)),
                       SmartContractParam(type: .uint(), value: tokenId)]
         
         let method = SmartContractMethod(name: "transfer", params: params)
