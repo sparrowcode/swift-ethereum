@@ -4,19 +4,19 @@ import Ethereum
 
 class ERC721Tests: XCTestCase {
     
-    struct ERC721: ERC721Contract {
-        var address: String
-    }
+    let contractAddress = "0xf8aD42AB76862A934AD2e4578C6a108B172Cd287"
 
     func testBalance() throws {
         
         let expectation = XCTestExpectation(description: "get balance erc721")
         
-        let erc721 = ERC721(address: "0xf8aD42AB76862A934AD2e4578C6a108B172Cd287")
+        let address = "0x495f947276749ce646f68ac8c248420045cb7b5e"
         
-        erc721.balance(of: "0x495f947276749ce646f68ac8c248420045cb7b5e") { value, error in
+        let transaction = try ERC721TransactionFactory.generateBalanceTransaction(address: address, contractAddress: contractAddress)
+        
+        EthereumService.call(transaction: transaction) { response, error in
             XCTAssertNil(error)
-            XCTAssertNotNil(value)
+            XCTAssertNotNil(response)
             expectation.fulfill()
         }
         
@@ -27,13 +27,13 @@ class ERC721Tests: XCTestCase {
         
         let expectation = XCTestExpectation(description: "get owner of erc721")
         
-        let erc721 = ERC721(address: "0xf8aD42AB76862A934AD2e4578C6a108B172Cd287")
-        
         let tokenId = BigUInt(708)
         
-        erc721.owner(of: tokenId) { value, error in
+        let transaction = try ERC721TransactionFactory.generateOwnerOfTransaction(tokenId: tokenId, contractAddress: contractAddress)
+        
+        EthereumService.call(transaction: transaction) { response, error in
             XCTAssertNil(error)
-            XCTAssertNotNil(value)
+            XCTAssertNotNil(response)
             expectation.fulfill()
         }
         
@@ -44,11 +44,11 @@ class ERC721Tests: XCTestCase {
         
         let expectation = XCTestExpectation(description: "get name erc721")
         
-        let erc721 = ERC721(address: "0xf8aD42AB76862A934AD2e4578C6a108B172Cd287")
+        let transaction = try ERC721TransactionFactory.generateNameTransaction(contractAddress: contractAddress)
         
-        erc721.name() { name, error in
+        EthereumService.call(transaction: transaction) { response, error in
             XCTAssertNil(error)
-            XCTAssertNotNil(name)
+            XCTAssertNotNil(response)
             expectation.fulfill()
         }
         
@@ -59,11 +59,11 @@ class ERC721Tests: XCTestCase {
         
         let expectation = XCTestExpectation(description: "get symbol erc721")
         
-        let erc721 = ERC721(address: "0xf8aD42AB76862A934AD2e4578C6a108B172Cd287")
+        let transaction = try ERC721TransactionFactory.generateSymbolTransaction(contractAddress: contractAddress)
         
-        erc721.symbol() { symbol, error in
+        EthereumService.call(transaction: transaction) { response, error in
             XCTAssertNil(error)
-            XCTAssertNotNil(symbol)
+            XCTAssertNotNil(response)
             expectation.fulfill()
         }
         
@@ -75,13 +75,13 @@ class ERC721Tests: XCTestCase {
         
         let expectation = XCTestExpectation(description: "get tokenURI of erc721")
         
-        let erc721 = ERC721(address: "0xf8aD42AB76862A934AD2e4578C6a108B172Cd287")
-        
         let tokenId = BigUInt(708)
         
-        erc721.tokenURI(tokenID: tokenId) { tokenURI, error in
+        let transaction = try ERC721TransactionFactory.generateTokenURITransaction(tokenId: tokenId, contractAddress: contractAddress)
+        
+        EthereumService.call(transaction: transaction) { response, error in
             XCTAssertNil(error)
-            XCTAssertNotNil(tokenURI)
+            XCTAssertNotNil(response)
             expectation.fulfill()
         }
         
@@ -92,11 +92,11 @@ class ERC721Tests: XCTestCase {
         
         let expectation = XCTestExpectation(description: "total supply of erc721")
         
-        let erc721 = ERC721(address: "0xf8aD42AB76862A934AD2e4578C6a108B172Cd287")
+        let transaction = try ERC721TransactionFactory.generateTotalSupplyTransaction(contractAddress: contractAddress)
         
-        erc721.totalSupply() { totalSupply, error in
+        EthereumService.call(transaction: transaction) { response, error in
             XCTAssertNil(error)
-            XCTAssertNotNil(totalSupply)
+            XCTAssertNotNil(response)
             expectation.fulfill()
         }
         

@@ -11,7 +11,7 @@ public enum ABIDecoder {
     
     static public func decode(_ value: String, to type: SmartContractValueType) throws -> Any {
         
-        let bytes = try value.bytes
+        let bytes = try value.removeHexPrefix().bytes
         
         let data = Data(bytes)
         
@@ -25,7 +25,7 @@ public enum ABIDecoder {
     
     static public func decode(_ value: String, to types: [SmartContractValueType]) throws -> Any {
         
-        let bytes = try value.bytes
+        let bytes = try value.removeHexPrefix().bytes
         
         let data = Data(bytes)
         

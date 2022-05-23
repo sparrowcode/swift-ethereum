@@ -34,14 +34,17 @@ public struct Node {
         var localError: Error?
         
         let group = DispatchGroup()
-        group.enter()
         
+        group.enter()
         self.version { version, error in
+            
+            defer { group.leave() }
+            
             chainID = version
             localError = error
-            group.leave()
         }
         
+        // MARK: - Blocks thread, maybe switch to notify
         group.wait()
         
         guard localError == nil, let chainID = chainID else {
