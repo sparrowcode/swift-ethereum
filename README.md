@@ -7,29 +7,26 @@ Going to be official Ethereum repo for Swift. There is active progress right now
 ### Create a new account
 
 #### In order to create a new account you have to use AccountManager. It secures your private key with AES encryption. You can also select a storage, where to hold the encrypted data.
-
-    let storage = UserDefaultsStorage(password: "password")
+```swift
+let storage = UserDefaultsStorage(password: "password")
         
-    let accountManager = AccountManager(storage: storage)
+let accountManager = AccountManager(storage: storage)
         
-    let account = try accountManager.importAccount(privateKey: "your_private_key")
-
+let account = try accountManager.importAccount(privateKey: "your_private_key")
+```
 #### All the fields of your account are decoded from your private key by the library, so after importing your account you can just tap to them:
-
-    let address = account.address
-    let publicKey = account.publicKey
-    let privateKey = account.privateKey
-
+```swift
+let address = account.address
+let publicKey = account.publicKey
+let privateKey = account.privateKey
+```
 ### Interacting with Ethereum
 
 #### The abstraction between you and Ethereum is EthereumService. By default it is set to the mainnet, but you can easily change it by setting new Node:
-
-    EthereumService.provider = Provider(node: .ropsten)
-
+```swift
+EthereumService.provider = Provider(node: .ropsten)
+```
 #### To get balance of any address:
-
-    EthereumService.getBalance(for: address) { balance, error in
-
-      print(balance)
-
-    }
+```swift
+let balance = try await EthereumService.getBalance(for: "address")
+```
