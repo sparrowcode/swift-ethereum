@@ -1,5 +1,5 @@
 import XCTest
-import Ethereum
+@testable import Ethereum
 
 class ProviderTests: XCTestCase {
     
