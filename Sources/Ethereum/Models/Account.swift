@@ -3,9 +3,9 @@ import SwiftKeccak
 
 public struct Account {
     
-    public var address: String
-    public var publicKey: String
-    public var privateKey: String
+    public let address: String
+    public let publicKey: String
+    public let privateKey: String
     
     init(privateKey: String) throws {
         

@@ -1,13 +1,6 @@
 import Foundation
 
-public protocol ProviderProtocol {
-    
-    init(node: Node, sessionConfiguration: URLSessionConfiguration)
-    init(node: Node)
-    func sendRequest<E: Encodable, D: Decodable>(method: JSONRPCMethod, params: E, decodeTo: D.Type, completion: @escaping (D?, Error?) -> Void)
-}
-
-public final class Provider: ProviderProtocol {
+public final class Provider {
     
     public let node: Node
     
@@ -35,7 +28,7 @@ public final class Provider: ProviderProtocol {
     /*
      Method that is called from Service to send a request
      */
-    public func sendRequest<E: Encodable, D: Decodable>(method: JSONRPCMethod, params: E, decodeTo: D.Type, completion: @escaping (D?, Error?) -> Void) {
+    func sendRequest<E: Encodable, D: Decodable>(method: JSONRPCMethod, params: E, decodeTo: D.Type, completion: @escaping (D?, Error?) -> Void) {
         
         queue.async { [weak self] in
             
@@ -86,3 +79,5 @@ public final class Provider: ProviderProtocol {
     }
     
 }
+
+

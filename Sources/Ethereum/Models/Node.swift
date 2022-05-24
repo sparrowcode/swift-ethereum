@@ -1,5 +1,9 @@
 import Foundation
 
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
+
 public enum NodeErrors: Error {
     case errorRetrievingChainID
     case invalidURL
@@ -155,3 +159,57 @@ extension Node: Equatable {
         return lhs.url == rhs.url && lhs.network == rhs.network
     }
 }
+
+#if compiler(>=5.5) && canImport(_Concurrency)
+@available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
+extension Node {
+    
+    public func version() async throws -> Int {
+        return try await withCheckedThrowingContinuation { continuation in
+            version() { value, error in
+                if let error = error {
+                    continuation.resume(throwing: error)
+                } else if let value = value {
+                    continuation.resume(returning: value)
+                }
+            }
+        }
+    }
+    
+    public func listening() async throws -> Bool {
+        return try await withCheckedThrowingContinuation { continuation in
+            listening() { value, error in
+                if let error = error {
+                    continuation.resume(throwing: error)
+                } else if let value = value {
+                    continuation.resume(returning: value)
+                }
+            }
+        }
+    }
+    
+    public func peerCount() async throws -> Int {
+        return try await withCheckedThrowingContinuation { continuation in
+            peerCount() { value, error in
+                if let error = error {
+                    continuation.resume(throwing: error)
+                } else if let value = value {
+                    continuation.resume(returning: value)
+                }
+            }
+        }
+    }
+    
+    public func clientVersion() async throws -> String {
+        return try await withCheckedThrowingContinuation { continuation in
+            clientVersion() { value, error in
+                if let error = error {
+                    continuation.resume(throwing: error)
+                } else if let value = value {
+                    continuation.resume(returning: value)
+                }
+            }
+        }
+    }
+}
+#endif

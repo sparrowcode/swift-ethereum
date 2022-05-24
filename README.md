@@ -2,48 +2,34 @@
 
 Going to be official Ethereum repo for Swift. There is active progress right now. We will soon get the documentation in order and offer examples of use.
 
-## Navigate
+## Account
 
-- [Installation](#installation)
-    - [Swift Package Manager](#swift-package-manager)
-    - [Manually](#manually)
-- [Quick Start](#quick-start)
-    - [Get Balance](#example)
-  - [Send](#example)
-  - [Get Gas](#example)
-  - [Get Fee](#example)
-- [Usage](#usage)
-  - [Set Node](#example)
-  - [Set Storage](#example)
-- [Models](#example)
-  - [Account](#account)
-  - [Transaction](#transaction)
-  - [Smart contract](#smart-contract)
-  - [Block](#block)
+### Create a new account
 
+#### In order to create a new account you have to use AccountManager. It secures your private key with AES encryption. You can also select a storage, where to hold the encrypted data.
 
-## Service
-Base service of the library. Incapsulates ethereum blockchain methods inside itself. Uses [provider](#provider) which gives access to interplay with ethereum blockchain (ex: call smart contract functions). Global source of truth
+    let storage = UserDefaultsStorage(password: "password")
+        
+    let accountManager = AccountManager(storage: storage)
+        
+    let account = try accountManager.importAccount(privateKey: "your_private_key")
 
-### Storage
-Is a place where keys of accounts are stored. Has to be secure (uses keychain) and requires a password for encryption and decryption
+#### All the fields of your account are decoded from your private key by the library, so after importing your account you can just tap to them:
 
-### Provider
-The representation of an [evm client](https://ethereum.org/en/developers/docs/nodes-and-clients). A required property for initialising is a url of rpc server. For a simplified usage, mainnet and testnets shold be added (from Infuria for example)
+    let address = account.address
+    let publicKey = account.publicKey
+    let privateKey = account.privateKey
 
-### Wallet
-Place where accounts are being held and managed.
-Authenticates accounts, manages creation of an account. A good feature would be to provide login via popular ethereum wallets such as metamask, openwallet, rainbow
+### Interacting with Ethereum
 
-#### Account
-Information of an ethereum account. Used for signing transactions
+#### The abstraction between you and Ethereum is EthereumService. By default it is set to the mainnet, but you can easily change it by setting new Node:
 
-## Smart Contract
-Is a representation of a smart contract. For a simplified usage, common contratcts should be added (.erc721, .erc20 .erc1155 etc). Web3j provides a feature to generate java code from the binary executable of solidity smart contract, this feature shold be considered
+    EthereumService.provider = Provider(node: .ropsten)
 
-## Block
-A representation of an ethereum [block](https://ethereum.org/en/developers/docs/blocks) that holds several transactions
+#### To get balance of any address:
 
-## Transaction
-A representation of an [ethereum transaction](https://ethereum.org/en/developers/docs/transactions/) that executes on [evm](https://ethereum.org/en/developers/docs/evm/)
+    EthereumService.getBalance(for: address) { balance, error in
 
+      print(balance)
+
+    }

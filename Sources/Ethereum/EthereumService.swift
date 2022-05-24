@@ -1,6 +1,10 @@
 import Foundation
 import BigInt
 
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
+
 public enum EthereumService {
     
     public static var provider = Provider(node: .mainnet)
@@ -9,7 +13,7 @@ public enum EthereumService {
     /**
      Ethereum: Returns the current price per gas in wei.
      */
-    public static func gasPrice(completion: @escaping (Int?, Error?) -> ()) {
+    public static func gasPrice(completion: @escaping (BigUInt?, Error?) -> ()) {
         
         // TODO: - Create a .none for params field
         let params = [String]()
@@ -21,7 +25,7 @@ public enum EthereumService {
                 return
             }
             
-            guard let gasPrice = Int(hexGasPrice.removeHexPrefix(), radix: 16) else {
+            guard let gasPrice = BigUInt(hexGasPrice.removeHexPrefix(), radix: 16) else {
                 completion(nil, ConvertingError.errorConvertingFromHex)
                 return
             }
@@ -533,14 +537,13 @@ public enum EthereumService {
         
     }
     
+    // MARK: TO LATER
     /**
      Ethereum: Returns an array of all logs matching a given filter object.
      */
-    public static func getLogs() {
-        
-    }
-    
-    // MARK: TO LATER
+//    public static func getLogs() {
+//
+//    }
     /*
     /**
      Ethereum: Creates a filter object, based on filter options, to notify when the state changes (logs). To check if the state has changed, call eth_getFilterChanges.
@@ -577,3 +580,238 @@ public enum EthereumService {
         
     }*/
 }
+
+#if compiler(>=5.5) && canImport(_Concurrency)
+@available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
+extension EthereumService {
+    
+    public static func gasPrice() async throws -> BigUInt {
+        return try await withCheckedThrowingContinuation { continuation in
+            gasPrice() { value, error in
+                if let error = error {
+                    continuation.resume(throwing: error)
+                } else if let value = value {
+                    continuation.resume(returning: value)
+                }
+            }
+        }
+    }
+    
+    public static func blockNumber() async throws -> Int {
+        return try await withCheckedThrowingContinuation { continuation in
+            blockNumber() { value, error in
+                if let error = error {
+                    continuation.resume(throwing: error)
+                } else if let value = value {
+                    continuation.resume(returning: value)
+                }
+            }
+        }
+    }
+    
+    public static func getBalance(for address: String, block: String = "latest") async throws -> BigUInt {
+        return try await withCheckedThrowingContinuation { continuation in
+            getBalance(for: address, block: block) { value, error in
+                if let error = error {
+                    continuation.resume(throwing: error)
+                } else if let value = value {
+                    continuation.resume(returning: value)
+                }
+            }
+        }
+    }
+    
+    public static func getStorageAt(address: String, storageSlot: Int, block: String = "latest") async throws -> String {
+        return try await withCheckedThrowingContinuation { continuation in
+            getStorageAt(address: address, storageSlot: storageSlot) { value, error in
+                if let error = error {
+                    continuation.resume(throwing: error)
+                } else if let value = value {
+                    continuation.resume(returning: value)
+                }
+            }
+        }
+    }
+    
+    public static func getTransactionCount(for address: String, block: String = "latest") async throws -> Int {
+        return try await withCheckedThrowingContinuation { continuation in
+            getTransactionCount(for: address, block: block) { value, error in
+                if let error = error {
+                    continuation.resume(throwing: error)
+                } else if let value = value {
+                    continuation.resume(returning: value)
+                }
+            }
+        }
+    }
+    
+    public static func getBlockTransactionCountByHash(blockHash: String) async throws -> Int {
+        return try await withCheckedThrowingContinuation { continuation in
+            getBlockTransactionCountByHash(blockHash: blockHash) { value, error in
+                if let error = error {
+                    continuation.resume(throwing: error)
+                } else if let value = value {
+                    continuation.resume(returning: value)
+                }
+            }
+        }
+    }
+    
+    public static func getBlockTransactionCountByNumber(blockNumber: Int) async throws -> Int {
+        return try await withCheckedThrowingContinuation { continuation in
+            getBlockTransactionCountByNumber(blockNumber: blockNumber) { value, error in
+                if let error = error {
+                    continuation.resume(throwing: error)
+                } else if let value = value {
+                    continuation.resume(returning: value)
+                }
+            }
+        }
+    }
+    
+    public static func getCode(address: String, block: String = "latest") async throws -> String {
+        return try await withCheckedThrowingContinuation { continuation in
+            getCode(address: address, block: block) { value, error in
+                if let error = error {
+                    continuation.resume(throwing: error)
+                } else if let value = value {
+                    continuation.resume(returning: value)
+                }
+            }
+        }
+    }
+    
+    public static func sendRawTransaction(account: Account, transaction: Transaction) async throws -> String {
+        return try await withCheckedThrowingContinuation { continuation in
+            sendRawTransaction(account: account, transaction: transaction) { value, error in
+                if let error = error {
+                    continuation.resume(throwing: error)
+                } else if let value = value {
+                    continuation.resume(returning: value)
+                }
+            }
+        }
+    }
+    
+    public static func call(transaction: Transaction, block: String = "latest") async throws -> String {
+        return try await withCheckedThrowingContinuation { continuation in
+            call(transaction: transaction, block: block) { value, error in
+                if let error = error {
+                    continuation.resume(throwing: error)
+                } else if let value = value {
+                    continuation.resume(returning: value)
+                }
+            }
+        }
+    }
+    
+    public static func estimateGas(for transaction: Transaction, block: String = "latest") async throws -> BigUInt {
+        return try await withCheckedThrowingContinuation { continuation in
+            estimateGas(for: transaction, block: block) { value, error in
+                if let error = error {
+                    continuation.resume(throwing: error)
+                } else if let value = value {
+                    continuation.resume(returning: value)
+                }
+            }
+        }
+    }
+    
+    public static func getBlockByHash(hash: String) async throws -> Block {
+        return try await withCheckedThrowingContinuation { continuation in
+            getBlockByHash(hash: hash) { value, error in
+                if let error = error {
+                    continuation.resume(throwing: error)
+                } else if let value = value {
+                    continuation.resume(returning: value)
+                }
+            }
+        }
+    }
+    
+    public static func getBlockByNumber(blockNumber: Int) async throws -> Block {
+        return try await withCheckedThrowingContinuation { continuation in
+            getBlockByNumber(blockNumber: blockNumber) { value, error in
+                if let error = error {
+                    continuation.resume(throwing: error)
+                } else if let value = value {
+                    continuation.resume(returning: value)
+                }
+            }
+        }
+    }
+    
+    public static func getTransactionByHash(transactionHash: String) async throws -> Transaction {
+        return try await withCheckedThrowingContinuation { continuation in
+            getTransactionByHash(transactionHash: transactionHash) { value, error in
+                if let error = error {
+                    continuation.resume(throwing: error)
+                } else if let value = value {
+                    continuation.resume(returning: value)
+                }
+            }
+        }
+    }
+    
+    public static func getTransactionByBlockHashAndIndex(blockHash: String, index: Int) async throws -> Transaction {
+        return try await withCheckedThrowingContinuation { continuation in
+            getTransactionByBlockHashAndIndex(blockHash: blockHash, index: index) { value, error in
+                if let error = error {
+                    continuation.resume(throwing: error)
+                } else if let value = value {
+                    continuation.resume(returning: value)
+                }
+            }
+        }
+    }
+    
+    
+    public static func getTransactionByBlockNumberAndIndex(blockNumber: Int, index: Int) async throws -> Transaction {
+        return try await withCheckedThrowingContinuation { continuation in
+            getTransactionByBlockNumberAndIndex(blockNumber: blockNumber, index: index) { value, error in
+                if let error = error {
+                    continuation.resume(throwing: error)
+                } else if let value = value {
+                    continuation.resume(returning: value)
+                }
+            }
+        }
+    }
+    
+    public static func getTransactionReceipt(transactionHash: String) async throws -> Receipt {
+        return try await withCheckedThrowingContinuation { continuation in
+            getTransactionReceipt(transactionHash: transactionHash) { value, error in
+                if let error = error {
+                    continuation.resume(throwing: error)
+                } else if let value = value {
+                    continuation.resume(returning: value)
+                }
+            }
+        }
+    }
+    
+    public static func getUncleByBlockHashAndIndex(blockHash: String, index: Int) async throws -> Block {
+        return try await withCheckedThrowingContinuation { continuation in
+            getUncleByBlockHashAndIndex(blockHash: blockHash, index: index) { value, error in
+                if let error = error {
+                    continuation.resume(throwing: error)
+                } else if let value = value {
+                    continuation.resume(returning: value)
+                }
+            }
+        }
+    }
+    
+    public static func getUncleByBlockNumberAndIndex(blockNumber: Int, index: Int) async throws -> Block {
+        return try await withCheckedThrowingContinuation { continuation in
+            getUncleByBlockNumberAndIndex(blockNumber: blockNumber, index: index) { value, error in
+                if let error = error {
+                    continuation.resume(throwing: error)
+                } else if let value = value {
+                    continuation.resume(returning: value)
+                }
+            }
+        }
+    }
+}
+#endif
