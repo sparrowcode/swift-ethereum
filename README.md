@@ -2,9 +2,52 @@
 
 Going to be official Ethereum repo for Swift. There is active progress right now. We will soon get the documentation in order and offer examples of use.
 
+## Navigation 
+- [Installation](#installation)
+    - [Swift Package Manager](#swift-package-manager)
+    - [Manually](#manually)
+- [Account](#account)
+    - [Create new account](#create-new-account)
+    - [Sign data](#sign-data)
+- [Interacting with Ethereum](#interacting-with-ethereum)
+    - [Send a transaction](#to-send-a-transaction)
+    - [Call a transaction](#to-call-a-transaction)
+    - [Get balance](#to-get-balance-of-any-address)
+    - [Get transactions count](#to-get-transactions-count)
+    - [Get current block number](#to-get-current-block-number)
+    - [Get current gas price](#to-get-current-gas-price)
+    - [Get block transaction count by block hash](#to-get-block-transaction-count-by-block-hash)
+    - [Get block transaction count by block number](#to-get-block-transaction-count-by-block-number)
+    - [Get storage at address](#to-get-storage-at-address)
+    - [Get code for address](#to-get-code-for-address)
+    - [Get block by hash](#to-get-block-by-hash)
+    - [Get block by number](#to-get-block-by-number)
+    - [Get transaction by hash](#to-get-transaction-by-hash)
+    - [Get uncle by block hash and index](#to-get-uncle-by-block-hash-and-index)
+    - [Get uncle by block number and index](#to-get-uncle-by-block-number-and-index)
+    - [Get transaction by block hash and index](#to-get-transaction-by-block-hash-and-index)
+    - [Get transaction by block number and index](#to-get-transaction-by-block-number-and-index)
+    - [Get transaction receipt](#to-get-transaction-receipt)
+    - [Estimate gas for transaction](#to-estimate-gas-for-transaction)
+- [Node](#getting-info-about-the-node)
+    - [Initialize custom node](#to-initialize-a-node-with-your-custom-rpc-url)
+    - [Get version](#to-get-version)
+    - [Check if listening](#to-check-if-listening)
+    - [Get peer count](#to-get-peer-count)
+    - [Get client version](#to-get-client-version)
+- [Utils](#utils)
+    - [Get public key from private key](#to-get-public-key-from-private-key)
+    - [Get address from public key](#to-get-address-from-public-key)
+    - [Get eth from wei](#to-get-eth-from-wei)
+- [Smart Contracts](#smart-contracts-and-abi-decodingencoding)
+    - [Get balance example](#to-get-balance-of-an-address-for-any-erc20-token)
+    - [Decoding response](#decoding-response)
+    - [Encode parameters](#to-encode-parameters)
+
+
 ## Account
 
-### Create a new account
+### Create new account
 
 In order to create a new account you have to use AccountManager. It secures your private key with AES encryption. You can also select a storage, where to hold the encrypted data.
 
@@ -22,6 +65,14 @@ All the fields of your account are decoded from your private key by the library,
 let address = account.address
 let publicKey = account.publicKey
 let privateKey = account.privateKey
+```
+
+### Sign data
+
+You can sign any instance of a type that confirms to RLPEncodable with your private key:
+
+```swift
+let signedData = try account.sign(rlpEncodable)
 ```
 
 ## Interacting with Ethereum
@@ -139,15 +190,6 @@ let transactionHash = "transaction_hash"
 let transaction = try await EthereumService.getTransactionByHash(transactionHash: transactionHash)
 ```
 
-#### To get uncle by block number and index:
-
-```swift
-let blockNumber = 668
-let index = 0
-
-let uncleBlock = try await EthereumService.getUncleByBlockNumberAndIndex(blockNumber: blockNumber, index: index)
-```
-
 #### To get uncle by block hash and index:
 
 ```swift
@@ -157,13 +199,13 @@ let index = 0
 let uncleBlock = try await EthereumService.getUncleByBlockHashAndIndex(blockHash: blockHash, index: index)
 ```
 
-#### To get transaction by block number and index:
+#### To get uncle by block number and index:
 
 ```swift
-let blockNumber = "5417326"
+let blockNumber = 668
 let index = 0
 
-let transaction = try await EthereumService.getTransactionByBlockNumberAndIndex(blockNumber: blockNumber, index: index)
+let uncleBlock = try await EthereumService.getUncleByBlockNumberAndIndex(blockNumber: blockNumber, index: index)
 ```
 
 #### To get transaction by block hash and index:
@@ -173,6 +215,15 @@ let blockHash = "block_hash"
 let index = 0
 
 let transaction = try await EthereumService.getTransactionByBlockHashAndIndex(blockHash: blockHash, index: index)
+```
+
+#### To get transaction by block number and index:
+
+```swift
+let blockNumber = "5417326"
+let index = 0
+
+let transaction = try await EthereumService.getTransactionByBlockNumberAndIndex(blockNumber: blockNumber, index: index)
 ```
 
 #### To get transaction receipt:
@@ -195,6 +246,7 @@ let estimatedGas = try await EthereumService.estimateGas(for: transaction)
 
 ## Getting info about the Node
 
+#### To initialize a node with your custom rpc url
 ```swift
 let node = try Node(url: "your_custom_rpc_url")
 ```
@@ -258,7 +310,7 @@ We decided to create a transaction based flow for interacting with smart contrac
 
 The flow is super easy, we provide factory for both erc20 and erc721 contracts. Factory lets you generate a transaction and then you can call or send it with EthereumService
 
-For example, to get balance of an address for any token:
+#### To get balance of an address for any ERC20 token:
 
 ```swift
 let contractAddress = "token_address" 
@@ -267,6 +319,7 @@ let address = "address_to_check_balance"
 let transaction = try ERC20TransactionFactory.generateBalanceTransaction(address: address, contractAddress: contractAddress)
 ```
 
+#### Decoding response:
 Then just call the transaction with EthereumService, get the abi encoded result and decode it using ABIDecoder:
 
 ```swift
@@ -275,13 +328,15 @@ let abiEncodedBalance = try await EthereumService.call(transaction: transaction)
 let balance = try ABIDecoder.decode(abiEncodedBalance, to: .uint()) as? BigUInt
 ```
 
-If the abi encoded result contains several types, provide them in an array:
+If the abi encoded result contains several types, provide them as an array:
 
 ```swift
 let decodedResult = try ABIDecoder.decode(someEncodedValue, to: [.uint(), .string, .address])
 ```
 
-To encode parameters:
+Decode method accepts both Data and String value
+
+#### To encode parameters:
 
 ```swift
 let params = [SmartContractParam(type: .address,  value: ABIEthereumAddress(to)),
