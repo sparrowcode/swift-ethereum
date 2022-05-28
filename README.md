@@ -5,7 +5,6 @@ Going to be official Ethereum repo for Swift. There is active progress right now
 ## Navigation 
 - [Installation](#installation)
     - [Swift Package Manager](#swift-package-manager)
-    - [Manually](#manually)
 - [Account](#account)
     - [Create new account](#create-new-account)
     - [Sign data](#sign-data)
@@ -41,9 +40,21 @@ Going to be official Ethereum repo for Swift. There is active progress right now
     - [Get eth from wei](#to-get-eth-from-wei)
 - [Smart Contracts](#smart-contracts-and-abi-decodingencoding)
     - [Get balance example](#to-get-balance-of-an-address-for-any-erc20-token)
-    - [Decoding response](#decoding-response)
+    - [Calling ERC20 transaction and decoding response](#calling-erc20-transaction-and-decoding-response)
     - [Encode parameters](#to-encode-parameters)
 
+## Installation
+
+### Swift Package Manager
+The [Swift Package Manager](https://swift.org/package-manager/) is a tool for automating the distribution of Swift code and is integrated into the `swift` compiler. It’s integrated with the Swift build system to automate the process of downloading, compiling, and linking dependencies.
+
+Once you have your Swift package set up, adding as a dependency is as easy as adding it to the `dependencies` value of your `Package.swift`.
+
+```swift
+dependencies: [
+    .package(url: "https://github.com/sparrowcode/swift-ethereum.git", .branchItem("main"))
+]
+```
 
 ## Account
 
@@ -69,15 +80,31 @@ let privateKey = account.privateKey
 
 ### Sign data
 
-You can sign any instance of a type that confirms to RLPEncodable with your private key:
+You can sign any instance of a type that confirms to `RLPEncodable` with your private key:
 
 ```swift
 let signedData = try account.sign(rlpEncodable)
 ```
 
+To confirm your type to `RLPEncodable` protocol provide how the data should be encoded for your type in `encodeRLP()` method:
+
+```swift
+struct SomeType {
+    let name: String
+}
+
+extension SomeType: RLPEncodable {
+    func encodeRLP() throws -> Data {
+        return try RLPEncoder.encode(self.name)
+    }
+}
+```
+
+Read more about RLP here: [RLP Ethereum Wiki](https://eth.wiki/fundamentals/rlp)
+
 ## Interacting with Ethereum
 
-The abstraction between you and Ethereum is EthereumService. By default it is set to the mainnet, but you can easily change it by setting new Node:
+The abstraction between you and Ethereum is EthereumService. By default it is set to the mainnet, but you can easily change it by setting new `Provider` with `Node` of your choice:
 
 ```swift
 EthereumService.provider = Provider(node: .ropsten)
@@ -307,8 +334,7 @@ let eth = Utils.ethFromWei(wei)
 
 We decided to create a transaction based flow for interacting with smart contracts, because of scalable architecture and lack of strong relations
 
-
-The flow is super easy, we provide factory for both erc20 and erc721 contracts. Factory lets you generate a transaction and then you can call or send it with EthereumService
+The flow is super easy, we provide factory for both ERC20 and ERC721 contracts. Factory lets you generate transactions and then you can call or send them with EthereumService
 
 #### To get balance of an address for any ERC20 token:
 
@@ -319,7 +345,8 @@ let address = "address_to_check_balance"
 let transaction = try ERC20TransactionFactory.generateBalanceTransaction(address: address, contractAddress: contractAddress)
 ```
 
-#### Decoding response:
+#### Calling ERC20 transaction and decoding response:
+
 Then just call the transaction with EthereumService, get the abi encoded result and decode it using ABIDecoder:
 
 ```swift
@@ -334,7 +361,7 @@ If the abi encoded result contains several types, provide them as an array:
 let decodedResult = try ABIDecoder.decode(someEncodedValue, to: [.uint(), .string, .address])
 ```
 
-Decode method accepts both Data and String value
+Decode method accepts both Data and String values
 
 #### To encode parameters:
 
