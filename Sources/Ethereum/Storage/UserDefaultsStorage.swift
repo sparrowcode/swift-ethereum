@@ -18,7 +18,7 @@ public struct UserDefaultsStorage: StorageProtocol {
         
         let iv = aes.initialVector
         
-        let aesEncryptedPrivateKey = try aes.encrypt(string: privateKey, password: password, iv: iv)
+        let aesEncryptedPrivateKey = try aes.encrypt(privateKey, password: password, iv: iv)
         
         let file = StorageFile(keyData: aesEncryptedPrivateKey, iv: iv)
         
@@ -39,7 +39,7 @@ public struct UserDefaultsStorage: StorageProtocol {
         
         let iv = decodedFile.iv
         
-        let decryptedPrivateKey = try aes.decrypt(data: aesEncryptedPrivateKey, password: password, iv: iv)
+        let decryptedPrivateKey = try aes.decrypt(aesEncryptedPrivateKey, password: password, iv: iv)
         
         return decryptedPrivateKey
     }

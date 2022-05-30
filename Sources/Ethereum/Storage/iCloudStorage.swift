@@ -1,6 +1,6 @@
 import Foundation
 
-public struct iCloudStorage: StorageProtocol {
+struct iCloudStorage: StorageProtocol {
     
     private let aes = AES()
     

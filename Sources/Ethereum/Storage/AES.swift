@@ -1,22 +1,15 @@
-//
-//  File.swift
-//  
-//
-//  Created by Ertem Biyik on 10.04.2022.
-//
-
 import Foundation
 import CommonCrypto
 
-struct AES {
+public struct AES {
 
-    var initialVector: Data {
+    public var initialVector: Data {
         let randomBytes = Data(0...16).map { _ in UInt32.random(in: 0...UInt32.max) }
         
         return Data(bytes: randomBytes, count: 16)
     }
-
-    func encrypt(string: String, password: String, iv: Data) throws -> Data {
+    
+    public func encrypt(_ data: Data, password: String, iv: Data) throws -> Data {
         
         let keyData = password.keccak()
         
@@ -24,14 +17,25 @@ struct AES {
             throw AESError.invalidPasswordLength
         }
         
-        let bytes = try string.bytes
+        return try crypt(data: data, option: CCOperation(kCCEncrypt), key: keyData, iv: iv)
+    }
+    
+    public func encrypt(_ privateKey: String, password: String, iv: Data) throws -> Data {
+        
+        let keyData = password.keccak()
+        
+        guard keyData.count == kCCKeySizeAES256 else {
+            throw AESError.invalidPasswordLength
+        }
+        
+        let bytes = try privateKey.bytes
         
         let data = Data(bytes)
         
         return try crypt(data: data, option: CCOperation(kCCEncrypt), key: keyData, iv: iv)
     }
 
-    func decrypt(data: Data, password: String, iv: Data) throws -> String {
+    public func decrypt(_ data: Data, password: String, iv: Data) throws -> String {
         
         let keyData = password.keccak()
         
@@ -85,7 +89,7 @@ struct AES {
         return cryptData
     }
     
-    enum AESError: Error {
+    public enum AESError: Error {
         case errorCrypting
         case invalidPasswordLength
     }

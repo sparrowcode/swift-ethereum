@@ -8,6 +8,10 @@ Going to be official Ethereum repo for Swift. There is active progress right now
 - [Account](#account)
     - [Create new account](#create-new-account)
     - [Sign data](#sign-data)
+- [Storage](#storage)
+    - [AES](#to-secure-private-keys-in-a-storage-make-use-of-aes)
+    - [Encrypting private key](#encrypting-private-key)
+    - [Decrypting](#decrypting)
 - [Interacting with Ethereum](#interacting-with-ethereum)
     - [Send a transaction](#to-send-a-transaction)
     - [Call a transaction](#to-call-a-transaction)
@@ -102,15 +106,58 @@ extension SomeType: RLPEncodable {
 
 Read more about RLP here: [RLP Ethereum Wiki](https://eth.wiki/fundamentals/rlp)
 
+## Storage
+
+A custom storage can be created by confirming to `StorageProtocol`:
+
+```swift
+struct CustomStorage: StorageProtocol {
+
+    func storePrivateKey(_ privateKey: String) throws {
+        // store private key in database of your choice
+    }
+
+    func getPrivateKey(for address: String) throws -> String {
+        // get private key from storage for address
+    }
+
+    func removePrivateKey(for address: String) throws {
+        // removes private key from storage
+    }
+}
+```
+
+### To secure private keys in a storage make use of `AES`
+
+#### Encrypting private key:
+
+```swift
+let privateKey = "some_private_key"
+
+let aes = AES()
+
+let iv = aes.initialVector // a vector that is used for encrypting the data
+
+let aesEncryptedPrivateKey = try aes.encrypt(privateKey, password: password, iv: iv)
+```
+
+The encrypt method accepts only the `hexidecimal string of bytes representation` ex: "0xfce353f6616263" or any `Data`
+
+#### Decrypting:
+
+```swift
+let decryptedPrivateKey = try aes.decrypt(aesEncryptedPrivateKey, password: password, iv: iv)
+```
+
 ## Interacting with Ethereum
 
-The abstraction between you and Ethereum is EthereumService. By default it is set to the mainnet, but you can easily change it by setting new `Provider` with `Node` of your choice:
+The abstraction between you and Ethereum is `EthereumService`. By default it is set to the mainnet, but you can easily change it by setting new `Provider` with `Node` of your choice:
 
 ```swift
 EthereumService.provider = Provider(node: .ropsten)
 ```
 
-You can also provide your own rpc url to Node:
+You can also provide your own rpc url to `Node`:
 
 ```swift
 let url = "http_rpc_url"
@@ -139,7 +186,7 @@ let transaction = try Transaction(to: "0xF65FF945f3a6067D0742fD6890f32A6960dD817
 let response = try await EthereumService.call(transaction: transaction, block: "latest")
 ```
 
-Quick note: block is optional for calling this methods and is set to latest by default
+`Quick note: block is optional for calling this methods and is set to latest by default`
 
 #### To get balance of any address:
 
@@ -247,7 +294,7 @@ let transaction = try await EthereumService.getTransactionByBlockHashAndIndex(bl
 #### To get transaction by block number and index:
 
 ```swift
-let blockNumber = "5417326"
+let blockNumber = 5417326
 let index = 0
 
 let transaction = try await EthereumService.getTransactionByBlockNumberAndIndex(blockNumber: blockNumber, index: index)
@@ -266,7 +313,7 @@ let receipt = try await EthereumService.getTransactionReceipt(transactionHash: t
 ```swift
 let transaction = try Transaction(from: "0xE92A146f86fEda6D14Ee1dc1BfB620D3F3d1b873",
                                   to: "0xc8DE4C1B4f6F6659944160DaC46B29a330C432B2",
-                                  value: "1000000")
+                                  value: "100000000000")
 
 let estimatedGas = try await EthereumService.estimateGas(for: transaction)
 ```

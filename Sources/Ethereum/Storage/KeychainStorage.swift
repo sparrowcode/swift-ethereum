@@ -1,6 +1,6 @@
 import Foundation
 
-public struct KeychainStorage: StorageProtocol {
+struct KeychainStorage: StorageProtocol {
     
     private let aes = AES()
     
