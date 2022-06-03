@@ -1,4 +1,5 @@
 import XCTest
+import BigInt
 @testable import Ethereum
 
 class UtilsTests: XCTestCase {
@@ -26,7 +27,7 @@ class UtilsTests: XCTestCase {
     func testEthFromWei() throws {
         
         let wei = "12345678901234567890"
-        let eth = Utils.ethFromWei(wei)
+        let eth = Utils.convert(from: .wei, to: .eth, value: wei)
         let rightEth = "12.34567890123456789"
         
         XCTAssertEqual(eth, rightEth)
@@ -34,11 +35,20 @@ class UtilsTests: XCTestCase {
     
     func testWeiFromEth() {
         
-//        let eth = "12.34567890123456789"
-//        let wei = Utils.weiFromEth(eth)
-//        let rightWei = "12345678901234567890"
+        let eth = "123.3"
+        let wei = Utils.convert(from: .eth, to: .wei, value: eth)
+        let rightWei = "123300000000000000000"
         
-        //XCTAssertEqual(wei, rightWei)
+        XCTAssertEqual(wei, rightWei)
+    }
+    
+    func testEthFromGwei() {
+        
+        let gwei = "121312100"
+        let eth = Utils.convert(from: .gwei, to: .eth, value: gwei)
+        let rightEth = "0.1213121"
+        
+        XCTAssertEqual(eth, rightEth)
     }
     
 }

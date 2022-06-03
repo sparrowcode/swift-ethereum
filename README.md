@@ -2,51 +2,6 @@
 
 Going to be official Ethereum repo for Swift. There is active progress right now. We will soon get the documentation in order and offer examples of use.
 
-## Navigation 
-- [Installation](#installation)
-    - [Swift Package Manager](#swift-package-manager)
-- [Account](#account)
-    - [Create new account](#create-new-account)
-    - [Sign data](#sign-data)
-- [Storage](#storage)
-    - [AES](#to-secure-private-keys-in-a-storage-make-use-of-aes)
-    - [Encrypting private key](#encrypting-private-key)
-    - [Decrypting](#decrypting)
-- [Interacting with Ethereum](#interacting-with-ethereum)
-    - [Send a transaction](#to-send-a-transaction)
-    - [Call a transaction](#to-call-a-transaction)
-    - [Get balance](#to-get-balance-of-any-address)
-    - [Get transactions count](#to-get-transactions-count)
-    - [Get current block number](#to-get-current-block-number)
-    - [Get current gas price](#to-get-current-gas-price)
-    - [Get block transaction count by block hash](#to-get-block-transaction-count-by-block-hash)
-    - [Get block transaction count by block number](#to-get-block-transaction-count-by-block-number)
-    - [Get storage at address](#to-get-storage-at-address)
-    - [Get code for address](#to-get-code-for-address)
-    - [Get block by hash](#to-get-block-by-hash)
-    - [Get block by number](#to-get-block-by-number)
-    - [Get transaction by hash](#to-get-transaction-by-hash)
-    - [Get uncle by block hash and index](#to-get-uncle-by-block-hash-and-index)
-    - [Get uncle by block number and index](#to-get-uncle-by-block-number-and-index)
-    - [Get transaction by block hash and index](#to-get-transaction-by-block-hash-and-index)
-    - [Get transaction by block number and index](#to-get-transaction-by-block-number-and-index)
-    - [Get transaction receipt](#to-get-transaction-receipt)
-    - [Estimate gas for transaction](#to-estimate-gas-for-transaction)
-- [Node](#getting-info-about-the-node)
-    - [Initialize custom node](#to-initialize-a-node-with-your-custom-rpc-url)
-    - [Get version](#to-get-version)
-    - [Check if listening](#to-check-if-listening)
-    - [Get peer count](#to-get-peer-count)
-    - [Get client version](#to-get-client-version)
-- [Utils](#utils)
-    - [Get public key from private key](#to-get-public-key-from-private-key)
-    - [Get address from public key](#to-get-address-from-public-key)
-    - [Get eth from wei](#to-get-eth-from-wei)
-- [Smart Contracts](#smart-contracts-and-abi-decodingencoding)
-    - [Get balance example](#to-get-balance-of-an-address-for-any-erc20-token)
-    - [Calling ERC20 transaction and decoding response](#calling-erc20-transaction-and-decoding-response)
-    - [Encode parameters](#to-encode-parameters)
-
 ## Installation
 
 ### Swift Package Manager
@@ -60,12 +15,61 @@ dependencies: [
 ]
 ```
 
+## Navigation 
+[Account](#account)
+    - [Create new account](#create-new-account)
+    - [Import account](#import-account)
+    - [Remove account from manager](#remove-account-from-manager)
+    - [Sign data](#sign-data)
+- [Storage](#storage)
+    - [AES](#to-secure-private-keys-in-a-storage-make-use-of-aes)
+    - [Encrypting private key](#encrypting-private-key)
+    - [Decrypting](#decrypting)
+- [Interacting with Ethereum](#interacting-with-ethereum)
+[Send a transaction](#send-a-transaction)
+[Call a transaction](#call-a-transaction)
+[Get balance](#get-balance-of-any-address)
+[Get transactions count](#get-transactions-count)
+[Get current block number](#get-current-block-number)
+[Get current gas price](#get-current-gas-price)
+[Get block transaction count by block hash](#get-block-transaction-count-by-block-hash)
+[Get block transaction count by block number](#get-block-transaction-count-by-block-number)
+[Get storage at address](#get-storage-at-address)
+[Get code for address](#get-code-for-address)
+[Get block by hash](#get-block-by-hash)
+[Get block by number](#get-block-by-number)
+[Get transaction by hash](#get-transaction-by-hash)
+[Get uncle by block hash and index](#get-uncle-by-block-hash-and-index)
+[Get uncle by block number and index](#get-uncle-by-block-number-and-index)
+[Get transaction by block hash and index](#get-transaction-by-block-hash-and-index)
+[Get transaction by block number and index](#get-transaction-by-block-number-and-index)
+[Get transaction receipt](#get-transaction-receipt)
+[Estimate gas for transaction](#estimate-gas-for-transaction)
+- [Node](#getting-info-about-the-node)
+[Initialize custom node](#initialize-a-node-with-your-custom-rpc-url)
+[Get version](#get-version)
+[Check if listening](#check-if-listening)
+[Get peer count](#get-peer-count)
+[Get client version](#get-client-version)
+- [Utils](#utils)
+[Get public key from private key](#get-public-key-from-private-key)
+[Get address from public key](#get-address-from-public-key)
+[Get eth from wei](#transform-ethereum-units)
+- [Smart Contracts](#smart-contracts-and-abi-decodingencoding)
+    - [Get balance example](#to-get-balance-of-an-address-for-any-erc20-token)
+    - [Calling ERC20 transaction and decoding response](#calling-erc20-transaction-and-decoding-response)
+[Encode parameters](#encode-parameters)
+
 ## Account
 
 ### Create new account
-
 In order to create a new account you have to use AccountManager. It secures your private key with AES encryption. You can also select a storage, where to hold the encrypted data.
 
+```swift
+let account = try accountManager.createAccount()
+```
+
+### Import account
 ```swift
 let storage = UserDefaultsStorage(password: "password")
         
@@ -80,6 +84,12 @@ All the fields of your account are decoded from your private key by the library,
 let address = account.address
 let publicKey = account.publicKey
 let privateKey = account.privateKey
+```
+
+### Remove account from manager
+
+```swift
+try accountManager.removeAccount(account)
 ```
 
 ### Sign data
@@ -151,21 +161,14 @@ let decryptedPrivateKey = try aes.decrypt(aesEncryptedPrivateKey, password: pass
 
 ## Interacting with Ethereum
 
-The abstraction between you and Ethereum is `EthereumService`. By default it is set to the mainnet, but you can easily change it by setting new `Provider` with `Node` of your choice:
+The abstraction between you and Ethereum is `EthereumService`. Before starting to call methods you have to configure provider with a [Node](#initialize-a-node-with-your-custom-rpc-url):
 
 ```swift
-EthereumService.provider = Provider(node: .ropsten)
+let node = try Node(url: "https://mainnet.infura.io/v3/967cf8dc4a37411c8e62698c7c603cee")
+EthereumService.configureProvider(with: node)
 ```
 
-You can also provide your own rpc url to `Node`:
-
-```swift
-let url = "http_rpc_url"
-
-let node = try Node(url: url)
-```
-
-#### To send a transaction:
+#### Send a transaction:
 
 ```swift
 let value = "1000000000000000000" // 1 eth in wei
@@ -178,7 +181,7 @@ let transaction = try Transaction(from:"0xE92A146f86fEda6D14Ee1dc1BfB620D3F3d1b8
 let transactionHash = try await EthereumService.sendRawTransaction(account: account, transaction: transaction)
 ```
 
-#### To call a transaction:
+#### Call a transaction:
 
 ```swift
 let transaction = try Transaction(to: "0xF65FF945f3a6067D0742fD6890f32A6960dD817d", input: "0x")
@@ -186,46 +189,46 @@ let transaction = try Transaction(to: "0xF65FF945f3a6067D0742fD6890f32A6960dD817
 let response = try await EthereumService.call(transaction: transaction, block: "latest")
 ```
 
-`Quick note: block is optional for calling this methods and is set to latest by default`
+> Quick note: block is optional for calling this methods and is set to latest by default
 
-#### To get balance of any address:
+#### Get balance of any address:
 
 ```swift
 let balance = try await EthereumService.getBalance(for: "address")
 ```
 
-#### To get transactions count:
+#### Get transactions count:
 
 ```swift
 let count = try await EthereumService.getTransactionCount(for: "address")
 ```
 
-#### To get current block number:
+#### Get current block number:
 
 ```swift
 let blockNumber = try await EthereumService.blockNumber()
 ```
 
-#### To get current gas price:
+#### Get current gas price:
 
 ```swift
 let gasPrice = try await EthereumService.gasPrice()
 ```
 
-#### To get block transaction count by block hash:
+#### Get block transaction count by block hash:
 
 ```swift
 let blockTransactionCount = try await EthereumService.getBlockTransactionCountByHash(blockHash: "block_hash")
 ```
 
-#### To get block transaction count by block number:
+#### Get block transaction count by block number:
 
 ```swift
 let blockNumber = 2
 let blockTransactionCount = try await EthereumService.getBlockTransactionCountByNumber(blockNumber: blockNumber)
 ```
 
-#### To get storage at address:
+#### Get storage at address:
 
 ```swift
 let address = "0x295a70b2de5e3953354a6a8344e616ed314d7251"
@@ -234,7 +237,7 @@ let storageSlot = 3
 let storage = try await EthereumService.getStorageAt(address: address, storageSlot: storageSlot, block: "latest")
 ```
 
-#### To get code for address:
+#### Get code for address:
 
 ```swift
 let address = "0x2b591e99afE9f32eAA6214f7B7629768c40Eeb39"
@@ -242,13 +245,13 @@ let address = "0x2b591e99afE9f32eAA6214f7B7629768c40Eeb39"
 let code = try await EthereumService.getCode(address: address, block: "latest")
 ```
 
-#### To get block by hash:
+#### Get block by hash:
 
 ```swift 
 let block = try await EthereumService.getBlockByHash(hash: "block_hash")
 ```
 
-#### To get block by number:
+#### Get block by number:
 
 ```swift
 let blockNumber = 12312
@@ -256,7 +259,7 @@ let blockNumber = 12312
 let block = try await EthereumService.getBlockByNumber(blockNumber: blockNumber)
 ```
 
-#### To get transaction by hash:
+#### Get transaction by hash:
 
 ```swift
 let transactionHash = "transaction_hash"
@@ -264,7 +267,7 @@ let transactionHash = "transaction_hash"
 let transaction = try await EthereumService.getTransactionByHash(transactionHash: transactionHash)
 ```
 
-#### To get uncle by block hash and index:
+#### Get uncle by block hash and index:
 
 ```swift
 let blockHash = "block_hash"
@@ -273,7 +276,7 @@ let index = 0
 let uncleBlock = try await EthereumService.getUncleByBlockHashAndIndex(blockHash: blockHash, index: index)
 ```
 
-#### To get uncle by block number and index:
+#### Get uncle by block number and index:
 
 ```swift
 let blockNumber = 668
@@ -282,7 +285,7 @@ let index = 0
 let uncleBlock = try await EthereumService.getUncleByBlockNumberAndIndex(blockNumber: blockNumber, index: index)
 ```
 
-#### To get transaction by block hash and index:
+#### Get transaction by block hash and index:
 
 ```swift
 let blockHash = "block_hash"
@@ -291,7 +294,7 @@ let index = 0
 let transaction = try await EthereumService.getTransactionByBlockHashAndIndex(blockHash: blockHash, index: index)
 ```
 
-#### To get transaction by block number and index:
+#### Get transaction by block number and index:
 
 ```swift
 let blockNumber = 5417326
@@ -300,7 +303,7 @@ let index = 0
 let transaction = try await EthereumService.getTransactionByBlockNumberAndIndex(blockNumber: blockNumber, index: index)
 ```
 
-#### To get transaction receipt:
+#### Get transaction receipt:
 
 ```swift
 let transactionHash = "transaction_hash"
@@ -308,7 +311,7 @@ let transactionHash = "transaction_hash"
 let receipt = try await EthereumService.getTransactionReceipt(transactionHash: transactionHash)
 ```
 
-#### To estimate gas for transaction:
+#### Estimate gas for transaction:
 
 ```swift
 let transaction = try Transaction(from: "0xE92A146f86fEda6D14Ee1dc1BfB620D3F3d1b873",
@@ -320,30 +323,30 @@ let estimatedGas = try await EthereumService.estimateGas(for: transaction)
 
 ## Getting info about the Node
 
-#### To initialize a node with your custom rpc url
+#### Initialize a node with your custom rpc url
 ```swift
 let node = try Node(url: "your_custom_rpc_url")
 ```
 
-#### To get version:
+#### Get version:
 
 ```swift
 let version = try await node.version()
 ```
 
-#### To check if listening:
+#### Check if listening:
 
 ```swift
 let isListening = try await node.listening()
 ```
 
-#### To get peer count:
+#### Get peer count:
 
 ```swift
 let peerCount = try await node.peerCount()
 ```
 
-#### To get client version:
+#### Get client version:
 
 ```swift
 let clientVersion = try await node.clientVersion()
@@ -354,7 +357,7 @@ let clientVersion = try await node.clientVersion()
 
 We provide commonly used scenarious under an easy interface
 
-#### To get public key from private key:
+#### Get public key from private key:
 
 ```swift
 let privateKey = "private_key"
@@ -362,7 +365,7 @@ let privateKey = "private_key"
 let publicKey = try Utils.getPublicKey(from: privateKey)
 ```
 
-#### To get address from public key:
+#### Get address from public key:
 
 ```swift
 let publicKey = "public_key"
@@ -370,11 +373,11 @@ let publicKey = "public_key"
 let ethereumAddress = try Utils.getEthereumAddress(from: publicKey)
 ```
 
-#### To get eth from wei:
+#### Transform Ethereum Units:
 
 ```swift
 let wei = "12345678901234567890"
-let eth = Utils.ethFromWei(wei)
+let eth = Utils.convert(from: .wei, to: .eth, value: wei)
 ```
 
 ## Smart Contracts and ABI Decoding/Encoding
@@ -383,7 +386,7 @@ We decided to create a transaction based flow for interacting with smart contrac
 
 The flow is super easy, we provide factory for both ERC20 and ERC721 contracts. Factory lets you generate transactions and then you can call or send them with EthereumService
 
-#### To get balance of an address for any ERC20 token:
+#### Get balance of an address for any ERC20 token:
 
 ```swift
 let contractAddress = "token_address" 
@@ -410,7 +413,7 @@ let decodedResult = try ABIDecoder.decode(someEncodedValue, to: [.uint(), .strin
 
 Decode method accepts both Data and String values
 
-#### To encode parameters:
+#### Encode parameters:
 
 ```swift
 let params = [SmartContractParam(type: .address,  value: ABIEthereumAddress(to)),

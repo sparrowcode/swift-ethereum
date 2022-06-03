@@ -7,7 +7,8 @@ class ERC20Tests: XCTestCase {
     let contractAddress = "0xF65FF945f3a6067D0742fD6890f32A6960dD817d"
     
     override func setUpWithError() throws {
-        EthereumService.provider = Provider(node: .ropsten)
+        let node = try Node(url: "https://ropsten.infura.io/v3/967cf8dc4a37411c8e62698c7c603cee")
+        EthereumService.configureProvider(with: node)
     }
     
     func testBalance() throws {

@@ -7,10 +7,11 @@ class ProviderTests: XCTestCase {
     
     let rinkebyNodeURL = URL(string: "https://speedy-nodes-nyc.moralis.io/b383c412901116039315dd16/eth/rinkeby")!
     
-    var node = Node.mainnet
+    var node: Node!
     var provider: Provider?
     
     override func setUpWithError() throws {
+        self.node = try Node(url: "https://mainnet.infura.io/v3/967cf8dc4a37411c8e62698c7c603cee")
         self.provider = Provider(node: node)
     }
     

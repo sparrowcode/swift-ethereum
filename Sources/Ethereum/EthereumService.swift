@@ -7,7 +7,11 @@ import FoundationNetworking
 
 public enum EthereumService {
     
-    public static var provider = Provider(node: .mainnet)
+    private static var provider: Provider!
+    
+    public static func configureProvider(with node: Node) {
+        self.provider = Provider(node: node)
+    }
 
     // MARK: - Original Methods
     /**

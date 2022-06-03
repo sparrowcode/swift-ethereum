@@ -5,6 +5,11 @@ import Ethereum
 class ERC721Tests: XCTestCase {
     
     let contractAddress = "0xf8aD42AB76862A934AD2e4578C6a108B172Cd287"
+    
+    override func setUpWithError() throws {
+        let node = try Node(url: "https://ropsten.infura.io/v3/967cf8dc4a37411c8e62698c7c603cee")
+        EthereumService.configureProvider(with: node)
+    }
 
     func testBalance() throws {
         

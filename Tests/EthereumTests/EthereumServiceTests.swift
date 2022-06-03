@@ -4,8 +4,13 @@ import Ethereum
 
 class EthereumServiceTests: XCTestCase {
     
+    var ropstenNode: Node!
+    var maiinetNode: Node!
+    
     override func setUpWithError() throws {
-        EthereumService.provider = Provider(node: .mainnet)
+        maiinetNode = try Node(url: "https://mainnet.infura.io/v3/967cf8dc4a37411c8e62698c7c603cee")
+        ropstenNode = try Node(url: "https://ropsten.infura.io/v3/967cf8dc4a37411c8e62698c7c603cee")
+        EthereumService.configureProvider(with: maiinetNode)
     }
     
     func testGetBalance() throws {
@@ -13,7 +18,7 @@ class EthereumServiceTests: XCTestCase {
         let address = "0xE92A146f86fEda6D14Ee1dc1BfB620D3F3d1b873"
         let expectation = XCTestExpectation(description: "get balance")
         
-        EthereumService.provider = Provider(node: .ropsten)
+        EthereumService.configureProvider(with: ropstenNode)
         
         EthereumService.getBalance(for: address) { balance, error in
             XCTAssertNil(error)
@@ -303,7 +308,7 @@ class EthereumServiceTests: XCTestCase {
         let expectation = XCTestExpectation(description: "send raw transaction")
         
         // MARK: - For sending transactions use test network
-        EthereumService.provider = Provider(node: .ropsten)
+        EthereumService.configureProvider(with: ropstenNode)
         
         let storage = UserDefaultsStorage(password: "password")
         
@@ -331,7 +336,7 @@ class EthereumServiceTests: XCTestCase {
     
     func testEstimateGas() throws {
         
-        EthereumService.provider = Provider(node: .ropsten)
+        EthereumService.configureProvider(with: ropstenNode)
         
         let expectation = XCTestExpectation(description: "get estimate gas")
         let transaction = try Transaction(from: "0xE92A146f86fEda6D14Ee1dc1BfB620D3F3d1b873",

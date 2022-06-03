@@ -5,36 +5,97 @@ import secp256k1
 
 public enum Utils {
     
-    public static func ethFromWei(_ wei: String) -> String {
-        
-        var eth = "0."
-        
-        if wei.count < 18 {
-            let zerosLeft = String(repeating: "0", count: 18 - wei.count)
-            eth.append(contentsOf: zerosLeft + wei)
-        } else {
-            let unsignedIndex = wei.index(wei.startIndex, offsetBy: wei.count - 18)
-            let unsigned = wei[wei.startIndex..<unsignedIndex]
-            let other = String(wei[unsignedIndex...])
-            eth.append(contentsOf: other)
-            eth.removeFirst()
-            eth = unsigned + eth
-        }
-        
-            
-        while eth.last == "0" {
-            eth.removeLast()
-        }
-        
-        return eth
+    public enum EthereumUnits {
+        case eth
+        case wei
+        case gwei
     }
     
-    public static func weiFromEth(_ eth: String) -> String {
-        if eth.first != "0" {
-            return eth + String(repeating: "0", count: 18)
-        } else {
-            return String()
+    public static func convert(from: EthereumUnits, to: EthereumUnits, value: String) -> String {
+        
+        switch from {
+        case .eth:
+            switch to {
+            case .eth:
+                return value
+            case .wei:
+                return transformDown(value: value, base: 18)
+            case .gwei:
+                return transformDown(value: value, base: 9)
+            }
+        case .wei:
+            switch to {
+            case .eth:
+                return transformUp(value: value, with: 18)
+            case .wei:
+                return value
+            case .gwei:
+                return transformUp(value: value, with: 9)
+            }
+            
+        case .gwei:
+            switch to {
+            case .eth:
+                return transformUp(value: value, with: 9)
+            case .wei:
+                return transformDown(value: value, base: 9)
+            case .gwei:
+                return value
+            }
+            
         }
+    }
+    
+    private static func transformUp(value: String, with base: Int) -> String {
+        
+        var result = "0."
+        
+        if value.count < base {
+            let zerosLeft = String(repeating: "0", count: base - value.count)
+            result.append(contentsOf: zerosLeft + value)
+        } else {
+            let unsignedIndex = value.index(value.startIndex, offsetBy: value.count - base)
+            let unsigned = value[value.startIndex..<unsignedIndex]
+            let other = String(value[unsignedIndex...])
+            result.append(contentsOf: other)
+            
+            if unsigned != "" {
+                result.removeFirst()
+                result = unsigned + result
+            }
+        }
+        
+        
+        while result.last == "0" {
+            result.removeLast()
+        }
+        
+        return result
+        
+    }
+    
+    private static func transformDown(value: String, base: Int) -> String {
+        
+        if value.range(of: "[0-9]*[.]", options: [.regularExpression, .anchored]) == nil {
+            return value + String(repeating: "0", count: base)
+        } else {
+            if value.first == "0" {
+                let signedIndex = value.index(value.startIndex, offsetBy: 2)
+                let signedPart = value[signedIndex...]
+                let additionalZeros = String(repeating: "0", count: base - signedPart.count)
+                return signedPart + additionalZeros
+            } else {
+                let indexOfDot = value.firstIndex(of: ".")!
+                let unsignedPart = value[value.startIndex..<indexOfDot]
+                let signedIndex = value.index(after: indexOfDot)
+                let signedPart = value[signedIndex...]
+                let additionalZeros = String(repeating: "0", count: base - signedPart.count)
+                return unsignedPart + signedPart + additionalZeros
+                
+            }
+            
+        }
+        
     }
     
     public static func getPublicKey(from privateKey: String) throws -> String {

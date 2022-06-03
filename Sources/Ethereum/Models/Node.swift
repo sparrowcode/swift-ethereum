@@ -11,12 +11,6 @@ public enum NodeErrors: Error {
 
 public struct Node {
     
-    public static let mainnet = Node(url: URL(string: "https://mainnet.infura.io/v3/967cf8dc4a37411c8e62698c7c603cee")!, network: .mainnet)
-    public static let ropsten = Node(url: URL(string: "https://ropsten.infura.io/v3/967cf8dc4a37411c8e62698c7c603cee")!, network: .ropsten)
-    public static let rinkeby = Node(url: URL(string: "https://rinkeby.infura.io/v3/967cf8dc4a37411c8e62698c7c603cee")!, network: .rinkeby)
-    public static let kovan = Node(url: URL(string: "https://kovan.infura.io/v3/967cf8dc4a37411c8e62698c7c603cee")!, network: .kovan)
-    public static let goerli = Node(url: URL(string: "https://goerli.infura.io/v3/967cf8dc4a37411c8e62698c7c603cee")!, network: .goerli)
-    
     public let url: URL
     
     public var network: Network
