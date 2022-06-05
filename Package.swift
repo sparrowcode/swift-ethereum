@@ -1,4 +1,4 @@
-// swift-tools-version: 5.5
+// swift-tools-version: 5.4
 
 import PackageDescription
 
@@ -6,7 +6,7 @@ let package = Package(
     name: "Ethereum",
     defaultLocalization: "en",
     platforms: [
-        .iOS(.v13)
+        .iOS(.v13), .macOS(.v10_15), .watchOS(.v6), .tvOS(.v13)
     ],
     products: [
         .library(

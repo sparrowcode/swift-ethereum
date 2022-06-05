@@ -54,11 +54,25 @@ dependencies: [
 - [Utils](#utils)
     - [Get public key from private key](#get-public-key-from-private-key)
     - [Get address from public key](#get-address-from-public-key)
-    - [Get eth from wei](#transform-ethereum-units)
+    - [Convert Ethereum Units](#convert-ethereum-units)
 - [Smart Contracts](#smart-contracts-and-abi-decodingencoding)
-    - [Get balance example](#to-get-balance-of-an-address-for-any-erc20-token)
-    - [Calling ERC20 transaction and decoding response](#calling-erc20-transaction-and-decoding-response)
-    - [Encode parameters](#encode-parameters)
+    - [ERC20](#erc20)
+        - [Get balance](#get-balance)
+        - [Transfer tokens](#transfer-tokens)
+        - [Get decimals](#get-decimals)
+        - [Get symbol](#get-symbol)
+        - [Get total supply](#get-total-supply)
+        - [Get name](#get-name)
+    - [ERC721](#erc721)
+        - [Get balance](#get-balance-1)
+        - [Get owner of](#get-owner-of)
+        - [Get name](#get-name-1)
+        - [Get symbol](#get-symbol)
+        - [Get token URI](#get-token-uri)
+        - [Get total supply](#get-total-supply-1)
+    - [Calling Smart Contract transaction and decoding response](#calling-smart-contract-transaction-and-decoding-response)
+    - [Sending Smart Contract transaction](#sending-smart-contract-transaction)
+    - [Custom Contracts](#custom-contracts)
 
 ## Account
 
@@ -362,7 +376,7 @@ We provide commonly used scenarious under an easy interface
 ```swift
 let privateKey = "private_key"
 
-let publicKey = try Utils.getPublicKey(from: privateKey)
+let publicKey = try Utils.KeyUtils.getPublicKey(from: privateKey)
 ```
 
 #### Get address from public key:
@@ -370,36 +384,127 @@ let publicKey = try Utils.getPublicKey(from: privateKey)
 ```swift
 let publicKey = "public_key"
 
-let ethereumAddress = try Utils.getEthereumAddress(from: publicKey)
+let ethereumAddress = try Utils.KeyUtils.getEthereumAddress(from: publicKey)
 ```
 
-#### Transform Ethereum Units:
+#### Convert Ethereum Units:
 
 ```swift
 let wei = "12345678901234567890"
-let eth = Utils.convert(from: .wei, to: .eth, value: wei)
+let eth = Utils.Converter.convert(value: wei, from: .wei, to: .eth)
 ```
 
 ## Smart Contracts and ABI Decoding/Encoding
 
 We decided to create a transaction based flow for interacting with smart contracts, because of scalable architecture and lack of strong relations
 
-The flow is super easy, we provide factory for both ERC20 and ERC721 contracts. Factory lets you generate transactions and then you can call or send them with EthereumService
+The flow is super easy, we provide factory for both ERC20 and ERC721 contracts. Factory lets you generate transactions and then you can [call or send them via EthereumService](#calling-smart-contract-transaction-and-decoding-response)
 
-#### Get balance of an address for any ERC20 token:
+### ERC20
 
 ```swift
-let contractAddress = "token_address" 
+let contractAddress = "erc20_contract_address" 
+```
+
+#### Get balance:
+
+```swift
 let address = "address_to_check_balance"
 
 let transaction = try ERC20TransactionFactory.generateBalanceTransaction(address: address, contractAddress: contractAddress)
 ```
 
-#### Calling ERC20 transaction and decoding response:
+#### Transfer tokens:
+
+```swift
+let value = BigUInt(some_value)
+let toAddress = "to_address"
+let gasLimit = BigUInt(gas_limit_value)
+let gasPrice = BigUInt(gas_price_value)
+
+let transaction = try ERC20TransactionFactory.generateTransferTransaction(value: value, 
+                                                                          to: toAddress,
+                                                                          gasLimit: gasLimit,
+                                                                          gasPrice: gasPrice, 
+                                                                          contractAddress: contractAddress)
+```
+
+#### Get decimals:
+
+```swift
+let transaction = try ERC20TransactionFactory.generateDecimalsTransaction(contractAddress: contractAddress)
+```
+
+#### Get symbol:
+
+```swift
+let transaction = try ERC20TransactionFactory.generateSymbolTransaction(contractAddress: contractAddress)
+```
+
+#### Get total supply:
+
+```swift
+let transaction = try ERC20TransactionFactory.generateTotalSupplyTransaction(contractAddress: contractAddress)
+```
+
+#### Get name:
+
+```swift
+let transaction = try ERC20TransactionFactory.generateNameTransaction(contractAddress: contractAddress)
+```
+
+### ERC721
+
+```swift
+let contractAddress = "erc721_contract_address"
+```
+
+#### Get balance:
+
+```swift
+let transaction = try ERC721TransactionFactory.generateBalanceTransaction(address: address, contractAddress: contractAddress)
+```
+
+#### Get owner of:
+
+```swift
+let tokenId = BigUInt(708)
+        
+let transaction = try ERC721TransactionFactory.generateOwnerOfTransaction(tokenId: tokenId, contractAddress: contractAddress)
+```
+
+#### Get name:
+
+```swift
+let transaction = try ERC721TransactionFactory.generateNameTransaction(contractAddress: contractAddress)
+```
+
+#### Get symbol:
+
+```swift
+let transaction = try ERC721TransactionFactory.generateSymbolTransaction(contractAddress: contractAddress)
+```
+
+#### Get token URI:
+
+```swift
+let tokenId = BigUInt(708)
+
+let transaction = try ERC721TransactionFactory.generateTokenURITransaction(tokenId: tokenId, contractAddress: contractAddress)
+```
+
+#### Get total supply:
+
+```swift
+let transaction = try ERC721TransactionFactory.generateTotalSupplyTransaction(contractAddress: contractAddress)
+```
+
+#### Calling Smart Contract transaction and decoding response:
 
 Then just call the transaction with EthereumService, get the abi encoded result and decode it using ABIDecoder:
 
 ```swift
+// transaction is a erc20 balance one
 let abiEncodedBalance = try await EthereumService.call(transaction: transaction)
 
 let balance = try ABIDecoder.decode(abiEncodedBalance, to: .uint()) as? BigUInt
@@ -411,17 +516,50 @@ If the abi encoded result contains several types, provide them as an array:
 let decodedResult = try ABIDecoder.decode(someEncodedValue, to: [.uint(), .string, .address])
 ```
 
-Decode method accepts both Data and String values
+> Decode method accepts both Data and String values
 
-#### Encode parameters:
+#### Sending Smart Contract transaction:
+
+If the transaction is a transfer one, send it via EthereumService:
 
 ```swift
-let params = [SmartContractParam(type: .address,  value: ABIEthereumAddress(to)),
-              SmartContractParam(type: .uint(), value: value)]
+let transactionHash = try await EthereumService.sendRawTransaction(account: account, transaction: transaction)
+```
+
+### Custom Contracts
+
+If you have a custom contract that you want to interact with, the flow is again very intuitive:
+
+1. Select a method that you want to call from your contract:
+
+For example we want to call this method:
+
+```
+function balanceOf(address _owner) constant returns (uint balance);
+```
+
+2. Check the input and output parameters of the method:
+
+Method accepts on address type as an input and returns a uint
+
+3. Encode parameters:
+
+```swift
+let params = [SmartContractParam(type: .address,  value: ABIEthereumAddress("some_address"))]
         
-let method = SmartContractMethod(name: "method_name", params: params)
+let method = SmartContractMethod(name: "balanceOf", params: params)
 
 guard let data = method.abiData else {
     return
 }
 ```
+
+4. Create a transaction:
+
+```swift
+let  contractAddress = "contract_address"
+
+let transaction = try Transaction(input: data, to: contractAddress)
+```
+
+That's all, next you can [call the transaction and decode the response](#calling-smart-contract-transaction-and-decoding-response)

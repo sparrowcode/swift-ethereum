@@ -10,15 +10,15 @@ public struct Account {
     init(privateKey: String) throws {
         
         self.privateKey = privateKey
-        self.publicKey = try Utils.getPublicKey(from: privateKey.removeHexPrefix())
-        self.address = try Utils.getEthereumAddress(from: publicKey)
+        self.publicKey = try Utils.KeyUtils.getPublicKey(from: privateKey.removeHexPrefix())
+        self.address = try Utils.KeyUtils.getEthereumAddress(from: publicKey)
     }
     
     public func sign<T>(_ value: T) throws -> Signature where T : RLPEncodable {
         
         let rlpData = try value.encodeRLP()
         
-        let signedData = try Utils.sign(data: rlpData, with: privateKey.removeHexPrefix())
+        let signedData = try Utils.KeyUtils.sign(data: rlpData, with: privateKey.removeHexPrefix())
         
         return signedData
     }

@@ -9,7 +9,7 @@ class UtilsTests: XCTestCase {
         
         let rightPublicKey = "94c9240ed8835b95856726d483cb14552208fb0fdcf305807b641a77e2dcbfb019941493cbe0cd5798f9b4048e3fdd742fd6549a5af26b038846ea96327fed05"
         
-        let publicKey = try Utils.getPublicKey(from: privateKey)
+        let publicKey = try Utils.KeyUtils.getPublicKey(from: privateKey)
         
         XCTAssertEqual(publicKey, rightPublicKey)
     }
@@ -19,7 +19,7 @@ class UtilsTests: XCTestCase {
         
         let rightEthereumAddress = "0xf4053f6c8626f22398778267e46e0bf4179d78f6".lowercased()
         
-        let ethereumAddress = try Utils.getEthereumAddress(from: publicKey)
+        let ethereumAddress = try Utils.KeyUtils.getEthereumAddress(from: publicKey)
         
         XCTAssertEqual(ethereumAddress, rightEthereumAddress)
     }
@@ -27,7 +27,7 @@ class UtilsTests: XCTestCase {
     func testEthFromWei() throws {
         
         let wei = "12345678901234567890"
-        let eth = Utils.convert(from: .wei, to: .eth, value: wei)
+        let eth = Utils.Converter.convert(value: wei, from: .wei, to: .eth)
         let rightEth = "12.34567890123456789"
         
         XCTAssertEqual(eth, rightEth)
@@ -35,9 +35,9 @@ class UtilsTests: XCTestCase {
     
     func testWeiFromEth() {
         
-        let eth = "123.3"
-        let wei = Utils.convert(from: .eth, to: .wei, value: eth)
-        let rightWei = "123300000000000000000"
+        let eth = "123.00000003"
+        let wei = Utils.Converter.convert(value: eth, from: .eth, to: .wei)
+        let rightWei = "123000000030000000000"
         
         XCTAssertEqual(wei, rightWei)
     }
@@ -45,10 +45,16 @@ class UtilsTests: XCTestCase {
     func testEthFromGwei() {
         
         let gwei = "121312100"
-        let eth = Utils.convert(from: .gwei, to: .eth, value: gwei)
+        let eth = Utils.Converter.convert(value: gwei, from: .gwei, to: .eth)
         let rightEth = "0.1213121"
         
         XCTAssertEqual(eth, rightEth)
+    }
+    
+    func testFormatter() throws {
+        
+        let priceString = Utils.Formatter.currencyFormatter.string(from: 9999.99)!
+        print(priceString)
     }
     
 }

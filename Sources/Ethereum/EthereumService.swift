@@ -585,8 +585,6 @@ public enum EthereumService {
     }*/
 }
 
-#if compiler(>=5.5) && canImport(_Concurrency)
-@available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
 extension EthereumService {
     
     public static func gasPrice() async throws -> BigUInt {
@@ -818,4 +816,3 @@ extension EthereumService {
         }
     }
 }
-#endif

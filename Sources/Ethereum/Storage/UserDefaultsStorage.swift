@@ -12,9 +12,9 @@ public struct UserDefaultsStorage: StorageProtocol {
     
     public func storePrivateKey(_ privateKey: String) throws {
         
-        let publicKey = try Utils.getPublicKey(from: privateKey)
+        let publicKey = try Utils.KeyUtils.getPublicKey(from: privateKey)
         
-        let address = try Utils.getEthereumAddress(from: publicKey)
+        let address = try Utils.KeyUtils.getEthereumAddress(from: publicKey)
         
         let iv = aes.initialVector
         

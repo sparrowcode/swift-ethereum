@@ -154,8 +154,6 @@ extension Node: Equatable {
     }
 }
 
-#if compiler(>=5.5) && canImport(_Concurrency)
-@available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
 extension Node {
     
     public func version() async throws -> Int {
@@ -206,4 +204,4 @@ extension Node {
         }
     }
 }
-#endif
+
