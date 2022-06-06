@@ -34,12 +34,17 @@ public struct Node {
         let group = DispatchGroup()
         
         group.enter()
-        self.version { version, error in
+        self.version { result in
             
             defer { group.leave() }
             
-            chainID = version
-            localError = error
+            switch result {
+            case .success(let version):
+                chainID = version
+            case .failure(let error):
+                localError = error
+            }
+            
         }
         
         // MARK: - Blocks thread, maybe switch to notify
@@ -72,57 +77,57 @@ public struct Node {
     
     
     // MARK: - Net
-    public func version(completion: @escaping (Int?, Error?) -> Void) {
+    public func version(completion: @escaping (Result<Int, Error>) -> ()) {
         
         let params = [String]()
         
-        provider?.sendRequest(method: .version, params: params, decodeTo: String.self) { version, error in
+        provider?.sendRequest(method: .version, params: params, decodeTo: String.self) { result in
             
-            guard let version = version, error == nil else {
-                completion(nil, error)
-                return
+            switch result {
+            case .success(let version):
+                if let intVersion = Int(version) {
+                    completion(.success(intVersion))
+                } else {
+                    completion(.failure(ResponseError.errorDecodingJSONRPC))
+                }
+            case .failure(let error):
+                completion(.failure(error))
             }
-            
-            guard let intVersion = Int(version) else {
-                completion(nil, ResponseError.errorDecodingJSONRPC)
-                return
-            }
-            
-            completion(intVersion, nil)
-            
-        }
-        
-    }
-    
-    public func listening(completion: @escaping (Bool?, Error?) -> Void) {
-        
-        let params = [String]()
-        
-        provider?.sendRequest(method: .listening, params: params, decodeTo: Bool.self) { isListening, error in
-            
-            guard let isListening = isListening, error == nil else {
-                completion(nil, error)
-                return
-            }
-            
-            completion(isListening, nil)
         }
     }
     
-    public func peerCount(completion: @escaping (Int?, Error?) -> Void) {
+    public func listening(completion: @escaping (Result<Bool, Error>) -> ()) {
         
         let params = [String]()
         
-        provider?.sendRequest(method: .peerCount, params: params, decodeTo: String.self) { hexPeerCount, error in
+        provider?.sendRequest(method: .listening, params: params, decodeTo: Bool.self) { result in
             
-            guard let hexPeerCount = hexPeerCount, error == nil else {
-                completion(nil, error)
-                return
+            switch result {
+            case .success(let isListening):
+                completion(.success(isListening))
+            case .failure(let error):
+                completion(.failure(error))
             }
             
-            let peerCount = Int(hexPeerCount.removeHexPrefix(), radix: 16)
+        }
+    }
+    
+    public func peerCount(completion: @escaping (Result<Int, Error>) -> ()) {
+        
+        let params = [String]()
+        
+        provider?.sendRequest(method: .peerCount, params: params, decodeTo: String.self) { result in
             
-            completion(peerCount, nil)
+            switch result {
+            case .success(let hexPeerCount):
+                if let peerCount = Int(hexPeerCount.removeHexPrefix(), radix: 16) {
+                    completion(.success(peerCount))
+                } else {
+                    completion(.failure(ConvertingError.errorConvertingFromHex))
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
             
         }
         
@@ -130,18 +135,14 @@ public struct Node {
     
     // MARK: - Web3
     
-    public func clientVersion(completion: @escaping (String?, Error?) -> Void) {
+    public func clientVersion(completion: @escaping (Result<String, Error>) -> ()) {
         
         let params = [String]()
         
-        provider?.sendRequest(method: .clientVersion, params: params, decodeTo: String.self) { clientVersion, error in
+        provider?.sendRequest(method: .clientVersion, params: params, decodeTo: String.self) { result in
             
-            guard let clientVersion = clientVersion, error == nil else {
-                completion(nil, error)
-                return
-            }
+            completion(result)
             
-            completion(clientVersion, nil)
         }
         
     }
@@ -158,11 +159,12 @@ extension Node {
     
     public func version() async throws -> Int {
         return try await withCheckedThrowingContinuation { continuation in
-            version() { value, error in
-                if let error = error {
-                    continuation.resume(throwing: error)
-                } else if let value = value {
+            version() { result in
+                switch result {
+                case .success(let value):
                     continuation.resume(returning: value)
+                case .failure(let error):
+                    continuation.resume(throwing: error)
                 }
             }
         }
@@ -170,11 +172,12 @@ extension Node {
     
     public func listening() async throws -> Bool {
         return try await withCheckedThrowingContinuation { continuation in
-            listening() { value, error in
-                if let error = error {
-                    continuation.resume(throwing: error)
-                } else if let value = value {
+            listening() { result in
+                switch result {
+                case .success(let value):
                     continuation.resume(returning: value)
+                case .failure(let error):
+                    continuation.resume(throwing: error)
                 }
             }
         }
@@ -182,11 +185,12 @@ extension Node {
     
     public func peerCount() async throws -> Int {
         return try await withCheckedThrowingContinuation { continuation in
-            peerCount() { value, error in
-                if let error = error {
-                    continuation.resume(throwing: error)
-                } else if let value = value {
+            peerCount() { result in
+                switch result {
+                case .success(let value):
                     continuation.resume(returning: value)
+                case .failure(let error):
+                    continuation.resume(throwing: error)
                 }
             }
         }
@@ -194,11 +198,12 @@ extension Node {
     
     public func clientVersion() async throws -> String {
         return try await withCheckedThrowingContinuation { continuation in
-            clientVersion() { value, error in
-                if let error = error {
-                    continuation.resume(throwing: error)
-                } else if let value = value {
+            clientVersion() { result in
+                switch result {
+                case .success(let value):
                     continuation.resume(returning: value)
+                case .failure(let error):
+                    continuation.resume(throwing: error)
                 }
             }
         }

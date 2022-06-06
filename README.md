@@ -540,7 +540,7 @@ function balanceOf(address _owner) constant returns (uint balance);
 
 2. Check the input and output parameters of the method:
 
-Method accepts on address type as an input and returns a uint
+Method accepts `address` type as an input and returns a `uint`
 
 3. Encode parameters:
 

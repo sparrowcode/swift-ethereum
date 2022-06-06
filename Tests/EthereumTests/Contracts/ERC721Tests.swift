@@ -11,100 +11,75 @@ class ERC721Tests: XCTestCase {
         EthereumService.configureProvider(with: node)
     }
 
-    func testBalance() throws {
-        
-        let expectation = XCTestExpectation(description: "get balance erc721")
+    func testBalance() async throws {
         
         let address = "0x495f947276749ce646f68ac8c248420045cb7b5e"
         
         let transaction = try ERC721TransactionFactory.generateBalanceTransaction(address: address, contractAddress: contractAddress)
         
-        EthereumService.call(transaction: transaction) { response, error in
-            XCTAssertNil(error)
-            XCTAssertNotNil(response)
-            expectation.fulfill()
+        do {
+            let _ = try await EthereumService.call(transaction: transaction)
+        } catch {
+            XCTFail("\(error)", file: #filePath, line: #line)
         }
-        
-        wait(for: [expectation], timeout: 50)
     }
 
-    func testOwnerOf() throws {
-        
-        let expectation = XCTestExpectation(description: "get owner of erc721")
+    func testOwnerOf() async throws {
         
         let tokenId = BigUInt(708)
         
         let transaction = try ERC721TransactionFactory.generateOwnerOfTransaction(tokenId: tokenId, contractAddress: contractAddress)
         
-        EthereumService.call(transaction: transaction) { response, error in
-            XCTAssertNil(error)
-            XCTAssertNotNil(response)
-            expectation.fulfill()
+        do {
+            let _ = try await EthereumService.call(transaction: transaction)
+        } catch {
+            XCTFail("\(error)", file: #filePath, line: #line)
         }
-        
-        wait(for: [expectation], timeout: 50)
     }
     
-    func testName() throws {
-        
-        let expectation = XCTestExpectation(description: "get name erc721")
+    func testName() async throws {
         
         let transaction = try ERC721TransactionFactory.generateNameTransaction(contractAddress: contractAddress)
         
-        EthereumService.call(transaction: transaction) { response, error in
-            XCTAssertNil(error)
-            XCTAssertNotNil(response)
-            expectation.fulfill()
+        do {
+            let _ = try await EthereumService.call(transaction: transaction)
+        } catch {
+            XCTFail("\(error)", file: #filePath, line: #line)
         }
-        
-        wait(for: [expectation], timeout: 50)
     }
     
-    func testSymbol() throws {
-        
-        let expectation = XCTestExpectation(description: "get symbol erc721")
+    func testSymbol() async throws {
         
         let transaction = try ERC721TransactionFactory.generateSymbolTransaction(contractAddress: contractAddress)
         
-        EthereumService.call(transaction: transaction) { response, error in
-            XCTAssertNil(error)
-            XCTAssertNotNil(response)
-            expectation.fulfill()
+        do {
+            let _ = try await EthereumService.call(transaction: transaction)
+        } catch {
+            XCTFail("\(error)", file: #filePath, line: #line)
         }
-        
-        wait(for: [expectation], timeout: 50)
-        
     }
     
-    func testTokenURI() throws {
-        
-        let expectation = XCTestExpectation(description: "get tokenURI of erc721")
+    func testTokenURI() async throws {
         
         let tokenId = BigUInt(708)
         
         let transaction = try ERC721TransactionFactory.generateTokenURITransaction(tokenId: tokenId, contractAddress: contractAddress)
         
-        EthereumService.call(transaction: transaction) { response, error in
-            XCTAssertNil(error)
-            XCTAssertNotNil(response)
-            expectation.fulfill()
+        do {
+            let _ = try await EthereumService.call(transaction: transaction)
+        } catch {
+            XCTFail("\(error)", file: #filePath, line: #line)
         }
-        
-        wait(for: [expectation], timeout: 50)
     }
     
-    func testTotalSupply() throws {
-        
-        let expectation = XCTestExpectation(description: "total supply of erc721")
+    func testTotalSupply() async throws {
         
         let transaction = try ERC721TransactionFactory.generateTotalSupplyTransaction(contractAddress: contractAddress)
         
-        EthereumService.call(transaction: transaction) { response, error in
-            XCTAssertNil(error)
-            XCTAssertNotNil(response)
-            expectation.fulfill()
+        do {
+            let _ = try await EthereumService.call(transaction: transaction)
+        } catch {
+            XCTFail("\(error)", file: #filePath, line: #line)
         }
-        
-        wait(for: [expectation], timeout: 50)
     }
 }

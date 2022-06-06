@@ -11,27 +11,20 @@ class ERC20Tests: XCTestCase {
         EthereumService.configureProvider(with: node)
     }
     
-    func testBalance() throws {
-        
-        let expectation = XCTestExpectation(description: "get balance erc20")
+    func testBalance() async throws {
         
         let address = "0xE92A146f86fEda6D14Ee1dc1BfB620D3F3d1b873"
         
         let transaction = try ERC20TransactionFactory.generateBalanceTransaction(address: address, contractAddress: contractAddress)
         
-        EthereumService.call(transaction: transaction) { response, error in
-            XCTAssertNil(error)
-            XCTAssertNotNil(response)
-            expectation.fulfill()
+        do {
+            let _ = try await EthereumService.call(transaction: transaction)
+        } catch {
+            XCTFail("\(error)", file: #filePath, line: #line)
         }
-        
-        wait(for: [expectation], timeout: 50)
-        
     }
     
-    func testTransfer() throws {
-        
-        let expectation = XCTestExpectation(description: "transfer erc20")
+    func testTransfer() async throws {
         
         let storage = UserDefaultsStorage(password: "password")
         
@@ -45,74 +38,55 @@ class ERC20Tests: XCTestCase {
                                                                               gasPrice: BigUInt(220000000000),
                                                                               contractAddress: contractAddress)
         
-        EthereumService.sendRawTransaction(account: account, transaction: transaction) { hash, error in
-            XCTAssertNil(error)
-            XCTAssertNotNil(hash)
-            expectation.fulfill()
+        do {
+            let _ = try await EthereumService.sendRawTransaction(account: account, transaction: transaction)
+        } catch {
+            XCTFail("\(error)", file: #filePath, line: #line)
         }
-        
-        wait(for: [expectation], timeout: 50)
     }
     
-    func testDecimals() throws {
-        
-        let expectation = XCTestExpectation(description: "transfer erc20")
+    func testDecimals() async throws {
         
         let transaction = try ERC20TransactionFactory.generateDecimalsTransaction(contractAddress: contractAddress)
         
-        EthereumService.call(transaction: transaction) { response, error in
-            XCTAssertNil(error)
-            XCTAssertNotNil(response)
-            expectation.fulfill()
+        do {
+            let _ = try await EthereumService.call(transaction: transaction)
+        } catch {
+            XCTFail("\(error)", file: #filePath, line: #line)
         }
-        
-        wait(for: [expectation], timeout: 50)
-        
     }
     
-    func testSymbol() throws {
-        
-        let expectation = XCTestExpectation(description: "symbol erc20")
+    func testSymbol() async throws {
         
         let transaction = try ERC20TransactionFactory.generateSymbolTransaction(contractAddress: contractAddress)
         
-        EthereumService.call(transaction: transaction) { response, error in
-            XCTAssertNil(error)
-            XCTAssertNotNil(response)
-            expectation.fulfill()
+        do {
+            let _ = try await EthereumService.call(transaction: transaction)
+        } catch {
+            XCTFail("\(error)", file: #filePath, line: #line)
         }
-        
-        wait(for: [expectation], timeout: 50)
-        
     }
     
-    func testTotalSupply() throws {
-        
-        let expectation = XCTestExpectation(description: "total supply erc20")
+    func testTotalSupply() async throws {
         
         let transaction = try ERC20TransactionFactory.generateTotalSupplyTransaction(contractAddress: contractAddress)
         
-        EthereumService.call(transaction: transaction) { response, error in
-            XCTAssertNil(error)
-            XCTAssertNotNil(response)
-            expectation.fulfill()
+        do {
+            let _ = try await EthereumService.call(transaction: transaction)
+        } catch {
+            XCTFail("\(error)", file: #filePath, line: #line)
         }
-        wait(for: [expectation], timeout: 50)
     }
     
-    func testName() throws {
-        
-        let expectation = XCTestExpectation(description: "name erc20")
+    func testName() async throws {
         
         let transaction = try ERC20TransactionFactory.generateNameTransaction(contractAddress: contractAddress)
         
-        EthereumService.call(transaction: transaction) { response, error in
-            XCTAssertNil(error)
-            XCTAssertNotNil(response)
-            expectation.fulfill()
+        do {
+            let _ = try await EthereumService.call(transaction: transaction)
+        } catch {
+            XCTFail("\(error)", file: #filePath, line: #line)
         }
-        
-        wait(for: [expectation], timeout: 50)
     }
     
     func testApprove() throws {

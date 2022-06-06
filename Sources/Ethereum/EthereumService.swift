@@ -17,219 +17,197 @@ public enum EthereumService {
     /**
      Ethereum: Returns the current price per gas in wei.
      */
-    public static func gasPrice(completion: @escaping (BigUInt?, Error?) -> ()) {
+    public static func gasPrice(completion: @escaping (Result<BigUInt, Error>) -> ()) {
         
-        // TODO: - Create a .none for params field
         let params = [String]()
         
-        provider.sendRequest(method: .gasPrice, params: params, decodeTo: String.self) { hexGasPrice, error in
+        provider.sendRequest(method: .gasPrice, params: params, decodeTo: String.self) { result in
             
-            guard let hexGasPrice = hexGasPrice, error == nil else {
-                completion(nil, error)
-                return
+            switch result {
+            case .success(let hexGasPrice):
+                if let gasPrice = BigUInt(hexGasPrice.removeHexPrefix(), radix: 16) {
+                    completion(.success(gasPrice))
+                } else {
+                    completion(.failure(ConvertingError.errorConvertingFromHex))
+                }
+            case .failure(let error):
+                completion(.failure(error))
             }
-            
-            guard let gasPrice = BigUInt(hexGasPrice.removeHexPrefix(), radix: 16) else {
-                completion(nil, ConvertingError.errorConvertingFromHex)
-                return
-            }
-            
-            completion(gasPrice, nil)
         }
     }
     
     /**
      Ethereum: Returns the number of most recent block.
      */
-    public static func blockNumber(completion: @escaping (Int?, Error?) -> ()) {
+    public static func blockNumber(completion: @escaping (Result<Int, Error>) -> ()) {
         
         let params = [String]()
         
-        provider.sendRequest(method: .blockNumber, params: params, decodeTo: String.self) { hexBlockNumber, error in
+        provider.sendRequest(method: .blockNumber, params: params, decodeTo: String.self) { result in
             
-            guard let hexBlockNumber = hexBlockNumber, error == nil else {
-                completion(nil, error)
-                return
+            switch result {
+            case .success(let hexBlockNumber):
+                if let blockNumber = Int(hexBlockNumber.removeHexPrefix(), radix: 16) {
+                    completion(.success(blockNumber))
+                } else {
+                    completion(.failure(ConvertingError.errorConvertingFromHex))
+                }
+            case .failure(let error):
+                completion(.failure(error))
             }
-            
-            guard let blockNumber = Int(hexBlockNumber.removeHexPrefix(), radix: 16) else {
-                completion(nil, ConvertingError.errorConvertingFromHex)
-                return
-            }
-            
-            completion(blockNumber, nil)
-            
         }
-        
     }
     
     /**
      Ethereum: Returns the balance of the account of given address.
      */
-    public static func getBalance(for address: String, block: String = "latest", completion: @escaping (BigUInt?, Error?) -> ()) {
+    public static func getBalance(for address: String, block: String = "latest", completion: @escaping (Result<BigUInt, Error>) -> ()) {
         
         let params = [address, block]
         
-        provider.sendRequest(method: .getBalance, params: params, decodeTo: String.self) { hexBalance, error in
+        provider.sendRequest(method: .getBalance, params: params, decodeTo: String.self) { result in
             
-            guard let hexBalance = hexBalance, error == nil else {
-                completion(nil, error)
-                return
+            switch result {
+            case .success(let hexBalance):
+                if let balance = BigUInt(hexBalance.removeHexPrefix(), radix: 16) {
+                    completion(.success(balance))
+                } else {
+                    completion(.failure(ConvertingError.errorConvertingFromHex))
+                }
+            case .failure(let error):
+                completion(.failure(error))
             }
-            
-            guard let balance = BigUInt(hexBalance.removeHexPrefix(), radix: 16) else {
-                completion(nil, ConvertingError.errorConvertingFromHex)
-                return
-            }
-            
-            completion(balance, nil)
-            
         }
-        
     }
     
     /**
      Ethereum: retrieves raw state storage for a smart contract;
      */
-    public static func getStorageAt(address: String, storageSlot: Int, block: String = "latest", completion: @escaping (String?, Error?) -> ()) {
+    public static func getStorageAt(address: String, storageSlot: Int, block: String = "latest", completion: @escaping (Result<BigUInt, Error>) -> ()) {
         
         let hexStorageSlot = String(storageSlot, radix: 16).addHexPrefix()
         
         let params = [address, hexStorageSlot, block]
         
-        provider.sendRequest(method: .getStorageAt, params: params, decodeTo: String.self) { hexValue, error in
+        provider.sendRequest(method: .getStorageAt, params: params, decodeTo: String.self) { result in
             
-            guard let hexValue = hexValue, error == nil else {
-                completion(nil, error)
-                return
+            switch result {
+            case .success(let hexValue):
+                if let value = BigUInt(hexValue.removeHexPrefix(), radix: 16) {
+                    completion(.success(value))
+                } else {
+                    completion(.failure(ConvertingError.errorConvertingFromHex))
+                }
+            case .failure(let error):
+                completion(.failure(error))
             }
-            
-            guard let value = BigInt(hexValue.removeHexPrefix(), radix: 16) else {
-                completion(nil, ConvertingError.errorConvertingFromHex)
-                return
-            }
-            
-            completion(value.description, nil)
-            
         }
-        
     }
     
     /**
      Ethereum: Returns the number of transactions sent from an address.
      */
-    public static func getTransactionCount(for address: String, block: String = "latest", completion: @escaping (Int?, Error?) -> ()) {
+    public static func getTransactionCount(for address: String, block: String = "latest", completion: @escaping (Result<Int, Error>) -> ()) {
         
         let params = [address, block]
         
-        provider.sendRequest(method: .getTransactionCount, params: params, decodeTo: String.self) { hexNonce, error in
+        provider.sendRequest(method: .getTransactionCount, params: params, decodeTo: String.self) { result in
             
-            guard let hexNonce = hexNonce, error == nil else {
-                completion(nil, error)
-                return
+            switch result {
+            case .success(let hexNonce):
+                if let nonce = Int(hexNonce.removeHexPrefix(), radix: 16) {
+                    completion(.success(nonce))
+                } else {
+                    completion(.failure(ConvertingError.errorConvertingFromHex))
+                }
+            case .failure(let error):
+                completion(.failure(error))
             }
-            
-            guard let nonce = Int(hexNonce.removeHexPrefix(), radix: 16) else {
-                completion(nil, ConvertingError.errorConvertingFromHex)
-                return
-            }
-            
-            completion(nonce, nil)
-            
         }
-        
     }
     
     /**
      Ethereum: Returns the number of transactions in a block from a block matching the given block hash.
      */
-    public static func getBlockTransactionCountByHash(blockHash: String, completion: @escaping (Int?, Error?) -> ()) {
+    public static func getBlockTransactionCountByHash(blockHash: String, completion: @escaping (Result<Int, Error>) -> ()) {
         
         let params = [blockHash]
         
-        provider.sendRequest(method: .getBlockTransactionCountByHash, params: params, decodeTo: String?.self) { hexTransactionCount, error in
+        provider.sendRequest(method: .getBlockTransactionCountByHash, params: params, decodeTo: String?.self) { result in
             
-            guard error == nil else {
-                completion(nil, error)
-                return
+            switch result {
+            case .success(let hexTransactionCount):
+                guard let hexTransactionCount = hexTransactionCount else {
+                    completion(.failure(ResponseError.nilResponse))
+                    return
+                }
+                if let transactionCount = Int(hexTransactionCount.removeHexPrefix(), radix: 16) {
+                    completion(.success(transactionCount))
+                } else {
+                    completion(.failure(ConvertingError.errorConvertingFromHex))
+                }
+            case .failure(let error):
+                completion(.failure(error))
             }
-            
-            guard let hexTransactionCount = hexTransactionCount, let hexTransactionCountNoHexPrefix = hexTransactionCount?.removeHexPrefix()  else {
-                completion(nil, ResponseError.nilResponse)
-                return
-            }
-            
-            guard let transactionCount = Int(hexTransactionCountNoHexPrefix, radix: 16) else {
-                completion(nil, ConvertingError.errorConvertingFromHex)
-                return
-            }
-            
-            completion(transactionCount, nil)
-            
         }
-        
     }
     
     /**
      Ethereum: Returns the number of transactions in a block matching the given block number.
      */
-    public static func getBlockTransactionCountByNumber(blockNumber: Int, completion: @escaping (Int?, Error?) -> ()) {
+    public static func getBlockTransactionCountByNumber(blockNumber: Int, completion: @escaping (Result<Int, Error>) -> ()) {
         
         let hexBlockNumber = String(blockNumber, radix: 16).addHexPrefix()
         
         let params = [hexBlockNumber]
         
-        provider.sendRequest(method: .getBlockTransactionCountByNumber, params: params, decodeTo: String?.self) { hexTransactionCount, error in
+        provider.sendRequest(method: .getBlockTransactionCountByNumber, params: params, decodeTo: String?.self) { result in
             
-            guard error == nil else {
-                completion(nil, error)
-                return
+            switch result {
+            case .success(let hexTransactionCount):
+                guard let hexTransactionCount = hexTransactionCount else {
+                    completion(.failure(ResponseError.nilResponse))
+                    return
+                }
+                if let transactionCount = Int(hexTransactionCount.removeHexPrefix(), radix: 16) {
+                    completion(.success(transactionCount))
+                } else {
+                    completion(.failure(ConvertingError.errorConvertingFromHex))
+                }
+            case .failure(let error):
+                completion(.failure(error))
             }
-            
-            guard let hexTransactionCount = hexTransactionCount, let hexTransactionCountNoHexPrefix = hexTransactionCount?.removeHexPrefix()  else {
-                completion(nil, ResponseError.nilResponse)
-                return
-            }
-            
-            guard let transactionCount = Int(hexTransactionCountNoHexPrefix, radix: 16) else {
-                completion(nil, ConvertingError.errorConvertingFromHex)
-                return
-            }
-            
-            completion(transactionCount, nil)
         }
-        
     }
     
     /**
      Ethereum: Returns the compiled solidity code
      */
-    public static func getCode(address: String, block: String = "latest", completion: @escaping (String?, Error?) -> ()) {
+    public static func getCode(address: String, block: String = "latest", completion: @escaping (Result<String, Error>) -> ()) {
         
         let params = [address, block]
         
-        provider.sendRequest(method: .getCode, params: params, decodeTo: String.self) { byteCode, error in
+        provider.sendRequest(method: .getCode, params: params, decodeTo: String.self) { result in
             
-            guard let byteCode = byteCode, error == nil else {
-                completion(nil, error)
-                return
-            }
-            
-            completion(byteCode, nil)
+            completion(result)
         }
-        
     }
     
     /**
      Ethereum: Creates new message call transaction or a contract creation for signed transactions.
      sendRawTransaction() requires that the transaction be already signed and serialized. So it requires extra serialization steps to use, but enables you to broadcast transactions on hosted nodes. There are other reasons that you might want to use a local key, of course. All of them would require using sendRawTransaction().
      */
-    public static func sendRawTransaction(account: Account, transaction: Transaction, completion: @escaping (String?, Error?) -> ()) {
+    public static func sendRawTransaction(account: Account, transaction: Transaction, completion: @escaping (Result<String, Error>) -> ()) {
         
-        self.getTransactionCount(for: account.address) { nonce, error in
+        self.getTransactionCount(for: account.address) { result in
             
-            guard let nonce = nonce, error == nil else {
-                completion(nil, error)
+            var nonce: Int
+            
+            switch result {
+            case .success(let nonceValue):
+                nonce = nonceValue
+            case .failure(let error):
+                completion(.failure(error))
                 return
             }
             
@@ -245,7 +223,7 @@ public enum EthereumService {
                 let signedTransaction = try account.sign(transaction: unsignedTransaction)
                 rlpBytes = try signedTransaction.encodeRLP()
             } catch {
-                completion(nil, error)
+                completion(.failure(error))
                 return
             }
             
@@ -254,14 +232,9 @@ public enum EthereumService {
             
             let params = [signedTransactionHash]
             
-            provider.sendRequest(method: .sendRawTransaction, params: params, decodeTo: String.self) { transactionHash, error in
+            provider.sendRequest(method: .sendRawTransaction, params: params, decodeTo: String.self) { result in
                 
-                guard let transactionHash = transactionHash, error == nil else {
-                    completion(nil, error)
-                    return
-                }
-                
-                completion(transactionHash, nil)
+                completion(result)
             }
         }
     }
@@ -269,7 +242,7 @@ public enum EthereumService {
     /**
      Ethereum: Executes a new message call immediately without creating a transaction on the block chain. Primarily is used on smart contracts
      */
-    public static func call(transaction: Transaction, block: String = "latest", completion: @escaping (String?, Error?) -> ()) {
+    public static func call(transaction: Transaction, block: String = "latest", completion: @escaping (Result<String, Error>) -> ()) {
         
         
         struct Params: Codable {
@@ -285,22 +258,16 @@ public enum EthereumService {
         
         let params = Params(transaction: transaction, block: block)
         
-        provider.sendRequest(method: .call, params: params, decodeTo: String.self) { responseData, error in
+        provider.sendRequest(method: .call, params: params, decodeTo: String.self) { result in
             
-            guard let responseData = responseData, error == nil else {
-                completion(nil, error)
-                return
-            }
-            
-            completion(responseData, nil)
+            completion(result)
         }
-        
     }
     
     /**
      Ethereum: Generates and returns an estimate of how much gas is necessary to allow the transaction to complete. The transaction will not be added to the blockchain. Note that the estimate may be significantly more than the amount of gas actually used by the transaction, for a variety of reasons including EVM mechanics and node performance.
      */
-    public static func estimateGas(for transaction: Transaction, block: String = "latest", completion: @escaping (BigUInt?, Error?) -> ()) {
+    public static func estimateGas(for transaction: Transaction, block: String = "latest", completion: @escaping (Result<BigUInt, Error>) -> ()) {
         
         struct Params: Codable {
             let transaction: Transaction
@@ -315,27 +282,25 @@ public enum EthereumService {
         
         let params = Params(transaction: transaction, block: block)
         
-        provider.sendRequest(method: .estimateGas, params: params, decodeTo: String.self) { hexValue, error in
+        provider.sendRequest(method: .estimateGas, params: params, decodeTo: String.self) { result in
             
-            guard let hexValue = hexValue, error == nil else {
-                completion(nil, error)
-                return
+            switch result {
+            case .success(let hexValue):
+                if let value = BigUInt(hexValue.removeHexPrefix(), radix: 16) {
+                    completion(.success(value))
+                } else {
+                    completion(.failure(ConvertingError.errorConvertingFromHex))
+                }
+            case .failure(let error):
+                completion(.failure(error))
             }
-            
-            guard let value = BigUInt(hexValue.removeHexPrefix(), radix: 16) else {
-                completion(nil, ConvertingError.errorConvertingFromHex)
-                return
-            }
-            
-            completion(value, nil)
         }
-        
     }
     
     /**
      Ethereum: Returns information about a block by hash.
      */
-    public static func getBlockByHash(hash: String, completion: @escaping (Block?, Error?) -> ()) {
+    public static func getBlockByHash(hash: String, completion: @escaping (Result<Block, Error>) -> ()) {
         
         struct Params: Codable {
             let hash: String
@@ -350,22 +315,16 @@ public enum EthereumService {
         
         let params = Params(hash: hash, isHydratedTransaction: false)
         
-        provider.sendRequest(method: .getBlockByHash, params: params, decodeTo: Block.self) { block, error in
+        provider.sendRequest(method: .getBlockByHash, params: params, decodeTo: Block.self) { result in
             
-            guard let block = block, error == nil else {
-                completion(nil, error)
-                return
-            }
-            
-            completion(block, nil)
+            completion(result)
         }
-        
     }
     
     /**
      Ethereum: Returns information about a block by block number.
      */
-    public static func getBlockByNumber(blockNumber: Int, completion: @escaping (Block?, Error?) -> ()) {
+    public static func getBlockByNumber(blockNumber: Int, completion: @escaping (Result<Block, Error>) -> ()) {
         
         let hexBlockNumber = String(blockNumber, radix: 16).addHexPrefix()
         
@@ -382,67 +341,53 @@ public enum EthereumService {
         
         let params = Params(hexBlockNumber: hexBlockNumber, isHydratedTransaction: false)
         
-        provider.sendRequest(method: .getBlockByNumber, params: params, decodeTo: Block.self) { block, error in
+        provider.sendRequest(method: .getBlockByNumber, params: params, decodeTo: Block.self) { result in
             
-            guard let block = block, error == nil else {
-                completion(nil, error)
-                return
-            }
-            
-            completion(block, nil)
+            completion(result)
         }
     }
     
     /**
      Ethereum: Returns the information about a transaction requested by transaction hash.
      */
-    public static func getTransactionByHash(transactionHash: String, completion: @escaping (Transaction?, Error?) -> ()) {
+    public static func getTransactionByHash(transactionHash: String, completion: @escaping (Result<Transaction, Error>) -> ()) {
         
         let params = [transactionHash]
         
-        provider.sendRequest(method: .getTransactionByHash, params: params, decodeTo: Transaction.self) { transaction, error in
+        provider.sendRequest(method: .getTransactionByHash, params: params, decodeTo: Transaction.self) { result in
             
-            guard let transaction = transaction, error == nil else {
-                completion(nil, error)
-                return
-            }
-            
-            completion(transaction, nil)
+            completion(result)
         }
-        
     }
     
     /**
      Ethereum: Returns information about a transaction by block hash and transaction index position.
      */
-    public static func getTransactionByBlockHashAndIndex(blockHash: String, index: Int, completion: @escaping (Transaction?, Error?) -> ()) {
+    public static func getTransactionByBlockHashAndIndex(blockHash: String, index: Int, completion: @escaping (Result<Transaction, Error>) -> ()) {
         
         let hexIndex = String(index, radix: 16).addHexPrefix()
         
         let params = [blockHash, hexIndex]
         
-        provider.sendRequest(method: .getTransactionByBlockHashAndIndex, params: params, decodeTo: Transaction?.self) { transaction, error in
+        provider.sendRequest(method: .getTransactionByBlockHashAndIndex, params: params, decodeTo: Transaction?.self) { result in
             
-            guard let optionalTransaction = transaction, error == nil else {
-                completion(nil, error)
-                return
+            switch result {
+            case .success(let optionalTransaction):
+                guard let transaction = optionalTransaction else {
+                    completion(.failure(ResponseError.noResult))
+                    return
+                }
+                completion(.success(transaction))
+            case .failure(let error):
+                completion(.failure(error))
             }
-            
-            guard let transaction = optionalTransaction else {
-                completion(nil, ResponseError.noResult)
-                return
-            }
-            
-            completion(transaction, nil)
-
         }
-        
     }
     
     /**
      Ethereum: Returns information about a transaction by block number and transaction index position.
      */
-    public static func getTransactionByBlockNumberAndIndex(blockNumber: Int, index: Int, completion: @escaping (Transaction?, Error?) -> ()) {
+    public static func getTransactionByBlockNumberAndIndex(blockNumber: Int, index: Int, completion: @escaping (Result<Transaction, Error>) -> ()) {
         
         let hexBlockNumber = String(blockNumber, radix: 16).addHexPrefix()
         
@@ -450,19 +395,18 @@ public enum EthereumService {
         
         let params = [hexBlockNumber, hexIndex]
         
-        provider.sendRequest(method: .getTransactionByBlockNumberAndIndex, params: params, decodeTo: Transaction?.self) { transaction, error in
+        provider.sendRequest(method: .getTransactionByBlockNumberAndIndex, params: params, decodeTo: Transaction?.self) { result in
             
-            guard let optionalTransaction = transaction, error == nil else {
-                completion(nil, error)
-                return
+            switch result {
+            case .success(let optionalTransaction):
+                guard let transaction = optionalTransaction else {
+                    completion(.failure(ResponseError.noResult))
+                    return
+                }
+                completion(.success(transaction))
+            case .failure(let error):
+                completion(.failure(error))
             }
-            
-            guard let transaction = optionalTransaction else {
-                completion(nil, ResponseError.noResult)
-                return
-            }
-            
-            completion(transaction, nil)
         }
         
     }
@@ -470,52 +414,44 @@ public enum EthereumService {
     /**
      Ethereum: Returns the receipt of a transaction by transaction hash.
      */
-    public static func getTransactionReceipt(transactionHash: String, completion: @escaping (Receipt?, Error?) -> ()) {
+    public static func getTransactionReceipt(transactionHash: String, completion: @escaping (Result<Receipt, Error>) -> ()) {
         
         let params = [transactionHash]
         
-        provider.sendRequest(method: .getTransactionReceipt, params: params, decodeTo: Receipt.self) { receipt, error in
+        provider.sendRequest(method: .getTransactionReceipt, params: params, decodeTo: Receipt.self) { result in
             
-            guard let receipt = receipt, error == nil else {
-                completion(nil, error)
-                return
-            }
-            
-            completion(receipt, nil)
+            completion(result)
         }
-        
     }
     
     /**
      Ethereum: Returns information about a uncle of a block by hash and uncle index position.
      */
-    public static func getUncleByBlockHashAndIndex(blockHash: String, index: Int, completion: @escaping (Block?, Error?) -> ()) {
+    public static func getUncleByBlockHashAndIndex(blockHash: String, index: Int, completion: @escaping (Result<Block, Error>) -> ()) {
         
         let hexIndex = String(index, radix: 16).addHexPrefix()
         
         let params = [blockHash, hexIndex]
         
-        provider.sendRequest(method: .getUncleByBlockHashAndIndex, params: params, decodeTo: Block?.self) { block, error in
+        provider.sendRequest(method: .getUncleByBlockHashAndIndex, params: params, decodeTo: Block?.self) { result in
             
-            guard let optionalBlock = block, error == nil else {
-                completion(nil, error)
-                return
+            switch result {
+            case .success(let optionalBlock):
+                guard let block = optionalBlock else {
+                    completion(.failure(ResponseError.noResult))
+                    return
+                }
+                completion(.success(block))
+            case .failure(let error):
+                completion(.failure(error))
             }
-            
-            guard let block = optionalBlock else {
-                completion(nil, ResponseError.noResult)
-                return
-            }
-            
-            completion(block, nil)
-            
         }
     }
     
     /**
      Ethereum: Returns information about a uncle of a block by number and uncle index position.
      */
-    public static func getUncleByBlockNumberAndIndex(blockNumber: Int, index: Int, completion: @escaping (Block?, Error?) -> ()) {
+    public static func getUncleByBlockNumberAndIndex(blockNumber: Int, index: Int, completion: @escaping (Result<Block, Error>) -> ()) {
         
         let hexBlockNumber = String(blockNumber, radix: 16).addHexPrefix()
         
@@ -523,22 +459,19 @@ public enum EthereumService {
         
         let params = [hexBlockNumber, hexIndex]
         
-        provider.sendRequest(method: .getUncleByBlockNumberAndIndex, params: params, decodeTo: Block?.self) { block, error in
+        provider.sendRequest(method: .getUncleByBlockNumberAndIndex, params: params, decodeTo: Block?.self) { result in
             
-            guard let optionalBlock = block, error == nil else {
-                completion(nil, error)
-                return
+            switch result {
+            case .success(let optionalBlock):
+                guard let block = optionalBlock else {
+                    completion(.failure(ResponseError.noResult))
+                    return
+                }
+                completion(.success(block))
+            case .failure(let error):
+                completion(.failure(error))
             }
-            
-            guard let block = optionalBlock else {
-                completion(nil, ResponseError.noResult)
-                return
-            }
-            
-            completion(block, nil)
-            
         }
-        
     }
     
     // MARK: TO LATER
@@ -589,11 +522,12 @@ extension EthereumService {
     
     public static func gasPrice() async throws -> BigUInt {
         return try await withCheckedThrowingContinuation { continuation in
-            gasPrice() { value, error in
-                if let error = error {
-                    continuation.resume(throwing: error)
-                } else if let value = value {
+            gasPrice() { result in
+                switch result {
+                case .success(let value):
                     continuation.resume(returning: value)
+                case .failure(let error):
+                    continuation.resume(throwing: error)
                 }
             }
         }
@@ -601,11 +535,12 @@ extension EthereumService {
     
     public static func blockNumber() async throws -> Int {
         return try await withCheckedThrowingContinuation { continuation in
-            blockNumber() { value, error in
-                if let error = error {
-                    continuation.resume(throwing: error)
-                } else if let value = value {
+            blockNumber() { result in
+                switch result {
+                case .success(let value):
                     continuation.resume(returning: value)
+                case .failure(let error):
+                    continuation.resume(throwing: error)
                 }
             }
         }
@@ -613,23 +548,25 @@ extension EthereumService {
     
     public static func getBalance(for address: String, block: String = "latest") async throws -> BigUInt {
         return try await withCheckedThrowingContinuation { continuation in
-            getBalance(for: address, block: block) { value, error in
-                if let error = error {
-                    continuation.resume(throwing: error)
-                } else if let value = value {
+            getBalance(for: address, block: block) { result in
+                switch result {
+                case .success(let value):
                     continuation.resume(returning: value)
+                case .failure(let error):
+                    continuation.resume(throwing: error)
                 }
             }
         }
     }
     
-    public static func getStorageAt(address: String, storageSlot: Int, block: String = "latest") async throws -> String {
+    public static func getStorageAt(address: String, storageSlot: Int, block: String = "latest") async throws -> BigUInt {
         return try await withCheckedThrowingContinuation { continuation in
-            getStorageAt(address: address, storageSlot: storageSlot) { value, error in
-                if let error = error {
-                    continuation.resume(throwing: error)
-                } else if let value = value {
+            getStorageAt(address: address, storageSlot: storageSlot) { result in
+                switch result {
+                case .success(let value):
                     continuation.resume(returning: value)
+                case .failure(let error):
+                    continuation.resume(throwing: error)
                 }
             }
         }
@@ -637,11 +574,12 @@ extension EthereumService {
     
     public static func getTransactionCount(for address: String, block: String = "latest") async throws -> Int {
         return try await withCheckedThrowingContinuation { continuation in
-            getTransactionCount(for: address, block: block) { value, error in
-                if let error = error {
-                    continuation.resume(throwing: error)
-                } else if let value = value {
+            getTransactionCount(for: address, block: block) { result in
+                switch result {
+                case .success(let value):
                     continuation.resume(returning: value)
+                case .failure(let error):
+                    continuation.resume(throwing: error)
                 }
             }
         }
@@ -649,11 +587,12 @@ extension EthereumService {
     
     public static func getBlockTransactionCountByHash(blockHash: String) async throws -> Int {
         return try await withCheckedThrowingContinuation { continuation in
-            getBlockTransactionCountByHash(blockHash: blockHash) { value, error in
-                if let error = error {
-                    continuation.resume(throwing: error)
-                } else if let value = value {
+            getBlockTransactionCountByHash(blockHash: blockHash) { result in
+                switch result {
+                case .success(let value):
                     continuation.resume(returning: value)
+                case .failure(let error):
+                    continuation.resume(throwing: error)
                 }
             }
         }
@@ -661,11 +600,12 @@ extension EthereumService {
     
     public static func getBlockTransactionCountByNumber(blockNumber: Int) async throws -> Int {
         return try await withCheckedThrowingContinuation { continuation in
-            getBlockTransactionCountByNumber(blockNumber: blockNumber) { value, error in
-                if let error = error {
-                    continuation.resume(throwing: error)
-                } else if let value = value {
+            getBlockTransactionCountByNumber(blockNumber: blockNumber) { result in
+                switch result {
+                case .success(let value):
                     continuation.resume(returning: value)
+                case .failure(let error):
+                    continuation.resume(throwing: error)
                 }
             }
         }
@@ -673,11 +613,12 @@ extension EthereumService {
     
     public static func getCode(address: String, block: String = "latest") async throws -> String {
         return try await withCheckedThrowingContinuation { continuation in
-            getCode(address: address, block: block) { value, error in
-                if let error = error {
-                    continuation.resume(throwing: error)
-                } else if let value = value {
+            getCode(address: address, block: block) { result in
+                switch result {
+                case .success(let value):
                     continuation.resume(returning: value)
+                case .failure(let error):
+                    continuation.resume(throwing: error)
                 }
             }
         }
@@ -685,11 +626,12 @@ extension EthereumService {
     
     public static func sendRawTransaction(account: Account, transaction: Transaction) async throws -> String {
         return try await withCheckedThrowingContinuation { continuation in
-            sendRawTransaction(account: account, transaction: transaction) { value, error in
-                if let error = error {
-                    continuation.resume(throwing: error)
-                } else if let value = value {
+            sendRawTransaction(account: account, transaction: transaction) { result in
+                switch result {
+                case .success(let value):
                     continuation.resume(returning: value)
+                case .failure(let error):
+                    continuation.resume(throwing: error)
                 }
             }
         }
@@ -697,11 +639,12 @@ extension EthereumService {
     
     public static func call(transaction: Transaction, block: String = "latest") async throws -> String {
         return try await withCheckedThrowingContinuation { continuation in
-            call(transaction: transaction, block: block) { value, error in
-                if let error = error {
-                    continuation.resume(throwing: error)
-                } else if let value = value {
+            call(transaction: transaction, block: block) { result in
+                switch result {
+                case .success(let value):
                     continuation.resume(returning: value)
+                case .failure(let error):
+                    continuation.resume(throwing: error)
                 }
             }
         }
@@ -709,11 +652,12 @@ extension EthereumService {
     
     public static func estimateGas(for transaction: Transaction, block: String = "latest") async throws -> BigUInt {
         return try await withCheckedThrowingContinuation { continuation in
-            estimateGas(for: transaction, block: block) { value, error in
-                if let error = error {
-                    continuation.resume(throwing: error)
-                } else if let value = value {
+            estimateGas(for: transaction, block: block) { result in
+                switch result {
+                case .success(let value):
                     continuation.resume(returning: value)
+                case .failure(let error):
+                    continuation.resume(throwing: error)
                 }
             }
         }
@@ -721,11 +665,12 @@ extension EthereumService {
     
     public static func getBlockByHash(hash: String) async throws -> Block {
         return try await withCheckedThrowingContinuation { continuation in
-            getBlockByHash(hash: hash) { value, error in
-                if let error = error {
-                    continuation.resume(throwing: error)
-                } else if let value = value {
+            getBlockByHash(hash: hash) { result in
+                switch result {
+                case .success(let value):
                     continuation.resume(returning: value)
+                case .failure(let error):
+                    continuation.resume(throwing: error)
                 }
             }
         }
@@ -733,11 +678,12 @@ extension EthereumService {
     
     public static func getBlockByNumber(blockNumber: Int) async throws -> Block {
         return try await withCheckedThrowingContinuation { continuation in
-            getBlockByNumber(blockNumber: blockNumber) { value, error in
-                if let error = error {
-                    continuation.resume(throwing: error)
-                } else if let value = value {
+            getBlockByNumber(blockNumber: blockNumber) { result in
+                switch result {
+                case .success(let value):
                     continuation.resume(returning: value)
+                case .failure(let error):
+                    continuation.resume(throwing: error)
                 }
             }
         }
@@ -745,11 +691,12 @@ extension EthereumService {
     
     public static func getTransactionByHash(transactionHash: String) async throws -> Transaction {
         return try await withCheckedThrowingContinuation { continuation in
-            getTransactionByHash(transactionHash: transactionHash) { value, error in
-                if let error = error {
-                    continuation.resume(throwing: error)
-                } else if let value = value {
+            getTransactionByHash(transactionHash: transactionHash) { result in
+                switch result {
+                case .success(let value):
                     continuation.resume(returning: value)
+                case .failure(let error):
+                    continuation.resume(throwing: error)
                 }
             }
         }
@@ -757,11 +704,12 @@ extension EthereumService {
     
     public static func getTransactionByBlockHashAndIndex(blockHash: String, index: Int) async throws -> Transaction {
         return try await withCheckedThrowingContinuation { continuation in
-            getTransactionByBlockHashAndIndex(blockHash: blockHash, index: index) { value, error in
-                if let error = error {
-                    continuation.resume(throwing: error)
-                } else if let value = value {
+            getTransactionByBlockHashAndIndex(blockHash: blockHash, index: index) { result in
+                switch result {
+                case .success(let value):
                     continuation.resume(returning: value)
+                case .failure(let error):
+                    continuation.resume(throwing: error)
                 }
             }
         }
@@ -770,11 +718,12 @@ extension EthereumService {
     
     public static func getTransactionByBlockNumberAndIndex(blockNumber: Int, index: Int) async throws -> Transaction {
         return try await withCheckedThrowingContinuation { continuation in
-            getTransactionByBlockNumberAndIndex(blockNumber: blockNumber, index: index) { value, error in
-                if let error = error {
-                    continuation.resume(throwing: error)
-                } else if let value = value {
+            getTransactionByBlockNumberAndIndex(blockNumber: blockNumber, index: index) { result in
+                switch result {
+                case .success(let value):
                     continuation.resume(returning: value)
+                case .failure(let error):
+                    continuation.resume(throwing: error)
                 }
             }
         }
@@ -782,11 +731,12 @@ extension EthereumService {
     
     public static func getTransactionReceipt(transactionHash: String) async throws -> Receipt {
         return try await withCheckedThrowingContinuation { continuation in
-            getTransactionReceipt(transactionHash: transactionHash) { value, error in
-                if let error = error {
-                    continuation.resume(throwing: error)
-                } else if let value = value {
+            getTransactionReceipt(transactionHash: transactionHash) { result in
+                switch result {
+                case .success(let value):
                     continuation.resume(returning: value)
+                case .failure(let error):
+                    continuation.resume(throwing: error)
                 }
             }
         }
@@ -794,11 +744,12 @@ extension EthereumService {
     
     public static func getUncleByBlockHashAndIndex(blockHash: String, index: Int) async throws -> Block {
         return try await withCheckedThrowingContinuation { continuation in
-            getUncleByBlockHashAndIndex(blockHash: blockHash, index: index) { value, error in
-                if let error = error {
-                    continuation.resume(throwing: error)
-                } else if let value = value {
+            getUncleByBlockHashAndIndex(blockHash: blockHash, index: index) { result in
+                switch result {
+                case .success(let value):
                     continuation.resume(returning: value)
+                case .failure(let error):
+                    continuation.resume(throwing: error)
                 }
             }
         }
@@ -806,11 +757,12 @@ extension EthereumService {
     
     public static func getUncleByBlockNumberAndIndex(blockNumber: Int, index: Int) async throws -> Block {
         return try await withCheckedThrowingContinuation { continuation in
-            getUncleByBlockNumberAndIndex(blockNumber: blockNumber, index: index) { value, error in
-                if let error = error {
-                    continuation.resume(throwing: error)
-                } else if let value = value {
+            getUncleByBlockNumberAndIndex(blockNumber: blockNumber, index: index) { result in
+                switch result {
+                case .success(let value):
                     continuation.resume(returning: value)
+                case .failure(let error):
+                    continuation.resume(throwing: error)
                 }
             }
         }

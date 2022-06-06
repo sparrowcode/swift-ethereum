@@ -13,299 +13,241 @@ class EthereumServiceTests: XCTestCase {
         EthereumService.configureProvider(with: maiinetNode)
     }
     
-    func testGetBalance() throws {
+    func testGetBalance() async throws {
         
         let address = "0xE92A146f86fEda6D14Ee1dc1BfB620D3F3d1b873"
-        let expectation = XCTestExpectation(description: "get balance")
         
         EthereumService.configureProvider(with: ropstenNode)
         
-        EthereumService.getBalance(for: address) { balance, error in
-            XCTAssertNil(error)
-            XCTAssertNotNil(balance)
-            expectation.fulfill()
+        do {
+            let _ = try await EthereumService.getBalance(for: address)
+        } catch {
+            XCTFail("\(error)", file: #filePath, line: #line)
         }
-        
-        wait(for: [expectation], timeout: 20)
     }
     
-    func testGetTransactionCount() throws {
+    func testGetTransactionCount() async throws {
         
         let address = "0xb5bfc95C7345c8B20e5290D21f88a602580a08AB"
-        let expectation = XCTestExpectation(description: "get transaction count")
         
-        EthereumService.getTransactionCount(for: address) { nonce, error in
-            XCTAssertNil(error)
-            XCTAssertNotNil(nonce)
-            expectation.fulfill()
+        do {
+            let _ = try await EthereumService.getTransactionCount(for: address)
+        } catch {
+            XCTFail("\(error)", file: #filePath, line: #line)
         }
-        
-        wait(for: [expectation], timeout: 20)
     }
     
-    func testBlockNumber() throws {
+    func testBlockNumber() async throws {
         
-        let expectation = XCTestExpectation(description: "block number")
-        
-        EthereumService.blockNumber { blockNumber, error in
-            XCTAssertNil(error)
-            XCTAssertNotNil(blockNumber)
-            expectation.fulfill()
+        do {
+            let _ = try await EthereumService.blockNumber()
+        } catch {
+            XCTFail("\(error)", file: #filePath, line: #line)
         }
-        
-        wait(for: [expectation], timeout: 20)
     }
     
-    func testGasPrice() throws {
-        let expectation = XCTestExpectation(description: "gas price")
+    func testGasPrice() async throws {
         
-        EthereumService.gasPrice { gasPrice, error in
-            XCTAssertNil(error)
-            XCTAssertNotNil(gasPrice)
-            expectation.fulfill()
+        do {
+            let _ = try await EthereumService.gasPrice()
+        } catch {
+            XCTFail("\(error)", file: #filePath, line: #line)
         }
-        
-        wait(for: [expectation], timeout: 20)
     }
     
-    func testGetBlockTransactionCountByHash() throws {
+    func testGetBlockTransactionCountByHash() async throws {
         
-        let expectation = XCTestExpectation(description: "get block transaction count by hash")
         let blockHash = "0xcd6112f8e97b646a5c25e75e62a509337c77ff9e879b261d5d2d958f13a8a403"
         
-        EthereumService.getBlockTransactionCountByHash(blockHash: blockHash) { transactionCount, error in
-            XCTAssertNil(error)
-            XCTAssertNotNil(transactionCount)
-            expectation.fulfill()
+        do {
+            let _ = try await EthereumService.getBlockTransactionCountByHash(blockHash: blockHash)
+        } catch {
+            XCTFail("\(error)", file: #filePath, line: #line)
         }
-        
-        wait(for: [expectation], timeout: 20)
     }
     
-    func testGetBlockTransactionCountByNumber() throws {
+    func testGetBlockTransactionCountByNumber() async throws {
         
-        let expectation = XCTestExpectation(description: "get block transaction count by number")
         let blockNumber = 2
         
-        EthereumService.getBlockTransactionCountByNumber(blockNumber: blockNumber) { transactionCount, error in
-            XCTAssertNil(error)
-            XCTAssertNotNil(transactionCount)
-            expectation.fulfill()
+        do {
+            let _ = try await EthereumService.getBlockTransactionCountByNumber(blockNumber: blockNumber)
+        } catch {
+            XCTFail("\(error)", file: #filePath, line: #line)
         }
-        
-        wait(for: [expectation], timeout: 20)
     }
     
-    func testGetStorageAt() throws {
+    func testGetStorageAt() async throws {
         
-        let expectation = XCTestExpectation(description: "get storage at")
         let address = "0x295a70b2de5e3953354a6a8344e616ed314d7251"
         let storageSlot = 3
         let block = "latest"
         
-        EthereumService.getStorageAt(address: address, storageSlot: storageSlot, block: block) { value, error in
-            XCTAssertNil(error)
-            XCTAssertNotNil(value)
-            expectation.fulfill()
+        do {
+            let _ = try await EthereumService.getStorageAt(address: address, storageSlot: storageSlot, block: block)
+        } catch {
+            XCTFail("\(error)", file: #filePath, line: #line)
         }
-        
-        wait(for: [expectation], timeout: 20)
     }
     
-    func testGetCode() throws {
+    func testGetCode() async throws {
         
-        let expectation = XCTestExpectation(description: "get code")
         let address = "0x2b591e99afE9f32eAA6214f7B7629768c40Eeb39"
         let block = "latest"
         
-        EthereumService.getCode(address: address, block: block) { byteCode, error in
-            XCTAssertNil(error)
-            XCTAssertNotNil(byteCode)
-            expectation.fulfill()
+        do {
+            let _ = try await EthereumService.getCode(address: address, block: block)
+        } catch {
+            XCTFail("\(error)", file: #filePath, line: #line)
         }
-        
-        wait(for: [expectation], timeout: 20)
     }
     
-    func testGetBlockByHash() throws {
+    func testGetBlockByHash() async throws {
         
-        let expectation = XCTestExpectation(description: "get block by hash")
         let hash = "0xad1328d13f833b8af722117afdc406a762033321df8e48c00cd372d462f48169"
         
-        EthereumService.getBlockByHash(hash: hash) { block, error in
-            XCTAssertNil(error)
-            XCTAssertNotNil(block)
-            expectation.fulfill()
+        do {
+            let _ = try await EthereumService.getBlockByHash(hash: hash)
+        } catch {
+            XCTFail("\(error)", file: #filePath, line: #line)
         }
-        
-        wait(for: [expectation], timeout: 50)
     }
     
-    func testGetBlockByNumber() throws {
+    func testGetBlockByNumber() async throws {
         
-        let expectation = XCTestExpectation(description: "get block by number")
         let blockNumber = 12312
         
-        EthereumService.getBlockByNumber(blockNumber: blockNumber) { block, error in
-            XCTAssertNil(error)
-            XCTAssertNotNil(block)
-            expectation.fulfill()
+        do {
+            let _ = try await EthereumService.getBlockByNumber(blockNumber: blockNumber)
+        } catch {
+            XCTFail("\(error)", file: #filePath, line: #line)
         }
-        
-        wait(for: [expectation], timeout: 20)
     }
     
-    func testGetTransactionByHash() throws {
+    func testGetTransactionByHash() async throws {
         
-        let expectation = XCTestExpectation(description: "get transaction by hash")
         let transactionHash = "0xb2fea9c4b24775af6990237aa90228e5e092c56bdaee74496992a53c208da1ee"
         
-        EthereumService.getTransactionByHash(transactionHash: transactionHash) { transaction, error in
-            XCTAssertNil(error)
-            XCTAssertNotNil(transaction)
-            expectation.fulfill()
+        do {
+            let _ = try await EthereumService.getTransactionByHash(transactionHash: transactionHash)
+        } catch {
+            XCTFail("\(error)", file: #filePath, line: #line)
         }
-        
-        wait(for: [expectation], timeout: 20)
     }
     
-    func testGetUncleByBlockNumberAndIndexNullResponse() throws {
+    func testGetUncleByBlockNumberAndIndexNullResponse() async throws {
         
-        let expectation = XCTestExpectation(description: "get uncle block by number and index null response")
         let blockNumber = 12312
         let index = 0
         
-        EthereumService.getUncleByBlockNumberAndIndex(blockNumber: blockNumber, index: index) { block, error in
+        do {
+            let _ = try await EthereumService.getUncleByBlockNumberAndIndex(blockNumber: blockNumber, index: index)
+        } catch {
+//            XCTAssertEqual(error, ResponseError.nilResponse)
             XCTAssertNotNil(error)
-            XCTAssertNil(block)
-            expectation.fulfill()
         }
-        
-        wait(for: [expectation], timeout: 20)
     }
     
-    func testGetUncleByBlockNumberAndIndex() throws {
+    func testGetUncleByBlockNumberAndIndex() async throws {
         
-        let expectation = XCTestExpectation(description: "get uncle block by number and index")
         let blockNumber = 668
         let index = 0
         
-        EthereumService.getUncleByBlockNumberAndIndex(blockNumber: blockNumber, index: index) { block, error in
-            XCTAssertNil(error)
-            XCTAssertNotNil(block)
-            expectation.fulfill()
+        do {
+            let _ = try await EthereumService.getUncleByBlockNumberAndIndex(blockNumber: blockNumber, index: index)
+        } catch {
+            XCTFail("\(error)", file: #filePath, line: #line)
         }
-        
-        wait(for: [expectation], timeout: 20)
     }
     
-    func testGetUncleByBlockHashAndIndex() throws {
+    func testGetUncleByBlockHashAndIndex() async throws {
         
-        let expectation = XCTestExpectation(description: "get uncle block by hash and index")
         let blockHash = "0x84e538e6da2340e3d4d90535f334c22974fecd037798d1cf8965c02e8ab3394b"
         let index = 0
         
-        EthereumService.getUncleByBlockHashAndIndex(blockHash: blockHash, index: index) { block, error in
-            XCTAssertNil(error)
-            XCTAssertNotNil(block)
-            expectation.fulfill()
+        do {
+            let _ = try await EthereumService.getUncleByBlockHashAndIndex(blockHash: blockHash, index: index)
+        } catch {
+            XCTFail("\(error)", file: #filePath, line: #line)
         }
-        
-        wait(for: [expectation], timeout: 20)
     }
     
-    func testGetUncleByBlockHashAndIndexNullResponse() throws {
+    func testGetUncleByBlockHashAndIndexNullResponse() async throws {
         
-        let expectation = XCTestExpectation(description: "get uncle block by hash and index null response")
         let blockHash = "0x7cea0c9ae53df7073fcd4e7b19fc3f1905a2540bbdbd9a10796c9296f5af55dc"
         let index = 0
         
-        EthereumService.getUncleByBlockHashAndIndex(blockHash: blockHash, index: index) { block, error in
+        do {
+            let _ = try await EthereumService.getUncleByBlockHashAndIndex(blockHash: blockHash, index: index)
+        } catch {
+//            XCTAssertEqual(error, ResponseError.nilResponse)
             XCTAssertNotNil(error)
-            XCTAssertNil(block)
-            expectation.fulfill()
         }
-        
-        wait(for: [expectation], timeout: 20)
     }
     
-    func testGetTransactionByBlockHashAndIndex() throws {
+    func testGetTransactionByBlockHashAndIndex() async throws {
         
-        let expectation = XCTestExpectation(description: "get transaction by hash and index")
         let blockHash = "0x3c82bc62179602b67318c013c10f99011037c49cba84e31ffe6e465a21c521a7"
         let index = 0
         
-        EthereumService.getTransactionByBlockHashAndIndex(blockHash: blockHash, index: index) { transaction, error in
-            XCTAssertNil(error)
-            XCTAssertNotNil(transaction)
-            expectation.fulfill()
+        do {
+            let _ = try await EthereumService.getTransactionByBlockHashAndIndex(blockHash: blockHash, index: index)
+        } catch {
+            XCTFail("\(error)", file: #filePath, line: #line)
         }
-        
-        wait(for: [expectation], timeout: 20)
     }
     
-    func testGetTransactionByBlockHashAndIndexNullResponse() throws {
+    func testGetTransactionByBlockHashAndIndexNullResponse() async throws {
         
-        let expectation = XCTestExpectation(description: "get transaction by hash and index")
         let blockHash = "0x8ed01db361de1e33ad89944aeca1412e536694be671df9c36e76ecc6d6ac44e5"
         let index = 0
         
-        EthereumService.getTransactionByBlockHashAndIndex(blockHash: blockHash, index: index) { transaction, error in
+        do {
+            let _ = try await EthereumService.getTransactionByBlockHashAndIndex(blockHash: blockHash, index: index)
+        } catch {
+//            XCTAssertEqual(error, ResponseError.nilResponse)
             XCTAssertNotNil(error)
-            XCTAssertNil(transaction)
-            expectation.fulfill()
         }
-        
-        wait(for: [expectation], timeout: 50)
     }
     
-    func testGetTransactionByBlockNumberAndIndex() throws {
+    func testGetTransactionByBlockNumberAndIndex() async throws {
         
-        let expectation = XCTestExpectation(description: "get transaction by block number and index")
         let blockNumber = 5417326
         let index = 0
         
-        EthereumService.getTransactionByBlockNumberAndIndex(blockNumber: blockNumber, index: index) { transaction, error in
-            XCTAssertNil(error)
-            XCTAssertNotNil(transaction)
-            expectation.fulfill()
+        do {
+            let _ = try await EthereumService.getTransactionByBlockNumberAndIndex(blockNumber: blockNumber, index: index)
+        } catch {
+            XCTFail("\(error)", file: #filePath, line: #line)
         }
-        
-        wait(for: [expectation], timeout: 20)
     }
     
-    func testGetTransactionByBlockNumberAndIndexNullResponse() throws {
+    func testGetTransactionByBlockNumberAndIndexNullResponse() async throws {
         
-        let expectation = XCTestExpectation(description: "get transaction by block number and index")
         let blockNumber = 541
         let index = 0
         
-        EthereumService.getTransactionByBlockNumberAndIndex(blockNumber: blockNumber, index: index) { transaction, error in
+        do {
+            let _ = try await EthereumService.getTransactionByBlockNumberAndIndex(blockNumber: blockNumber, index: index)
+        } catch {
+//            XCTAssertEqual(error, ResponseError.nilResponse)
             XCTAssertNotNil(error)
-            XCTAssertNil(transaction)
-            expectation.fulfill()
         }
-        
-        wait(for: [expectation], timeout: 20)
     }
     
-    func testGetTransactionReceipt() throws {
+    func testGetTransactionReceipt() async throws {
         
-        let expectation = XCTestExpectation(description: "get transaction receipt")
         let transactionHash = "0xa3ece39ae137617669c6933b7578b94e705e765683f260fcfe30eaa41932610f"
         
-        EthereumService.getTransactionReceipt(transactionHash: transactionHash) { receipt, error in
-            XCTAssertNil(error)
-            XCTAssertNotNil(receipt)
-            expectation.fulfill()
+        do {
+            let _ = try await EthereumService.getTransactionReceipt(transactionHash: transactionHash)
+        } catch {
+            XCTFail("\(error)", file: #filePath, line: #line)
         }
         
-        wait(for: [expectation], timeout: 20)
     }
     
-    func testSendRawTransaction() throws {
-        
-        let expectation = XCTestExpectation(description: "send raw transaction")
+    func testSendRawTransaction() async throws {
         
         // MARK: - For sending transactions use test network
         EthereumService.configureProvider(with: ropstenNode)
@@ -324,32 +266,26 @@ class EthereumServiceTests: XCTestCase {
                                           gasPrice: "250000000000",
                                           to: "0xc8DE4C1B4f6F6659944160DaC46B29a330C432B2",
                                           value: BigUInt(value))
-
-        EthereumService.sendRawTransaction(account: account, transaction: transaction) { hash, error in
-            XCTAssertNil(error)
-            XCTAssertNotNil(hash)
-            expectation.fulfill()
-        }
         
-        wait(for: [expectation], timeout: 50)
+        do {
+            let _ = try await EthereumService.sendRawTransaction(account: account, transaction: transaction)
+        } catch {
+            XCTFail("\(error)", file: #filePath, line: #line)
+        }
     }
     
-    func testEstimateGas() throws {
+    func testEstimateGas() async throws {
         
         EthereumService.configureProvider(with: ropstenNode)
         
-        let expectation = XCTestExpectation(description: "get estimate gas")
         let transaction = try Transaction(from: "0xE92A146f86fEda6D14Ee1dc1BfB620D3F3d1b873",
                                           to: "0xc8DE4C1B4f6F6659944160DaC46B29a330C432B2",
                                           value: "1000000")
         
-        EthereumService.estimateGas(for: transaction) { value, error in
-            XCTAssertNil(error)
-            XCTAssertNotNil(value)
-            expectation.fulfill()
+        do {
+            let _ = try await EthereumService.estimateGas(for: transaction)
+        } catch {
+            XCTFail("\(error)", file: #filePath, line: #line)
         }
-        
-        wait(for: [expectation], timeout: 50)
     }
-    
 }

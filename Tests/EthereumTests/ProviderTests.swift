@@ -15,34 +15,25 @@ class ProviderTests: XCTestCase {
         self.provider = Provider(node: node)
     }
     
-    func testSendRequest() throws {
+    func testSendRequest() async throws {
         
         let address = "0xb5bfc95C7345c8B20e5290D21f88a602580a08AB"
-        let expectation = XCTestExpectation(description: "send request")
         
-        provider?.sendRequest(method: .getBalance, params: [address, "latest"], decodeTo: String.self) { value, error in
-            XCTAssertNil(error)
-            XCTAssertNotNil(value)
-            expectation.fulfill()
+        do {
+            let _ = try await provider?.sendRequest(method: .getBalance, params: [address, "latest"], decodeTo: String.self)
+        } catch {
+            XCTFail("\(error)", file: #filePath, line: #line)
         }
-        
-        wait(for: [expectation], timeout: 50)
     }
     
-    func testSendRequest2() throws {
-        
-        let expectation = XCTestExpectation(description: "send request 2")
+    func testSendRequest2() async throws {
         
         let params = [String]()
-                
-        provider?.sendRequest(method: .version, params: params, decodeTo: String.self) { value, error in
-            XCTAssertNil(error)
-            XCTAssertNotNil(value)
-            expectation.fulfill()
-            
-        }
         
-        wait(for: [expectation], timeout: 50)
+        do {
+            let _ = try await provider?.sendRequest(method: .version, params: params, decodeTo: String.self)
+        } catch {
+            XCTFail("\(error)", file: #filePath, line: #line)
+        }
     }
-    
 }

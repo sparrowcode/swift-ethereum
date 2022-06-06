@@ -20,56 +20,39 @@ class NodeTests: XCTestCase {
         XCTAssertEqual(network, Network.mainnet)
     }
 
-    func testVersion() throws {
+    func testVersion() async throws {
         
-        let expectation = XCTestExpectation(description: "version")
-        
-        node.version { version, error in
-            XCTAssertNil(error)
-            XCTAssertNotNil(version)
-            expectation.fulfill()
+        do {
+            let _ = try await node.version()
+        } catch {
+            XCTFail("\(error)", file: #filePath, line: #line)
         }
-        
-        wait(for: [expectation], timeout: 20)
     }
     
-    func testListening() throws {
+    func testListening() async throws {
         
-        let expectation = XCTestExpectation(description: "listening")
-        
-        node.listening { isListening, error in
-            XCTAssertNil(error)
-            XCTAssertNotNil(isListening)
-            expectation.fulfill()
+        do {
+            let _ = try await node.listening()
+        } catch {
+            XCTFail("\(error)", file: #filePath, line: #line)
         }
-        
-        wait(for: [expectation], timeout: 20)
     }
     
-    func testPeerCount() throws {
+    func testPeerCount() async throws {
         
-        let expectation = XCTestExpectation(description: "peer count")
-        
-        node.peerCount { peerCount, error in
-            XCTAssertNil(error)
-            XCTAssertNotNil(peerCount)
-            expectation.fulfill()
+        do {
+            let _ = try await node.peerCount()
+        } catch {
+            XCTFail("\(error)", file: #filePath, line: #line)
         }
-        
-        wait(for: [expectation], timeout: 20)
     }
     
-    func testClientVersion() throws {
+    func testClientVersion() async throws {
         
-        let expectation = XCTestExpectation(description: "client version")
-        
-        node.clientVersion { clientVersion, error in
-            XCTAssertNil(error)
-            XCTAssertNotNil(clientVersion)
-            expectation.fulfill()
+        do {
+            let _ = try await node.clientVersion()
+        } catch {
+            XCTFail("\(error)", file: #filePath, line: #line)
         }
-        
-        wait(for: [expectation], timeout: 20)
     }
-
 }

@@ -9,7 +9,7 @@ public indirect enum SmartContractValueType {
     
     case int(_ bits: UInt16 = 256)
     
-    case bool
+    case bool 
     
     case string
     

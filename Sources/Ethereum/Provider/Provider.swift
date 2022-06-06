@@ -1,5 +1,9 @@
 import Foundation
 
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
+
 public final class Provider {
     
     public let node: Node
@@ -28,12 +32,12 @@ public final class Provider {
     /*
      Method that is called from Service to send a request
      */
-    func sendRequest<E: Encodable, D: Decodable>(method: JSONRPCMethod, params: E, decodeTo: D.Type, completion: @escaping (D?, Error?) -> Void) {
+    func sendRequest<E: Encodable, D: Decodable>(method: JSONRPCMethod, params: E, decodeTo: D.Type, completion: @escaping (Result<D, Error>) -> Void) {
         
         queue.async { [weak self] in
             
             guard let self = self else {
-                completion(nil, ProviderError.providerIsNil)
+                completion(.failure(ProviderError.providerIsNil))
                 return
             }
             
@@ -47,7 +51,7 @@ public final class Provider {
             let jsonRPC = JSONRPCRequest(jsonrpc: "2.0", method: method, params: params, id: id)
             
             guard let jsonRPCData = try? JSONEncoder().encode(jsonRPC) else {
-                completion(nil, ResponseError.errorEncodingJSONRPC)
+                completion(.failure(ResponseError.errorEncodingJSONRPC))
                 return
             }
             
@@ -56,28 +60,40 @@ public final class Provider {
             let task = self.session.dataTask(with: request) { data, response, error in
                 
                 guard let data = data, error == nil else {
-                    completion(nil, ResponseError.nilResponse)
+                    completion(.failure(ResponseError.nilResponse))
                     return
                 }
                 
                 if let ethereumError = try? JSONDecoder().decode(JSONRPCResponseError.self, from: data) {
-                    completion(nil, ResponseError.ethereumError(ethereumError.error))
+                    completion(.failure(ResponseError.ethereumError(ethereumError.error)))
                     return
                 }
                 
                 guard let jsonRPCResponse = try? JSONDecoder().decode(JSONRPCResponse<D>.self, from: data) else {
-                    completion(nil, ResponseError.errorDecodingJSONRPC)
+                    completion(.failure(ResponseError.errorDecodingJSONRPC))
                     return
                 }
                 
-                completion(jsonRPCResponse.result, nil)
+                completion(.success(jsonRPCResponse.result))
             }
-            
             task.resume()
         }
-        
     }
-    
 }
 
+
+extension Provider {
+    func sendRequest<E: Encodable, D: Decodable>(method: JSONRPCMethod, params: E, decodeTo: D.Type) async throws -> D {
+        return try await withCheckedThrowingContinuation { continuation in
+            sendRequest(method: method, params: params, decodeTo: decodeTo) { result in
+                switch result {
+                case .success(let value):
+                    continuation.resume(returning: value)
+                case .failure(let error):
+                    continuation.resume(throwing: error)
+                }
+            }
+        }
+    }
+}
 
