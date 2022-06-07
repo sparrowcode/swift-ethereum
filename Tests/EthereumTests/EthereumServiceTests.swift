@@ -19,62 +19,38 @@ class EthereumServiceTests: XCTestCase {
         
         EthereumService.configureProvider(with: ropstenNode)
         
-        do {
-            let _ = try await EthereumService.getBalance(for: address)
-        } catch {
-            XCTFail("\(error)", file: #filePath, line: #line)
-        }
+        let _ = try await EthereumService.getBalance(for: address)
     }
     
     func testGetTransactionCount() async throws {
         
         let address = "0xb5bfc95C7345c8B20e5290D21f88a602580a08AB"
         
-        do {
-            let _ = try await EthereumService.getTransactionCount(for: address)
-        } catch {
-            XCTFail("\(error)", file: #filePath, line: #line)
-        }
+        let _ = try await EthereumService.getTransactionCount(for: address)
     }
     
     func testBlockNumber() async throws {
         
-        do {
-            let _ = try await EthereumService.blockNumber()
-        } catch {
-            XCTFail("\(error)", file: #filePath, line: #line)
-        }
+        let _ = try await EthereumService.blockNumber()
     }
     
     func testGasPrice() async throws {
         
-        do {
-            let _ = try await EthereumService.gasPrice()
-        } catch {
-            XCTFail("\(error)", file: #filePath, line: #line)
-        }
+        let _ = try await EthereumService.gasPrice()
     }
     
     func testGetBlockTransactionCountByHash() async throws {
         
         let blockHash = "0xcd6112f8e97b646a5c25e75e62a509337c77ff9e879b261d5d2d958f13a8a403"
         
-        do {
-            let _ = try await EthereumService.getBlockTransactionCountByHash(blockHash: blockHash)
-        } catch {
-            XCTFail("\(error)", file: #filePath, line: #line)
-        }
+        let _ = try await EthereumService.getBlockTransactionCountByHash(blockHash: blockHash)
     }
     
     func testGetBlockTransactionCountByNumber() async throws {
         
         let blockNumber = 2
         
-        do {
-            let _ = try await EthereumService.getBlockTransactionCountByNumber(blockNumber: blockNumber)
-        } catch {
-            XCTFail("\(error)", file: #filePath, line: #line)
-        }
+        let _ = try await EthereumService.getBlockTransactionCountByNumber(blockNumber: blockNumber)
     }
     
     func testGetStorageAt() async throws {
@@ -83,11 +59,7 @@ class EthereumServiceTests: XCTestCase {
         let storageSlot = 3
         let block = "latest"
         
-        do {
-            let _ = try await EthereumService.getStorageAt(address: address, storageSlot: storageSlot, block: block)
-        } catch {
-            XCTFail("\(error)", file: #filePath, line: #line)
-        }
+        let _ = try await EthereumService.getStorageAt(address: address, storageSlot: storageSlot, block: block)
     }
     
     func testGetCode() async throws {
@@ -95,44 +67,28 @@ class EthereumServiceTests: XCTestCase {
         let address = "0x2b591e99afE9f32eAA6214f7B7629768c40Eeb39"
         let block = "latest"
         
-        do {
-            let _ = try await EthereumService.getCode(address: address, block: block)
-        } catch {
-            XCTFail("\(error)", file: #filePath, line: #line)
-        }
+        let _ = try await EthereumService.getCode(address: address, block: block)
     }
     
     func testGetBlockByHash() async throws {
         
         let hash = "0xad1328d13f833b8af722117afdc406a762033321df8e48c00cd372d462f48169"
         
-        do {
-            let _ = try await EthereumService.getBlockByHash(hash: hash)
-        } catch {
-            XCTFail("\(error)", file: #filePath, line: #line)
-        }
+        let _ = try await EthereumService.getBlockByHash(hash: hash)
     }
     
     func testGetBlockByNumber() async throws {
         
         let blockNumber = 12312
         
-        do {
-            let _ = try await EthereumService.getBlockByNumber(blockNumber: blockNumber)
-        } catch {
-            XCTFail("\(error)", file: #filePath, line: #line)
-        }
+        let _ = try await EthereumService.getBlockByNumber(blockNumber: blockNumber)
     }
     
     func testGetTransactionByHash() async throws {
         
         let transactionHash = "0xb2fea9c4b24775af6990237aa90228e5e092c56bdaee74496992a53c208da1ee"
         
-        do {
-            let _ = try await EthereumService.getTransactionByHash(transactionHash: transactionHash)
-        } catch {
-            XCTFail("\(error)", file: #filePath, line: #line)
-        }
+        let _ = try await EthereumService.getTransactionByHash(transactionHash: transactionHash)
     }
     
     func testGetUncleByBlockNumberAndIndexNullResponse() async throws {
@@ -153,11 +109,7 @@ class EthereumServiceTests: XCTestCase {
         let blockNumber = 668
         let index = 0
         
-        do {
-            let _ = try await EthereumService.getUncleByBlockNumberAndIndex(blockNumber: blockNumber, index: index)
-        } catch {
-            XCTFail("\(error)", file: #filePath, line: #line)
-        }
+        let _ = try await EthereumService.getUncleByBlockNumberAndIndex(blockNumber: blockNumber, index: index)
     }
     
     func testGetUncleByBlockHashAndIndex() async throws {
@@ -165,11 +117,7 @@ class EthereumServiceTests: XCTestCase {
         let blockHash = "0x84e538e6da2340e3d4d90535f334c22974fecd037798d1cf8965c02e8ab3394b"
         let index = 0
         
-        do {
-            let _ = try await EthereumService.getUncleByBlockHashAndIndex(blockHash: blockHash, index: index)
-        } catch {
-            XCTFail("\(error)", file: #filePath, line: #line)
-        }
+        let _ = try await EthereumService.getUncleByBlockHashAndIndex(blockHash: blockHash, index: index)
     }
     
     func testGetUncleByBlockHashAndIndexNullResponse() async throws {
@@ -180,7 +128,7 @@ class EthereumServiceTests: XCTestCase {
         do {
             let _ = try await EthereumService.getUncleByBlockHashAndIndex(blockHash: blockHash, index: index)
         } catch {
-//            XCTAssertEqual(error, ResponseError.nilResponse)
+            //            XCTAssertEqual(error, ResponseError.nilResponse)
             XCTAssertNotNil(error)
         }
     }
@@ -190,11 +138,7 @@ class EthereumServiceTests: XCTestCase {
         let blockHash = "0x3c82bc62179602b67318c013c10f99011037c49cba84e31ffe6e465a21c521a7"
         let index = 0
         
-        do {
-            let _ = try await EthereumService.getTransactionByBlockHashAndIndex(blockHash: blockHash, index: index)
-        } catch {
-            XCTFail("\(error)", file: #filePath, line: #line)
-        }
+        let _ = try await EthereumService.getTransactionByBlockHashAndIndex(blockHash: blockHash, index: index)
     }
     
     func testGetTransactionByBlockHashAndIndexNullResponse() async throws {
@@ -205,7 +149,7 @@ class EthereumServiceTests: XCTestCase {
         do {
             let _ = try await EthereumService.getTransactionByBlockHashAndIndex(blockHash: blockHash, index: index)
         } catch {
-//            XCTAssertEqual(error, ResponseError.nilResponse)
+            //            XCTAssertEqual(error, ResponseError.nilResponse)
             XCTAssertNotNil(error)
         }
     }
@@ -215,11 +159,7 @@ class EthereumServiceTests: XCTestCase {
         let blockNumber = 5417326
         let index = 0
         
-        do {
-            let _ = try await EthereumService.getTransactionByBlockNumberAndIndex(blockNumber: blockNumber, index: index)
-        } catch {
-            XCTFail("\(error)", file: #filePath, line: #line)
-        }
+        let _ = try await EthereumService.getTransactionByBlockNumberAndIndex(blockNumber: blockNumber, index: index)
     }
     
     func testGetTransactionByBlockNumberAndIndexNullResponse() async throws {
@@ -230,7 +170,7 @@ class EthereumServiceTests: XCTestCase {
         do {
             let _ = try await EthereumService.getTransactionByBlockNumberAndIndex(blockNumber: blockNumber, index: index)
         } catch {
-//            XCTAssertEqual(error, ResponseError.nilResponse)
+            //            XCTAssertEqual(error, ResponseError.nilResponse)
             XCTAssertNotNil(error)
         }
     }
@@ -239,12 +179,7 @@ class EthereumServiceTests: XCTestCase {
         
         let transactionHash = "0xa3ece39ae137617669c6933b7578b94e705e765683f260fcfe30eaa41932610f"
         
-        do {
-            let _ = try await EthereumService.getTransactionReceipt(transactionHash: transactionHash)
-        } catch {
-            XCTFail("\(error)", file: #filePath, line: #line)
-        }
-        
+        let _ = try await EthereumService.getTransactionReceipt(transactionHash: transactionHash)
     }
     
     func testSendRawTransaction() async throws {
@@ -267,11 +202,7 @@ class EthereumServiceTests: XCTestCase {
                                           to: "0xc8DE4C1B4f6F6659944160DaC46B29a330C432B2",
                                           value: BigUInt(value))
         
-        do {
-            let _ = try await EthereumService.sendRawTransaction(account: account, transaction: transaction)
-        } catch {
-            XCTFail("\(error)", file: #filePath, line: #line)
-        }
+        let _ = try await EthereumService.sendRawTransaction(account: account, transaction: transaction)
     }
     
     func testEstimateGas() async throws {
@@ -282,10 +213,6 @@ class EthereumServiceTests: XCTestCase {
                                           to: "0xc8DE4C1B4f6F6659944160DaC46B29a330C432B2",
                                           value: "1000000")
         
-        do {
-            let _ = try await EthereumService.estimateGas(for: transaction)
-        } catch {
-            XCTFail("\(error)", file: #filePath, line: #line)
-        }
+        let _ = try await EthereumService.estimateGas(for: transaction)
     }
 }

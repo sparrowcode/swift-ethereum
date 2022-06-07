@@ -19,21 +19,13 @@ class ProviderTests: XCTestCase {
         
         let address = "0xb5bfc95C7345c8B20e5290D21f88a602580a08AB"
         
-        do {
-            let _ = try await provider?.sendRequest(method: .getBalance, params: [address, "latest"], decodeTo: String.self)
-        } catch {
-            XCTFail("\(error)", file: #filePath, line: #line)
-        }
+        let _ = try await provider?.sendRequest(method: .getBalance, params: [address, "latest"], decodeTo: String.self)
     }
     
     func testSendRequest2() async throws {
         
         let params = [String]()
         
-        do {
-            let _ = try await provider?.sendRequest(method: .version, params: params, decodeTo: String.self)
-        } catch {
-            XCTFail("\(error)", file: #filePath, line: #line)
-        }
+        let _ = try await provider?.sendRequest(method: .version, params: params, decodeTo: String.self)
     }
 }

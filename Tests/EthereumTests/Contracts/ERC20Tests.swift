@@ -17,11 +17,7 @@ class ERC20Tests: XCTestCase {
         
         let transaction = try ERC20TransactionFactory.generateBalanceTransaction(address: address, contractAddress: contractAddress)
         
-        do {
-            let _ = try await EthereumService.call(transaction: transaction)
-        } catch {
-            XCTFail("\(error)", file: #filePath, line: #line)
-        }
+        let _ = try await EthereumService.call(transaction: transaction)
     }
     
     func testTransfer() async throws {
@@ -33,73 +29,53 @@ class ERC20Tests: XCTestCase {
         let account = try accountManager.importAccount(privateKey: "2404a482a212386ecf1ed054547cf4d28348ddf73d23325a83373f803138f105")
         
         let transaction = try ERC20TransactionFactory.generateTransferTransaction(value: BigUInt(210000000),
-                                                                              to: "0xc8DE4C1B4f6F6659944160DaC46B29a330C432B2",
-                                                                              gasLimit: BigUInt(100000),
-                                                                              gasPrice: BigUInt(220000000000),
-                                                                              contractAddress: contractAddress)
+                                                                                  to: "0xc8DE4C1B4f6F6659944160DaC46B29a330C432B2",
+                                                                                  gasLimit: BigUInt(100000),
+                                                                                  gasPrice: BigUInt(220000000000),
+                                                                                  contractAddress: contractAddress)
         
-        do {
-            let _ = try await EthereumService.sendRawTransaction(account: account, transaction: transaction)
-        } catch {
-            XCTFail("\(error)", file: #filePath, line: #line)
-        }
+        let _ = try await EthereumService.sendRawTransaction(account: account, transaction: transaction)
     }
     
     func testDecimals() async throws {
         
         let transaction = try ERC20TransactionFactory.generateDecimalsTransaction(contractAddress: contractAddress)
         
-        do {
-            let _ = try await EthereumService.call(transaction: transaction)
-        } catch {
-            XCTFail("\(error)", file: #filePath, line: #line)
-        }
+        let _ = try await EthereumService.call(transaction: transaction)
     }
     
     func testSymbol() async throws {
         
         let transaction = try ERC20TransactionFactory.generateSymbolTransaction(contractAddress: contractAddress)
         
-        do {
-            let _ = try await EthereumService.call(transaction: transaction)
-        } catch {
-            XCTFail("\(error)", file: #filePath, line: #line)
-        }
+        let _ = try await EthereumService.call(transaction: transaction)
     }
     
     func testTotalSupply() async throws {
         
         let transaction = try ERC20TransactionFactory.generateTotalSupplyTransaction(contractAddress: contractAddress)
         
-        do {
-            let _ = try await EthereumService.call(transaction: transaction)
-        } catch {
-            XCTFail("\(error)", file: #filePath, line: #line)
-        }
+        let _ = try await EthereumService.call(transaction: transaction)
     }
     
     func testName() async throws {
         
         let transaction = try ERC20TransactionFactory.generateNameTransaction(contractAddress: contractAddress)
         
-        do {
-            let _ = try await EthereumService.call(transaction: transaction)
-        } catch {
-            XCTFail("\(error)", file: #filePath, line: #line)
-        }
+        let _ = try await EthereumService.call(transaction: transaction)
     }
     
     func testApprove() throws {
         
-//        let expectation = XCTestExpectation(description: "approve erc20")
-//
-//        let storage = UserDefaultsStorage(password: "password")
-//
-//        let accountManager = AccountManager(storage: storage)
-//
-//        let account = try accountManager.importAccount(privateKey: "2404a482a212386ecf1ed054547cf4d28348ddf73d23325a83373f803138f105")
-//
-//        let value = BigUInt("152587885986328125000000", radix: 10)!
+        //        let expectation = XCTestExpectation(description: "approve erc20")
+        //
+        //        let storage = UserDefaultsStorage(password: "password")
+        //
+        //        let accountManager = AccountManager(storage: storage)
+        //
+        //        let account = try accountManager.importAccount(privateKey: "2404a482a212386ecf1ed054547cf4d28348ddf73d23325a83373f803138f105")
+        //
+        //        let value = BigUInt("152587885986328125000000", radix: 10)!
         
         //        erc20.approve(spender: account, value: value) { remaining, error in
         //            XCTAssertNil failed: "ethereumError(Ethereum.JSONRPCErrorResult(code: 3, message: "execution reverted: ERC20: approve from the zero address"))"

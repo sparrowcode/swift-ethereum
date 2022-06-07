@@ -19,40 +19,24 @@ class NodeTests: XCTestCase {
         
         XCTAssertEqual(network, Network.mainnet)
     }
-
+    
     func testVersion() async throws {
         
-        do {
-            let _ = try await node.version()
-        } catch {
-            XCTFail("\(error)", file: #filePath, line: #line)
-        }
+        let _ = try await node.version()
     }
     
     func testListening() async throws {
         
-        do {
-            let _ = try await node.listening()
-        } catch {
-            XCTFail("\(error)", file: #filePath, line: #line)
-        }
+        let _ = try await node.listening()
     }
     
     func testPeerCount() async throws {
         
-        do {
-            let _ = try await node.peerCount()
-        } catch {
-            XCTFail("\(error)", file: #filePath, line: #line)
-        }
+        let _ = try await node.peerCount()
     }
     
     func testClientVersion() async throws {
         
-        do {
-            let _ = try await node.clientVersion()
-        } catch {
-            XCTFail("\(error)", file: #filePath, line: #line)
-        }
+        let _ = try await node.clientVersion()
     }
 }
